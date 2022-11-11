@@ -1,2 +1,2 @@
-# dots-ac
-Dots with Ansible and Chezmoi (experimental)
+# ansible-collection-desktop
+Ansible collection for Desktop.
