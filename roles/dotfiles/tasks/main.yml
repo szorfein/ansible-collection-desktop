@@ -1,2 +1,4 @@
 ---
 # tasks file for dotfiles
+- include_tasks: shell.yml
+  when: dotfiles_shell | bool

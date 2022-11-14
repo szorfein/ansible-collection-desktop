@@ -1,0 +1,30 @@
+---
+- name: shell > installing {{ dotfiles_shell_pkgname }}
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_shell_pkgname }}'
+    state: present
+
+- name: shell > applying default shell for {{ ansible_user_id }}
+  ansible.builtin.user:
+    name: '{{ ansible_user_id }}'
+    shell: '{{ dotfiles_shell_path }}'
+  when: ansible_user_shell != {{ dotfiles_shell_path }}
+
+- name: shell > get plugins
+  ansible.builtin.unarchive:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    remote_src: yes
+  with_items: dotfiles_shell_plugin_items
+  when: dotfiles_shell_plugin_items is defined
+
+- name: shell > make symbolink links
+  ansible.builtin.file:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    owner: '{{ ansible_user_id }}'
+    group: '{{ ansible_user_id }}'
+    state: link
+  with_items: dotfiles_shell_plugin_link_items
+  when: dotfiles_shell_plugin_link_items is defined
