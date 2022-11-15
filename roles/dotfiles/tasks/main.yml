@@ -1,4 +1,14 @@
 ---
 # tasks file for dotfiles
+- name: Load OS-vars
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - '{{ ansible_os_family }}.yml'
+        - main.yml
+      paths:
+        - 'vars'
+
 - include_tasks: shell.yml
   when: dotfiles_shell | bool

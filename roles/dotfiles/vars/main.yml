@@ -1,2 +1,3 @@
 ---
 # vars file for dotfiles
+dotfiles_shell_path: /usr/bin/zsh
