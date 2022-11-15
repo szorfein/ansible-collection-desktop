@@ -5,16 +5,18 @@
     name: '{{ dotfiles_shell_pkgname }}'
     state: present
 
-- name: shell > applying default shell for {{ ansible_user_id }}
-  ansible.builtin.shell: 'chsh -s {{ dotfiles_shell_path }}'
-  when: ansible_user_shell != dotfiles_shell_path
+- name: shell > applying default shell {{ dotfiles_shell_path }} for {{ ansible_user_id }}
+  become: true
+  ansible.builtin.user:
+    name: '{{ username }}'
+    shell: '{{ dotfiles_shell_path }}'
 
 - name: shell > get plugins
   ansible.builtin.unarchive:
     src: '{{ item.src }}'
     dest: '{{ item.dest }}'
     remote_src: yes
-  with_items: dotfiles_shell_plugin_items
+  with_items: '{{ dotfiles_shell_plugin_items }}'
   when: dotfiles_shell_plugin_items | length > 0
 
 - name: shell > make symbolink links
@@ -22,5 +24,5 @@
     src: '{{ item.src }}'
     dest: '{{ item.dest }}'
     state: link
-  with_items: dotfiles_shell_plugin_link_items
+  with_items: '{{ dotfiles_shell_plugin_link_items }}'
   when: dotfiles_shell_plugin_link_items | length > 0

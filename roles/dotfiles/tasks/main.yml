@@ -10,5 +10,9 @@
       paths:
         - 'vars'
 
+- name: setting fact username = {{ ansible_user_id }}
+  ansible.builtin.set_fact:
+    username: '{{ ansible_user_id }}'
+
 - include_tasks: shell.yml
   when: dotfiles_shell | bool

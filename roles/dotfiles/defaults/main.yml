@@ -2,9 +2,9 @@
 # defaults file for dotfiles
 dotfiles_shell: false
 dotfiles_shell_pkgname: zsh
-dotfiles_shell_plugin_items:
-  - { src: https://github.com/spaceship-prompt/spaceship-prompt/archive/refs/tags/v4.10.1.tar.gz,
-      dest: ~/.oh-my-zsh/custom/themes/spaceship-prompt }
-dotfiles_shell_plugin_link_items:
-  - { src: ~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme,
-      dest: ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme }
+
+# List for zsh plugins to install: e.g - { src: https://xxx, dest: somewhere }
+dotfiles_shell_plugin_items: []
+
+# list of symbolink link to create
+dotfiles_shell_plugin_link_items: []
