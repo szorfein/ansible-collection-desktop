@@ -1,15 +1,17 @@
 ---
-- name: shell > installing {{ dotfiles_shell_pkgname }}
+- name: shell > installing zsh
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_shell_pkgname }}'
+    name: '{{ dotfiles_shell_zsh_pkgname }}'
     state: present
+  when: dotfiles_shell_zsh | bool
 
-- name: shell > applying default shell {{ dotfiles_shell_path }} for {{ ansible_user_id }}
+- name: shell > default shell zsh for {{ username }}
   become: true
   ansible.builtin.user:
     name: '{{ username }}'
-    shell: '{{ dotfiles_shell_path }}'
+    shell: '{{ dotfiles_shell_zsh_path }}'
+  when: dotfiles_shell_zsh | bool
 
 - name: shell > get plugins
   ansible.builtin.unarchive:

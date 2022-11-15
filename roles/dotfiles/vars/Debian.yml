@@ -1,2 +1,4 @@
 ---
-dotfiles_shell_path: /bin/zsh
+dotfiles_shell_zsh_path: /bin/zsh
+dotfiles_shell_zsh_pkgname: zsh
+dotfiles_vim_pkgname: vim

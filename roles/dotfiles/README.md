@@ -11,19 +11,24 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 Role Variables
 --------------
 
-- `dotfiles_shell`
+- `dotfiles_shell_zsh`
   - Default: `false`
-  - Description: Install and configure default shell for user.
-- `dotfiles_shell_pkgname`
-  - Default: `zsh`
-- `dotfiles_shell_path`
-  - Default: `/usr/bin/zsh`
+  - Description: Use zsh as default shell.
 - `dotfiles_shell_plugin_items:`
   - Default: `[]`
   - Description: A list of remote plugins to install `- { src: https://xxx, dest: xxx }`
 - `dotfiles_shell_plugin_link_items:`
   - Default: `[]`
   - Description: A list of links to create if need `- { src: xxx, dest: xxx }`
+- `dotfiles_vim`
+  - Default: `false`
+  - Description: Install and configure vim (not neovim).
+- `dotfiles_vim_plugin_items:`
+  - Default: `[]`
+  - Description: A list of remote plugins from github to install with the native pack system, e.g: `- airblade/vim-gitgutter`
+- `dotfiles_vim_stow_dir:`
+  - Default: `undefined`
+  - Description: If we have to install a directory with stow from `dotfiles_stow_dir` in "$HOME", e.g: `vim`.
 
 Dependencies
 ------------
@@ -37,7 +42,12 @@ Example Playbook
       collections:
         - szorfein.desktop
       roles:
-         - { role: dotfiles, dotfiles_shell_pkgname: dash }
+         - dotfiles
+      vars:
+        dotfiles_vim: true
+        dotfiles_vim_plugin_items:
+          - airblade/vim-gitgutter
+          - Yggdroot/indentLine
 
 License
 -------

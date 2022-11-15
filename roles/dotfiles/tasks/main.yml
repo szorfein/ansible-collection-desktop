@@ -15,4 +15,7 @@
     username: '{{ ansible_user_id }}'
 
 - include_tasks: shell.yml
-  when: dotfiles_shell | bool
+  when: dotfiles_shell_zsh | bool
+
+- include_tasks: vim.yml
+  when: dotfiles_vim | bool
