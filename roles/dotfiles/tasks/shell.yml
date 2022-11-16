@@ -13,11 +13,19 @@
     shell: '{{ dotfiles_shell_zsh_path }}'
   when: dotfiles_shell_zsh | bool
 
+- name: shell > plugins directory
+  ansible.builtin.file:
+    src: '{{ item.dest }}'
+    state: directory
+  with_items: '{{ dotfiles_shell_plugin_items }}'
+  when: dotfiles_shell_plugin_items | length > 0
+
 - name: shell > get plugins
   ansible.builtin.unarchive:
     src: '{{ item.src }}'
     dest: '{{ item.dest }}'
     remote_src: yes
+    extra_opts: [--strip-components=1]
   with_items: '{{ dotfiles_shell_plugin_items }}'
   when: dotfiles_shell_plugin_items | length > 0
 
