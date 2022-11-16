@@ -21,8 +21,8 @@
     state: present
   when: dotfiles_stow_dir is defined
 
-- include_tasks: shell.yml
-  when: dotfiles_shell_zsh | bool
+- include_tasks: zsh.yml
+  when: dotfiles_zsh | bool
 
 - include_tasks: vim.yml
   when: dotfiles_vim | bool
