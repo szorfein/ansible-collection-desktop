@@ -14,6 +14,13 @@
   ansible.builtin.set_fact:
     username: '{{ ansible_user_id }}'
 
+- name: installing stow
+  become: true
+  ansible.builtin.package:
+    name: stow
+    state: present
+  when: dotfiles_stow_dir is defined
+
 - include_tasks: shell.yml
   when: dotfiles_shell_zsh | bool
 

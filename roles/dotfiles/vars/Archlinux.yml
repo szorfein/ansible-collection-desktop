@@ -1,0 +1,6 @@
+---
+dotfiles_shell_zsh_path: /usr/bin/zsh
+dotfiles_shell_zsh_pkgname: zsh
+
+dotfiles_vim_pkgname_conflict: vim
+dotfiles_vim_pkgname: gvim

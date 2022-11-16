@@ -20,6 +20,9 @@ Role Variables
 - `dotfiles_shell_plugin_link_items:`
   - Default: `[]`
   - Description: A list of links to create if need `- { src: xxx, dest: xxx }`
+- `dotfiles_stow_dir`
+  - Default: `undefined`
+  - Description: If you need `GNU/Stow` to install config files, add the path here, e.g: `~/.dotfiles`.
 - `dotfiles_vim`
   - Default: `false`
   - Description: Install and configure vim (not neovim).
@@ -28,7 +31,7 @@ Role Variables
   - Description: A list of remote plugins from github to install with the native pack system, e.g: `- airblade/vim-gitgutter`
 - `dotfiles_vim_stow_dir:`
   - Default: `undefined`
-  - Description: If we have to install a directory with stow from `dotfiles_stow_dir` in "$HOME", e.g: `vim`.
+  - Description: If you need to install a directory with stow from `dotfiles_stow_dir` in "$HOME", e.g: `vim`.
 
 Dependencies
 ------------
