@@ -1,0 +1,28 @@
+---
+# tasks file for dotfiles
+- name: Load OS-vars
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - '{{ ansible_os_family }}.yml'
+        - main.yml
+      paths:
+        - 'vars'
+
+- name: setting fact username = {{ ansible_user_id }}
+  ansible.builtin.set_fact:
+    username: '{{ ansible_user_id }}'
+
+- name: installing stow
+  become: true
+  ansible.builtin.package:
+    name: stow
+    state: present
+  when: dotfiles_stow_dir is defined
+
+- include_tasks: zsh.yml
+  when: dotfiles_zsh | bool
+
+- include_tasks: vim.yml
+  when: dotfiles_vim | bool

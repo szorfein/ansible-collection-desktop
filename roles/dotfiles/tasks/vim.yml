@@ -1,0 +1,28 @@
+---
+- name: vim > uninstall conflicting packages
+  ansible.builtin.package:
+    name: '{{ dotfiles_vim_pkgname_conflict }}'
+    state: absent
+  when: dotfiles_vim_pkgname_conflict is defined
+
+- name: vim > installing
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_vim_pkgname }}'
+    state: present
+
+- name: vim > directory for the native vim pack
+  ansible.builtin.file:
+    path: ~/.vim/pack/dotfiles/start
+    state: directory
+
+- name: vim > get plugins
+  ansible.builtin.git:
+    repo: 'https://github.com/{{ item }}'
+    dest: '~/.vim/pack/dotfiles/start/{{ item | basename }}'
+  with_items: '{{ dotfiles_vim_plugin_items }}'
+  when: dotfiles_vim_plugin_items | length > 0
+
+- name: vim > copy vim configs using stow
+  ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_vim_stow_dir }}'
+  when: dotfiles_stow_dir is defined and dotfiles_vim_stow_dir is defined

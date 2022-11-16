@@ -1,0 +1,14 @@
+---
+# defaults file for dotfiles
+dotfiles_zsh: false
+
+# List for zsh plugins to install: e.g - { src: https://xxx, dest: somewhere }
+dotfiles_zsh_plugin_items: []
+
+# list of symbolink link to create
+dotfiles_zsh_plugin_link_items: []
+
+dotfiles_vim: false
+
+# A list of remote plugin to install, use the default vim packager.
+dotfiles_vim_plugin_items: []
