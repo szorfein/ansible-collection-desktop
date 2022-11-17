@@ -19,6 +19,9 @@ Role Variables
   - Description: Config files for audio with Stow, relative to `dotfiles_stow_dir`, e.g: `alsa-sound`.
 - `dotfiles_mpd`
   - Default: `false`
+- `dotfiles_mpd_music_dir`
+  - Default: `~/musics`
+  - Description: Music directory for mpd.
 - `dotfiles_stow_dir`
   - Default: `undefined`
   - Description: If you need `GNU/Stow` to install config files, add the path here, e.g: `~/.dotfiles`.

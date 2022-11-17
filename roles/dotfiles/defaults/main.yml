@@ -1,6 +1,7 @@
 ---
 # defaults file for dotfiles
 dotfiles_mpd: false
+dotfiles_mpd_music_dir: ~/musics
 
 dotfiles_zsh: false
 

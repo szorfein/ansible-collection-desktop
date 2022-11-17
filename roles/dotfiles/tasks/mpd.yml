@@ -2,7 +2,34 @@
 - import_tasks: alsa.yml
   when: dotfiles_audio_backend is defined and dotfiles_audio_backend == 'alsa'
 
-- name: mpd
-  ansible.builtin.debug:
-    msg:
-      - Starting mpd task
+- name: mpd > installing
+  become: true
+  ansible.builtin.package:
+    name: mpd
+    state: present
+
+- name: mpd > mpd_dir fact
+  ansible.builtin.set_fact:
+    mpd_dir: ~/.config/mpd
+
+- name: mpd > creating required directory
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: directory
+  with_items:
+    - '{{ mpd_dir }}'
+    - '{{ mpd_dir }}/playlists'
+    - '{{ dotfiles_mpd_music_dir }}'
+
+- name: mpd > creating required files
+  ansible.builtin.file:
+    path: '{{ mpd_dir }}/{{ item }}'
+  with_items:
+    - database
+    - pid
+    - state
+
+- name: mpd > add the config file
+  ansible.builtin.template:
+    src: mpd.conf.j2
+    path: '{{ mpd_dir }}/mpd.conf'

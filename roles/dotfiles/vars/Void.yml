@@ -4,6 +4,7 @@ dotfiles_alsa_pkg_conflict_items:
 dotfiles_alsa_pkg_items:
   - alsa-utils
   - alsa-plugins
+  - alsa-plugins-samplerate
 
 dotfiles_zsh_path: /usr/bin/zsh
 dotfiles_zsh_pkgname: zsh
