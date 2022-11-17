@@ -1,0 +1,8 @@
+---
+- import_tasks: alsa.yml
+  when: dotfiles_audio_backend is defined and dotfiles_audio_backend == 'alsa'
+
+- name: mpd
+  ansible.builtin.debug:
+    msg:
+      - Starting mpd task

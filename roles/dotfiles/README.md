@@ -11,6 +11,14 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 Role Variables
 --------------
 
+- `dotfiles_audio_backend`
+  - Default: `undefined`
+  - Description: Can be `alsa` or `pipewire`, if remain `undefined`, your distro may install the both by default or install `pulseaudio`.
+- `dotfiles_audio_stow_dir`
+  - Default: `undefined`
+  - Description: Config files for audio with Stow, relative to `dotfiles_stow_dir`, e.g: `alsa-sound`.
+- `dotfiles_mpd`
+  - Default: `false`
 - `dotfiles_stow_dir`
   - Default: `undefined`
   - Description: If you need `GNU/Stow` to install config files, add the path here, e.g: `~/.dotfiles`.

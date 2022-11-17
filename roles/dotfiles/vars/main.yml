@@ -1,5 +1,8 @@
 ---
 # vars file for dotfiles
+dotfiles_alsa_pkg_items:
+  - alsa-utils
+
 dotfiles_zsh_path: /usr/bin/zsh
 dotfiles_zsh_pkgname: zsh
 dotfiles_vim_pkgname: vim
