@@ -1,4 +1,20 @@
 ---
+# https://wiki.debian.org/GraphicsCard#Intel
+dotfiles_gpu_intel_gen7_pkg_items:
+  - i965-va-driver
+
+dotfiles_gpu_intel_gen8_pkg_items:
+  - intel-media-va-driver
+
+dotfiles_gpu_qemu_pkg_items:
+  - qemu-guest-agent
+
+dotfiles_xorg_pkg_items:
+  - xserver-xorg-core
+  - xinit
+  - xclip
+  - xserver-xorg-input-libinput
+
 dotfiles_zsh_path: /bin/zsh
 dotfiles_zsh_pkgname: zsh
 dotfiles_vim_pkgname: vim

@@ -1,0 +1,15 @@
+---
+- import_tasks: gpu_intel.yml
+  when: dotfiles_gpu_driver is defined and
+    ( dotfiles_gpu_driver == 'intel_gen7' or dotfiles_gpu_driver == 'intel' )
+
+- name: xorg > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ dotfiles_xorg_pkg_items }}'
+
+- name: xorg > config files with stow
+  ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_xorg_stow_dir }}'
+  when: dotfiles_stow_dir is defined and dotfiles_xorg_stow_dir is defined

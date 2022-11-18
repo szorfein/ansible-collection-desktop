@@ -1,4 +1,20 @@
 ---
+# intel https://wiki.archlinux.org/title/Intel_graphics
+# https://wiki.archlinux.org/title/Hardware_video_acceleration
+dotfiles_gpu_intel_gen7_pkg_items:
+  - mesa
+  - libva-intel-driver
+
+dotfiles_gpu_intel:
+  - mesa
+  - intel-media-driver
+
+dotfiles_xorg_pkg_items:
+  - xorg-server
+  - xorg-xinit
+  - xclip
+  - xf86-input-libinput
+
 dotfiles_zsh_path: /usr/bin/zsh
 dotfiles_zsh_pkgname: zsh
 

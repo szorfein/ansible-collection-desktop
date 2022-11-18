@@ -11,6 +11,9 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 Role Variables
 --------------
 
+- `dotfiles_gpu_driver`
+  - Default: `undefined`
+  - Description: Can be `intel_gen7` (ivybridge), `intel` (broadwell - Gen8 and more), `qemu` (guest with virtio driver), if remain `undefined`, your distro can install all driver gpu during the Xorg install, see the [doc](https://github.com/szorfein/ansible-collection-desktop/blob/main/roles/dotfiles/docs/GPU.md).
 - `dotfiles_stow_dir`
   - Default: `undefined`
   - Description: If you need `GNU/Stow` to install config files, add the path here, e.g: `~/.dotfiles`.
@@ -23,6 +26,12 @@ Role Variables
 - `dotfiles_vim_stow_dir:`
   - Default: `undefined`
   - Description: Config files for vim with Stow, relative to `dotfiles_stow_dir`, e.g: `vim`.
+- `dotfiles_xorg`
+  - Default: `false`
+  - Description: Install and configure Xorg (minimal).
+- `dotfiles_xorg_stow_dir`
+  - Default: `undefined`
+  - Description: Config files for X with Stow, relative to `dotfiles_stow_dir`, e.g: `xorg`.
 - `dotfiles_zsh`
   - Default: `false`
   - Description: Use zsh as default shell.

@@ -1,4 +1,19 @@
 ---
+# https://docs.voidlinux.org/config/graphical-session/graphics-drivers/intel.html
+dotfiles_gpu_intel_gen7_pkg_items:
+  - mesa-dri
+  - libva-intel-driver
+
+dotfiles_gpu_intel_gen8_pkg_items:
+  - mesa-dri
+  - intel-media-driver
+
+dotfiles_xorg_pkg_items:
+  - xorg-minimal
+  - xinit
+  - xclip 
+    xorg-input-drivers
+
 dotfiles_zsh_path: /usr/bin/zsh
 dotfiles_zsh_pkgname: zsh
 

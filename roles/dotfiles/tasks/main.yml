@@ -21,8 +21,11 @@
     state: present
   when: dotfiles_stow_dir is defined
 
-- include_tasks: zsh.yml
-  when: dotfiles_zsh | bool
-
 - include_tasks: vim.yml
   when: dotfiles_vim | bool
+
+- include_tasks: xorg.yml
+  when: dotfiles_xorg | bool
+
+- include_tasks: zsh.yml
+  when: dotfiles_zsh | bool
