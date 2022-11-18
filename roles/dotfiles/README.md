@@ -13,7 +13,7 @@ Role Variables
 
 - `dotfiles_gpu_driver`
   - Default: `undefined`
-  - Description: Can be `intel_gen7` (ivybridge), `intel` (broadwell - Gen8 and more), `qemu` (guest with virtio driver), if remain `undefined`, your distro can install all driver gpu during the Xorg install, see the [doc](https://github.com/szorfein/ansible-collection-desktop/blob/main/roles/dotfiles/docs/GPU.md).
+  - Description: Can be `intel_gen7` (ivybridge), `intel` (broadwell - Gen8 and more), if remain `undefined`, your distro can install all gpu drivers during the Xorg install unless you install them manually, see the [doc](https://github.com/szorfein/ansible-collection-desktop/blob/main/roles/dotfiles/docs/GPU.md).
 - `dotfiles_stow_dir`
   - Default: `undefined`
   - Description: If you need `GNU/Stow` to install config files, add the path here, e.g: `~/.dotfiles`.
