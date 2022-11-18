@@ -1,12 +1,12 @@
 music_directory    "{{ dotfiles_mpd_music_dir }}"
 playlist_directory "{{ mpd_dir }}/playlists"
 db_file	    "{{ mpd_dir }}/database"
-log_file    "syslog"
 pid_file    "{{ mpd_dir }}/pid"
 state_file  "{{ mpd_dir }}/state"
+
+log_file    "syslog"
 save_absolute_paths_in_playlists  "yes"
 auto_update  "yes"
-#mixer_type "software"
 filesystem_charset "UTF-8"
 
 # Fifo for cava

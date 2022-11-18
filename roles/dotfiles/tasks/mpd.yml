@@ -24,6 +24,9 @@
 - name: mpd > creating required files
   ansible.builtin.file:
     path: '{{ mpd_dir }}/{{ item }}'
+    state: touch
+    modification_time: preserve
+    access_time: preserve
   with_items:
     - database
     - pid
@@ -32,4 +35,4 @@
 - name: mpd > add the config file
   ansible.builtin.template:
     src: mpd.conf.j2
-    path: '{{ mpd_dir }}/mpd.conf'
+    dest: '{{ mpd_dir }}/mpd.conf'
