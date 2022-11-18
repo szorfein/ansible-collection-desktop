@@ -11,6 +11,11 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 Role Variables
 --------------
 
+- `dotfiles_awm`
+  - Default: `false`
+  - Description: Install awesome on Xorg (minimal).
+- `dotfiles_awm_stow_dir`
+  - Description: Config files for awm with Stow, relative to `dotfiles_stow_dir`, e.g: `awm`.
 - `dotfiles_gpu_driver`
   - Default: `undefined`
   - Description: Can be `intel_gen7` (ivybridge), `intel` (broadwell - Gen8 and more), if remain `undefined`, your distro can install all gpu drivers during the Xorg install unless you install them manually, see the [doc](https://github.com/szorfein/ansible-collection-desktop/blob/main/roles/dotfiles/docs/GPU.md).
@@ -26,9 +31,6 @@ Role Variables
 - `dotfiles_vim_stow_dir:`
   - Default: `undefined`
   - Description: Config files for vim with Stow, relative to `dotfiles_stow_dir`, e.g: `vim`.
-- `dotfiles_xorg`
-  - Default: `false`
-  - Description: Install and configure Xorg (minimal).
 - `dotfiles_xorg_stow_dir`
   - Default: `undefined`
   - Description: Config files for X with Stow, relative to `dotfiles_stow_dir`, e.g: `xorg`.

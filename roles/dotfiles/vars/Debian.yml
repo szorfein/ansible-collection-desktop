@@ -1,13 +1,21 @@
 ---
+dotfiles_awm_pkg_items:
+  - awesome
+  - picom
+  - feh
+  - light
+  - mpc
+  - papirus-icon-theme
+  - xss-lock
+  - inotify-tools
+  - scrot
+
 # https://wiki.debian.org/GraphicsCard#Intel
 dotfiles_gpu_intel_gen7_pkg_items:
   - i965-va-driver
 
-dotfiles_gpu_intel_gen8_pkg_items:
+dotfiles_gpu_intel_pkg_items:
   - intel-media-va-driver
-
-dotfiles_gpu_qemu_pkg_items:
-  - qemu-guest-agent
 
 dotfiles_xorg_pkg_items:
   - xserver-xorg-core
