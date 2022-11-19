@@ -23,6 +23,16 @@
     state: present
   with_items: '{{ dotfiles_awm_pkg_items }}'
 
+- name: awm > creating required directory
+  ansible.builtin.file:
+    path: ~/.config/awesome/config
+    state: directory
+
+- name: awm > add config file
+  ansible.builtin.template:
+    src: awm-env-lua.j2
+    dest: ~/.config/awesome/config/env.lua
+
 - name: awm > add config files using stow
   ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_awm_stow_dir }}'
   when: dotfiles_stow_dir is defined and dotfiles_awm_stow_dir is defined
