@@ -1,4 +1,11 @@
 ---
+dotfiles_cache_dir: ~/.cache/dotfiles
+
+dotfiles_external_font_dir: ~/.local/share/fonts
+dotfiles_external_nerd_font_items: []
+
+dotfiles_external_wallpaper_dir: ~/images
+dotfiles_external_wallpaper_items: []
 # defaults file for dotfiles
 dotfiles_zsh: false
 

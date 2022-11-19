@@ -1,0 +1,64 @@
+---
+- name: external > create cache dir {{ dotfiles_cache_dir }}
+  ansible.builtin.file:
+    path: '{{ dotfiles_cache_dir }}'
+    state: directory
+
+- name: external > create wallpaper dir
+  ansible.builtin.file:
+    path: '{{ dotfiles_external_wallpaper_dir }}'
+    state: directory
+  when: dotfiles_external_wallpaper_items | length > 0
+
+- name: external > add wallpapers
+  ansible.builtin.unarchive:
+    src: '{{ item }}'
+    dest: '{{ dotfiles_external_wallpaper_dir }}'
+    remote_src: yes
+    extra_opts: [--strip-components=1]
+  with_items: '{{ dotfiles_external_wallpaper_items }}'
+  when: dotfiles_external_wallpaper_items | length > 0
+
+- name: external > downloading nerd fonts
+  ansible.builtin.get_url:
+    url: 'https://github.com/ryanoasis/nerd-fonts/releases/download/v{{ dotfiles_external_nerd_font_version }}/{{ item.name }}.zip'
+    dest: '{{ dotfiles_cache_dir }}/{{ item.name }}.zip'
+    checksum: 'sha256:{{ item.hash }}'
+  with_items: '{{ dotfiles_external_nerd_font_items }}'
+  when: dotfiles_external_nerd_font_items | length > 0
+
+- name: external > create font dir
+  ansible.builtin.file:
+    path: '{{ dotfiles_external_font_dir }}/{{ item.name }}'
+    state: directory
+  with_items: '{{ dotfiles_external_nerd_font_items }}'
+  when: dotfiles_external_nerd_font_items | length > 0
+
+- name: external > extracting archive
+  ansible.builtin.unarchive:
+    src: '{{ dotfiles_cache_dir }}/{{ item.name }}.zip'
+    dest: '{{ dotfiles_external_font_dir }}/{{ item.name }}'
+    extra_opts: [--strip-components=1]
+  with_items: '{{ dotfiles_external_nerd_font_items }}'
+  when: dotfiles_external_nerd_font_items | length > 0
+
+- name: external > remove windows font
+  ansible.builtin.command: "find {{ dotfiles_external_font_dir}}/{{ item.name }} -name '*Windows*' -delete"
+  with_items: '{{ dotfiles_external_nerd_font_items }}'
+  when: dotfiles_external_nerd_font_items | length > 0
+
+- name: external > create other fonts dir
+  ansible.builtin.file:
+    path: '{{ dotfiles_external_font_dir }}/{{ item.name }}'
+    state: directory
+  with_items: '{{ dotfiles_external_font_items }}'
+  when: dotfiles_external_font_items | length > 0
+
+- name: external > other fonts
+  ansible.builtin.unarchive:
+    src: '{{ item.src }}'
+    dest: '{{ dotfiles_external_font_dir }}/{{ item.name }}'
+    remote_src: yes
+    extra_opts: [--strip-components=1]
+  with_items: '{{ dotfiles_external_font_items }}'
+  when: dotfiles_external_font_items | length > 0

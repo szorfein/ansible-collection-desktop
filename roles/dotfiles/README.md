@@ -11,6 +11,18 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 Role Variables
 --------------
 
+- `dotfiles_cache_dir`
+  - Default: `~/.cache/dotfiles`
+  - Description: Where playbook download archives before extract them.
+- `dotfiles_external_font_dir`
+  - Default: `~/.local/share/fonts`
+  - Description: Fonts dir.
+- `dotfiles_external_nerd_font_version`
+  - Default: `2.2.2`
+  - Description: Release version of the [Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases).
+- `dotfiles_external_nerd_font_items`
+  - Default: `[]`
+  - Description: If need nerd font, add them. e.g: `- { name: Iosevka: hash: xxxxxx }`
 - `dotfiles_stow_dir`
   - Default: `undefined`
   - Description: If you need `GNU/Stow` to install config files, add the path here, e.g: `~/.dotfiles`.
