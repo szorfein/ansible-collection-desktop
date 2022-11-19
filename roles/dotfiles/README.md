@@ -15,13 +15,14 @@ Role Variables
   - Default: `false`
   - Description: Install awesome on Xorg (minimal).
 - `dotfiles_awm_stow_dir`
+  - Default: `undefined`
   - Description: Config files for awm with Stow, relative to `dotfiles_stow_dir`, e.g: `awm`.
 - `dotfiles_awm_default_theme`
   - Default: `undefined`
   - Description: The string name of a theme to install with Stow if any, relative to `dotfiles_stow_dir_theme`.
 - `dotfiles_gpu_driver`
   - Default: `undefined`
-  - Description: Can be `intel_gen7` (ivybridge), `intel` (broadwell - Gen8 and more), if remain `undefined`, your distro can install all gpu drivers during the Xorg install unless you install them manually, see the [doc](https://github.com/szorfein/ansible-collection-desktop/blob/main/roles/dotfiles/docs/GPU.md).
+  - Description: For now, only support `intel_gen7` (ivybridge), `intel` (broadwell - Gen8 and more), see the [doc](https://github.com/szorfein/ansible-collection-desktop/blob/main/roles/dotfiles/docs/GPU.md).
 - `dotfiles_stow_dir`
   - Default: `undefined`
   - Description: If you need `GNU/Stow` to install config files, add the path here, e.g: `~/.dotfiles`.
