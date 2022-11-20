@@ -23,6 +23,9 @@ Role Variables
 - `dotfiles_vim_stow_dir:`
   - Default: `undefined`
   - Description: Config files for vim with Stow, relative to `dotfiles_stow_dir`, e.g: `vim`.
+- `dotfiles_xst`
+  - Default: `false`
+  - Description: Build [xst](https://github.com/gnotclub/xst) or install it via your package manager if available.
 - `dotfiles_zsh`
   - Default: `false`
   - Description: Use zsh as default shell.
