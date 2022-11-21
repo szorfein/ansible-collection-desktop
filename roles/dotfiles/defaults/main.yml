@@ -16,3 +16,4 @@ dotfiles_vim: false
 dotfiles_vim_plugin_items: []
 
 dotfiles_xst: false
+dotfiles_xst_version: 0.8.5 # https://github.com/gnotclub/xst/blob/master/config.mk

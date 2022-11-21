@@ -1,0 +1,12 @@
+Source: xst
+Section: x11
+Priority: optional
+Maintainer: Szorfein <szorfein@protonmail.com>
+Build-Depends: debhelper-compat (= 12)
+Standards-Version: 4.5.0
+Homepage: https://github.com/gnotclub/xst
+
+Architecture: any
+Multi-Arch: foreign
+Depends: ${misc:Depends}, pkg-config, libx11-dev, libxft-dev, fontconfig, x11proto-dev, libxext-dev
+Description: xst is a st fork with some patches applied and other goodies.

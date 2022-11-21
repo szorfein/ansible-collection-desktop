@@ -34,7 +34,7 @@
 - name: xst > grabbing source
   ansible.builtin.get_url:
     url: 'https://github.com/gnotclub/xst/archive/master.tar.gz'
-    dest: '{{ dotfiles_cache_dir}}/xst.tar.gz'
+    dest: '{{ dotfiles_cache_dir}}/xst-{{ dotfiles_xst_version }}.tar.gz'
     checksum: sha256:d686246556386f1cd30c3421976c74f5440de6fbc7b733474db100d1b7df5bfd
   when: dotfiles_xst_pkg is not defined
 
@@ -45,20 +45,39 @@
   when: dotfiles_xst_pkg is not defined
 
 - name: xst > uncompressing source
-  ansible.builtin.unarchive:
-    src: '{{ dotfiles_cache_dir}}/xst.tar.gz'
-    dest: '{{ dotfiles_cache_dir}}/build'
-    extra_opts: [--strip-components=1]
+  ansible.builtin.command: >
+    debmake -a ../xst-{{ dotfiles_xst_version }}.tar.gz
+    chdir = {{ dotfiles_cache_dir }}/build
+  when: dotfiles_xst_pkg is not defined
+
+- name: xsg > copying xst/debian
+  ansible.builtin.copy:
+    src: xst/debian
+    dest: '{{ dotfiles_cache_dir }}/build/xst-{{ dotfiles_xst_version }}'
   when: dotfiles_xst_pkg is not defined
 
 - name: xst > building source
-  become: true
   ansible.builtin.command: >
-    {{ item }}
-    chdir = {{ dotfiles_cache_dir }}/build
-  with_items:
-    - make
-    - make PREFIX=/usr DESTDIR=/ install
+    debmake -i debuild
+    chdir = {{ dotfiles_cache_dir }}/build/xst-{{ dotfiles_xst_version }}
+  when: dotfiles_xst_pkg is not defined
+
+- name: xst > searching for .deb
+  ansible.builtin.find:
+    paths:
+      - '{{ dotfiles_cache_dir }}/build'
+    patterns:
+      - 'xst_{{ dotfiles_xst_version }}_*.deb'
+  register: xst_deb
+  when: dotfiles_xst_pkg is not defined
+
+- ansible.builtin.debug:
+  msg:
+    - 'found {{ xst_deb }}'
+
+- name: xst > installing package
+  become: true
+  ansible.builtin.command: 'dpkg -i {{ xst_deb.files }}'
   when: dotfiles_xst_pkg is not defined
 
 - name: nuke build destination
