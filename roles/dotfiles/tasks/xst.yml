@@ -1,19 +1,4 @@
 ---
-- name: xst > installing dependencies for Debian
-  become: true
-  ansible.builtin.apt:
-    pkg:
-      - build-essential
-      - pkg-config
-      - x11proto-core-dev
-      - libx11-dev
-      - libxft-dev
-      - fontconfig
-      - x11proto-dev
-      - libxext-dev
-      - debmake
-  when: ansible_os_family == 'Debian'
-
 # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=xst
 - name: xst > installing dependencies for Arch
   community.general.pacman:
@@ -31,54 +16,15 @@
     state: present
   when: dotfiles_xst_pkg is defined
 
-- name: xst > grabbing source
+- name: xst > downloading last sources package
   ansible.builtin.get_url:
     url: 'https://github.com/gnotclub/xst/archive/master.tar.gz'
     dest: '{{ dotfiles_cache_dir}}/xst-{{ dotfiles_xst_version }}.tar.gz'
-    checksum: sha256:d686246556386f1cd30c3421976c74f5440de6fbc7b733474db100d1b7df5bfd
+  register: xst_src
   when: dotfiles_xst_pkg is not defined
 
-- name: xst > creating building directory
-  ansible.builtin.file:
-    path: '{{ dotfiles_cache_dir}}/build'
-    state: directory
-  when: dotfiles_xst_pkg is not defined
-
-- name: xst > uncompressing source
-  ansible.builtin.command: >
-    debmake -a ../xst-{{ dotfiles_xst_version }}.tar.gz
-    chdir = {{ dotfiles_cache_dir }}/build
-  when: dotfiles_xst_pkg is not defined
-
-- name: xsg > copying xst/debian
-  ansible.builtin.copy:
-    src: xst/debian
-    dest: '{{ dotfiles_cache_dir }}/build/xst-{{ dotfiles_xst_version }}'
-  when: dotfiles_xst_pkg is not defined
-
-- name: xst > building source
-  ansible.builtin.command: >
-    debmake -i debuild
-    chdir = {{ dotfiles_cache_dir }}/build/xst-{{ dotfiles_xst_version }}
-  when: dotfiles_xst_pkg is not defined
-
-- name: xst > searching for .deb
-  ansible.builtin.find:
-    paths:
-      - '{{ dotfiles_cache_dir }}/build'
-    patterns:
-      - 'xst_{{ dotfiles_xst_version }}_*.deb'
-  register: xst_deb
-  when: dotfiles_xst_pkg is not defined
-
-- ansible.builtin.debug:
-  msg:
-    - 'found {{ xst_deb }}'
-
-- name: xst > installing package
-  become: true
-  ansible.builtin.command: 'dpkg -i {{ xst_deb.files }}'
-  when: dotfiles_xst_pkg is not defined
+- import_tasks: xst-debian.yml
+  when: ansible_os_family == 'Debian' and xst_src.changed
 
 - name: nuke build destination
   ansible.builtin.file:

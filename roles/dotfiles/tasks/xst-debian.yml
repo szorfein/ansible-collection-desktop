@@ -1,0 +1,53 @@
+---
+- name: xst > installing dependencies for Debian
+  become: true
+  ansible.builtin.apt:
+    pkg:
+      - build-essential
+      - pkg-config
+      - x11proto-core-dev
+      - libx11-dev
+      - libxft-dev
+      - fontconfig
+      - x11proto-dev
+      - libxext-dev
+      - debmake
+
+- name: xst > creating building directory
+  ansible.builtin.file:
+    path: '{{ dotfiles_cache_dir}}/build'
+    state: directory
+
+- name: xst > uncompressing source
+  ansible.builtin.command: >
+    debmake -y -a ../xst-{{ dotfiles_xst_version }}.tar.gz
+    chdir={{ dotfiles_cache_dir }}/build
+
+- name: xsg > copying xst/debian
+  ansible.builtin.copy:
+    src: xst/debian
+    dest: '{{ dotfiles_cache_dir }}/build/xst-{{ dotfiles_xst_version }}'
+
+- name: xst > building source
+  ansible.builtin.command: >
+    debmake -i debuild
+    chdir={{ dotfiles_cache_dir }}/build/xst-{{ dotfiles_xst_version }}
+
+- name: xst > searching for .deb
+  ansible.builtin.find:
+    paths:
+      - '{{ dotfiles_cache_dir }}/build'
+    patterns:
+      - 'xst_{{ dotfiles_xst_version }}*.deb'
+    file_type: file
+  register: xst_deb
+
+- name: xst > found result
+  ansible.builtin.debug:
+    msg:
+      - 'found {{ xst_deb }}'
+
+- name: xst > installing package
+  become: true
+  ansible.builtin.command: 'dpkg -i {{ xst_deb.files[0].path }}'
+  when: dotfiles_xst_pkg is not defined and xst_src.changed
