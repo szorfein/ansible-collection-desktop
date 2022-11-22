@@ -1,14 +1,4 @@
 ---
-# https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=xst
-- name: xst > installing dependencies for Arch
-  community.general.pacman:
-    name:
-      - libxft
-      - ncurses
-      - libxext
-      - git
-  when: ansible_os_family == 'Archlinux'
-
 - name: xst > installing via your package manager
   become: true
   ansible.builtin.package:
@@ -19,12 +9,26 @@
 - name: xst > downloading last sources package
   ansible.builtin.get_url:
     url: 'https://github.com/gnotclub/xst/archive/master.tar.gz'
-    dest: '{{ dotfiles_cache_dir}}/xst-{{ dotfiles_xst_version }}.tar.gz'
+    dest: '{{ dotfiles_cache_dir }}/xst-{{ dotfiles_xst_version }}.tar.gz'
   register: xst_src
   when: dotfiles_xst_pkg is not defined
 
 - import_tasks: xst-debian.yml
   when: ansible_os_family == 'Debian' and xst_src.changed
+
+- import_tasks: arch-aur.yml
+  loop:
+    - { name: xst-git,
+        deps:
+          - base-devel
+          - libxft
+          - ncurses
+          - libext
+          - git
+      }
+  loop_control:
+    loop_var: aur_item
+  when: ansible_os_family == 'Archlinux'
 
 - name: nuke build destination
   ansible.builtin.file:

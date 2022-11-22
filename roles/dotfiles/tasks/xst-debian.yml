@@ -50,4 +50,4 @@
 - name: xst > installing package
   become: true
   ansible.builtin.command: 'dpkg -i {{ xst_deb.files[0].path }}'
-  when: dotfiles_xst_pkg is not defined and xst_src.changed
+  when: xst_src.changed

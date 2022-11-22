@@ -1,0 +1,47 @@
+---
+# https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=xst
+- name: aur > installing dependencies for {{ aur_item.name }}
+  become: true
+  community.general.pacman:
+    name: '{{ aur_item.deps }}'
+    extra_args: --needed
+    update_cache: true
+
+- name: aur > downloading the last snapshot
+  ansible.builtin.get_url:
+    url: 'https://aur.archlinux.org/cgit/aur.git/snapshot/{{ aur_item.name }}.tar.gz'
+    dest: '{{ dotfiles_cache_dir }}/{{ aur_item.name }}.tar.gz'
+  register: aur_src
+
+- name: aur > creating building directory
+  ansible.builtin.file:
+    path: '{{ dotfiles_cache_dir}}/build'
+    state: directory
+  when: aur_src.changed
+
+- name: aur > uncompressing source
+  ansible.builtin.command: >
+    tar xvf ../{{ aur_item.name }}.tar.gz
+    chdir={{ dotfiles_cache_dir}}/build
+  when: aur_src.changed
+
+- name: aur > building source
+  ansible.builtin.command: >
+    makepkg --nodeps --noconfirm
+    chdir={{ dotfiles_cache_dir }}/build/{{ aur_item.name }}
+
+- name: aur > searching for buildind package .pkg.tar.zst
+  ansible.builtin.find:
+    paths:
+      - '{{ dotfiles_cache_dir }}/build/{{ aur_item.name }}'
+    patterns:
+      - '{{ aur_item.name }}*.pkg.tar.zst'
+    file_type: file
+  register: aur_pkg
+
+- name: aur > installing package {{ aur_item.name }}
+  become: true
+  ansible.general.pacman:
+    name: '{{ aur_pkg.files[0].path }}'
+    state: present
+  when: aur_src.changed
