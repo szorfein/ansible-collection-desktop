@@ -1,0 +1,28 @@
+---
+- name: gentoo > portage dir
+  become: true
+  ansible.builtin.file:
+    path: '/etc/portage/{{ item }}'
+    state: directory
+  with_items:
+    - package.use
+    - repos.conf
+
+- name: gentoo > importing ninjatools
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/szorfein/ninjatools/master/ninjatools.conf
+    dest: '{{ dotfiles_cache_dir }}/ninjatools.conf'
+    checksum: sha256:504a5b2ff59564ac0f318b903603dfd541e46135eda7b9fa5856f74604ee5beb
+
+- name: gentoo > copy ninjatools
+  become: true
+  ansible.builtin.copy:
+    src: '{{ dotfiles_cache_dir }}/ninjatools.conf'
+    dest: /etc/portage/repos.conf/ninjatools.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: gentoo > sync ninjatools
+  become: true
+  ansible.builtin.command: emaint sync -r ninjatools

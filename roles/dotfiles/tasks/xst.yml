@@ -16,15 +16,10 @@
 - import_tasks: xst-debian.yml
   when: ansible_os_family == 'Debian' and xst_src.changed
 
-- import_tasks: arch-aur.yml
+- include_tasks: arch-aur.yml
   loop:
     - { name: xst-git,
-        deps:
-          - base-devel
-          - libxft
-          - ncurses
-          - libext
-          - git
+        deps: [base-devel, libxft, ncurses, libext, git]
       }
   loop_control:
     loop_var: aur_item

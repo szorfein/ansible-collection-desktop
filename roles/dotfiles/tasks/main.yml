@@ -14,6 +14,9 @@
   ansible.builtin.set_fact:
     username: '{{ ansible_user_id }}'
 
+- import_tasks: gentoo.yml
+  when: ansible_os_family == 'Gentoo'
+
 - name: installing stow
   become: true
   ansible.builtin.package:
