@@ -1,15 +1,8 @@
-Description: <short summary of the patch>
- TODO: Put a short summary on the line above and replace this paragraph
- with a longer explanation of this change. Complete the meta-information
- with other relevant fields (see below for details). To make it easier, the
- information below has been extracted from the changelog. Adjust it or drop
- it.
- .
- xst (0.8.5-1) UNRELEASED; urgency=low
- .
-   * Initial release. Closes: #nnnn
-     <nnnn is the bug number of your ITP>
-Author: Szorfein <szorfein@protonmail.com>
+Description: [PATCH] xst: change prefix
+
+The path need to be changed to be able to compile source.
+
+From: Szorfein <szorfein@protonmail.com>
 
 ---
 The information above should follow the Patch Tagging Guidelines, please
@@ -20,8 +13,6 @@ Origin: <vendor|upstream|other>, <url of original patch>
 Bug: <url in upstream bugtracker>
 Bug-Debian: https://bugs.debian.org/<bugnumber>
 Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
-Forwarded: <no|not-needed|url proving that it has been forwarded>
-Reviewed-By: <name and email of someone who approved the patch>
 Last-Update: 2022-11-21
 
 --- xst-0.8.5.orig/config.mk

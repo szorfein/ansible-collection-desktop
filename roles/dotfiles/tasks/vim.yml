@@ -11,7 +11,6 @@
   ansible.builtin.copy:
     dest: /etc/portage/package.use/vim
     content: app-editors/vim X
-    create: yes
   when: ansible_os_family == 'Gentoo'
 
 - name: vim > installing

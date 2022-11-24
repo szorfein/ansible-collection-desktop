@@ -1,7 +1,7 @@
 ---
 dotfiles_xst_pkg: xst
 
-dotfiles_zsh_path: /usr/bin/zsh
+dotfiles_zsh_path: /bin/zsh
 dotfiles_zsh_pkgname: zsh
 
 dotfiles_vim_pkgname: vim

@@ -7,6 +7,7 @@
   with_items:
     - package.use
     - repos.conf
+    - package.accept_keywords
 
 - name: gentoo > importing ninjatools
   ansible.builtin.get_url:

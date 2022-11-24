@@ -1,4 +1,11 @@
 ---
+- name: xst > allowing masking keyword
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/portage/package.accept_keywords/xst
+    content: =x11-terms/xst-9999 **
+  when: ansible_os_family == 'Gentoo'
+
 - name: xst > installing via your package manager
   become: true
   ansible.builtin.package:
@@ -19,7 +26,7 @@
 - include_tasks: arch-aur.yml
   loop:
     - { name: xst-git,
-        deps: [base-devel, libxft, ncurses, libext, git]
+        deps: [base-devel, libxft, ncurses, libxext, git]
       }
   loop_control:
     loop_var: aur_item
