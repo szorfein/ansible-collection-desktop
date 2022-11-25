@@ -21,6 +21,9 @@
     state: present
   when: dotfiles_stow_dir is defined
 
+- include_tasks: tmux.yml
+  when: dotfiles_tmux | bool
+
 - include_tasks: zsh.yml
   when: dotfiles_zsh | bool
 

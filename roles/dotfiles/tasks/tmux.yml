@@ -1,0 +1,9 @@
+---
+- name: tmux > installing dependencies
+  ansible.builtin.package:
+    name: tmux
+    state: present
+
+- name: tmux > configuring using stow
+  ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_tmux_stow_dir }}'
+  when: dotfiles_stow_dir is defined and dotfiles_tmux_stow_dir is defined
