@@ -17,9 +17,12 @@ Role Variables
 - `dotfiles_vim`
   - Default: `false`
   - Description: Install and configure vim (not neovim).
-- `dotfiles_vim_plugin_items:`
+- `dotfiles_vim_plugin_git_items:`
   - Default: `[]`
   - Description: A list of remote plugins from github to install with the native pack system, e.g: `- airblade/vim-gitgutter`
+- `dotfiles_vim_plugin_tar_items:`
+  - Default: `[]`
+  - Description: A list of remote plugins from a `.tar.gz` archive to install with the native pack system.
 - `dotfiles_vim_stow_dir:`
   - Default: `undefined`
   - Description: Config files for vim with Stow, relative to `dotfiles_stow_dir`, e.g: `vim`.
@@ -29,9 +32,12 @@ Role Variables
 - `dotfiles_zsh`
   - Default: `false`
   - Description: Use zsh as default shell.
+- `dotfiles_zsh_plugin_dir:`
+  - Default: `undefined`
+  - Description: Plugin dir, for ohmyzsh, it look like `~/.oh-my-zsh/custom/themes`.
 - `dotfiles_zsh_plugin_items:`
   - Default: `[]`
-  - Description: A list of remote plugins to install `- { src: https://xxx, dest: xxx }`
+  - Description: A list of remote plugins to install `- { url: https://xxx, name: xxx }`, the `name:` will be installed in `dotfiles_zsh_plugin_dir`.
 - `dotfiles_zsh_plugin_link_items:`
   - Default: `[]`
   - Description: A list of links to create if need `- { src: xxx, dest: xxx }`
@@ -51,7 +57,7 @@ Example Playbook
          - dotfiles
       vars:
         dotfiles_vim: true
-        dotfiles_vim_plugin_items:
+        dotfiles_vim_plugin_git_items:
           - airblade/vim-gitgutter
           - Yggdroot/indentLine
 

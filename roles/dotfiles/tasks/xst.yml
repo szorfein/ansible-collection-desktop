@@ -13,15 +13,8 @@
     state: present
   when: dotfiles_xst_pkg is defined
 
-- name: xst > downloading last sources package
-  ansible.builtin.get_url:
-    url: 'https://github.com/gnotclub/xst/archive/master.tar.gz'
-    dest: '{{ dotfiles_cache_dir }}/xst-{{ dotfiles_xst_version }}.tar.gz'
-  register: xst_src
-  when: dotfiles_xst_pkg is not defined
-
 - import_tasks: xst-debian.yml
-  when: ansible_os_family == 'Debian' and xst_src.changed
+  when: ansible_os_family == 'Debian'
 
 - include_tasks: arch-aur.yml
   loop:

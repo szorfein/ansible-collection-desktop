@@ -30,7 +30,7 @@
     chdir={{ dotfiles_cache_dir }}/build/{{ aur_item.name }}
   when: aur_src.changed
 
-- name: aur > searching for buildind package .pkg.tar.zst
+- name: aur > searching for building package '*.pkg.tar.zst'
   ansible.builtin.find:
     paths:
       - '{{ dotfiles_cache_dir }}/build/{{ aur_item.name }}'
