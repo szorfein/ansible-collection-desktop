@@ -1,0 +1,7 @@
+---
+dotfiles_vifm_pkg_items:
+  - ffmpegthumbnailer
+  - imagemagick
+  - ueberzug
+  - vifm
+  - xdotool

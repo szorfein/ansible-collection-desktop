@@ -24,5 +24,8 @@
 - include_tasks: zsh.yml
   when: dotfiles_zsh | bool
 
+- include_tasks: vifm.yml
+  when: dotfiles_vifm | bool
+
 - include_tasks: vim.yml
   when: dotfiles_vim | bool

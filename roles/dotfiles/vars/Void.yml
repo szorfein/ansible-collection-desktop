@@ -1,4 +1,12 @@
 ---
+dotfiles_vifm_pkg_items:
+  - djvulibre
+  - ffmpegthumbnailer
+  - ImageMagick
+  - ueberzug
+  - vifm
+  - xdotool
+
 dotfiles_zsh_path: /usr/bin/zsh
 dotfiles_zsh_pkgname: zsh
 
