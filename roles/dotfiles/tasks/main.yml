@@ -10,6 +10,9 @@
       paths:
         - 'vars'
 
+- import_tasks: gentoo.yml
+  when: ansible_os_family == 'Gentoo'
+
 - name: setting fact username = {{ ansible_user_id }}
   ansible.builtin.set_fact:
     username: '{{ ansible_user_id }}'
