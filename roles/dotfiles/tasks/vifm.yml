@@ -52,6 +52,12 @@
     - https://raw.githubusercontent.com/cirala/vifmimg/master/vifmimg
     - https://raw.githubusercontent.com/cirala/vifmimg/master/vifmrun
 
+- name: vifm > downloading and install epub-thumbnailer.py
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/marianosimone/epub-thumbnailer/master/src/epub-thumbnailer.py
+    dest: ~/bin/epub-thumbnailer
+    mode: 0700
+
 - name: vifm > downloading and install fontpreview
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/sdushantha/fontpreview/master/fontpreview

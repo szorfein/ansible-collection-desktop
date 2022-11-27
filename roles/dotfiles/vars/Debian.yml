@@ -1,12 +1,14 @@
 ---
 dotfiles_vifm_pkg_items:
-  - djvulibre-bin
+  - bat
   - ffmpegthumbnailer
   - imagemagick
+  - poppler-utils # pdftoppm
   - ueberzug
   - vifm
+  - w3m
   - xdotool
-                            
+
 dotfiles_zsh_path: /bin/zsh
 dotfiles_zsh_pkgname: zsh
 dotfiles_vim_pkgname: vim

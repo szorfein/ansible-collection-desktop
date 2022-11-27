@@ -1,9 +1,12 @@
 ---
 dotfiles_vifm_pkg_items:
-  - vifm
-  - ueberzug
-  - imagemagick
+  - bat
   - ffmpegthumbnailer
+  - imagemagick
+  - poppler # pdftoppm
+  - ueberzug
+  - vifm
+  - w3m
   - xdotool
 
 dotfiles_zsh_path: /usr/bin/zsh

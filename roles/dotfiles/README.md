@@ -16,7 +16,7 @@ Role Variables
   - Description: If you need `GNU/Stow` to install config files, add the path here, e.g: `~/.dotfiles`.
 - `dotfiles_vifm`
   - Default: `false`
-  - Description: Install [vifm](https://github.com/vifm/vifm) with [image preview](https://github.com/cirala/vifmimg).
+  - Description: Install [vifm](https://github.com/vifm/vifm) with [vifmimg](https://github.com/cirala/vifmimg) and his dependencies.
 - `dotfiles_vifm_stow_dir:`
   - Default: `undefined`
   - Description: Config files for vifm with Stow, relative to `dotfiles_stow_dir`, e.g: `vifm`.

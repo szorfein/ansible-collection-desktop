@@ -1,7 +1,10 @@
 ---
 dotfiles_vifm_pkg_items:
+  - bat
   - ffmpegthumbnailer
   - imagemagick
+  - poppler
   - ueberzug
   - vifm
+  - w3m
   - xdotool
