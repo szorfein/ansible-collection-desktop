@@ -1,0 +1,69 @@
+---
+# https://wiki.debian.org/SourcesList
+- name: vifm > add sid repo for Debian
+  become: true
+  ansible.builtin.apt_repository:
+    repo: '{{ item }}'
+    state: present
+    filename: sid
+    update_cache: yes
+  with_items:
+    - deb https://deb.debian.org/debian/ unstable main
+    - deb-src https://deb.debian.org/debian/ unstable main
+  when: ansible_os_family == 'Debian'
+
+# http://jaqque.sbih.org/kplug/apt-pinning.html
+- name: vifm > update repo preferences for Debian
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/apt/preferences
+    content: >
+      Package: *
+      Pin: release a=stable
+      Pin-Priority: 700
+
+      Package: *
+      Pin: release a=unstable
+      Pin-Priority: 600
+  when: ansible_os_family == 'Debian'
+
+- name: vifm > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ dotfiles_vifm_pkg_items }}'
+  when: dotfiles_vifm_pkg_items is defined
+
+- name: vifm > create required directory ~/bin, ~/.config/vifm/scripts
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: directory
+  with_items:
+    - ~/.config/vifm/scripts
+    - ~/bin
+
+- name: vifm > downloading scripts from cirala/vifmimg
+  ansible.builtin.get_url:
+    url: '{{ item }}'
+    dest: '~/.config/vifm/scripts/{{ item | basename }}'
+    mode: 0700
+  with_items:
+    - https://raw.githubusercontent.com/cirala/vifmimg/master/vifmimg
+    - https://raw.githubusercontent.com/cirala/vifmimg/master/vifmrun
+
+- name: vifm > downloading and install epub-thumbnailer.py
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/marianosimone/epub-thumbnailer/master/src/epub-thumbnailer.py
+    dest: ~/bin/epub-thumbnailer
+    mode: 0700
+
+- name: vifm > downloading and install fontpreview
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/sdushantha/fontpreview/master/fontpreview
+    dest: ~/bin/fontpreview
+    mode: 0755
+
+- name: vifm > install dots with stow
+  ansible.builtin.command: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_vifm_stow_dir }}'
+  when: dotfiles_stow_dir is defined and dotfiles_vifm_stow_dir is defined

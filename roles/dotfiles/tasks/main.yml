@@ -10,6 +10,9 @@
       paths:
         - 'vars'
 
+- import_tasks: gentoo.yml
+  when: ansible_os_family == 'Gentoo'
+
 - name: setting fact username = {{ ansible_user_id }}
   ansible.builtin.set_fact:
     username: '{{ ansible_user_id }}'
@@ -21,8 +24,11 @@
     state: present
   when: dotfiles_stow_dir is defined
 
-- include_tasks: zsh.yml
-  when: dotfiles_zsh | bool
+- include_tasks: vifm.yml
+  when: dotfiles_vifm | bool
 
 - include_tasks: vim.yml
   when: dotfiles_vim | bool
+
+- include_tasks: zsh.yml
+  when: dotfiles_zsh | bool

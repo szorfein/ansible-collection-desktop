@@ -3,12 +3,8 @@ dotfiles_vifm_pkg_items:
   - bat
   - ffmpegthumbnailer
   - imagemagick
-  - poppler-utils # pdftoppm
+  - poppler
   - ueberzug
   - vifm
   - w3m
   - xdotool
-
-dotfiles_zsh_path: /bin/zsh
-dotfiles_zsh_pkgname: zsh
-dotfiles_vim_pkgname: vim

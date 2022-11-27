@@ -13,7 +13,7 @@
 
 - name: zsh > plugins directory
   ansible.builtin.file:
-    src: '{{ item.dest }}'
+    path: '{{ item.dest }}'
     state: directory
   with_items: '{{ dotfiles_zsh_plugin_items }}'
   when: dotfiles_zsh_plugin_items | length > 0
