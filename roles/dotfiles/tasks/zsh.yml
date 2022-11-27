@@ -11,20 +11,12 @@
     name: '{{ username }}'
     shell: '{{ dotfiles_zsh_path }}'
 
-- name: zsh > plugins directory
-  ansible.builtin.file:
-    path: '{{ item.dest }}'
-    state: directory
-  with_items: '{{ dotfiles_zsh_plugin_items }}'
-  when: dotfiles_zsh_plugin_items | length > 0
-
-- name: zsh > get plugins
-  ansible.builtin.unarchive:
-    src: '{{ item.src }}'
-    dest: '{{ item.dest }}'
-    remote_src: yes
-    extra_opts: [--strip-components=1]
-  with_items: '{{ dotfiles_zsh_plugin_items }}'
+- include_tasks: get-tar.yml
+  loop: '{{ dotfiles_zsh_plugin_items }}'
+  loop_control:
+    loop_var: tar_item
+  vars:
+    to_dest: '{{ dotfiles_zsh_plugin_dir }}'
   when: dotfiles_zsh_plugin_items | length > 0
 
 - name: zsh > make symbolink links

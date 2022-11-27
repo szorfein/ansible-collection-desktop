@@ -8,3 +8,10 @@ dotfiles_vifm_pkg_items:
   - vifm
   - w3m
   - xdotool
+
+dotfiles_vim_pkgname: vim
+
+dotfiles_xst_pkg: xst
+
+dotfiles_zsh_path: /bin/zsh
+dotfiles_zsh_pkgname: zsh

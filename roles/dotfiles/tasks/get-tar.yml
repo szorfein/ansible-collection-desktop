@@ -1,0 +1,20 @@
+---
+- name: tar > creating destination {{ to_dest }}/{{ tar_item.name }}
+  ansible.builtin.file:
+    path: '{{ to_dest }}/{{ tar_item.name }}'
+    state: directory
+
+- name: tar > downloading archive {{ tar_item.url }}
+  ansible.builtin.get_url:
+    url: '{{ tar_item.url }}'
+    dest: '{{ dotfiles_cache_dir }}/{{ tar_item.name }}.tar.gz'
+  register: tar_archive
+
+- name: tar > uncompressing archive {{ tar_item.name }}
+  ansible.builtin.unarchive:
+    src: '{{ dotfiles_cache_dir }}/{{ tar_item.name }}.tar.gz'
+    dest: '{{ to_dest }}/{{ tar_item.name }}'
+    extra_opts: [--strip-components=1] # remove first directory
+    exclude:
+      - '*.md'
+  when: tar_archive.changed

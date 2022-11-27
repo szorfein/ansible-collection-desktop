@@ -1,9 +1,17 @@
 ---
 - name: vim > uninstall conflicting packages
+  become: true
   ansible.builtin.package:
     name: '{{ dotfiles_vim_pkgname_conflict }}'
     state: absent
   when: dotfiles_vim_pkgname_conflict is defined
+
+- name: vim > configure use flag
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/portage/package.use/vim
+    content: app-editors/vim X
+  when: ansible_os_family == 'Gentoo'
 
 - name: vim > installing
   become: true
@@ -16,12 +24,20 @@
     path: ~/.vim/pack/dotfiles/start
     state: directory
 
-- name: vim > get plugins
+- name: vim > get git plugins
   ansible.builtin.git:
     repo: 'https://github.com/{{ item }}'
     dest: '~/.vim/pack/dotfiles/start/{{ item | basename }}'
-  with_items: '{{ dotfiles_vim_plugin_items }}'
-  when: dotfiles_vim_plugin_items | length > 0
+  with_items: '{{ dotfiles_vim_plugin_git_items }}'
+  when: dotfiles_vim_plugin_git_items | length > 0
+
+- include_tasks: get-tar.yml
+  loop: '{{ dotfiles_vim_plugin_tar_items }}'
+  loop_control:
+    loop_var: tar_item
+  vars:
+    to_dest: ~/.vim/pack/dotfiles/start
+  when: dotfiles_vim_plugin_tar_items | length > 0
 
 - name: vim > copy vim configs using stow
   ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_vim_stow_dir }}'

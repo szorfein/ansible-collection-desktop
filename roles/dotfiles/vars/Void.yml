@@ -9,8 +9,10 @@ dotfiles_vifm_pkg_items:
   - w3m
   - xdotool
 
-dotfiles_zsh_path: /usr/bin/zsh
-dotfiles_zsh_pkgname: zsh
-
 dotfiles_vim_pkgname_conflict: vim
 dotfiles_vim_pkgname: vim-x11
+
+dotfiles_xst_pkg: xst
+
+dotfiles_zsh_path: /usr/bin/zsh
+dotfiles_zsh_pkgname: zsh

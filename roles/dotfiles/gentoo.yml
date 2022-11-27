@@ -1,8 +1,0 @@
----
-- name: gentoo > install package.use/dotfiles
-  ansible.builtin.template:
-    src: package-use.j2
-    dest: /etc/portage/package.use/dotfiles
-    owner: root
-    group: root
-    mode: 0644

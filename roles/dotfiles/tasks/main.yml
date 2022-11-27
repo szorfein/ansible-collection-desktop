@@ -17,6 +17,11 @@
   ansible.builtin.set_fact:
     username: '{{ ansible_user_id }}'
 
+- name: creating cache dir
+  ansible.builtin.file:
+    path: '{{ dotfiles_cache_dir }}'
+    state: directory
+
 - name: installing stow
   become: true
   ansible.builtin.package:
@@ -29,6 +34,9 @@
 
 - include_tasks: vim.yml
   when: dotfiles_vim | bool
+
+- include_tasks: xst.yml
+  when: dotfiles_xst | bool
 
 - include_tasks: zsh.yml
   when: dotfiles_zsh | bool
