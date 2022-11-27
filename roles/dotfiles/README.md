@@ -14,6 +14,12 @@ Role Variables
 - `dotfiles_stow_dir`
   - Default: `undefined`
   - Description: If you need `GNU/Stow` to install config files, add the path here, e.g: `~/.dotfiles`.
+- `dotfiles_tmux`
+  - Default: `false`
+  - Description: Install tmux.
+- `dotfiles_tmux_stow_dir`
+  - Default: `undefined`
+  - Description: Config files for tmux with Stow, relative to `dotfiles_stow_dir`, e.g: `tmux`.
 - `dotfiles_vifm`
   - Default: `false`
   - Description: Install [vifm](https://github.com/vifm/vifm) with [vifmimg](https://github.com/cirala/vifmimg) and his dependencies.

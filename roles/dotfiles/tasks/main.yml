@@ -29,6 +29,9 @@
     state: present
   when: dotfiles_stow_dir is defined
 
+- include_tasks: tmux.yml
+  when: dotfiles_tmux | bool
+
 - include_tasks: vifm.yml
   when: dotfiles_vifm | bool
 
