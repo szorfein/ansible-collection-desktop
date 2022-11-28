@@ -3,13 +3,13 @@
   ansible.builtin.file:
     path: '{{ to_dest }}/{{ zip_item.name }}'
     state: directory
-  when: zip_archive.changed and zip_in_sub
+  when: zip_in_sub
 
 - name: zip > creating destination {{ to_dest }}
   ansible.builtin.file:
     path: '{{ to_dest }}'
     state: directory
-  when: zip_archive.changed and not zip_in_sub
+  when: not zip_in_sub
 
 - name: zip > downloading archive {{ zip_item.url }}
   ansible.builtin.get_url:

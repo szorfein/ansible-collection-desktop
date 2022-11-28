@@ -20,6 +20,7 @@
     dest: '{{ dotfiles_cache_dir }}/{{ item.name }}.zip'
     checksum: 'sha256:{{ item.hash }}'
   with_items: '{{ dotfiles_external_nerd_font_items }}'
+  register: nerd_font
   when: dotfiles_external_nerd_font_items | length > 0
 
 - name: external > create font dir
@@ -27,7 +28,7 @@
     path: '{{ dotfiles_external_font_dir }}/{{ item.name }}'
     state: directory
   with_items: '{{ dotfiles_external_nerd_font_items }}'
-  when: dotfiles_external_nerd_font_items | length > 0
+  when: dotfiles_external_nerd_font_items | length > 0 and nerd_font.changed
 
 - name: external > extracting nerd font archive
   ansible.builtin.unarchive:
@@ -37,12 +38,12 @@
     exclude:
       - '*.md'
   with_items: '{{ dotfiles_external_nerd_font_items }}'
-  when: dotfiles_external_nerd_font_items | length > 0
+  when: dotfiles_external_nerd_font_items | length > 0 and nerd_font.changed
 
 - name: external > removing windows font
   ansible.builtin.command: "find {{ dotfiles_external_font_dir}}/{{ item.name }} -name '*Windows*' -delete"
   with_items: '{{ dotfiles_external_nerd_font_items }}'
-  when: dotfiles_external_nerd_font_items | length > 0
+  when: dotfiles_external_nerd_font_items | length > 0 and nerd_font.changed
 
 - include_tasks: get-zip.yml
   loop: '{{ dotfiles_external_font_items }}'
