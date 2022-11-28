@@ -44,13 +44,13 @@ Role Variables
 - `dotfiles_zsh`
   - Default: `false`
   - Description: Use zsh as default shell.
-- `dotfiles_zsh_plugin_dir:`
+- `dotfiles_zsh_theme_dir:`
   - Default: `undefined`
-  - Description: Plugin dir, for ohmyzsh, it look like `~/.oh-my-zsh/custom/themes`.
-- `dotfiles_zsh_plugin_items:`
+  - Description: Theme dir, for ohmyzsh, it look like `~/.oh-my-zsh/custom/themes`.
+- `dotfiles_zsh_theme_items:`
   - Default: `[]`
-  - Description: A list of remote plugins to install `- { url: https://xxx, name: xxx }`, the `name:` will be installed in `dotfiles_zsh_plugin_dir`.
-- `dotfiles_zsh_plugin_link_items:`
+  - Description: A list of remote themes to install `- { url: https://xxx, name: xxx }`, the `name:` will be installed in `dotfiles_zsh_theme_dir`.
+- `dotfiles_zsh_link_items:`
   - Default: `[]`
   - Description: A list of links to create if need `- { src: xxx, dest: xxx }`
 

@@ -6,13 +6,6 @@
     state: absent
   when: dotfiles_vim_pkgname_conflict is defined
 
-- name: vim > configure use flag
-  become: true
-  ansible.builtin.copy:
-    dest: /etc/portage/package.use/vim
-    content: app-editors/vim X
-  when: ansible_os_family == 'Gentoo'
-
 - name: vim > installing
   become: true
   ansible.builtin.package:

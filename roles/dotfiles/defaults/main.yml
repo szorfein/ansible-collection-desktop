@@ -1,14 +1,9 @@
 ---
 dotfiles_cache_dir: ~/.cache/dotfiles
 
-# defaults file for dotfiles
-dotfiles_zsh: false
+dotfiles_tmux: false
 
-# List for zsh plugins to install: e.g - { src: https://xxx, dest: somewhere }
-dotfiles_zsh_plugin_items: []
-
-# list of symbolink link to create
-dotfiles_zsh_plugin_link_items: []
+dotfiles_vifm: false
 
 dotfiles_vim: false
 
@@ -18,3 +13,12 @@ dotfiles_vim_plugin_tar_items: []
 
 dotfiles_xst: false
 dotfiles_xst_version: 0.8.5 # https://github.com/gnotclub/xst/blob/master/config.mk
+
+# defaults file for dotfiles
+dotfiles_zsh: false
+
+# List for zsh plugins to install: e.g - { src: https://xxx, dest: somewhere }
+dotfiles_zsh_theme_items: []
+
+# list of symbolink link to create
+dotfiles_zsh_link_items: []
