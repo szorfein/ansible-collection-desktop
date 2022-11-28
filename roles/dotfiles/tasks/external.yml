@@ -5,26 +5,13 @@
     name: unzip
     state: present
 
-- name: external > create cache dir {{ dotfiles_cache_dir }}
-  ansible.builtin.file:
-    path: '{{ dotfiles_cache_dir }}'
-    state: directory
-
-- name: external > create wallpaper dir {{ dotfiles_external_wallpaper_dir }}
-  ansible.builtin.file:
-    path: '{{ dotfiles_external_wallpaper_dir }}'
-    state: directory
-  when: dotfiles_external_wallpaper_items | length > 0
-
-- name: external > download and extract wallpapers list
-  ansible.builtin.unarchive:
-    src: '{{ item }}'
-    dest: '{{ dotfiles_external_wallpaper_dir }}'
-    remote_src: yes
-    extra_opts: [-j]
-    exclude:
-      - '*/*.md'
-  with_items: '{{ dotfiles_external_wallpaper_items }}'
+- include_tasks: get-zip.yml
+  loop: '{{ dotfiles_external_wallpaper_items }}'
+  loop_control:
+    loop_var: zip_item
+  vars:
+    to_dest: '{{ dotfiles_external_wallpaper_dir }}'
+    zip_in_sub: false
   when: dotfiles_external_wallpaper_items | length > 0
 
 - name: external > downloading nerd fonts
@@ -57,23 +44,11 @@
   with_items: '{{ dotfiles_external_nerd_font_items }}'
   when: dotfiles_external_nerd_font_items | length > 0
 
-- name: external > create other fonts dir
-  ansible.builtin.file:
-    path: '{{ dotfiles_external_font_dir }}/{{ item.name }}'
-    state: directory
-  with_items: '{{ dotfiles_external_font_items }}'
-  when: dotfiles_external_font_items | length > 0
-
-- name: external > downloading other fonts
-  ansible.builtin.unarchive:
-    src: '{{ item.src }}'
-    dest: '{{ dotfiles_external_font_dir }}/{{ item.name }}'
-    remote_src: yes
-    extra_opts: [-j]
-    exclude:
-      - '*.md'
-      - '*.otf'
-      - '*.png'
-      - '*.txt'
-  with_items: '{{ dotfiles_external_font_items }}'
+- include_tasks: get-zip.yml
+  loop: '{{ dotfiles_external_font_items }}'
+  loop_control:
+    loop_var: zip_item
+  vars:
+    to_dest: '{{ dotfiles_external_font_dir }}'
+    zip_in_sub: true
   when: dotfiles_external_font_items | length > 0
