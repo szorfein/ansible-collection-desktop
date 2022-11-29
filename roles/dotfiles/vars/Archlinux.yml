@@ -6,7 +6,6 @@ dotfiles_awm_pkg_items:
   - light
   - mpc
   - papirus-icon-theme
-  - ttf-iosevka-nerd
   - xss-lock
   - inotify-tools
   - scrot

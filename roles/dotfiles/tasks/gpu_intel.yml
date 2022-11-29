@@ -1,4 +1,14 @@
 ---
+- name: gpu_intel > global settings for Gentoo
+  become: true
+  ansible.builtin.blockinfile:
+    path: /etc/portage/make.conf
+    block: |
+      VIDEO_CARDS="intel"
+      USE="${USE} vaapi"
+  notify: emerge changed use
+  when: ansible_os_family == 'Gentoo'
+
 - name: gpu_intel > installing drivers for intel gen7
   become: true
   ansible.builtin.package:
