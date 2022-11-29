@@ -1,4 +1,22 @@
 ---
+dotfiles_awm_pkg_items:
+  - awesome
+  - picom
+  - feh
+  - light
+  - mpc
+  - papirus-icon-theme
+  - xss-lock
+  - inotify-tools
+  - scrot
+
+# https://wiki.debian.org/GraphicsCard#Intel
+dotfiles_gpu_intel_gen7_pkg_items:
+  - i965-va-driver
+
+dotfiles_gpu_intel_pkg_items:
+  - intel-media-va-driver
+
 dotfiles_vifm_pkg_items:
   - bat
   - ffmpegthumbnailer
@@ -9,6 +27,13 @@ dotfiles_vifm_pkg_items:
   - w3m
   - xdotool
 
+dotfiles_vim_pkgname: vim
+
+dotfiles_xorg_pkg_items:
+  - xserver-xorg-core
+  - xinit
+  - xclip
+  - xserver-xorg-input-libinput
+
 dotfiles_zsh_path: /bin/zsh
 dotfiles_zsh_pkgname: zsh
-dotfiles_vim_pkgname: vim

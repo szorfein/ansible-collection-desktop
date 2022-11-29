@@ -1,0 +1,18 @@
+terminal = os.getenv("TERMINAL") or "xst"
+
+-- TODO: specific to xst
+terminal_cmd = terminal .. " -e "
+terminal_args = { " -c ", " -e " }
+
+editor = os.getenv("EDITOR") or "vim"
+editor_cmd = terminal_cmd .. editor
+
+file_browser = terminal_cmd .. "vifm"
+
+-- TODO: soon customized
+sound_system = "alsa"
+web_browser = "brave"
+sound_card = "hw:PCH"
+
+cpu_core = 2
+password = "awesome"

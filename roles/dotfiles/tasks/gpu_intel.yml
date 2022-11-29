@@ -1,0 +1,16 @@
+---
+- name: gpu_intel > installing drivers for intel gen7
+  become: true
+  ansible.builtin.package:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ dotfiles_gpu_intel_gen7_pkg_items }}'
+  when: dotfiles_gpu_driver == 'intel_gen7'
+
+- name: gpu_intel > installing drivers for intel gen8+
+  become: true
+  ansible.builtin.package:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ dotfiles_gpu_intel_pkg_items }}'
+  when: dotfiles_gpu_driver == 'intel'

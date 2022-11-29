@@ -1,4 +1,26 @@
 ---
+dotfiles_awm_pkg_items:
+  - awesome
+  - picom
+  - feh
+  - light
+  - mpc
+  - papirus-icon-theme
+  - nerd-fonts-ttf
+  - xss-lock
+  - inotify-tools
+  - scrot
+  - i3lock-color
+
+# https://docs.voidlinux.org/config/graphical-session/graphics-drivers/intel.html
+dotfiles_gpu_intel_gen7_pkg_items:
+  - mesa-dri
+  - libva-intel-driver
+
+dotfiles_gpu_intel_pkg_items:
+  - mesa-dri
+  - intel-media-driver
+
 dotfiles_vifm_pkg_items:
   - bat
   - ffmpegthumbnailer
@@ -11,6 +33,12 @@ dotfiles_vifm_pkg_items:
 
 dotfiles_vim_pkgname_conflict: vim
 dotfiles_vim_pkgname: vim-x11
+
+dotfiles_xorg_pkg_items:
+  - xorg-minimal
+  - xinit
+  - xclip
+  - xorg-input-drivers
 
 dotfiles_xst_pkg: xst
 
