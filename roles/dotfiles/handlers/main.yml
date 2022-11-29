@@ -2,7 +2,7 @@
 # handlers file for dotfiles
 - name: emerge changed use
   become: true
-  ansible.general.portage:
+  community.general.portage:
     package: '@world'
     changed_use: true
     deep: true
