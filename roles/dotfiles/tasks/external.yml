@@ -40,16 +40,23 @@
   with_items: '{{ dotfiles_external_nerd_font_items }}'
   when: dotfiles_external_nerd_font_items | length > 0 and nerd_font.changed
 
+- name: external > getting ad-hoc fonts
+  ansible.builtin.get_url:
+    url: '{{ item }}'
+    dest: "{{ dotfiles_external_font_dir }}/{{ item | basename | replace('%20',' ')}}"
+  with_items: '{{ dotfiles_external_font_ad_hoc_items }}'
+  when: dotfiles_external_font_ad_hoc_items | length > 0
+
 - name: external > removing windows font
   ansible.builtin.command: "find {{ dotfiles_external_font_dir}}/{{ item.name }} -name '*Windows*' -delete"
   with_items: '{{ dotfiles_external_nerd_font_items }}'
   when: dotfiles_external_nerd_font_items | length > 0 and nerd_font.changed
 
 - include_tasks: get-zip.yml
-  loop: '{{ dotfiles_external_font_items }}'
+  loop: '{{ dotfiles_external_font_zip_items }}'
   loop_control:
     loop_var: zip_item
   vars:
     to_dest: '{{ dotfiles_external_font_dir }}'
     zip_in_sub: true
-  when: dotfiles_external_font_items | length > 0
+  when: dotfiles_external_font_zip_items | length > 0

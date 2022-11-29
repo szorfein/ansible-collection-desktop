@@ -3,7 +3,8 @@
 dotfiles_cache_dir: ~/.cache/dotfiles
 
 dotfiles_external_font_dir: ~/.local/share/fonts
-dotfiles_external_font_items: []
+dotfiles_external_font_zip_items: []
+dotfiles_external_font_ad_hoc_items: []
 
 dotfiles_external_nerd_font_items: []
 dotfiles_external_nerd_font_version: 2.2.2

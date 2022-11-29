@@ -17,6 +17,13 @@ Role Variables
 - `dotfiles_external_font_dir`
   - Default: `~/.local/share/fonts`
   - Description: Fonts dir.
+- `dotfiles_external_font_ad_hoc_items`
+  - Default: `[]`
+  - Description: A list of remote fonts to download directly, end by `.ttf`,
+    `.otf`, etc.
+- `dotfiles_external_font_zip_items`
+  - Default: `[]`
+  - Description: A list of remote `zip` font archive to download.
 - `dotfiles_external_nerd_font_version`
   - Default: `2.2.2`
   - Description: Release version of the [Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases).
