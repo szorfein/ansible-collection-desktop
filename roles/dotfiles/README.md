@@ -13,10 +13,13 @@ Role Variables
 
 - `dotfiles_audio_backend`
   - Default: `undefined`
-  - Description: Can be `alsa` or `pipewire`, if remain `undefined`, your distro may install the both by default or install `pulseaudio`.
-- `dotfiles_audio_stow_dir`
+  - Description: Can be `alsa` or `pulseaudio`, if remain `undefined`, your distro choose one or can install the both.
+- `dotfiles_audio_alsa_stow_dir`
   - Default: `undefined`
   - Description: Config files for audio with Stow, relative to `dotfiles_stow_dir`, e.g: `alsa-sound`.
+- `dotfiles_audio_pulseaudio_stow_dir`
+  - Default: `undefined`
+  - Description: Config files for audio with Stow, relative to `dotfiles_stow_dir`, e.g: `pulse-sound`.
 - `dotfiles_mpd`
   - Default: `false`
 - `dotfiles_mpd_music_dir`

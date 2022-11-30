@@ -1,0 +1,9 @@
+---
+dotfiles_alsa_pkg_conflict_items:
+  - pulseaudio
+
+dotfiles_alsa_pkg_items:
+  - alsa-utils
+
+dotfiles_pulseaudio_pkg_items:
+  - pulseaudio

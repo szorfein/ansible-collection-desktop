@@ -1,0 +1,18 @@
+{% if dotfiles_audio_backend == 'alsa' %}
+# ALSA
+media-sound/cava alsa
+media-sound/alsa-utils libsamplerate
+media-video/ffmpeg alsa ladspa bs2b
+media-sound/mpd alsa
+{% endif %}
+
+{% if dotfiles_audio_backend == 'pulseaudio' %}
+# Pulseaudio
+
+media-sound/pulseaudio libsamplerate
+
+media-sound/cava pulseaudio
+media-video/ffmpeg pulseaudio bs2b
+
+media-sound/mpd pulseaudio
+{% endif %}

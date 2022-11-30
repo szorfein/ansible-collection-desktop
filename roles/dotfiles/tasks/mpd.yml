@@ -2,6 +2,9 @@
 - import_tasks: alsa.yml
   when: dotfiles_audio_backend is defined and dotfiles_audio_backend == 'alsa'
 
+- import_tasks: pulseaudio.yml
+  when: dotfiles_audio_backend is defined and dotfiles_audio_backend == 'pulseaudio'
+
 - name: mpd > installing
   become: true
   ansible.builtin.package:

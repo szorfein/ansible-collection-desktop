@@ -2,9 +2,13 @@
 dotfiles_alsa_pkg_conflict_items:
   - pipewire-pulse
   - pulseaudio
+
 dotfiles_alsa_pkg_items:
   - alsa-utils
   - alsa-plugins # speexrate resampling
+
+dotfiles_pulseaudio_pkg_items:
+  - pulseaudio
 
 dotfiles_zsh_path: /usr/bin/zsh
 dotfiles_zsh_pkgname: zsh

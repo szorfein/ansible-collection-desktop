@@ -1,9 +1,13 @@
 ---
 dotfiles_alsa_pkg_conflict_items:
   - pulseaudio
+
 dotfiles_alsa_pkg_item:
   - alsa-utils
   - libasound2-plugins # speexrate resampling
+
+dotfiles_pulseaudio_pkg_item:
+  - pulseaudio
 
 dotfiles_zsh_path: /bin/zsh
 dotfiles_zsh_pkgname: zsh
