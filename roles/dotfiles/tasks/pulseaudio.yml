@@ -1,0 +1,19 @@
+---
+- name: pulseaudio > apply global config
+  become: true
+  ansible.builtin.blockinfile:
+    block: "{{ lookup('ansible.builtin.template', 'global.j2') }}"
+    marker: '# {mark} Configured with Ansible'
+    path: /etc/portage/make.conf
+  when: ansible_os_family == 'Gentoo'
+
+- name: pulseaudio > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_pulseaudio_pkg_items }}'
+    state: present
+  when: dotfiles_pulseaudio_pkg_items | length > 0
+
+- name: pulseaudio > installing dots with stow
+  ansible.builtin.command: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_audio_pulseaudio_stow_dir }}'
+  when: dotfiles_stow_dir is defined and dotfiles_audio_pulseaudio_stow_dir is defined

@@ -1,3 +1,32 @@
+{% if dotfiles_awm %}
+# awesome
+dev-python/pillow jpeg
+media-libs/libglvnd X
+x11-libs/cairo X
+x11-libs/libxkbcommon X
+{% endif %}
+
+{% if dotfiles_audio_backend == 'alsa' or dotfiles_audio_backend == 'pulseaudio' %}
+# ALSA
+media-sound/alsa-utils libsamplerate
+media-plugins/alsa-plugins speex
+media-video/ffmpeg ladspa bs2b
+{% endif %}
+
+{% if dotfiles_audio_backend == 'pulseaudio' %}
+# Pulseaudio
+media-libs/libpulse X
+# cycle dependencie here
+media-libs/libsndfile minimal
+{% endif %}
+
+{% if dotfiles_mpd %}
+# MPD
+dev-libs/boost icu
+media-sound/ncmpcpp taglib visualizer clock
+media-sound/mpd -network
+{% endif %}
+
 {% if dotfiles_vifm %}
 # vifm
 media-video/ffmpegthumbnailer jpeg png
@@ -8,12 +37,4 @@ media-video/ffmpegthumbnailer jpeg png
 app-editors/vim X
 app-misc/tmux vim-syntax
 app-misc/vifm vim-syntax
-{% endif %}
-
-{% if dotfiles_awm %}
-# awesome
-dev-python/pillow jpeg
-media-libs/libglvnd X
-x11-libs/cairo X
-x11-libs/libxkbcommon X
 {% endif %}

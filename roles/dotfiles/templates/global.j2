@@ -1,0 +1,7 @@
+{% if dotfiles_audio_backend == 'alsa' %}
+USE="${USE} {{ dotfiles_audio_backend }}"
+{% endif %}
+
+{% if dotfiles_audio_backend == 'pulseaudio' %}
+USE="${USE} {{ dotfiles_audio_backend }}"
+{% endif %}

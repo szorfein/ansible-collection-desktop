@@ -1,10 +1,16 @@
 ---
+dotfiles_alsa_pkg_conflict_items:
+  - pulseaudio
+
+dotfiles_alsa_pkg_item:
+  - alsa-utils
+  - libasound2-plugins # speexrate resampling
+
 dotfiles_awm_pkg_items:
   - awesome
   - picom
   - feh
   - light
-  - mpc
   - papirus-icon-theme
   - xss-lock
   - inotify-tools
@@ -16,6 +22,15 @@ dotfiles_gpu_intel_gen7_pkg_items:
 
 dotfiles_gpu_intel_pkg_items:
   - intel-media-va-driver
+
+dotfiles_mpd_pkg_items:
+  - cava
+  - mpd
+  - mpc
+  - ncmpcpp
+
+dotfiles_pulseaudio_pkg_item:
+  - pulseaudio
 
 dotfiles_vifm_pkg_items:
   - bat

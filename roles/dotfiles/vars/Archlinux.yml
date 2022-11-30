@@ -1,10 +1,17 @@
 ---
+dotfiles_alsa_pkg_conflict_items:
+  - pipewire-pulse
+  - pulseaudio
+
+dotfiles_alsa_pkg_items:
+  - alsa-utils
+  - alsa-plugins # speexrate resampling
+
 dotfiles_awm_pkg_items:
   - awesome
   - picom
   - feh
   - light
-  - mpc
   - papirus-icon-theme
   - xss-lock
   - inotify-tools
@@ -20,6 +27,14 @@ dotfiles_gpu_intel_gen7_pkg_items:
 dotfiles_gpu_intel_pkg_items:
   - mesa
   - intel-media-driver
+
+dotfiles_mpd_pkg_items:
+  - mpd
+  - mpc
+  - ncmpcpp
+
+dotfiles_pulseaudio_pkg_items:
+  - pulseaudio
 
 dotfiles_vifm_pkg_items:
   - bat

@@ -1,0 +1,33 @@
+---
+- name: alsa > insert global USE="alsa"
+  become: true
+  ansible.builtin.blockinfile:
+    block: "{{ lookup('ansible.builtin.template', 'global.j2') }}"
+    marker: '# {mark} Configured with Ansible'
+    path: /etc/portage/make.conf
+  when: ansible_os_family == 'Gentoo'
+
+- name: alsa > uninstalling conflicting packages
+  become: true
+  ansible.builtin.package:
+    name: '{{ item }}'
+    state: absent
+  with_items: '{{ dotfiles_alsa_pkg_conflict_items }}'
+  when: dotfiles_alsa_pkg_conflict_items is defined and dotfiles_alsa_pkg_conflict_items | length > 0
+
+- name: alsa > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ dotfiles_alsa_pkg_items }}'
+
+- name: alsa > config files with stow
+  ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_audio_alsa_stow_dir }}'
+  when: dotfiles_stow_dir is defined and dotfiles_audio_alsa_stow_dir is defined
+
+- name: alsa > default config
+  ansible.builtin.template:
+    src: asoundrc.j2
+    dest: ~/.asoundrc
+  when: dotfiles_audio_stow_dir is not defined

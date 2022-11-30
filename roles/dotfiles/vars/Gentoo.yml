@@ -1,10 +1,15 @@
 ---
+dotfiles_alsa_pkg_conflict_items:
+  - pulseaudio
+
+dotfiles_alsa_pkg_items:
+  - alsa-utils
+
 dotfiles_awm_pkg_items:
   - awesome
   - picom
   - feh
   - light
-  - media-sound/mpc
   - papirus-icon-theme
   - xss-lock
   - inotify-tools
@@ -17,6 +22,15 @@ dotfiles_gpu_intel_gen7_pkg_items:
 dotfiles_gpu_intel_pkg_items:
   - sys-kernel/linux-firmware
   - libva-intel-media-driver
+
+dotfiles_mpd_pkg_items:
+  - cava
+  - media-sound/mpd
+  - media-sound/mpc
+  - ncmpcpp
+
+dotfiles_pulseaudio_pkg_items:
+  - pulseaudio
 
 dotfiles_xorg_pkg_items:
   - xorg-server
