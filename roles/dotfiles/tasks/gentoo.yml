@@ -27,7 +27,15 @@
 - name: gentoo > sync ninjatools
   become: true
   ansible.builtin.command: emaint sync -r ninjatools
-    
+
+- name: gentoo > install global stuff
+  become: true
+  ansible.builtin.blockinfile:
+    block: "{{ lookup('ansible.builtin.template', 'global.j2') }}"
+    marker: '# {mark} Configured with Ansible'
+    path: /etc/portage/make.conf
+  notify: emerge changed use
+
 - name: gentoo > install package.use/dotfiles
   become: true
   ansible.builtin.template:

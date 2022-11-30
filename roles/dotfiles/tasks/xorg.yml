@@ -7,7 +7,6 @@
   become: true
   ansible.builtin.lineinfile:
     path: /etc/portage/make.conf
-    state: present
     regexp: '^INPUT_DEVICES='
     line: 'INPUT_DEVICES="libinput"'
   notify: emerge changed use
@@ -16,9 +15,8 @@
 - name: xorg > installing dependencies
   become: true
   ansible.builtin.package:
-    name: '{{ item }}'
+    name: '{{ dotfiles_xorg_pkg_items }}'
     state: present
-  with_items: '{{ dotfiles_xorg_pkg_items }}'
 
 - name: xorg > config files with stow
   ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_xorg_stow_dir }}'

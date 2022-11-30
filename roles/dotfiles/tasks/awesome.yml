@@ -6,7 +6,7 @@
   ignore_errors: true
   register: previous_theme
 
-- name: awm > setting awm_theme
+- name: awm > setting awm_theme to previous_theme
   ansible.builtin.set_fact:
     awm_theme: '{{ previous_theme.stdout | trim }}'
   when: previous_theme is succeeded
@@ -19,9 +19,8 @@
 - name: awm > installing dependencies
   become: true
   ansible.builtin.package:
-    name: '{{ item }}'
+    name: '{{ dotfiles_awm_pkg_items }}'
     state: present
-  with_items: '{{ dotfiles_awm_pkg_items }}'
 
 - name: awm > creating required directory
   ansible.builtin.file:

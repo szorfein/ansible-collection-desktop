@@ -61,5 +61,6 @@
 
 - name: xst > installing package
   become: true
-  ansible.builtin.command: 'dpkg -i {{ xst_deb.files[0].path }}'
+  ansible.builtin.apt:
+    deb: '{{ xst_deb.files[0].path }}'
   when: xst_src.changed

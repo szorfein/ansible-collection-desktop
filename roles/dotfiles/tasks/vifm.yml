@@ -13,15 +13,21 @@
   when: ansible_os_family == 'Debian'
 
 # http://jaqque.sbih.org/kplug/apt-pinning.html
-- name: vifm > update repo preferences for Debian
+- name: vifm > high priority for Debian stable
   become: true
-  ansible.builtin.copy:
-    dest: /etc/apt/preferences
-    content: >
+  ansible.builtin.blockinfile:
+    path: /etc/apt/preferences
+    block: |
       Package: *
       Pin: release a=stable
       Pin-Priority: 700
+  when: ansible_os_family == 'Debian'
 
+- name: vifm > low priority for Debian unstable
+  become: true
+  ansible.builtin.blockinfile:
+    path: /etc/apt/preferences
+    block: |
       Package: *
       Pin: release a=unstable
       Pin-Priority: 600
@@ -30,9 +36,8 @@
 - name: vifm > installing dependencies
   become: true
   ansible.builtin.package:
-    name: '{{ item }}'
+    name: '{{ dotfiles_vifm_pkg_items }}'
     state: present
-  with_items: '{{ dotfiles_vifm_pkg_items }}'
   when: dotfiles_vifm_pkg_items is defined
 
 - name: vifm > create required directory ~/bin, ~/.config/vifm/scripts
