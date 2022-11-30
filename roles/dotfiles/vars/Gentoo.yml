@@ -5,5 +5,11 @@ dotfiles_alsa_pkg_conflict_items:
 dotfiles_alsa_pkg_items:
   - alsa-utils
 
+dotfiles_mpd_pkg_items:
+  - cava
+  - media-sound/mpd
+  - media-sound/mpc
+  - ncmpcpp
+
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio

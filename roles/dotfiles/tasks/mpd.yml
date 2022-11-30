@@ -5,10 +5,10 @@
 - import_tasks: pulseaudio.yml
   when: dotfiles_audio_backend is defined and dotfiles_audio_backend == 'pulseaudio'
 
-- name: mpd > installing
+- name: mpd > installing dependencies
   become: true
   ansible.builtin.package:
-    name: mpd
+    name: '{{ dotfiles_mpd_pkg_items }}'
     state: present
 
 - name: mpd > mpd_dir fact

@@ -13,7 +13,7 @@ Role Variables
 
 - `dotfiles_audio_backend`
   - Default: `undefined`
-  - Description: Can be `alsa` or `pulseaudio`, if remain `undefined`, your distro choose one or can install the both.
+  - Description: Can be `alsa` or `pulseaudio`.
 - `dotfiles_audio_alsa_stow_dir`
   - Default: `undefined`
   - Description: Config files for audio with Stow, relative to `dotfiles_stow_dir`, e.g: `alsa-sound`.
@@ -22,6 +22,7 @@ Role Variables
   - Description: Config files for audio with Stow, relative to `dotfiles_stow_dir`, e.g: `pulse-sound`.
 - `dotfiles_mpd`
   - Default: `false`
+  - Description: Install and configure mpd with ncmpcpp and mpc.
 - `dotfiles_mpd_music_dir`
   - Default: `~/musics`
   - Description: Music directory for mpd.

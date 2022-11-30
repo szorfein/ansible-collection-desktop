@@ -1,18 +1,20 @@
-{% if dotfiles_audio_backend == 'alsa' %}
+{% if dotfiles_audio_backend == 'alsa' or dotfiles_audio_backend == 'pulseaudio' %}
 # ALSA
-media-sound/cava alsa
 media-sound/alsa-utils libsamplerate
-media-video/ffmpeg alsa ladspa bs2b
-media-sound/mpd alsa
+media-plugins/alsa-plugins speex
+media-video/ffmpeg ladspa bs2b
 {% endif %}
 
 {% if dotfiles_audio_backend == 'pulseaudio' %}
 # Pulseaudio
+media-libs/libpulse X
+# cycle dependencie here
+media-libs/libsndfile minimal
+{% endif %}
 
-media-sound/pulseaudio libsamplerate
-
-media-sound/cava pulseaudio
-media-video/ffmpeg pulseaudio bs2b
-
-media-sound/mpd pulseaudio
+{% if dotfiles_mpd %}
+# MPD
+dev-libs/boost icu
+media-sound/ncmpcpp taglib visualizer clock
+media-sound/mpd -network
 {% endif %}

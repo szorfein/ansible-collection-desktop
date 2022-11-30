@@ -7,6 +7,11 @@ dotfiles_alsa_pkg_items:
   - alsa-utils
   - alsa-plugins # speexrate resampling
 
+dotfiles_mpd_pkg_items:
+  - mpd
+  - mpc
+  - ncmpcpp
+
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
 

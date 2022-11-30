@@ -6,6 +6,12 @@ dotfiles_alsa_pkg_item:
   - alsa-utils
   - libasound2-plugins # speexrate resampling
 
+dotfiles_mpd_pkg_items:
+  - cava
+  - mpd
+  - mpc
+  - ncmpcpp
+
 dotfiles_pulseaudio_pkg_item:
   - pulseaudio
 

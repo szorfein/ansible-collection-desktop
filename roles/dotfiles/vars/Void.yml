@@ -7,6 +7,12 @@ dotfiles_alsa_pkg_items:
   - alsa-plugins
   - alsa-plugins-samplerate
 
+dotfiles_mpd_pkg_items:
+  - cava
+  - mpd
+  - mpc
+  - ncmpcpp
+
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
 
