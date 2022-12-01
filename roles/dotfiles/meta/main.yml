@@ -9,10 +9,11 @@ galaxy_info:
   min_ansible_version: 2.1
 
   platforms:
-    - name: Archlinux
+    - name: ArchLinux
     - name: Debian
       versions:
         - bullseye
+    - name: Gentoo
     - name: Void Linux
 
   galaxy_tags:
