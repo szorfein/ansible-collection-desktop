@@ -17,6 +17,8 @@
   become: true
   ansible.builtin.blockinfile:
     path: /etc/apt/preferences
+    marker: '# STABLE'
+    create: true
     block: |
       Package: *
       Pin: release a=stable
@@ -27,6 +29,7 @@
   become: true
   ansible.builtin.blockinfile:
     path: /etc/apt/preferences
+    marker: '# SID'
     block: |
       Package: *
       Pin: release a=unstable
