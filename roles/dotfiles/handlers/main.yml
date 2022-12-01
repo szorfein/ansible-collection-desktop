@@ -1,0 +1,8 @@
+---
+# handlers file for dotfiles
+- name: emerge changed use
+  become: true
+  community.general.portage:
+    package: '@world'
+    changed_use: true
+    deep: true

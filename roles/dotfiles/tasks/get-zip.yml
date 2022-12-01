@@ -1,0 +1,40 @@
+---
+- name: zip > creating destination {{ to_dest }}/{{ zip_item.name }}
+  ansible.builtin.file:
+    path: '{{ to_dest }}/{{ zip_item.name }}'
+    state: directory
+  when: zip_in_sub
+
+- name: zip > creating destination {{ to_dest }}
+  ansible.builtin.file:
+    path: '{{ to_dest }}'
+    state: directory
+  when: not zip_in_sub
+
+- name: zip > downloading archive {{ zip_item.url }}
+  ansible.builtin.get_url:
+    url: '{{ zip_item.url }}'
+    dest: '{{ dotfiles_cache_dir }}/{{ zip_item.name }}.zip'
+  register: zip_archive
+
+- name: zip > uncompressing {{ zip_item.name }}
+  ansible.builtin.unarchive:
+    src: '{{ dotfiles_cache_dir }}/{{ zip_item.name }}.zip'
+    dest: '{{ to_dest }}/{{ zip_item.name }}'
+    extra_opts: [-j] # remove first directory
+    exclude:
+      - '*.md'
+      - '*.txt'
+      - '*.otf'
+  when: zip_archive.changed and zip_in_sub
+
+- name: zip > uncompressing {{ zip_item.name }} to {{ to_dest }}
+  ansible.builtin.unarchive:
+    src: '{{ dotfiles_cache_dir }}/{{ zip_item.name }}.zip'
+    dest: '{{ to_dest }}'
+    extra_opts: [-j] # remove first directory
+    exclude:
+      - '*.md'
+      - '*.txt'
+      - '*.otf'
+  when: zip_archive.changed and not zip_in_sub

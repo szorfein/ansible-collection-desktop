@@ -1,0 +1,28 @@
+Description: [PATCH] xst: change prefix
+
+The path need to be changed to be able to compile source.
+
+From: Szorfein <szorfein@protonmail.com>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Last-Update: 2022-11-21
+
+--- xst-0.8.5.orig/config.mk
++++ xst-0.8.5/config.mk
+@@ -4,7 +4,7 @@ VERSION = 0.8.5
+ # Customize below to fit your system
+ 
+ # paths
+-PREFIX = /usr/local
++PREFIX = /usr
+ MANPREFIX = $(PREFIX)/share/man
+ 
+ X11INC = /usr/X11R6/include

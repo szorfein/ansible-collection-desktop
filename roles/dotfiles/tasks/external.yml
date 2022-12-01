@@ -1,0 +1,62 @@
+---
+- name: external > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: unzip
+    state: present
+
+- include_tasks: get-zip.yml
+  loop: '{{ dotfiles_external_wallpaper_items }}'
+  loop_control:
+    loop_var: zip_item
+  vars:
+    to_dest: '{{ dotfiles_external_wallpaper_dir }}'
+    zip_in_sub: false
+  when: dotfiles_external_wallpaper_items | length > 0
+
+- name: external > downloading nerd fonts
+  ansible.builtin.get_url:
+    url: 'https://github.com/ryanoasis/nerd-fonts/releases/download/v{{ dotfiles_external_nerd_font_version }}/{{ item.name }}.zip'
+    dest: '{{ dotfiles_cache_dir }}/{{ item.name }}.zip'
+    checksum: 'sha256:{{ item.hash }}'
+  with_items: '{{ dotfiles_external_nerd_font_items }}'
+  register: nerd_font
+  when: dotfiles_external_nerd_font_items | length > 0
+
+- name: external > create font dir
+  ansible.builtin.file:
+    path: '{{ dotfiles_external_font_dir }}/{{ item.name }}'
+    state: directory
+  with_items: '{{ dotfiles_external_nerd_font_items }}'
+  when: dotfiles_external_nerd_font_items | length > 0 and nerd_font.changed
+
+- name: external > extracting nerd font archive
+  ansible.builtin.unarchive:
+    src: '{{ dotfiles_cache_dir }}/{{ item.name }}.zip'
+    dest: '{{ dotfiles_external_font_dir }}/{{ item.name }}'
+    extra_opts: [-j]
+    exclude:
+      - '*.md'
+  with_items: '{{ dotfiles_external_nerd_font_items }}'
+  when: dotfiles_external_nerd_font_items | length > 0 and nerd_font.changed
+
+- name: external > getting ad-hoc fonts
+  ansible.builtin.get_url:
+    url: '{{ item }}'
+    dest: "{{ dotfiles_external_font_dir }}/{{ item | basename | replace('%20',' ')}}"
+  with_items: '{{ dotfiles_external_font_ad_hoc_items }}'
+  when: dotfiles_external_font_ad_hoc_items | length > 0
+
+- name: external > removing windows font
+  ansible.builtin.command: "find {{ dotfiles_external_font_dir}}/{{ item.name }} -name '*Windows*' -delete"
+  with_items: '{{ dotfiles_external_nerd_font_items }}'
+  when: dotfiles_external_nerd_font_items | length > 0 and nerd_font.changed
+
+- include_tasks: get-zip.yml
+  loop: '{{ dotfiles_external_font_zip_items }}'
+  loop_control:
+    loop_var: zip_item
+  vars:
+    to_dest: '{{ dotfiles_external_font_dir }}'
+    zip_in_sub: true
+  when: dotfiles_external_font_zip_items | length > 0

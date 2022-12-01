@@ -1,0 +1,66 @@
+---
+- name: xst > installing dependencies for Debian
+  become: true
+  ansible.builtin.apt:
+    pkg:
+      - build-essential
+      - pkg-config
+      - x11proto-core-dev
+      - libx11-dev
+      - libxft-dev
+      - fontconfig
+      - x11proto-dev
+      - libxext-dev
+      - debmake
+
+- name: xst > downloading last sources package
+  ansible.builtin.get_url:
+    url: 'https://github.com/gnotclub/xst/archive/master.tar.gz'
+    dest: '{{ dotfiles_cache_dir }}/xst-{{ dotfiles_xst_version }}.tar.gz'
+  register: xst_src
+
+- name: xst > creating building directory
+  ansible.builtin.file:
+    path: '{{ dotfiles_cache_dir}}/build'
+    state: directory
+  when: xst_src.changed
+
+- name: xst > uncompressing source
+  ansible.builtin.command: >
+    debmake -y -a ../xst-{{ dotfiles_xst_version }}.tar.gz
+    chdir={{ dotfiles_cache_dir }}/build
+  when: xst_src.changed
+
+- name: xst > copying xst/debian
+  ansible.builtin.copy:
+    src: xst/debian
+    dest: '{{ dotfiles_cache_dir }}/build/xst-{{ dotfiles_xst_version }}'
+  when: xst_src.changed
+
+- name: xst > building source
+  ansible.builtin.command: >
+    debmake -i debuild
+    chdir={{ dotfiles_cache_dir }}/build/xst-{{ dotfiles_xst_version }}
+  when: xst_src.changed
+
+- name: xst > searching for .deb
+  ansible.builtin.find:
+    paths:
+      - '{{ dotfiles_cache_dir }}/build'
+    patterns:
+      - 'xst_{{ dotfiles_xst_version }}*.deb'
+    file_type: file
+  register: xst_deb
+  when: xst_src.changed
+
+- name: xst > found result
+  ansible.builtin.debug:
+    msg:
+      - 'found {{ xst_deb }}'
+  when: xst_src.changed
+
+- name: xst > installing package
+  become: true
+  ansible.builtin.apt:
+    deb: '{{ xst_deb.files[0].path }}'
+  when: xst_src.changed

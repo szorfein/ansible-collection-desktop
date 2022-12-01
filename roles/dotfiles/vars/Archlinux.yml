@@ -1,0 +1,59 @@
+---
+dotfiles_alsa_pkg_conflict_items:
+  - pipewire-pulse
+  - pulseaudio
+
+dotfiles_alsa_pkg_items:
+  - alsa-utils
+  - alsa-plugins # speexrate resampling
+
+dotfiles_awm_pkg_items:
+  - awesome
+  - picom
+  - feh
+  - light
+  - papirus-icon-theme
+  - xss-lock
+  - inotify-tools
+  - scrot
+
+# intel https://wiki.archlinux.org/title/Intel_graphics
+# https://wiki.archlinux.org/title/Hardware_video_acceleration
+dotfiles_gpu_intel_gen7_pkg_items:
+  - mesa
+  - libva-intel-driver
+
+# Intel gen8 and more
+dotfiles_gpu_intel_pkg_items:
+  - mesa
+  - intel-media-driver
+
+dotfiles_mpd_pkg_items:
+  - mpd
+  - mpc
+  - ncmpcpp
+
+dotfiles_pulseaudio_pkg_items:
+  - pulseaudio
+
+dotfiles_vifm_pkg_items:
+  - bat
+  - ffmpegthumbnailer
+  - imagemagick
+  - poppler # pdftoppm
+  - ueberzug
+  - vifm
+  - w3m
+  - xdotool
+
+dotfiles_vim_pkgname_conflict: vim
+dotfiles_vim_pkgname: gvim
+
+dotfiles_xorg_pkg_items:
+  - xorg-server
+  - xorg-xinit
+  - xclip
+  - xf86-input-libinput
+
+dotfiles_zsh_path: /usr/bin/zsh
+dotfiles_zsh_pkgname: zsh

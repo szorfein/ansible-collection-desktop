@@ -1,0 +1,56 @@
+---
+dotfiles_alsa_pkg_conflict_items:
+  - pulseaudio
+
+dotfiles_alsa_pkg_items:
+  - alsa-utils
+
+dotfiles_awm_pkg_items:
+  - awesome
+  - picom
+  - feh
+  - light
+  - papirus-icon-theme
+  - xss-lock
+  - inotify-tools
+  - scrot
+
+# https://wiki.gentoo.org/wiki/Intel_Graphics#VAAPI
+dotfiles_gpu_intel_gen7_pkg_items:
+  - libva-intel-driver
+
+dotfiles_gpu_intel_pkg_items:
+  - sys-kernel/linux-firmware
+  - libva-intel-media-driver
+
+dotfiles_mpd_pkg_items:
+  - cava
+  - media-sound/mpd
+  - media-sound/mpc
+  - ncmpcpp
+
+dotfiles_pulseaudio_pkg_items:
+  - pulseaudio
+
+dotfiles_xorg_pkg_items:
+  - xorg-server
+  - xinit
+  - x11-misc/xclip
+  - xf86-input-libinput
+
+dotfiles_vifm_pkg_items:
+  - bat
+  - ffmpegthumbnailer
+  - imagemagick
+  - poppler
+  - ueberzug
+  - vifm
+  - w3m
+  - xdotool
+
+dotfiles_vim_pkgname: vim
+
+dotfiles_xst_pkg: xst
+
+dotfiles_zsh_path: /bin/zsh
+dotfiles_zsh_pkgname: zsh

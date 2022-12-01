@@ -1,0 +1,18 @@
+music_directory    "{{ dotfiles_mpd_music_dir }}"
+playlist_directory "{{ mpd_dir }}/playlists"
+db_file	    "{{ mpd_dir }}/database"
+pid_file    "{{ mpd_dir }}/pid"
+state_file  "{{ mpd_dir }}/state"
+
+log_file    "syslog"
+save_absolute_paths_in_playlists  "yes"
+auto_update  "yes"
+filesystem_charset "UTF-8"
+
+# Fifo for cava
+audio_output {
+  type        "fifo"
+  name        "my_fifo"
+  path        "/tmp/mpd.fifo"
+  format      "44100:16:2"
+}

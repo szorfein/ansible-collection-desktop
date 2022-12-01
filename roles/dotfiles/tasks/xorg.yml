@@ -1,0 +1,23 @@
+---
+- import_tasks: gpu_intel.yml
+  when: (dotfiles_gpu_driver is defined and dotfiles_gpu_driver == 'intel_gen7') or
+    (dotfiles_gpu_driver is defined and dotfiles_gpu_driver == 'intel')
+
+- name: xorg > insert global INPUT_DEVICES="libinput"
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/portage/make.conf
+    regexp: '^INPUT_DEVICES='
+    line: 'INPUT_DEVICES="libinput"'
+  notify: emerge changed use
+  when: ansible_os_family == 'Gentoo'
+
+- name: xorg > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_xorg_pkg_items }}'
+    state: present
+
+- name: xorg > config files with stow
+  ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_xorg_stow_dir }}'
+  when: dotfiles_stow_dir is defined and dotfiles_xorg_stow_dir is defined

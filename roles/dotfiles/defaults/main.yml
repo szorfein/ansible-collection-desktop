@@ -1,0 +1,38 @@
+---
+# defaults file for dotfiles
+dotfiles_cache_dir: ~/.cache/dotfiles
+
+dotfiles_external_font_dir: ~/.local/share/fonts
+dotfiles_external_font_zip_items: []
+dotfiles_external_font_ad_hoc_items: []
+
+dotfiles_external_nerd_font_items: []
+dotfiles_external_nerd_font_version: 2.2.2
+
+dotfiles_external_wallpaper_dir: ~/images
+dotfiles_external_wallpaper_items: []
+
+dotfiles_mpd: false
+dotfiles_mpd_music_dir: ~/musics
+
+dotfiles_tmux: false
+
+dotfiles_vifm: false
+
+dotfiles_vim: false
+
+# A list of remote plugin to install, use the default vim packager.
+dotfiles_vim_plugin_git_items: []
+dotfiles_vim_plugin_tar_items: []
+
+dotfiles_xst: false
+dotfiles_xst_version: 0.8.5 # https://github.com/gnotclub/xst/blob/master/config.mk
+
+# defaults file for dotfiles
+dotfiles_zsh: false
+
+# List for zsh plugins to install: e.g - { src: https://xxx, dest: somewhere }
+dotfiles_zsh_theme_items: []
+
+# list of symbolink link to create
+dotfiles_zsh_link_items: []

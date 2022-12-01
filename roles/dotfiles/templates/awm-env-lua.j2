@@ -1,0 +1,32 @@
+{% if dotfiles_xst %}
+-- xSt
+terminal = "xst"
+terminal_cmd = terminal .. " -e "
+terminal_args = { " -c ", " -e " }
+{% else %}
+terminal = os.getenv("TERMINAL")
+{% endif %}
+
+{% if dotfiles_vim %}
+-- Vim
+editor = "vim"
+{% else %}
+editor = os.getenv("EDITOR")
+{% endif %}
+
+editor_cmd = terminal_cmd .. editor
+file_browser = terminal_cmd .. "vifm"
+
+{% if dotfiles_audio_backend is defined and dotfiles_audio_backend == 'alsa' %}
+sound_system = "alsa"
+{% endif %}
+
+{% if dotfiles_audio_backend is defined and dotfiles_audio_backend == 'pulseaudio' %}
+sound_system = "pulseaudio"
+{% endif %}
+
+web_browser = "brave"
+sound_card = "hw:PCH"
+
+cpu_core = {{ ansible_processor_cores }}
+password = "awesome"

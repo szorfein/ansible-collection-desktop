@@ -1,0 +1,62 @@
+---
+dotfiles_alsa_pkg_conflict_items:
+  - pulseaudio
+
+dotfiles_alsa_pkg_items:
+  - alsa-utils
+  - alsa-plugins
+  - alsa-plugins-samplerate
+
+dotfiles_awm_pkg_items:
+  - awesome
+  - picom
+  - feh
+  - light
+  - papirus-icon-theme
+  - xss-lock
+  - inotify-tools
+  - scrot
+  - i3lock-color
+
+# https://docs.voidlinux.org/config/graphical-session/graphics-drivers/intel.html
+dotfiles_gpu_intel_gen7_pkg_items:
+  - mesa-dri
+  - libva-intel-driver
+
+dotfiles_gpu_intel_pkg_items:
+  - mesa-dri
+  - intel-media-driver
+
+dotfiles_mpd_pkg_items:
+  - cava
+  - mpd
+  - mpc
+  - ncmpcpp
+
+dotfiles_pulseaudio_pkg_items:
+  - pulseaudio
+
+dotfiles_vifm_pkg_items:
+  - bat
+  - ffmpegthumbnailer
+  - ImageMagick
+  - poppler
+  - ueberzug
+  - vifm
+  - w3m
+  - xdotool
+
+dotfiles_vim_pkgname_conflict: vim
+dotfiles_vim_pkgname: vim-x11
+
+dotfiles_xorg_pkg_items:
+  - xorg-minimal
+  - xinit
+  - xclip
+  - xrdb
+  - xorg-input-drivers
+
+dotfiles_xst_pkg: xst
+
+dotfiles_zsh_path: /usr/bin/zsh
+dotfiles_zsh_pkgname: zsh
