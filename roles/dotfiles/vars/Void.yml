@@ -53,6 +53,7 @@ dotfiles_xorg_pkg_items:
   - xorg-minimal
   - xinit
   - xclip
+  - xrdb
   - xorg-input-drivers
 
 dotfiles_xst_pkg: xst

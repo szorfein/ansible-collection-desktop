@@ -48,6 +48,7 @@ dotfiles_xorg_pkg_items:
   - xserver-xorg-core
   - xinit
   - xclip
+  - x11-xserver-utils
   - xserver-xorg-input-libinput
 
 dotfiles_zsh_path: /bin/zsh
