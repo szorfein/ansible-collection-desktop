@@ -1,7 +1,9 @@
 display_manager
 ===============
 
-A brief description of the role goes here.
+A role to install a display manager:
+
+- [sddm](https://github.com/sddm/sddm)
 
 Requirements
 ------------
@@ -11,7 +13,17 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+- `display_manager_sddm`
+  - Default: `false`
+  - Description: Install and configure sddm.
+- `display_manager_background_dir`
+  - Default: `''`
+  - Description: Directory for background.
+- `display_manager_background_items`
+  - Default: `[]`
+  - Description: A list of string url format `.tar.gz`.
+- `display_manager_theme`
+  - Default: `{}`
 
 Dependencies
 ------------
@@ -21,18 +33,30 @@ A list of other roles hosted on Galaxy should go here, plus any details in regar
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+To install the last sddm theme [delicious-sddm-theme](https://github.com/stuomas/delicious-sddm-theme):
 
-    - hosts: servers
+    - hosts: desktop
       roles:
-         - { role: username.rolename, x: 42 }
+         - szorfein.desktop.display_manager
+      vars:
+        display_manager_sddm: true
+        display_manager_background_dir: '/usr/share/backgrounds'
+        display_manager_background_items:
+          - url: 'https://github.com/szorfein/walls/archive/refs/heads/main.tar.gz'
+            sum: 'xxxxxxx'
+        display_manager_theme:
+          url: 'https://github.com/stuomas/delicious-sddm-theme/archive/refs/heads/master.tar.gz'
+          name: delicious
+
+
+Other nice sddm themes
+----------------------
+
+- [astronaut-theme](https://github.com/Keyitdev/sddm-astronaut-theme)
+- [lubuntu-theme](https://github.com/the-zero885/lubuntu-sddm-theme)
+- [anime](https://github.com/shinas101/Anime-sddm-theme)
 
 License
 -------
 
 BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).

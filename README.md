@@ -5,11 +5,10 @@ Void Linux.
 
 Unless you want to help support other distributions, I won't add another distro/system here.  
 
-Last release - v1.13.0
-
 ## Roles include
 
 - [dotfiles](https://github.com/szorfein/ansible-collection-desktop/tree/main/roles/dotfiles)
+- [display-manager](https://github.com/szorfein/ansible-collection-desktop/tree/main/roles/display_manager)
 
 ## Installation
 

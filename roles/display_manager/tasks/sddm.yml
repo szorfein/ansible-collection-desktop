@@ -1,0 +1,47 @@
+---
+- name: sddm > remove conflicting packages
+  become: true
+  ansible.builtin.package:
+    name: '{{ display_manager_sddm_conflict_items }}'
+    state: absent
+  when: display_manager_sddm_conflict_items is defined
+
+- name: sddm > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: '{{ display_manager_sddm_pkg }}'
+    state: present
+
+- name: sddm > required dir
+  become: true
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: directory
+  with_items:
+    - '{{ display_manager_cache_dir }}'
+    - '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}'
+    - '{{ display_manager_sddm_config_dir }}'
+  when: display_manager_theme.name != ''
+
+- name: sddm > download the last project archive
+  ansible.builtin.get_url:
+    url: '{{ display_manager_theme.url }}'
+    dest: '{{ display_manager_cache_dir }}/{{ display_manager_theme.name }}.tar.gz'
+    checksum: 'sha256:{{ display_manager_theme.sum }}'
+  register: sddm_theme
+  when: display_manager_theme.url != '' and display_manager_theme.sum != '' and
+    display_manager_theme.name != ''
+
+- name: sddm > uncompressing theme {{ display_manager_theme.name }}
+  become: true
+  ansible.builtin.unarchive:
+    src: '{{ display_manager_cache_dir }}/{{ display_manager_theme.name }}.tar.gz'
+    dest: '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}'
+    extra_opts: [--strip-components=1]
+  when: sddm_theme.changed
+
+- name: sddm > applying config
+  become: true
+  ansible.builtin.template:
+    src: sddm-config.j2
+    dest: '{{ display_manager_sddm_config_dir }}/desktop.conf'

@@ -1,2 +1,14 @@
 ---
 # tasks file for display_manager
+- name: Load OS-vars
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - '{{ ansible_os_family }}.yml'
+        - main.yml
+      paths:
+        - 'vars'
+
+- import_tasks: sddm.yml
+  when: display_manager_sddm | bool
