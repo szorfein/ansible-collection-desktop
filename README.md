@@ -5,8 +5,6 @@ Void Linux.
 
 Unless you want to help support other distributions, I won't add another distro/system here.  
 
-Last release - v1.13.0
-
 ## Roles include
 
 - [dotfiles](https://github.com/szorfein/ansible-collection-desktop/tree/main/roles/dotfiles)
@@ -26,4 +24,4 @@ See the [contributor guideline](https://github.com/szorfein/ansible-collection-d
 
 ## Licensing
 
-GPL-3
+GPLv3+
