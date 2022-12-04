@@ -1,2 +1,3 @@
 ---
-display_manager_sddm_pkg: sddm
+display_manager_sddm_pkg_items:
+  - sddm

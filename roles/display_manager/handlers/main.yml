@@ -1,2 +1,15 @@
 ---
 # handlers file for display_manager
+- name: remove display-manager link
+  become: true
+  ansible.builtin.file:
+    path: /etc/systemd/system/display-manager.service
+    state: link
+    state: absent
+  when: ansible_service_mgr == 'systemd'
+
+- name: enable sddm
+  become: true
+  ansible.builtin.service:
+    name: sddm
+    enabled: true

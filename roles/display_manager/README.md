@@ -40,13 +40,10 @@ To install the last sddm theme [delicious-sddm-theme](https://github.com/stuomas
          - szorfein.desktop.display_manager
       vars:
         display_manager_sddm: true
-        display_manager_background_dir: '/usr/share/backgrounds'
-        display_manager_background_items:
-          - url: 'https://github.com/szorfein/walls/archive/refs/heads/main.tar.gz'
-            sum: 'xxxxxxx'
         display_manager_theme:
           url: 'https://github.com/stuomas/delicious-sddm-theme/archive/refs/heads/master.tar.gz'
           name: delicious
+          sum: 20dda1a210cf736dc0454fca9c81edd564c87ebf66e022023071842759b7a960
 
 
 Other nice sddm themes
@@ -59,4 +56,4 @@ Other nice sddm themes
 License
 -------
 
-BSD
+GPLv3+
