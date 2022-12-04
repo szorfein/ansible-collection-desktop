@@ -1,3 +1,12 @@
 ---
 display_manager_sddm_pkg_items:
-  - 'x11-misc/sddm'
+  - x11-misc/sddm
+  - dev-qt/qtmultimedia
+  - dev-qt/qtquickcontrols2
+  - dev-qt/qtgraphicaleffects
+  - dev-qt/qtsvg
+  - media-plugins/gst-plugins-libav
+
+display_manager_sddm_conflict_items:
+  - lightdm-gtk-greeter
+  - lightdm

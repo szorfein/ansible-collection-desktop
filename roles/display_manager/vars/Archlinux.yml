@@ -1,6 +1,4 @@
 ---
-display_manager_sddm_conflict_service: display-manager
-
 display_manager_sddm_pkg_items:
   - sddm
   - qt5-multimedia

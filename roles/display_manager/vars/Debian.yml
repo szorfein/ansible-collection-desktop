@@ -1,3 +1,11 @@
 ---
 display_manager_sddm_pkg_items:
   - sddm
+  - libqt5multimedia5
+  - libqt5quickcontrols2-5
+  - qml-module-qtgraphicaleffects
+  - gstreamer1.0-libav
+
+display_manager_sddm_conflict_items:
+  - lightdm-gtk-greeter
+  - lightdm
