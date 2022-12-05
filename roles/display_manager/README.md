@@ -17,13 +17,26 @@ Role Variables
   - Default: `false`
   - Description: Install and configure sddm.
 - `display_manager_background_dir`
-  - Default: `''`
+  - Default: `/usr/share/backgrounds`
   - Description: Directory for background.
-- `display_manager_background_items`
-  - Default: `[]`
-  - Description: A list of string url format `.tar.gz`.
-- `display_manager_theme`
-  - Default: `{}`
+- `display_manager_background.name`
+  - Default: `''`
+  - Description: The name of the backgound image/video to load, e.g `black-wall.jpg`.
+- `display_manager_background.sum`
+  - Default: `''`
+  - Description: The sha256sum for the archive.
+- `display_manager_background.url`
+  - Default: `''`
+  - Description: The url for the background images to download `.tar.gz`.
+- `display_manager_theme.name`
+  - Default: `''`
+  - Description: The name of the theme, used in the config file.
+- `display_manager_theme.sum`
+  - Default: `''`
+  - Description: The sha256sum for the archive.
+- `display_manager_theme.url`
+  - Default: `''`
+  - Description: The url for the theme to download `.tar.gz`.
 
 Dependencies
 ------------
@@ -40,6 +53,10 @@ To install the last sddm theme [delicious-sddm-theme](https://github.com/stuomas
          - szorfein.desktop.display_manager
       vars:
         display_manager_sddm: true
+        display_manager_background:
+          url: 'https://github.com/szorfein/dm-bgs/archive/refs/heads/main.tar.gz'
+          name: glitch.mp4
+          sum: 20dda1a210cf736dc0454fca9c81edd564c87ebf66e022023071842759b7a960
         display_manager_theme:
           url: 'https://github.com/stuomas/delicious-sddm-theme/archive/refs/heads/master.tar.gz'
           name: delicious

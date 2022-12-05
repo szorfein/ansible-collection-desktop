@@ -29,7 +29,7 @@
     path: '{{ item }}'
     state: directory
   with_items:
-    - '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}'
+    - '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}/BG'
     - '{{ display_manager_sddm_config_dir }}'
   when: display_manager_theme.name != ''
 
@@ -50,8 +50,33 @@
     extra_opts: [--strip-components=1]
   when: sddm_theme.changed
 
+- name: sddm > download background
+  ansible.builtin.get_url:
+    url: '{{ display_manager_background.url }}'
+    dest: '{{ display_manager_cache_dir }}//sddm-background.tar.gz'
+    checksum: 'sha256:{{ display_manager_background.sum }}'
+  register: sddm_background
+  when: display_manager_background.url != '' and
+    display_manager_background.sum != ''
+
+- name: sddm > uncompressing background
+  become: true
+  ansible.builtin.unarchive:
+    src: '{{ display_manager_cache_dir }}/sddm-background.tar.gz'
+    dest: '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}/BG'
+    extra_opts: [--strip-components=1]
+  when: sddm_background.changed
+
 - name: sddm > applying config
   become: true
   ansible.builtin.template:
     src: sddm-config.j2
     dest: '{{ display_manager_sddm_config_dir }}/desktop.conf'
+
+- name: sddm > edit theme {{ display_manager_theme.name }}
+  become: true
+  ansible.builtin.lineinfile:
+    path: '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}/theme.conf'
+    regexp: '^background='
+    line: 'background=BG/{{ display_manager_background.name }}'
+  when: display_manager_theme.name != '' and display_manager_background.name != ''
