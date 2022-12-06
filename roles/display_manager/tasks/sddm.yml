@@ -29,11 +29,11 @@
     path: '{{ item }}'
     state: directory
   with_items:
-    - '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}/BG'
+    - '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}'
     - '{{ display_manager_sddm_config_dir }}'
   when: display_manager_theme.name != ''
 
-- name: sddm > download the last project archive
+- name: sddm > download the last {{ display_manager_theme.name }} archive
   ansible.builtin.get_url:
     url: '{{ display_manager_theme.url }}'
     dest: '{{ display_manager_cache_dir }}/{{ display_manager_theme.name }}.tar.gz'
@@ -63,7 +63,7 @@
   become: true
   ansible.builtin.unarchive:
     src: '{{ display_manager_cache_dir }}/sddm-background.tar.gz'
-    dest: '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}/BG'
+    dest: '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}/{{ display_manager_theme.background_dir }}'
     extra_opts: [--strip-components=1]
   when: sddm_background.changed
 
@@ -78,5 +78,14 @@
   ansible.builtin.lineinfile:
     path: '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}/theme.conf'
     regexp: '^background='
-    line: 'background=BG/{{ display_manager_background.name }}'
+    line: 'background={{ display_manager_background.name }}'
   when: display_manager_theme.name != '' and display_manager_background.name != ''
+
+- name: sddm > customize theme
+  become: true
+  ansible.builtin.lineinfile:
+    path: '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}/theme.conf'
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+  with_items: '{{ display_manager_theme_customize }}'
+  when: display_manager_theme_customize | length > 0 and display_manager_theme.name != ''

@@ -1,7 +1,6 @@
 ---
 # defaults file for display_manager
 display_manager_cache_dir: ~/.cache/display_manager
-display_manager_background_dir: /usr/share/backgrounds
 
 display_manager_sddm: false
 display_manager_sddm_config_dir: '/etc/sddm.conf.d/'
@@ -16,3 +15,5 @@ display_manager_theme:
   url: ''
   sum: ''
   name: ''
+
+display_manager_theme_customize: []

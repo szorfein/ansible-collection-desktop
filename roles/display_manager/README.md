@@ -16,9 +16,6 @@ Role Variables
 - `display_manager_sddm`
   - Default: `false`
   - Description: Install and configure sddm.
-- `display_manager_background_dir`
-  - Default: `/usr/share/backgrounds`
-  - Description: Directory for background.
 - `display_manager_background.name`
   - Default: `''`
   - Description: The name of the backgound image/video to load, e.g `black-wall.jpg`.
@@ -31,12 +28,19 @@ Role Variables
 - `display_manager_theme.name`
   - Default: `''`
   - Description: The name of the theme, used in the config file.
+- `display_manager_theme.background_dir`
+  - Default: `''`
+  - Description: The background directory on theme, can be `Background`,
+    `background`, `assert`, etc... depend on theme.
 - `display_manager_theme.sum`
   - Default: `''`
   - Description: The sha256sum for the archive.
 - `display_manager_theme.url`
   - Default: `''`
   - Description: The url for the theme to download `.tar.gz`.
+- `display_manager_theme_customize`
+  - Default: `[]`
+  - Description: Modify the content of the `theme.conf` include in the theme.
 
 Dependencies
 ------------
@@ -46,7 +50,7 @@ A list of other roles hosted on Galaxy should go here, plus any details in regar
 Example Playbook
 ----------------
 
-To install the last sddm theme [delicious-sddm-theme](https://github.com/stuomas/delicious-sddm-theme):
+To install the last sddm theme [delicious-sddm-theme](https://github.com/stuomas/delicious-sddm-theme), change the background and customize the [theme.conf](https://github.com/stuomas/delicious-sddm-theme/blob/master/theme.conf):
 
     - hosts: desktop
       roles:
@@ -56,11 +60,17 @@ To install the last sddm theme [delicious-sddm-theme](https://github.com/stuomas
         display_manager_background:
           url: 'https://github.com/szorfein/dm-bgs/archive/refs/heads/main.tar.gz'
           name: glitch.mp4
-          sum: 20dda1a210cf736dc0454fca9c81edd564c87ebf66e022023071842759b7a960
+          sum: ccc1bdcb621d5a475d45da333b5dfa0e1f96a4b2b133fd850056ebf9edbc4f20
         display_manager_theme:
           url: 'https://github.com/stuomas/delicious-sddm-theme/archive/refs/heads/master.tar.gz'
           name: delicious
+          background_dir: background
           sum: 20dda1a210cf736dc0454fca9c81edd564c87ebf66e022023071842759b7a960
+        display_manager_theme_customize:
+          - regexp: '^glowcolor='
+            line: 'glowcolor=#BBA33393'
+          - regexp: '^iconoverlay='
+            line: 'iconoverlay=#FF000000'
 
 
 Other nice sddm themes
