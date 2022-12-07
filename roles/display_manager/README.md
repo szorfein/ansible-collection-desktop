@@ -80,6 +80,12 @@ Other nice sddm themes
 - [lubuntu-theme](https://github.com/the-zero885/lubuntu-sddm-theme)
 - [anime](https://github.com/shinas101/Anime-sddm-theme)
 
+Troubleshooting
+---------------
+
+Voidlinux need the package `mesa-dri`, it should depend of the graphic
+chipset.
+
 License
 -------
 

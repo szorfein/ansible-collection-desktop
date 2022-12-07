@@ -6,6 +6,7 @@ display_manager_sddm_pkg_items:
   - qt5-graphicaleffects
   - qt5-svg
   - gst-libav
+  - gst-plugins-good1
 
 display_manager_sddm_conflict_items:
   - lightdm-gtk-greeter

@@ -21,7 +21,6 @@
     state: directory
   with_items:
     - '{{ display_manager_cache_dir }}'
-  when: display_manager_theme.name != ''
 
 - name: sddm > required dir
   become: true
