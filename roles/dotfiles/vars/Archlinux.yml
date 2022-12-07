@@ -17,6 +17,11 @@ dotfiles_awm_pkg_items:
   - inotify-tools
   - scrot
 
+dotfiles_emacs_pkg_items:
+  - ripgrep
+  - jq
+  - emacs
+
 # intel https://wiki.archlinux.org/title/Intel_graphics
 # https://wiki.archlinux.org/title/Hardware_video_acceleration
 dotfiles_gpu_intel_gen7_pkg_items:

@@ -15,6 +15,11 @@ dotfiles_awm_pkg_items:
   - inotify-tools
   - scrot
 
+dotfiles_emacs_pkg_items:
+  - ripgrep
+  - discount
+  - app-misc/jq
+  - emacs
 # https://wiki.gentoo.org/wiki/Intel_Graphics#VAAPI
 dotfiles_gpu_intel_gen7_pkg_items:
   - libva-intel-driver

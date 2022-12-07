@@ -21,6 +21,12 @@ media-libs/libpulse X
 media-libs/libsndfile minimal
 {% endif %}
 
+{% if dotfiles_emacs %}
+# doom-emacs
+app-editors/emacs -alsa gui gtk json xft gpm
+app-emacs/emacs-common gui
+{% endif %}
+
 {% if dotfiles_mpd %}
 # MPD
 dev-libs/boost icu
