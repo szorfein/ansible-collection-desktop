@@ -17,7 +17,8 @@ dotfiles_awm_pkg_items:
 
 dotfiles_emacs_pkg_items:
   - ripgrep
-  - discount
+  - sys-apps/findutils
+  - sys-apps/fd
   - app-misc/jq
   - emacs
 # https://wiki.gentoo.org/wiki/Intel_Graphics#VAAPI

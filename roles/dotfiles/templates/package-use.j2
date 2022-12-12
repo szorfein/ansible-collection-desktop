@@ -23,7 +23,8 @@ media-libs/libsndfile minimal
 
 {% if dotfiles_emacs %}
 # doom-emacs
-app-editors/emacs -alsa gui gtk json xft gpm
+# https://github.com/doomemacs/doomemacs/blob/master/docs/getting_started.org#gentoo-linux
+app-editors/emacs -alsa gui json xft gpm
 app-emacs/emacs-common gui
 {% endif %}
 
