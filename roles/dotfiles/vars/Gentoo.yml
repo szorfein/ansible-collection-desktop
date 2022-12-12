@@ -29,6 +29,15 @@ dotfiles_mpd_pkg_items:
   - media-sound/mpc
   - ncmpcpp
 
+dotfiles_neomutt_conflict_pkg_items:
+  - mutt
+  - msmtp
+  - fdm
+
+dotfiles_neomutt_pkg_items:
+  - neomutt
+  - net-mail/isync
+
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
 

@@ -42,6 +42,9 @@
 - include_tasks: mpd.yml
   when: dotfiles_mpd | bool
 
+- include_tasks: neomutt.yml
+  when: dotfiles_neomutt | bool
+
 - include_tasks: tmux.yml
   when: dotfiles_tmux | bool
 

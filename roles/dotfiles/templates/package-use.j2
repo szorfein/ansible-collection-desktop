@@ -28,6 +28,12 @@ media-sound/ncmpcpp taglib visualizer clock
 media-sound/mpd -network
 {% endif %}
 
+{% if dotfiles_neomutt %}
+# neomutt
+mail-client/neomutt gpgme gdbm sasl
+net-mail/isync sasl
+{% endif %}
+
 {% if dotfiles_vifm %}
 # vifm
 media-video/ffmpegthumbnailer jpeg png
