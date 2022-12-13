@@ -6,7 +6,7 @@
     state: absent
   when: dotfiles_vim_pkgname_conflict is defined
 
-- name: vim > installing
+- name: vim > installing dependencies
   become: true
   ansible.builtin.package:
     name: '{{ dotfiles_vim_pkgname }}'
