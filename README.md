@@ -8,6 +8,7 @@ Unless you want to help support other distributions, I won't add another distro/
 ## Roles include
 
 - [dotfiles](https://github.com/szorfein/ansible-collection-desktop/tree/main/roles/dotfiles)
+- [display-manager](https://github.com/szorfein/ansible-collection-desktop/tree/main/roles/display_manager)
 
 ## Installation
 

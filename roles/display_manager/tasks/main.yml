@@ -1,0 +1,24 @@
+---
+# tasks file for display_manager
+- name: Load OS-vars
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - '{{ ansible_os_family }}.yml'
+        - main.yml
+      paths:
+        - 'vars'
+
+- name: gentoo > install package.use/display-manager
+  become: true
+  ansible.builtin.template:
+    src: package-use.j2
+    dest: /etc/portage/package.use/display-manager
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_os_family == 'Gentoo'
+
+- import_tasks: sddm.yml
+  when: display_manager_sddm | bool
