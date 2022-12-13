@@ -1,0 +1,26 @@
+namespace: szorfein
+name: desktop
+version: 1.20.0
+readme: README.md
+authors:
+  - szorfein <szorfein@protonmail.com>
+description: 'A collection to install various desktop applications for Linux.'
+license:
+  - GPLv3+
+license_file: ''
+tags:
+  - desktop
+  - archlinux
+  - debian
+  - voidlinux
+  - gentoo
+  - dotfiles
+  - display_manager
+dependencies:
+  ansible.posix: '>=1.0.0'
+  community.general: '>=1.0.0'
+repository: 'https://github.com/szorfein/ansible-collection-desktop/'
+homepage: 'https://github.com/szorfein/ansible-collection-desktop/'
+issues: 'https://github.com/szorfein/ansible-collection-desktop/issues'
+build_ignore:
+  - .gitignore
