@@ -5,6 +5,11 @@
     name: '{{ dotfiles_emacs_pkg_items }}'
     state: present
 
+- name: emacs > ensure font dir exist
+  ansible.builtin.file:
+    path: '{{ dotfiles_external_font_dir }}'
+    state: directory
+
 # https://github.com/domtronn/all-the-icons.el/tree/master/fonts
 - name: emacs > get fonts for all-the-icons.el
   ansible.builtin.get_url:

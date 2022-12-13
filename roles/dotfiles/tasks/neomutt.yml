@@ -22,7 +22,9 @@
 - name: neomutt > adding divs
   ansible.builtin.file:
     path: '{{ dotfiles_neomutt_mail_dir }}/{{ item }}'
-    state: file
+    state: touch
+    modification_time: preserve
+    access_time: preserve
   with_items:
     - div1
     - div2
