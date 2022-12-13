@@ -38,6 +38,8 @@ dotfiles_vifm_pkg_items:
   - imagemagick
   - poppler-utils # pdftoppm
   - ueberzug
+  - mpv
+  - zathura
   - vifm
   - w3m
   - xdotool
