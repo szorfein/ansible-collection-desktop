@@ -16,6 +16,15 @@
     url: '{{ zip_item.url }}'
     dest: '{{ dotfiles_cache_dir }}/{{ zip_item.name }}.zip'
   register: zip_archive
+  when: zip_item.hash is not defined
+
+- name: zip > downloading hashed archive {{ zip_item.url }}
+  ansible.builtin.get_url:
+    url: '{{ zip_item.url }}'
+    dest: '{{ dotfiles_cache_dir }}/{{ zip_item.name }}.zip'
+    checksum: 'sha256:{{ zip_item.hash }}'
+  register: zip_archive
+  when: zip_item.hash is defined
 
 - name: zip > uncompressing {{ zip_item.name }}
   ansible.builtin.unarchive:

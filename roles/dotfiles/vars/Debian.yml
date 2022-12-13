@@ -16,6 +16,10 @@ dotfiles_awm_pkg_items:
   - inotify-tools
   - scrot
 
+dotfiles_emacs_pkg_items:
+  - ripgrep
+  - fd-find
+  - emacs
 # https://wiki.debian.org/GraphicsCard#Intel
 dotfiles_gpu_intel_gen7_pkg_items:
   - i965-va-driver
@@ -29,6 +33,16 @@ dotfiles_mpd_pkg_items:
   - mpc
   - ncmpcpp
 
+dotfiles_neomutt_conflict_pkg_items:
+  - mutt
+  - msmtp-mta
+  - msmtp
+  - fdm
+
+dotfiles_neomutt_pkg_items:
+  - neomutt
+  - isync
+
 dotfiles_pulseaudio_pkg_item:
   - pulseaudio
 
@@ -38,6 +52,8 @@ dotfiles_vifm_pkg_items:
   - imagemagick
   - poppler-utils # pdftoppm
   - ueberzug
+  - mpv
+  - zathura
   - vifm
   - w3m
   - xdotool

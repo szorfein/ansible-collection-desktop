@@ -1,0 +1,14 @@
+---
+display_manager_sddm_pkg_items:
+  - sddm
+  - qml-module-qtmultimedia
+  - qml-module-qtquick-controls
+  - qml-module-qtgraphicaleffects
+  - qml-module-qtgstreamer
+  - libqt5multimedia5-plugins # fix Qt no service found for - "org.qt-project.qt.mediaplayer"
+  - gstreamer1.0-plugins-good
+  - gstreamer1.0-libav
+
+display_manager_sddm_conflict_items:
+  - lightdm-gtk-greeter
+  - lightdm

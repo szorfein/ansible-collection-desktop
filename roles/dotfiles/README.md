@@ -29,6 +29,9 @@ Role Variables
 - `dotfiles_awm_default_theme`
   - Default: `undefined`
   - Description: The string name of a theme to install with Stow if any, relative to `dotfiles_stow_dir_theme`.
+- `dotfiles_emacs`
+  - Default: `false`
+  - Description: Install the editor Emacs.
 - `dotfiles_cache_dir`
   - Default: `~/.cache/dotfiles`
   - Description: Where playbook download archives before extract them.
@@ -57,6 +60,19 @@ Role Variables
 - `dotfiles_mpd_music_dir`
   - Default: `~/musics`
   - Description: Music directory for mpd.
+- `dotfiles_neomutt`
+  - Default: `false`
+  - Description: Install and configure neomutt.
+- `dotfiles_neomutt_stow_dir`
+  - Default: `undefined`
+  - Description: Config files for neomutt with Stow, relative to `dotfiles_stow_dir`, e.g: `email`.
+- `dotfiles_neomutt_accounts_dir`
+  - Default: `[]`
+  - Description: If need to create a directory relative to
+    `dotfiles_neomutt_mail_dir`.
+- `dotfiles_neomutt_mail_dir`
+  - Default: `undefined`
+  - Description: Directory for mails.
 - `dotfiles_stow_dir`
   - Default: `undefined`
   - Description: If you need `GNU/Stow` to install config files, add the path here, e.g: `~/.dotfiles`.

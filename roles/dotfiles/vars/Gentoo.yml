@@ -4,6 +4,7 @@ dotfiles_alsa_pkg_conflict_items:
 
 dotfiles_alsa_pkg_items:
   - alsa-utils
+  - alsa-plugins
 
 dotfiles_awm_pkg_items:
   - awesome
@@ -15,6 +16,12 @@ dotfiles_awm_pkg_items:
   - inotify-tools
   - scrot
 
+dotfiles_emacs_pkg_items:
+  - ripgrep
+  - sys-apps/findutils
+  - sys-apps/fd
+  - app-misc/jq
+  - emacs
 # https://wiki.gentoo.org/wiki/Intel_Graphics#VAAPI
 dotfiles_gpu_intel_gen7_pkg_items:
   - libva-intel-driver
@@ -28,6 +35,15 @@ dotfiles_mpd_pkg_items:
   - media-sound/mpd
   - media-sound/mpc
   - ncmpcpp
+
+dotfiles_neomutt_conflict_pkg_items:
+  - mutt
+  - msmtp
+  - fdm
+
+dotfiles_neomutt_pkg_items:
+  - neomutt
+  - net-mail/isync
 
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
@@ -44,6 +60,9 @@ dotfiles_vifm_pkg_items:
   - imagemagick
   - poppler
   - ueberzug
+  - mpv
+  - zathura-pdf-mupdf
+  - zathura
   - vifm
   - w3m
   - xdotool

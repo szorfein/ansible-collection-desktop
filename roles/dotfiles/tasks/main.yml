@@ -29,6 +29,9 @@
     state: present
   when: dotfiles_stow_dir is defined
 
+- include_tasks: emacs.yml
+  when: dotfiles_emacs | bool
+
 # vim should run before awesome if used
 - include_tasks: vim.yml
   when: dotfiles_vim | bool
@@ -41,6 +44,9 @@
 
 - include_tasks: mpd.yml
   when: dotfiles_mpd | bool
+
+- include_tasks: neomutt.yml
+  when: dotfiles_neomutt | bool
 
 - include_tasks: tmux.yml
   when: dotfiles_tmux | bool

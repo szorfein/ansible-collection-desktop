@@ -1,0 +1,12 @@
+---
+display_manager_sddm_pkg_items:
+  - sddm
+  - qt5-multimedia
+  - qt5-quickcontrols
+  - qt5-graphicaleffects
+  - qt5-svg
+  - gst-libav
+
+display_manager_sddm_conflict_items:
+  - lightdm-gtk-greeter
+  - lightdm

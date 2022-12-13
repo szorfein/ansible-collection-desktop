@@ -1,13 +1,18 @@
 # ansible-collection-desktop
 
-Ansible collection for Desktop, tested on ArchLinux, Debian bullseye, Gentoo and
-Void Linux.
+Ansible collection for Desktop, tested on:
+
++ ArchLinux
++ Debian bullseye
++ Gentoo
++ Void Linux
 
 Unless you want to help support other distributions, I won't add another distro/system here.  
 
 ## Roles include
 
 - [dotfiles](https://github.com/szorfein/ansible-collection-desktop/tree/main/roles/dotfiles)
+- [display-manager](https://github.com/szorfein/ansible-collection-desktop/tree/main/roles/display_manager)
 
 ## Installation
 

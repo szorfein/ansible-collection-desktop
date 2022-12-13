@@ -17,6 +17,12 @@ dotfiles_awm_pkg_items:
   - inotify-tools
   - scrot
 
+dotfiles_emacs_pkg_items:
+  - ripgrep
+  - jq
+  - fd
+  - emacs
+
 # intel https://wiki.archlinux.org/title/Intel_graphics
 # https://wiki.archlinux.org/title/Hardware_video_acceleration
 dotfiles_gpu_intel_gen7_pkg_items:
@@ -33,6 +39,16 @@ dotfiles_mpd_pkg_items:
   - mpc
   - ncmpcpp
 
+dotfiles_neomutt_pkg_conflict_items:
+  - mutt
+  - msmtp-mta
+  - msmtp
+  - fdm
+
+dotfiles_neomutt_pkg_items:
+  - neomutt
+  - isync
+
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
 
@@ -42,6 +58,9 @@ dotfiles_vifm_pkg_items:
   - imagemagick
   - poppler # pdftoppm
   - ueberzug
+  - zathura-pdf-mupdf
+  - zathura
+  - mpv
   - vifm
   - w3m
   - xdotool
