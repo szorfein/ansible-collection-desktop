@@ -35,7 +35,9 @@
       - '*.md'
       - '*.txt'
       - '*.otf'
-  when: zip_archive.changed and zip_in_sub
+  when: zip_in_sub
+  # TODO: check why it dont extract
+  #when: zip_archive.changed and zip_in_sub
 
 - name: zip > uncompressing {{ zip_item.name }} to {{ to_dest }}
   ansible.builtin.unarchive:
