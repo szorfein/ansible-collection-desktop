@@ -1,0 +1,20 @@
+---
+- name: emacs > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_emacs_pkg_items }}'
+    state: present
+
+# https://github.com/domtronn/all-the-icons.el/tree/master/fonts
+- name: emacs > get fonts for all-the-icons.el
+  ansible.builtin.get_url:
+    url: '{{ item }}'
+    dest: '{{ dotfiles_external_font_dir }}/{{ item | basename }}'
+  with_items:
+    - https://raw.githubusercontent.com/domtronn/all-the-icons.el/master/fonts/all-the-icons-project.json
+    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/all-the-icons.ttf
+    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/file-icons.ttf
+    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/fontawesome.ttf
+    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/material-design-icons.ttf
+    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/octicons.ttf
+    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/weathericons.ttf

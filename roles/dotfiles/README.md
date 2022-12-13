@@ -29,6 +29,9 @@ Role Variables
 - `dotfiles_awm_default_theme`
   - Default: `undefined`
   - Description: The string name of a theme to install with Stow if any, relative to `dotfiles_stow_dir_theme`.
+- `dotfiles_emacs`
+  - Default: `false`
+  - Description: Install the editor Emacs.
 - `dotfiles_cache_dir`
   - Default: `~/.cache/dotfiles`
   - Description: Where playbook download archives before extract them.
