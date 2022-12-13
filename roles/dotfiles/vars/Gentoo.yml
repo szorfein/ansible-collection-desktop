@@ -4,6 +4,7 @@ dotfiles_alsa_pkg_conflict_items:
 
 dotfiles_alsa_pkg_items:
   - alsa-utils
+  - alsa-plugins
 
 dotfiles_awm_pkg_items:
   - awesome

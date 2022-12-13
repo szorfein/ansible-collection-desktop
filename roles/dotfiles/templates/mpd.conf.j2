@@ -9,6 +9,18 @@ save_absolute_paths_in_playlists  "yes"
 auto_update  "yes"
 filesystem_charset "UTF-8"
 
+{% if dotfiles_audio_backend == 'alsa' %}
+audio_output {
+  type "alsa"
+  name "ALSA sound card"
+}
+{% elif dotfiles_audio_backend == 'pulseaudio' %}
+audio_output {
+  type "pulse"
+  name "pulse audio"
+}
+{% endif %}
+
 # Fifo for cava
 audio_output {
   type        "fifo"
