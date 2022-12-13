@@ -33,6 +33,15 @@ dotfiles_mpd_pkg_items:
   - mpc
   - ncmpcpp
 
+dotfiles_neomutt_conflict_pkg_items:
+  - mutt
+  - msmtp
+  - fdm
+
+dotfiles_neomutt_pkg_items:
+  - neomutt
+  - isync
+
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
 

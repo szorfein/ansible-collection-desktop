@@ -6,3 +6,10 @@
     package: '@world'
     changed_use: true
     deep: true
+
+- name: enable systemd mbsync
+  ansible.builtin.systemd:
+    name: mbsync.timer
+    enabled: yes
+    state: reloaded
+    scope: user
