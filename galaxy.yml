@@ -1,13 +1,13 @@
 namespace: szorfein
 name: desktop
-version: 1.20.0
+version: 1.20.1
 readme: README.md
 authors:
   - szorfein <szorfein@protonmail.com>
 description: 'A collection to install various desktop applications for Linux.'
 license:
   - GPLv3+
-license_file: ''
+license_file: LICENSE
 tags:
   - desktop
   - archlinux
