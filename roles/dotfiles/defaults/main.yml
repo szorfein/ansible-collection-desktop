@@ -2,6 +2,8 @@
 # defaults file for dotfiles
 dotfiles_cache_dir: ~/.cache/dotfiles
 
+dotfiles_emacs: false
+
 dotfiles_external_font_dir: ~/.local/share/fonts
 dotfiles_external_font_zip_items: []
 dotfiles_external_font_ad_hoc_items: []
@@ -14,6 +16,8 @@ dotfiles_external_wallpaper_items: []
 
 dotfiles_mpd: false
 dotfiles_mpd_music_dir: ~/musics
+
+dotfiles_neomutt: false
 
 dotfiles_tmux: false
 
