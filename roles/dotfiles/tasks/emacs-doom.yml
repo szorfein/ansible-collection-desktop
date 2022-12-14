@@ -1,17 +1,20 @@
 ---
-- name: emacs > installing dependencies
+- name: doom-emacs > installing dependencies
   become: true
   ansible.builtin.package:
     name: '{{ dotfiles_emacs_pkg_items }}'
     state: present
 
-- name: emacs > ensure font dir exist
+- name: doom-emacs > ensure font directory exist
   ansible.builtin.file:
     path: '{{ dotfiles_external_font_dir }}'
     state: directory
 
+- name: doom-emacs > synchronise pkgs
+  ansible.builtin.command: ~/.emacs.d/bin/doom sync
+
 # https://github.com/domtronn/all-the-icons.el/tree/master/fonts
-- name: emacs > get fonts for all-the-icons.el
+- name: doome-emacs > get fonts for all-the-icons.el
   ansible.builtin.get_url:
     url: '{{ item }}'
     dest: '{{ dotfiles_external_font_dir }}/{{ item | basename }}'
