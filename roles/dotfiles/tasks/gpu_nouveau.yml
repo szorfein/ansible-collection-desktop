@@ -17,6 +17,13 @@
   notify: emerge changed use
   when: ansible_os_family == 'Gentoo'
 
+- name: nouveau > Gentoo accept license NVIDIA-r2
+  become: true
+  ansible.builtin.copy:
+    src: /etc/portage/package.license/nouveau
+    content: 'sys-firmware/nvidia-firmware NVIDIA-r2'
+  when: ansible_os_family == 'Gentoo'
+
 - name: nouveau > installing dependencies
   become: true
   ansible.builtin.package:
