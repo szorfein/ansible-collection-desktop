@@ -10,3 +10,27 @@
   loop_control:
     loop_var: aur_item
   when: ansible_os_family == 'Archlinux'
+
+- name: librewolf > importing apt-repo
+  become: true
+  block:
+    - name: librewolf | apt key
+      ansible.builtin.get_url:
+        url: https://deb.librewolf.net/keyring.gpg
+        dest: /etc/apt/trusted.gpg.d/librewolf.asc
+        # ansible.builtin.command:
+        # wget -O- https://deb.librewolf.net/keyring.gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/librewolf.asc
+
+    - name: librewolf | apt source
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/librewolf.asc] https://deb.librewolf.net {{ ansible_distribution_release }} main
+        filename: librewolf
+        update_cache: yes
+  when: ansible_os_family == 'Debian'
+
+- name: librewolf > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: librewolf
+    state: present
+  when: ansible_os_family != 'Archlinux'
