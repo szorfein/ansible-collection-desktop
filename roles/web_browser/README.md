@@ -1,7 +1,9 @@
 web browser
 ===========
 
-A role to install a "secure" web browser like `brave` or `librewolf`.
+A role to install web browser focus on privacy/security like `brave` or `librewolf`.
+
+Try to install with your system packager if possible, use [flatpak](https://www.flatpak.org/) in last resort.
 
 Requirements
 ------------

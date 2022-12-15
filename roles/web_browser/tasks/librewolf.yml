@@ -40,6 +40,30 @@
       ansible.builtin.command: emaint -r librewolf sync
   when: ansible_os_family == 'Gentoo'
 
+- name: librewolf > installing flatpack
+  become: true
+  ansible.builtin.package:
+    name: flatpak
+    state: present
+  when: ansible_os_family == 'Void'
+
+- name: librewolf > setup flatpak
+  block:
+    - name: add the Flathub repository
+      ansible.builtin.command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+    - name: installing librewolf
+      ansible.builtin.command: flatpak install flathub io.gitlab.librewolf-community
+
+    - name: add a script to launch librewolf
+      ansible.builtin.copy:
+        dest: ~/bin/librewolf
+        mode: 0700
+        content: |
+          #!/usr/bin/env sh
+          flatpak run io.gitlab.librewolf-community
+  when: ansible_os_family == 'Void'
+
 - name: librewolf > installing dependencies
   become: true
   ansible.builtin.package:
