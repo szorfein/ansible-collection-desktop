@@ -2,6 +2,16 @@
 # tasks file for web_browser
 #
 #
+- name: Load OS-vars
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - '{{ ansible_os_family }}.yml'
+        - main.yml
+      paths:
+        - 'vars'
+
 - name: ensure cache dir {{ web_browser_cache_dir }} exist
   ansible.builtin.file:
     path: '{{ web_browser_cache_dir }}'

@@ -28,9 +28,21 @@
         update_cache: yes
   when: ansible_os_family == 'Debian'
 
+- name: librewolf > for Gentoo
+  become: true
+  block:
+    - name: LibreWolf Repo
+      ansible.builtin.copy:
+        src: librewolf.conf
+        dest: /etc/portage/repos.cond.d/librewolf.conf
+
+    - name: LibreWolf Sync
+      ansible.builtin.command: emaint -r librewolf sync
+  when: ansible_os_family == 'Gentoo'
+
 - name: librewolf > installing dependencies
   become: true
   ansible.builtin.package:
-    name: librewolf
+    name: '{{ web_browser_librewolf_pkg }}'
     state: present
-  when: ansible_os_family != 'Archlinux'
+  when: web_browser_librewolf_pkg is defined
