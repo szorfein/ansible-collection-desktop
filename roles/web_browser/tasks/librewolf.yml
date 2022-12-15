@@ -1,0 +1,12 @@
+---
+
+- include_tasks: arch-aur.yml
+  loop:
+    - name: librewolf-bin
+      deps: [gtk3, libxt, startup-notification, mime-types, dbus-glib,
+              nss, ttf-font, libpulse, ffmpeg]
+      gpg_key: 031F7104E932F7BD7416E7F6D2845E1305D6E801
+      gpg_server: hkp://keyserver.ubuntu.com:80
+  loop_control:
+    loop_var: aur_item
+  when: ansible_os_family == 'Archlinux'

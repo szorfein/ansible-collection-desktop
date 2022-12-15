@@ -1,4 +1,5 @@
 ---
 # defaults file for web_browser
+web_browser_cache_dir: ~/.cache/web-browser
 web_browser_brave: false
 web_browser_librewolf: false

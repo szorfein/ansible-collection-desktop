@@ -1,0 +1,9 @@
+---
+
+- include_tasks: arch-aur.yml
+  loop:
+    - name: brave-bin
+      deps: [alsa-lib, gtk3, libxss, nss, ttf-font]
+  loop_control:
+    loop_var: aur_item
+  when: ansible_os_family == 'Archlinux'
