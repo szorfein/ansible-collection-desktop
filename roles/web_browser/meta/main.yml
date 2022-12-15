@@ -1,0 +1,30 @@
+galaxy_info:
+  author: szorfein
+  description: A role to install a 'secure' web browser like Librewolf, Brave.
+
+  issue_tracker_url: https://github.com/szorfein/ansible-collection-desktop/issues
+
+  # If the issue tracker for your role is not on github, uncomment the
+  # next line and provide a value
+  # issue_tracker_url: http://example.com/issue/tracker
+
+  license: GPLv3+
+
+  min_ansible_version: 2.1
+
+  platforms:
+    - Archlinux
+    - Debian
+      version:
+        - bullseye
+    - Gentoo
+    - Void Linux
+
+  galaxy_tags: 
+    - brave
+    - librewolf
+    - web_browser
+
+dependencies: []
+  # List your role dependencies here, one per line. Be sure to remove the '[]' above,
+  # if you add dependencies to this list.
