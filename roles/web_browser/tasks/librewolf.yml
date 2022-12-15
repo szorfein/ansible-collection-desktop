@@ -15,15 +15,15 @@
   become: true
   block:
     - name: librewolf | apt key
-      ansible.builtin.get_url:
-        url: https://deb.librewolf.net/keyring.gpg
-        dest: /etc/apt/trusted.gpg.d/librewolf.asc
-        # ansible.builtin.command:
-        # wget -O- https://deb.librewolf.net/keyring.gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/librewolf.asc
+      ansible.builtin.shell: |
+        [ -f /etc/apt/trusted.gpg.d/librewolf.gpg ] \
+          && rm /etc/apt/trusted.gpg.d/librewolf.gpg
+
+        wget -O- https://deb.librewolf.net/keyring.gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/librewolf.gpg
 
     - name: librewolf | apt source
       ansible.builtin.apt_repository:
-        repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/librewolf.asc] https://deb.librewolf.net {{ ansible_distribution_release }} main
+        repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/librewolf.gpg] https://deb.librewolf.net {{ ansible_distribution_release }} main
         filename: librewolf
         update_cache: yes
   when: ansible_os_family == 'Debian'
