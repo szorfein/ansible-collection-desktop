@@ -7,3 +7,55 @@
   loop_control:
     loop_var: aur_item
   when: ansible_os_family == 'Archlinux'
+
+# https://brave.com/linux/#debian-ubuntu-mint
+- name: brave > importing apt-repo
+  become: true
+  block:
+    - name: brave | apt key
+      ansible.builtin.get_url:
+        url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+        dest: /etc/apt/trusted.gpg.d/brave-browser-archive-keyring.gpg
+
+    - name: brave | apt source
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ {{ ansible_distribution_release }} main
+        filename: brave
+        update_cache: yes
+  when: ansible_os_family == 'Debian'
+
+- name: brave > for Gentoo
+  become: true
+  block:
+    - name: NinjaTools Repo
+      ansible.builtin.copy:
+        src: ninjatools.conf
+        dest: /etc/portage/repos.cond.d/ninjatools.conf
+
+    - name: NinjaTools Sync
+      ansible.builtin.command: emaint -r ninjatools sync
+  when: ansible_os_family == 'Gentoo'
+
+- name: brave > setup flatpak
+  block:
+    - name: add the Flathub repository
+      ansible.builtin.command: flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+    - name: installing brave
+      ansible.builtin.command: flatpak install --user -y flathub com.brave.Browser
+
+    - name: add a script to launch brave
+      ansible.builtin.copy:
+        dest: ~/bin/brave
+        mode: 0700
+        content: |
+          #!/usr/bin/env sh
+          flatpak run com.brave.Browser &
+  when: ansible_os_family == 'Void'
+          #
+- name: brave > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: '{{ web_browser_brave_pkg }}'
+    state: present
+  when: web_browser_brave_pkg is defined

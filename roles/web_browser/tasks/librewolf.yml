@@ -50,10 +50,10 @@
 - name: librewolf > setup flatpak
   block:
     - name: add the Flathub repository
-      ansible.builtin.command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+      ansible.builtin.command: flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
     - name: installing librewolf
-      ansible.builtin.command: flatpak install flathub io.gitlab.librewolf-community
+      ansible.builtin.command: flatpak install --user -y flathub io.gitlab.librewolf-community
 
     - name: add a script to launch librewolf
       ansible.builtin.copy:
@@ -61,7 +61,7 @@
         mode: 0700
         content: |
           #!/usr/bin/env sh
-          flatpak run io.gitlab.librewolf-community
+          flatpak run io.gitlab.librewolf-community &
   when: ansible_os_family == 'Void'
 
 - name: librewolf > installing dependencies
