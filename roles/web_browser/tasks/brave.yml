@@ -24,16 +24,17 @@
         update_cache: yes
   when: ansible_os_family == 'Debian'
 
+# Using: https://github.com/gentoo-mirror/brave-overlay
 - name: brave > for Gentoo
   become: true
   block:
-    - name: NinjaTools Repo
+    - name: add brave-overlay
       ansible.builtin.copy:
-        src: ninjatools.conf
-        dest: /etc/portage/repos.cond.d/ninjatools.conf
+        src: brave-overlay.conf
+        dest: /etc/portage/repos.cond.d/brave-overlay.conf
 
-    - name: NinjaTools Sync
-      ansible.builtin.command: emaint -r ninjatools sync
+    - name: brave-overlay Sync
+      ansible.builtin.command: emaint -r brave-overlay sync
   when: ansible_os_family == 'Gentoo'
 
 - name: brave > installing flatpack
