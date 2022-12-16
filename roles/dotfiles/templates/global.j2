@@ -1,9 +1,13 @@
 {% if dotfiles_audio_backend == 'alsa' %}
-USE="{{ dotfiles_audio_backend }} ${USE}"
+USE="{{ dotfiles_audio_backend }} -pulseaudio ${USE}"
 {% endif %}
 
 {% if dotfiles_audio_backend == 'pulseaudio' %}
 USE="{{ dotfiles_audio_backend }} ${USE}"
+{% endif %}
+
+{% if dotfiles_awesome %}
+USE="-wayland ${USE}"
 {% endif %}
 
 {% if dotfiles_gpu_driver is defined %}

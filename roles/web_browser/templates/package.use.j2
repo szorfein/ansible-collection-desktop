@@ -7,4 +7,8 @@ app-text/ghostscript-gpl cups
 {% if web_browser_librewolf %}
 # Librewolf
 media-libs/libvpx postproc
+
+# Librewolf-bin, even we don't need wayland :(
+x11-libs/gtk+ wayland
+media-libs/mesa wayland
 {% endif %}
