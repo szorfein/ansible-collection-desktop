@@ -36,6 +36,15 @@
       ansible.builtin.command: emaint -r ninjatools sync
   when: ansible_os_family == 'Gentoo'
 
+- name: brave > installing flatpack
+  become: true
+  block:
+    - name: installing flatpak dependencies
+      ansible.builtin.package:
+        name: flatpak
+        state: present
+  when: ansible_os_family == 'Void'
+
 - name: brave > setup flatpak
   block:
     - name: add the Flathub repository
@@ -44,12 +53,18 @@
     - name: installing brave
       ansible.builtin.command: flatpak install --user -y flathub com.brave.Browser
 
+    # https://stackoverflow.com/questions/41242460/how-to-export-dbus-session-bus-address
+    # https://dbus.freedesktop.org/doc/dbus-launch.1.html#EXAMPLES
     - name: add a script to launch brave
       ansible.builtin.copy:
         dest: ~/bin/brave
         mode: 0700
         content: |
           #!/usr/bin/env sh
+          #export $(dbus-launch)
+          if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
+            eval `dbus-launch --sh-syntax`
+          fi
           flatpak run com.brave.Browser &
   when: ansible_os_family == 'Void'
           #
