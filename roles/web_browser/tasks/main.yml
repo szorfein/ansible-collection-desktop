@@ -17,6 +17,18 @@
     path: '{{ web_browser_cache_dir }}'
     state: directory
 
+- name: Gentoo stuff
+  become: true
+  ansible.builtin.template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+  with_items:
+    - src: package.use.j2
+      dest: /etc/portage/package.use/web-browser
+    - src: package.accept_keywords.j2
+      dest: /etc/portage/package.accept_keywords/web-browser
+  when: ansible_os_family == 'Gentoo'
+
 - import_tasks: brave.yml
   when: web_browser_brave | bool
 

@@ -25,13 +25,14 @@
   when: ansible_os_family == 'Debian'
 
 # Using: https://github.com/gentoo-mirror/brave-overlay
+# https://wiki.gentoo.org/wiki/Brave
 - name: brave > for Gentoo
   become: true
   block:
     - name: add brave-overlay
       ansible.builtin.copy:
         src: brave-overlay.conf
-        dest: /etc/portage/repos.cond.d/brave-overlay.conf
+        dest: /etc/portage/repos.conf/brave-overlay.conf
 
     - name: brave-overlay Sync
       ansible.builtin.command: emaint -r brave-overlay sync

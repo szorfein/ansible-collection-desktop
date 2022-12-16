@@ -34,7 +34,7 @@
     - name: LibreWolf Repo
       ansible.builtin.copy:
         src: librewolf.conf
-        dest: /etc/portage/repos.cond.d/librewolf.conf
+        dest: /etc/portage/repos.conf/librewolf.conf
 
     - name: LibreWolf Sync
       ansible.builtin.command: emaint -r librewolf sync
