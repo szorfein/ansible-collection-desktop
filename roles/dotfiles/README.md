@@ -52,8 +52,8 @@ Role Variables
   - Default: `[]`
   - Description: If need nerd font, add them. e.g: `- { name: Iosevka: hash: xxxxxx }`
 - `dotfiles_gpu_driver`
-  - Default: `undefined`
-  - Description: For now, only support `intel_gen7` (ivybridge), `intel` (broadwell - Gen8 and more), see the [doc](https://github.com/szorfein/ansible-collection-desktop/blob/main/roles/dotfiles/docs/GPU.md).
+  - Default: `''`
+  - Description: For now, only support `intel_gen7` (ivybridge), `intel` (broadwell - Gen8 and more), `nouveau`, see the [doc](https://github.com/szorfein/ansible-collection-desktop/blob/main/roles/dotfiles/docs/GPU.md).
 - `dotfiles_mpd`
   - Default: `false`
   - Description: Install and configure mpd with ncmpcpp and mpc.

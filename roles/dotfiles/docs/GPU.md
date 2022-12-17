@@ -5,6 +5,7 @@ GPU Drivers
 
 + `intel_gen7` - ivy bridge, gen 7
 + `intel` - on recent Intel (Broadwell, Gen 8 and more)
++ `nouveau` - target family [NV50](https://nouveau.freedesktop.org/CodeNames.html) or older cards no longer supported by NVIDIA.
 
 If your gpu is not yet supported, you have to install it by hand as you are used to.
 

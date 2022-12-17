@@ -31,6 +31,16 @@ dotfiles_gpu_intel_pkg_items:
   - mesa-dri
   - intel-media-driver
 
+# https://docs.voidlinux.org/config/graphical-session/graphics-drivers/nvidia.html#nvidia
+dotfiles_gpu_nouveau_conflict_pkg_items:
+  - nvidia
+  - nvidia470
+  - nvidia390
+
+dotfiles_gpu_nouveau_pkg_items:
+  - mesa-dri
+  - xf86-video-nouveau
+
 dotfiles_mpd_pkg_items:
   - cava
   - mpd

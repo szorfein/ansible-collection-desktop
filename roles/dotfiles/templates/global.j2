@@ -6,8 +6,12 @@ USE="{{ dotfiles_audio_backend }} ${USE}"
 USE="{{ dotfiles_audio_backend }} ${USE}"
 {% endif %}
 
-{% if dotfiles_gpu_driver is defined %}
 {% if dotfiles_gpu_driver == 'intel_gen7' or dotfiles_gpu_driver == 'intel' %}
 USE="vaapi ${USE}"
 {% endif %}
+
+{% if dotfiles_gpu_driver == 'nouveau' %}
+# https://wiki.archlinux.org/title/Hardware_video_acceleration#1.2_NVIDIA
+# https://nouveau.freedesktop.org/VideoAcceleration.html
+USE="vaapi vdpau ${USE}"
 {% endif %}

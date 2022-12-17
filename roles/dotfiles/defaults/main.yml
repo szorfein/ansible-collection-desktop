@@ -14,6 +14,8 @@ dotfiles_external_nerd_font_version: 2.2.2
 dotfiles_external_wallpaper_dir: ~/images
 dotfiles_external_wallpaper_items: []
 
+dotfiles_gpu_driver: ''
+
 dotfiles_mpd: false
 dotfiles_mpd_music_dir: ~/musics
 
