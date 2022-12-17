@@ -1,0 +1,78 @@
+---
+
+- include_tasks: arch-aur.yml
+  loop:
+    - name: brave-bin
+      deps: [alsa-lib, gtk3, libxss, nss, ttf-font]
+  loop_control:
+    loop_var: aur_item
+  when: ansible_os_family == 'Archlinux'
+
+# https://brave.com/linux/#debian-ubuntu-mint
+- name: brave > importing apt-repo
+  become: true
+  block:
+    - name: brave | apt key
+      ansible.builtin.get_url:
+        url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+        dest: /etc/apt/trusted.gpg.d/brave-browser-archive-keyring.gpg
+
+    - name: brave | apt source
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ {{ ansible_distribution_release }} main
+        filename: brave
+        update_cache: yes
+  when: ansible_os_family == 'Debian'
+
+# Using: https://github.com/gentoo-mirror/brave-overlay
+# https://wiki.gentoo.org/wiki/Brave
+- name: brave > for Gentoo
+  become: true
+  block:
+    - name: add brave-overlay
+      ansible.builtin.copy:
+        src: brave-overlay.conf
+        dest: /etc/portage/repos.conf/brave-overlay.conf
+
+    - name: brave-overlay Sync
+      ansible.builtin.command: emaint -r brave-overlay sync
+  when: ansible_os_family == 'Gentoo'
+
+- name: brave > installing flatpack
+  become: true
+  block:
+    - name: installing flatpak dependencies
+      ansible.builtin.package:
+        name: flatpak
+        state: present
+  when: ansible_os_family == 'Void'
+
+- name: brave > setup flatpak
+  block:
+    - name: add the Flathub repository
+      ansible.builtin.command: flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+    - name: installing brave
+      ansible.builtin.command: flatpak install --user -y flathub com.brave.Browser
+
+    # https://stackoverflow.com/questions/41242460/how-to-export-dbus-session-bus-address
+    # https://dbus.freedesktop.org/doc/dbus-launch.1.html#EXAMPLES
+    - name: add a script to launch brave
+      ansible.builtin.copy:
+        dest: ~/bin/brave
+        mode: 0700
+        content: |
+          #!/usr/bin/env sh
+          #export $(dbus-launch)
+          if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
+            eval `dbus-launch --sh-syntax`
+          fi
+          flatpak run com.brave.Browser &
+  when: ansible_os_family == 'Void'
+          #
+- name: brave > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: '{{ web_browser_brave_pkg }}'
+    state: present
+  when: web_browser_brave_pkg is defined

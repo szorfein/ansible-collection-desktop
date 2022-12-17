@@ -1,0 +1,6 @@
+# Ansible Role web-browser
+{% if web_browser_librewolf and ansible_architecture == 'x86_64' %}
+# Librewolf
+www-client/librewolf ~amd64
+dev-libs/nss ~amd64
+{% endif %}
