@@ -21,3 +21,7 @@
     src: asoundrc.j2
     dest: ~/.asoundrc
   when: dotfiles_audio_stow_dir is not defined
+
+- name: alsa > initialize all devices
+  become: true
+  ansible.builtin.command: alsactl init
