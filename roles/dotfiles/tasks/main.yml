@@ -36,8 +36,8 @@
 - include_tasks: awesome.yml
   when: dotfiles_awm | bool
 
-- include_tasks: emacs.yml
-  when: dotfiles_emacs | bool
+- include_tasks: emacs-doom.yml
+  when: dotfiles_emacs_doom | bool
 
 - include_tasks: external.yml
   when: dotfiles_external_nerd_font_items | length > 0 or dotfiles_external_wallpaper_items | length > 0
