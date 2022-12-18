@@ -1,5 +1,6 @@
 ---
 - import_tasks: xorg.yml
+- import_tasks: betterlockscreen.yml
 
 - name: awm > search previous theme
   ansible.builtin.command: cat /tmp/awesome-theme

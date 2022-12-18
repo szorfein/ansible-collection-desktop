@@ -1,0 +1,32 @@
+---
+- name: betterlockscreen > removing conflicting packages
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_betterlockscreen_conflict_pkg_items }}'
+    state: absent
+  when: dotfiles_betterlockscreen_conflict_pkg_items is defined
+
+- name: betterlockscreen > AUR
+  block:
+    - include_tasks: arch-aur.yml
+      loop:
+        - name: i3lock-color
+          deps: [xcb-util-image, pam, libev, cairo, libxkbcommon-x11,
+            libjpeg-turbo, xcb-util-xrm, pkgconf]
+      loop_control:
+        loop_var: aur_item
+
+    - include_tasks: arch-aur.yml
+      loop:
+        - name: betterlockscreen
+          deps: [bc, feh, i3lock-color, imagemagick, xorg-xdpyinfo, xorg-xrandr]
+      loop_control:
+        loop_var: aur_item
+  when: ansible_os_family == 'Archlinux'
+
+- name: betterlockscreen > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_betterlockscreen_pkg_items }}'
+    state: present
+  when: dotfiles_betterlockscreen_pkg_items is defined
