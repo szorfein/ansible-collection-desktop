@@ -23,3 +23,16 @@
 - name: xorg > config files with stow
   ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_xorg_stow_dir }}'
   when: dotfiles_stow_dir is defined and dotfiles_xorg_stow_dir is defined
+
+- name: xorg > keymap
+  become: true
+  block:
+    - name: ensure directory exist
+      ansible.builtin.file:
+        path: /etc/X11/xorg.conf.d
+        state: directory
+
+    - name: configuring keymap with {{ dotfiles_xorg_keymap }}
+      ansible.builtin.template:
+        src: xorg/keyboard.j2
+        dest: /etc/X11/xorg.conf.d/00-keyboard.conf

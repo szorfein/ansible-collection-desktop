@@ -103,6 +103,9 @@ Role Variables
 - `dotfiles_vim_stow_dir:`
   - Default: `undefined`
   - Description: Config files for vim with Stow, relative to `dotfiles_stow_dir`, e.g: `vim`.
+- `dotfiles_xorg_keymap`
+  - Default: `en`
+  - Description: Keymap used in Xorg, apply on the `Option "XkbLayout" "{{ dotfiles_xorg_keymap }}"`.
 - `dotfiles_xorg_stow_dir`
   - Default: `undefined`
   - Description: Config files for X (.xinit, .xprofile, etc) with Stow, relative to `dotfiles_stow_dir`, e.g: `xorg`.
