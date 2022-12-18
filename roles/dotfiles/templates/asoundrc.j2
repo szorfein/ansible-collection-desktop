@@ -1,13 +1,42 @@
 defaults.pcm.rate_converter "speexrate_medium"
 
 {% if alsa_card is defined %}
-ctl.!default {
-  type hw
-  card {{ alsa_card }}
+#ctl.!default {
+#  type hw
+#  card PCH
+#}
+
+# https://github.com/opensrc/alsa/blob/master/lib/md/Dmix.md#6-the-complex-approach-defining-dmix-parameters
+pcm.ossmix {
+    type dmix
+    ipc_key 1024 # must be unique!
+    slave {
+        pcm "hw:{{ alsa_card }}" # you cannot use a "plug" device here, darn.
+        period_time 0
+        period_size 1024 # must be power of 2
+        buffer_size 8192
+    }
+    bindings {
+        0 0 # from 0 => to 0
+        1 1 # from 1 => to 1
+    }
 }
 
-pcm.!default {
-  type hw
-  card {{ alsa_card }}
+pcm.dsp0 {
+    type plug
+    slave.pcm "ossmix"
+    # A hint is required for listing the device in some GUIs, e.g. Phonon
+    # configuration.
+    hint {
+        show on
+        description "My dmix dsp0"
+    }
 }
+
+ctl.mixer0 {
+    type hw
+    card {{ alsa_card }}
+}
+
+pcm.default pcm.dsp0
 {% endif %}
