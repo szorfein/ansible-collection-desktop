@@ -1,0 +1,3 @@
+---
+web_browser_brave_pkg: www-client/brave-bin::brave-overlay
+web_browser_librewolf_pkg: librewolf-bin

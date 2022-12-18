@@ -1,0 +1,72 @@
+---
+
+- include_tasks: arch-aur.yml
+  loop:
+    - name: librewolf-bin
+      deps: [gtk3, libxt, startup-notification, mime-types, dbus-glib,
+              nss, ttf-font, libpulse, ffmpeg]
+      gpg_key: 031F7104E932F7BD7416E7F6D2845E1305D6E801
+      gpg_server: hkp://keyserver.ubuntu.com:80
+  loop_control:
+    loop_var: aur_item
+  when: ansible_os_family == 'Archlinux'
+
+- name: librewolf > importing apt-repo
+  become: true
+  block:
+    - name: librewolf | apt key
+      ansible.builtin.shell: |
+        [ -f /etc/apt/trusted.gpg.d/librewolf.gpg ] \
+          && rm /etc/apt/trusted.gpg.d/librewolf.gpg
+
+        wget -O- https://deb.librewolf.net/keyring.gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/librewolf.gpg
+
+    - name: librewolf | apt source
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/librewolf.gpg] https://deb.librewolf.net {{ ansible_distribution_release }} main
+        filename: librewolf
+        update_cache: yes
+  when: ansible_os_family == 'Debian'
+
+- name: librewolf > for Gentoo
+  become: true
+  block:
+    - name: LibreWolf Repo
+      ansible.builtin.copy:
+        src: librewolf.conf
+        dest: /etc/portage/repos.conf/librewolf.conf
+
+    - name: LibreWolf Sync
+      ansible.builtin.command: emaint -r librewolf sync
+  when: ansible_os_family == 'Gentoo'
+
+- name: librewolf > installing flatpack
+  become: true
+  ansible.builtin.package:
+    name: flatpak
+    state: present
+  when: ansible_os_family == 'Void'
+
+- name: librewolf > setup flatpak
+  block:
+    - name: add the Flathub repository
+      ansible.builtin.command: flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+    - name: installing librewolf
+      ansible.builtin.command: flatpak install --user -y flathub io.gitlab.librewolf-community
+
+    - name: add a script to launch librewolf
+      ansible.builtin.copy:
+        dest: ~/bin/librewolf
+        mode: 0700
+        content: |
+          #!/usr/bin/env sh
+          flatpak run io.gitlab.librewolf-community &
+  when: ansible_os_family == 'Void'
+
+- name: librewolf > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: '{{ web_browser_librewolf_pkg }}'
+    state: present
+  when: web_browser_librewolf_pkg is defined

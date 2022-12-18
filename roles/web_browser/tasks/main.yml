@@ -1,0 +1,36 @@
+---
+# tasks file for web_browser
+#
+#
+- name: Load OS-vars
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - '{{ ansible_os_family }}.yml'
+        - main.yml
+      paths:
+        - 'vars'
+
+- name: ensure cache dir {{ web_browser_cache_dir }} exist
+  ansible.builtin.file:
+    path: '{{ web_browser_cache_dir }}'
+    state: directory
+
+- name: Gentoo stuff
+  become: true
+  ansible.builtin.template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+  with_items:
+    - src: package.use.j2
+      dest: /etc/portage/package.use/web-browser
+    - src: package.accept_keywords.j2
+      dest: /etc/portage/package.accept_keywords/web-browser
+  when: ansible_os_family == 'Gentoo'
+
+- import_tasks: brave.yml
+  when: web_browser_brave | bool
+
+- import_tasks: librewolf.yml
+  when: web_browser_librewolf | bool

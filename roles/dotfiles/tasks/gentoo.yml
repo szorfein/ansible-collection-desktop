@@ -8,6 +8,7 @@
     - package.accept_keywords
     - package.use
     - repos.conf
+    - package.license
 
 - name: gentoo > importing ninjatools
   ansible.builtin.get_url:
@@ -36,12 +37,17 @@
     path: /etc/portage/make.conf
   notify: emerge changed use
 
-- name: gentoo > install package.use/dotfiles
+- name: gentoo > /etc/portage
   become: true
   ansible.builtin.template:
-    src: package-use.j2
-    dest: /etc/portage/package.use/dotfiles
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
     owner: root
     group: root
     mode: 0644
   notify: emerge changed use
+  with_items:
+    - src: package-use.j2
+      dest: /etc/portage/package.use/dotfiles
+    - src: package.accept_keywords.j2
+      dest: /etc/portage/package.accept_keywords/dotfiles

@@ -27,6 +27,15 @@ dotfiles_gpu_intel_gen7_pkg_items:
 dotfiles_gpu_intel_pkg_items:
   - intel-media-va-driver
 
+dotfiles_gpu_nouveau_conflict_pkg_items:
+  - nvidia-driver
+
+# https://packages.debian.org/bullseye/xserver-xorg-video-nouveau
+dotfiles_gpu_nouveau_pkg_items:
+  - firmware-misc-nonfree
+  - libgl1-mesa-dri
+  - xserver-xorg-video-nouveau
+
 dotfiles_mpd_pkg_items:
   - cava
   - mpd

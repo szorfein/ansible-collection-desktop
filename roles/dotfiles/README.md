@@ -29,9 +29,9 @@ Role Variables
 - `dotfiles_awm_default_theme`
   - Default: `undefined`
   - Description: The string name of a theme to install with Stow if any, relative to `dotfiles_stow_dir_theme`.
-- `dotfiles_emacs`
+- `dotfiles_emacs_doom`
   - Default: `false`
-  - Description: Install the editor Emacs.
+  - Description: Install [doom-emacs](https://github.com/doomemacs/doomemacs).
 - `dotfiles_cache_dir`
   - Default: `~/.cache/dotfiles`
   - Description: Where playbook download archives before extract them.
@@ -52,8 +52,8 @@ Role Variables
   - Default: `[]`
   - Description: If need nerd font, add them. e.g: `- { name: Iosevka: hash: xxxxxx }`
 - `dotfiles_gpu_driver`
-  - Default: `undefined`
-  - Description: For now, only support `intel_gen7` (ivybridge), `intel` (broadwell - Gen8 and more), see the [doc](https://github.com/szorfein/ansible-collection-desktop/blob/main/roles/dotfiles/docs/GPU.md).
+  - Default: `''`
+  - Description: For now, only support `intel_gen7` (ivybridge), `intel` (broadwell - Gen8 and more), `nouveau`, see the [doc](https://github.com/szorfein/ansible-collection-desktop/blob/main/roles/dotfiles/docs/GPU.md).
 - `dotfiles_mpd`
   - Default: `false`
   - Description: Install and configure mpd with ncmpcpp and mpc.

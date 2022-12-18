@@ -4,7 +4,6 @@ dev-python/pillow jpeg
 media-libs/libglvnd X
 x11-libs/cairo X
 x11-libs/libxkbcommon X
-x11-base/xorg-server minimal
 {% endif %}
 
 {% if dotfiles_audio_backend == 'alsa' or dotfiles_audio_backend == 'pulseaudio' %}
@@ -37,7 +36,7 @@ media-sound/mpd -network
 
 {% if dotfiles_neomutt %}
 # neomutt
-mail-client/neomutt gpgme gdbm sasl
+mail-client/neomutt gpgme gdbm sasl notmuch
 net-mail/isync sasl
 {% endif %}
 

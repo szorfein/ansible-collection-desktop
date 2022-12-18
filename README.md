@@ -13,6 +13,7 @@ Unless you want to help support other distributions, I won't add another distro/
 
 - [dotfiles](https://github.com/szorfein/ansible-collection-desktop/tree/main/roles/dotfiles)
 - [display-manager](https://github.com/szorfein/ansible-collection-desktop/tree/main/roles/display_manager)
+- [web-browser](https://github.com/szorfein/ansible-collection-desktop/tree/main/roles/web_browser)
 
 ## Installation
 
