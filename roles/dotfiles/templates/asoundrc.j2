@@ -1,1 +1,13 @@
 defaults.pcm.rate_converter "speexrate_medium"
+
+{% if alsa_card is defined %}
+ctl.!default {
+  type hw
+  card {{ alsa_card }}
+}
+
+pcm.!default {
+  type hw
+  card {{ alsa_card }}
+}
+{% endif %}

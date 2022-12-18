@@ -1,5 +1,7 @@
 ---
 # defaults file for dotfiles
+dotfiles_awm: false
+
 dotfiles_cache_dir: ~/.cache/dotfiles
 
 dotfiles_emacs_doom: false

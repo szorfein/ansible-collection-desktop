@@ -20,7 +20,7 @@
 - name: nouveau > Gentoo accept license NVIDIA-r2
   become: true
   ansible.builtin.copy:
-    src: /etc/portage/package.license/nouveau
+    dest: /etc/portage/package.license/nouveau
     content: 'sys-firmware/nvidia-firmware NVIDIA-r2'
   when: ansible_os_family == 'Gentoo'
 
