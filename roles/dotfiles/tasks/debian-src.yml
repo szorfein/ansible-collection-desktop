@@ -40,7 +40,7 @@
     paths:
       - '{{ dotfiles_cache_dir }}/build'
     patterns:
-      - '{{ deb_item.name }}-{{ deb_item.version }}*.deb'
+      - '{{ deb_item.name }}?{{ deb_item.version }}*.deb'
     file_type: file
   register: deb_pkg
   when: deb_src.changed
