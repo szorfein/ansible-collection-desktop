@@ -1,0 +1,30 @@
+Source: i3lock-color
+Section: x11
+Priority: optional
+Maintainer: Szorfein <szorfein@protonmail.com>
+Build-Depends: debhelper-compat (= 13), dh-autoreconf
+Standards-Version: 4.5.1
+Homepage: https://github.com/Raymo111/i3lock-color
+Rules-Requires-Root: no
+
+Package: i3lock-color
+Architecture: any
+Multi-Arch: foreign
+Depends: libcairo2-dev,
+         libev-dev,
+         libfontconfig1-dev,
+         libjpeg-dev,
+         libpam0g-dev,
+         libx11-xcb-dev,
+         libxcb-composite0-dev,
+         libxcb-image0-dev,
+         libxcb-randr0-dev,
+         libxcb-util0-dev,
+         libxcb-xinerama0-dev,
+         libxcb-xkb-dev,
+         libxcb-xrm-dev,
+         libxkbcommon-dev,
+         libxkbcommon-x11-dev,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: A modern version of i3lock with color functionality and other features.

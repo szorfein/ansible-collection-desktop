@@ -1,0 +1,6 @@
+i3lock-color (2.13.c.4-1) UNRELEASED; urgency=low
+
+  * Initial release. Closes: #nnnn
+    <nnnn is the bug number of your ITP>
+
+ -- Szorfein <szorfein@protonmail.com>  Mon, 19 Dec 2022 05:30:28 -0400
