@@ -30,6 +30,11 @@
         libxcb-xkb-dev, libxcb-xinerama0-dev, libxcb-randr0-dev, libxcb-image0-dev,
         libxcb-util0-dev, libxcb-xrm-dev, libxkbcommon-dev, libxkbcommon-x11-dev,
         libjpeg-dev]
+
+    - name: betterlockscreen
+      version: 4.0.4
+      url: https://github.com/betterlockscreen/betterlockscreen/archive/refs/tags/v4.0.4.tar.gz
+      deps: [imagemagick, feh]
   loop_control:
     loop_var: deb_item
   when: ansible_os_family == 'Debian'

@@ -1,0 +1,19 @@
+Source: betterlockscreen
+Section: x11
+Priority: optional
+Maintainer: Szorfein <szorfein@protonmail.com>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.5.1
+Homepage: https://github.com/betterlockscreen/betterlockscreen
+Rules-Requires-Root: no
+
+Package: betterlockscreen
+Architecture: any
+Multi-Arch: foreign
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         feh,
+         imagemagick,
+         x11-utils,
+         x11-xserver-utils
+Description: Fast and sweet looking lockscreen for linux systems with effects!
