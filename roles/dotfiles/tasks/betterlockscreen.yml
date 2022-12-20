@@ -39,9 +39,29 @@
     loop_var: deb_item
   when: ansible_os_family == 'Debian'
 
+- name: betterlockscreen > Gentoo
+  become: true
+  block:
+    - name: GURU Repo
+      ansible.builtin.copy:
+        src: guru.conf
+        dest: /etc/portage/repos.conf/guru.conf
+
+    - name: GURU Sync
+      ansible.builtin.command: emaint -r guru sync
+  when: ansible_os_family == 'Gentoo'
+
 - name: betterlockscreen > installing dependencies
   become: true
   ansible.builtin.package:
     name: '{{ dotfiles_betterlockscreen_pkg_items }}'
     state: present
   when: dotfiles_betterlockscreen_pkg_items is defined
+
+- name: betterlockscreen > systemd service
+  become: true
+  ansible.builtin.systemd:
+    name: 'betterlockscreen@{{ username }}'
+    enabled: yes
+    state: started
+  when: ansible_service_mgr == 'systemd'

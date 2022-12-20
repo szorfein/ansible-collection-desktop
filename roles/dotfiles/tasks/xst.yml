@@ -13,15 +13,15 @@
     state: present
   when: dotfiles_xst_pkg is defined
 
-- import_tasks: debian-src.yml
+- include_tasks: debian-src.yml
   loop:
     - name: xst
       version: 0.8.5
       url: https://github.com/gnotclub/xst/archive/refs/heads/master.tar.gz
       deps: [build-essential, pkg-config, x11proto-core-dev, libx11-dev,
         libxft-dev, fontconfig, x11proto-dev, libxext-dev, debmake]
-      loop_control:
-        loop_var: deb_item
+  loop_control:
+    loop_var: deb_item
   when: ansible_os_family == 'Debian'
 
 - include_tasks: arch-aur.yml
