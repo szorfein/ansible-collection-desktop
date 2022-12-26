@@ -33,29 +33,29 @@
 - include_tasks: vim.yml
   when: dotfiles_vim | bool
 
-- include_tasks: awesome.yml
-  when: dotfiles_awm | bool
+    #- include_tasks: awesome.yml
+    #when: dotfiles_awm | bool
 
-- include_tasks: emacs-doom.yml
-  when: dotfiles_emacs_doom | bool
+    #- include_tasks: emacs-doom.yml
+    #  when: dotfiles_emacs_doom | bool
 
-- include_tasks: external.yml
-  when: dotfiles_external_nerd_font_items | length > 0 or dotfiles_external_wallpaper_items | length > 0
+    #- include_tasks: external.yml
+    #  when: dotfiles_external_nerd_font_items | length > 0 or dotfiles_external_wallpaper_items | length > 0
 
-- include_tasks: mpd.yml
-  when: dotfiles_mpd | bool
+    #- include_tasks: mpd.yml
+    #  when: dotfiles_mpd | bool
 
-- include_tasks: neomutt.yml
-  when: dotfiles_neomutt | bool
+    #- include_tasks: neomutt.yml
+    #  when: dotfiles_neomutt | bool
 
-- include_tasks: tmux.yml
-  when: dotfiles_tmux | bool
+    #- include_tasks: tmux.yml
+    #  when: dotfiles_tmux | bool
 
-- include_tasks: vifm.yml
-  when: dotfiles_vifm | bool
+    #- include_tasks: vifm.yml
+    #  when: dotfiles_vifm | bool
 
-- include_tasks: xst.yml
-  when: dotfiles_xst | bool
+    #- include_tasks: xst.yml
+    #  when: dotfiles_xst | bool
 
-- include_tasks: zsh.yml
-  when: dotfiles_zsh | bool
+    #- include_tasks: zsh.yml
+    #  when: dotfiles_zsh | bool

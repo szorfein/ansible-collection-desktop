@@ -23,6 +23,8 @@ dotfiles_mpd_music_dir: ~/musics
 
 dotfiles_neomutt: false
 
+dotfiles_reaver_cache_dir: ~/.cache/reaver
+
 dotfiles_tmux: false
 
 dotfiles_vifm: false
@@ -32,6 +34,9 @@ dotfiles_vim: false
 # A list of remote plugin to install, use the default vim packager.
 dotfiles_vim_plugin_git_items: []
 dotfiles_vim_plugin_tar_items: []
+
+dotfiles_vim_reaver_cache_dir: ''
+dotfiles_vim_reaver_items: []
 
 dotfiles_xst: false
 dotfiles_xst_version: 0.8.5 # https://github.com/gnotclub/xst/blob/master/config.mk
