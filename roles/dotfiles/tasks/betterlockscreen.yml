@@ -1,0 +1,67 @@
+---
+- name: betterlockscreen > removing conflicting packages
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_betterlockscreen_conflict_pkg_items }}'
+    state: absent
+  when: dotfiles_betterlockscreen_conflict_pkg_items is defined
+
+- name: betterlockscreen > AUR
+  block:
+    - include_tasks: arch-aur.yml
+      loop:
+        - name: i3lock-color
+          deps: [xcb-util-image, pam, libev, cairo, libxkbcommon-x11,
+            libjpeg-turbo, xcb-util-xrm, pkgconf]
+
+        - name: betterlockscreen
+          deps: [bc, feh, i3lock-color, imagemagick, xorg-xdpyinfo, xorg-xrandr]
+      loop_control:
+        loop_var: aur_item
+  when: ansible_os_family == 'Archlinux'
+
+- include_tasks: debian-src.yml
+  loop:
+    - name: i3lock-color
+      version: 2.13.c.4
+      url: https://github.com/Raymo111/i3lock-color/archive/refs/tags/2.13.c.4.tar.gz
+      deps: [autoconf, gcc, make, pkg-config, libpam0g-dev, libcairo2-dev,
+        libfontconfig1-dev, libxcb-composite0-dev, libev-dev, libx11-xcb-dev,
+        libxcb-xkb-dev, libxcb-xinerama0-dev, libxcb-randr0-dev, libxcb-image0-dev,
+        libxcb-util0-dev, libxcb-xrm-dev, libxkbcommon-dev, libxkbcommon-x11-dev,
+        libjpeg-dev]
+
+    - name: betterlockscreen
+      version: 4.0.4
+      url: https://github.com/betterlockscreen/betterlockscreen/archive/refs/tags/v4.0.4.tar.gz
+      deps: [imagemagick, feh]
+  loop_control:
+    loop_var: deb_item
+  when: ansible_os_family == 'Debian'
+
+- name: betterlockscreen > Gentoo
+  become: true
+  block:
+    - name: GURU Repo
+      ansible.builtin.copy:
+        src: guru.conf
+        dest: /etc/portage/repos.conf/guru.conf
+
+    - name: GURU Sync
+      ansible.builtin.command: emaint -r guru sync
+  when: ansible_os_family == 'Gentoo'
+
+- name: betterlockscreen > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_betterlockscreen_pkg_items }}'
+    state: present
+  when: dotfiles_betterlockscreen_pkg_items is defined
+
+- name: betterlockscreen > systemd service
+  become: true
+  ansible.builtin.systemd:
+    name: 'betterlockscreen@{{ username }}'
+    enabled: yes
+    state: started
+  when: ansible_service_mgr == 'systemd'

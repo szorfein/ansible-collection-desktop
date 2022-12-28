@@ -1,0 +1,3 @@
+betterlockscreen usr/bin/
+examples usr/share/doc/betterlockscreen/examples
+system/betterlockscreen@.service usr/lib/systemd/system/

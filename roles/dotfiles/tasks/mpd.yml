@@ -13,9 +13,8 @@
 
 - include_tasks: arch-aur.yml
   loop:
-    - { name: cava,
-        deps: [base-devel, fftw, alsa-lib, ncurses, iniparser, sndio, portaudio]
-      }
+    - name: cava,
+      deps: [base-devel, fftw, alsa-lib, ncurses, iniparser, sndio, portaudio]
   loop_control:
     loop_var: aur_item
   when: ansible_os_family == 'Archlinux'

@@ -17,6 +17,10 @@ dotfiles_awm_pkg_items:
   - inotify-tools
   - scrot
 
+dotfiles_betterlockscreen_conflict_pkg_items:
+  - i3lock
+  - i3lock-color-git
+
 dotfiles_emacs_pkg_items:
   - ripgrep
   - jq
