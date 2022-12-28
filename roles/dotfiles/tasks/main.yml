@@ -15,6 +15,9 @@
     path: '{{ dotfiles_cache_dir }}'
     state: directory
 
+- import_tasks: debian.yml
+  when: ansible_os_family == 'Debian'
+
 - import_tasks: gentoo.yml
   when: ansible_os_family == 'Gentoo'
 

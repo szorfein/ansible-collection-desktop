@@ -146,8 +146,3 @@ Example Playbook
 
 You can show a complete example at
 https://github.com/szorfein/dots/blob/ansible/ansible/group_vars/desktop.yml.tmpl
-
-License
--------
-
-GPL3
