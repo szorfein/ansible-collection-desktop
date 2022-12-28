@@ -33,6 +33,8 @@ dotfiles_vim: false
 dotfiles_vim_plugin_git_items: []
 dotfiles_vim_plugin_tar_items: []
 
+dotfiles_xorg_keymap: 'en'
+
 dotfiles_xst: false
 dotfiles_xst_version: 0.8.5 # https://github.com/gnotclub/xst/blob/master/config.mk
 
