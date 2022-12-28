@@ -60,3 +60,28 @@
     to_dest: '{{ dotfiles_external_font_dir }}'
     zip_in_sub: true
   when: dotfiles_external_font_zip_items | length > 0
+
+- name: external > check if collection has changed for reaver
+  ansible.builtin.lineinfile:
+    path: '{{ dotfiles_external_font_reaver_cache_dir }}/metadata.yml'
+    line: 'changed: true'
+    state: present
+  check_mode: yes
+  register: presence
+  when: dotfiles_external_font_reaver_items | length > 0
+
+- include_tasks: get-reaver.yml
+  loop: '{{ dotfiles_external_font_reaver_items }}'
+  loop_control:
+    loop_var: reaver_item
+  vars:
+    cache_dir: '{{ dotfiles_external_font_reaver_cache_dir }}'
+    to_dest: '{{ dotfiles_external_font_dir }}'
+  when: dotfiles_external_font_reaver_items | length > 0 and presence is not changed
+
+- name: external > reaver finish
+  ansible.builtin.lineinfile:
+    path: '{{ dotfiles_external_font_reaver_cache_dir }}/metadata.yml'
+    regexp: '^changed'
+    line: 'changed: false'
+  when: dotfiles_external_font_reaver_items | length > 0 and presence is not changed

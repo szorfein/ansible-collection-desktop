@@ -1,0 +1,26 @@
+---
+# https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_filters.html#managing-file-names-and-path-names
+- name: reaver > creating destination {{ to_dest }}/{{ reaver_item | split(".") | first }}
+  ansible.builtin.file:
+    path: '{{ to_dest }}/{{ reaver_item | split(".") | first }}'
+    state: directory
+
+- name: reaver > uncompressing tar archive {{ reaver_item }}
+  ansible.builtin.unarchive:
+    src: '{{ cache_dir }}/{{ reaver_item }}'
+    dest: '{{ to_dest }}/{{ reaver_item | split(".") | first }}'
+    extra_opts: [--strip-components=1] # remove first directory
+    exclude:
+      - '*.md'
+  when: reaver_item | split(".") | last == 'gz'
+
+- name: reaver > uncompressing zip archive {{ reaver_item }}
+  ansible.builtin.unarchive:
+    src: '{{ cache_dir }}/{{ reaver_item }}'
+    dest: '{{ to_dest }}/{{ reaver_item | split(".") | first }}'
+    extra_opts: [-j] # remove first directory
+    exclude:
+      - '*.md'
+      - '*.otf'
+      - '*.txt'
+  when: reaver_item | split(".") | last == 'zip'
