@@ -83,10 +83,4 @@ Other nice sddm themes
 Troubleshooting
 ---------------
 
-Voidlinux need the package `mesa-dri`, it should depend of the graphic
-chipset.
-
-License
--------
-
-GPLv3+
+Voidlinux need the package `mesa-dri`, it should depend of the graphic chipset.

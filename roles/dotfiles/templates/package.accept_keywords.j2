@@ -1,5 +1,9 @@
-{% if dotfiles_gpu_driver == 'nouveau' %}
 {% if ansible_architecture == 'x86_64' %}
+{% if dotfiles_gpu_driver == 'nouveau' %}
 sys-firmware/nvidia-firmware ~amd64
+{% endif %}
+{% if dotfiles_awm %}
+x11-misc/i3lock-color ~amd64
+x11-misc/betterlockscreen ~amd64
 {% endif %}
 {% endif %}
