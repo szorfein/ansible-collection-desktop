@@ -34,7 +34,3 @@ To install the last [librewolf](https://librewolf.net/)
       roles:
          - { role: web_browser, web_browser_librewolf: true }
 
-License
--------
-
-GPLv3+
