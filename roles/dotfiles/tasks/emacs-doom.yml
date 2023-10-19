@@ -1,4 +1,11 @@
 ---
+- name: doom-emacs > removing conflict pkgs
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_emacs_conflict_pkg_items }}'
+    state: absent
+  when: dotfiles_emacs_conflict_pkg_items is defined
+
 - name: doom-emacs > installing dependencies
   become: true
   ansible.builtin.package:
@@ -14,26 +21,35 @@
 # https://github.com/doomemacs/doomemacs#install
 - include_tasks: get-tar.yml
   loop:
-    - name: .emacs.d
+    - name: emacs
       url: https://github.com/doomemacs/doomemacs/archive/refs/heads/master.tar.gz
   loop_control:
     loop_var: tar_item
   vars:
-    to_dest: '{{ ansible_user_dir }}'
+    to_dest: ~/.config/
 
-- name: doom-emacs > x doom sync x
-  ansible.builtin.command: ~/.emacs.d/bin/doom sync
-
-# https://github.com/domtronn/all-the-icons.el/tree/master/fonts
-- name: doom-emacs > get fonts for all-the-icons.el
+# doom-emacs use nerd-icons instead of all-the-icons
+# https://github.com/rainstormstudio/nerd-icons.el/tree/master/fonts
+- name: doom-emacs > get fonts for nerd-icons.el
   ansible.builtin.get_url:
     url: '{{ item }}'
     dest: '{{ dotfiles_external_font_dir }}/{{ item | basename }}'
   with_items:
-    - https://raw.githubusercontent.com/domtronn/all-the-icons.el/master/fonts/all-the-icons-project.json
-    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/all-the-icons.ttf
-    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/file-icons.ttf
-    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/fontawesome.ttf
-    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/material-design-icons.ttf
-    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/octicons.ttf
-    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/weathericons.ttf
+    - https://github.com/rainstormstudio/nerd-icons.el/raw/main/fonts/NFM.ttf
+
+- name: doom-emacs > x doom sync x
+  ansible.builtin.command: '{{ dotfiles_emacs_dir }}/bin/doom sync'
+
+- name: doom-emacs > clean older install
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: absent
+  loop:
+    - ~/.emacs.d
+    - '{{ dotfiles_external_font_dir }}/all-the-icons-project.json'
+    - '{{ dotfiles_external_font_dir }}/all-the-icons.ttf'
+    - '{{ dotfiles_external_font_dir }}/file-icons.ttf'
+    - '{{ dotfiles_external_font_dir }}/fontawesome.ttf'
+    - '{{ dotfiles_external_font_dir }}/material-design-icons.ttf'
+    - '{{ dotfiles_external_font_dir }}/octicons.ttf'
+    - '{{ dotfiles_external_font_dir }}/weathericons.ttf'
