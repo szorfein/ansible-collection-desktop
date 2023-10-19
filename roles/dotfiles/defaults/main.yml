@@ -5,6 +5,7 @@ dotfiles_awm: false
 dotfiles_cache_dir: ~/.cache/dotfiles
 
 dotfiles_emacs_doom: false
+dotfiles_emacs_dir: ~/.config/emacs
 
 dotfiles_external: false
 dotfiles_external_font_dir: ~/.local/share/fonts
