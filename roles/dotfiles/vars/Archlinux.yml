@@ -25,6 +25,9 @@ dotfiles_emacs_pkg_items:
   - ripgrep
   - jq
   - fd
+  - emacs-nativecomp
+
+dotfiles_emacs_conflict_pkg_items:
   - emacs
 
 # intel https://wiki.archlinux.org/title/Intel_graphics
