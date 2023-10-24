@@ -26,6 +26,10 @@ dotfiles_emacs_pkg_items:
   - jq
   - fd
   - emacs-nativecomp
+  - rubocop # ruby lint
+  - shellcheck # shell lint
+  - tidy # html lint
+  - stylelint-config-recommended # css lint
 
 dotfiles_emacs_conflict_pkg_items:
   - emacs

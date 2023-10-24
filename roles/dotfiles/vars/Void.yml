@@ -25,6 +25,7 @@ dotfiles_emacs_pkg_items:
   - ripgrep
   - jq
   - emacs-gtk3
+
 # https://docs.voidlinux.org/config/graphical-session/graphics-drivers/intel.html
 dotfiles_gpu_intel_gen7_pkg_items:
   - mesa-dri
