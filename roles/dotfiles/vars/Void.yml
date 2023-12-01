@@ -24,7 +24,11 @@ dotfiles_betterlockscreen_pkg_items:
 dotfiles_emacs_pkg_items:
   - ripgrep
   - jq
+  - fd
   - emacs-gtk3
+  - shellcheck
+  - tidy5
+
 # https://docs.voidlinux.org/config/graphical-session/graphics-drivers/intel.html
 dotfiles_gpu_intel_gen7_pkg_items:
   - mesa-dri
