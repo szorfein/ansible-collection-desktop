@@ -10,8 +10,12 @@ USE="{{ dotfiles_audio_backend }} ${USE}"
 USE="-wayland ${USE}"
 {% endif %}
 
-{% if dotfiles_gpu_driver == 'intel_gen7' or dotfiles_gpu_driver == 'intel' %}
+{% if dotfiles_gpu_driver == 'intel_gen7' %}
 USE="vaapi ${USE}"
+{% endif %}
+
+{% if dotfiles_gpu_driver == 'intel' %}
+USE="vaapi vulkan ${USE}"
 {% endif %}
 
 {% if dotfiles_gpu_driver == 'nouveau' %}
