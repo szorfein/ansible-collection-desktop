@@ -21,11 +21,17 @@ dotfiles_betterlockscreen_conflict_pkg_items:
   - i3lock
   - i3lock-color-git
 
+# https://www.flycheck.org/en/latest/languages.html#flycheck-languages
 dotfiles_emacs_pkg_items:
   - ripgrep
   - jq
   - fd
   - emacs-nativecomp
+  - rubocop # ruby lint
+  - shellcheck # shell lint
+  - tidy # html lint
+  - stylelint-config-recommended # css lint
+  - luacheck # lua lint
 
 dotfiles_emacs_conflict_pkg_items:
   - emacs

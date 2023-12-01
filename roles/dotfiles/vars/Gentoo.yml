@@ -25,6 +25,10 @@ dotfiles_emacs_pkg_items:
   - sys-apps/fd
   - app-misc/jq
   - emacs
+  - shellcheck
+  - htmltidy
+  - luacheck
+
 # https://wiki.gentoo.org/wiki/Intel_Graphics#VAAPI
 dotfiles_gpu_intel_gen7_pkg_items:
   - libva-intel-driver
