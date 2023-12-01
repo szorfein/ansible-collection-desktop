@@ -24,6 +24,7 @@ dotfiles_emacs_pkg_items:
   - rubocop
   - shellcheck
   - tidy
+  - lua-check
 
 # https://wiki.debian.org/GraphicsCard#Intel
 dotfiles_gpu_intel_gen7_pkg_items:
