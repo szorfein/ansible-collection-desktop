@@ -11,11 +11,11 @@ USE="-wayland ${USE}"
 {% endif %}
 
 {% if dotfiles_gpu_driver == 'intel_gen7' %}
-USE="vaapi ${USE}"
+USE="opengl vaapi ${USE}"
 {% endif %}
 
 {% if dotfiles_gpu_driver == 'intel' %}
-USE="vaapi vulkan ${USE}"
+USE="opengl vaapi vulkan ${USE}"
 {% endif %}
 
 {% if dotfiles_gpu_driver == 'nouveau' %}

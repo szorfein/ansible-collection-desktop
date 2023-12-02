@@ -1,4 +1,6 @@
-+ doom emacs with code linter.
++ mask >qtmultimedia-5.20 for gentoo
++ Doom emacs with more code linter.
++ Correct the install with the `dotfiles_gpu_driver=intel` on Gentoo.
 
 1.30.0
 ======
