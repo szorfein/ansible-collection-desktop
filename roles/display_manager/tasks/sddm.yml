@@ -6,6 +6,13 @@
     state: absent
   when: display_manager_sddm_conflict_items is defined
 
+- name: sddm > block recent version for gentoo
+  become: true
+  ansible.builtin.copy:
+    dest: /usr/portage/package.mask/sddm
+    content: ">dev-qt/qtmultimedia-5.20\n"
+  when: ansible_os_family == 'Gentoo'
+
 - name: sddm > installing dependencies
   become: true
   ansible.builtin.package:
