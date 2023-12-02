@@ -51,3 +51,7 @@ app-editors/vim X
 app-misc/tmux vim-syntax
 app-misc/vifm vim-syntax
 {% endif %}
+
+{% if dotfiles_gpu_driver == 'intel_gen7' or dotfiles_gpu_driver == 'intel' %}
+media-libs/libva X
+{% endif %

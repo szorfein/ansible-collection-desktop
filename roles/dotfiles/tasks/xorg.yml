@@ -1,8 +1,10 @@
 ---
 - import_tasks: gpu_intel.yml
+  become: true
   when: dotfiles_gpu_driver == 'intel_gen7' or dotfiles_gpu_driver == 'intel'
 
 - import_tasks: gpu_nouveau.yml
+  become: true
   when: dotfiles_gpu_driver == 'nouveau'
 
 - name: xorg > insert global INPUT_DEVICES="libinput"
@@ -11,7 +13,15 @@
     path: /etc/portage/make.conf
     regexp: '^INPUT_DEVICES='
     line: 'INPUT_DEVICES="libinput"'
-  notify: emerge changed use
+  when: ansible_os_family == 'Gentoo'
+
+# update gentoo here
+- name: xorg > updating gentoo
+  become: true
+  community.general.portage:
+    package: '@world'
+    changed_use: true
+    deep: true
   when: ansible_os_family == 'Gentoo'
 
 - name: xorg > installing dependencies

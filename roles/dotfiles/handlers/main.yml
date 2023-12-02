@@ -6,6 +6,7 @@
     package: '@world'
     changed_use: true
     deep: true
+  when: ansible_os_family == 'Gentoo'
 
 - name: enable systemd mbsync
   ansible.builtin.systemd:
