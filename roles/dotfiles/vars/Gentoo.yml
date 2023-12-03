@@ -36,6 +36,7 @@ dotfiles_gpu_intel_gen7_pkg_items:
 dotfiles_gpu_intel_pkg_items:
   - sys-kernel/linux-firmware
   - libva-intel-media-driver
+  - media-libs/vulkan-loader
 
 dotfiles_gpu_nouveau_conflict_pkg_items:
   - x11-drivers/nvidia-drivers
