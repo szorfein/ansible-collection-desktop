@@ -1,4 +1,5 @@
-+ mask >qtmultimedia-5.20 for gentoo
++ Add vulkan with gpu_driver="intel" (gen 8 and more).
++ Mask package >qtmultimedia-5.20 for Gentoo and SDDM.
 + Doom emacs with more code linter.
 + Correct the install with the `dotfiles_gpu_driver=intel` on Gentoo.
 
