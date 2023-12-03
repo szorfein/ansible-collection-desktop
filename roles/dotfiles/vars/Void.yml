@@ -31,12 +31,17 @@ dotfiles_emacs_pkg_items:
 
 # https://docs.voidlinux.org/config/graphical-session/graphics-drivers/intel.html
 dotfiles_gpu_intel_gen7_pkg_items:
+  - linux-firmware-intel
   - mesa-dri
   - libva-intel-driver
 
+# https://docs.voidlinux.org/config/graphical-session/graphics-drivers/intel.html
 dotfiles_gpu_intel_pkg_items:
+  - linux-firmware-intel
   - mesa-dri
   - intel-media-driver
+  - vulkan-loader
+  - mesa-vulkan-intel
 
 # https://docs.voidlinux.org/config/graphical-session/graphics-drivers/nvidia.html#nvidia
 dotfiles_gpu_nouveau_conflict_pkg_items:
