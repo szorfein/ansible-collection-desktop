@@ -8,9 +8,12 @@
 
 - name: sddm > block recent version for gentoo
   become: true
-  ansible.builtin.copy:
+  ansible.builtin.template:
+    src: package-mask.j2
     dest: /usr/portage/package.mask/sddm
-    content: ">dev-qt/qtmultimedia-5.20\n"
+    owner: root
+    group: root
+    mode: '0644'
   when: ansible_os_family == 'Gentoo'
 
 - name: sddm > installing dependencies
