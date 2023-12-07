@@ -7,6 +7,10 @@ x11-libs/cairo X
 x11-libs/libxkbcommon X
 {% endif %}
 
+{% if ansible_service_mgr == 'openrc' %}
+sys-auth/pambase elogind
+{% endif %}
+
 {% if dotfiles_audio_backend == 'alsa' or dotfiles_audio_backend == 'pulseaudio' %}
 # ALSA
 media-sound/alsa-utils libsamplerate
