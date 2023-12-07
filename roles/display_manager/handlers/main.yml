@@ -13,3 +13,4 @@
   ansible.builtin.service:
     name: sddm
     enabled: true
+  when: ansible_service_mgr == 'systemd' or ansible_os_family == 'Void'

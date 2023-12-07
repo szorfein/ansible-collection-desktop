@@ -10,7 +10,7 @@
   become: true
   ansible.builtin.template:
     src: package-mask.j2
-    dest: /usr/portage/package.mask/sddm
+    dest: /etc/portage/package.mask/sddm
     owner: root
     group: root
     mode: '0644'
@@ -98,3 +98,35 @@
     line: '{{ item.line }}'
   with_items: '{{ display_manager_theme_customize }}'
   when: display_manager_theme_customize | length > 0 and display_manager_theme.name != ''
+
+# https://wiki.gentoo.org/wiki/SDDM#Service
+- name: sddm > openrc need pkg display-manager-init
+  become: true
+  ansible.builtin.package:
+    name: gui-libs/display-manager-init
+    state: present
+  when:
+    - ansible_service_mgr == 'openrc'
+    - ansible_os_family == 'Gentoo'
+
+- name: sddm > openrc configuring /etc/conf.d/display-manager
+  become: true
+  ansible.builtin.template:
+    src: display-manager.j2
+    dest: /etc/conf.d/display-manager
+    owner: root
+    group: root
+    mode: '0644'
+  when:
+    - ansible_service_mgr == 'openrc'
+    - ansible_os_family == 'Gentoo'
+
+- name: sddm > openrc enabling service
+  become: true
+  ansible.builtin.service:
+    name: display-manager
+    state: started
+    enabled: true
+  when:
+    - ansible_service_mgr == 'openrc'
+    - ansible_os_family == 'Gentoo'
