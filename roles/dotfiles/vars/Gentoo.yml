@@ -24,10 +24,11 @@ dotfiles_emacs_pkg_items:
   - sys-apps/findutils
   - sys-apps/fd
   - app-misc/jq
-  - emacs
-  - shellcheck
   - htmltidy
   - luacheck
+  - emacs
+# TODO 2023-12 dont compile with musl, try later (because ghc (haskell dep))
+#  - shellcheck
 
 # https://wiki.gentoo.org/wiki/Intel_Graphics#VAAPI
 dotfiles_gpu_intel_gen7_pkg_items:
