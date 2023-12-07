@@ -1,0 +1,49 @@
+---
+- name: lightdm > removing conflicting pkgs
+  become: true
+  ansible.builtin.package:
+    name: '{{ dm_lightdm_conflict_pkgs }}'
+    state: absent
+  when: dm_lightdm_conflict_pkgs is defined
+
+- name: lightdm > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: '{{ dm_lightdm_pkgs }}'
+
+- name: lightdm > creating dir themes
+  become: true
+  ansible.builtin.file:
+    path: '/usr/share/lightdm-webkit/themes/{{ item.name }}'
+    state: directory
+  with_items: '{{ dm_lightdm_themes_archives }}'
+
+- name: lightdm > uncompressing themes
+  become: true
+  ansible.builtin.unarchive:
+    src: '{{ dm_lightdm_reaver_dir }}/{{ item.archive }}'
+    dest: '/usr/share/lightdm-webkit/themes/{{ item.name }}'
+  with_items: '{{ dm_lightdm_themes_archives }}'
+
+- name: lightdm > configuring lightdm-webkit2-greeter.conf...
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/lightdm/lightdm-webkit2-greeter.conf
+    regexp: '^webkit_theme'
+    line: 'webkit_theme = litarvan'
+
+- name: lightdm > configuring lightdm.conf...
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+  with_items:
+    - regexp: ^greeter-session=
+      line: greeter-session=lightdm-webkit2-greeter
+
+- name: lightdm > enabling service
+  become: true
+  ansible.builtin.service:
+    name: lightdm
+    enabled: true

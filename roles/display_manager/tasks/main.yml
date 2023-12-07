@@ -22,3 +22,6 @@
 
 - import_tasks: sddm.yml
   when: display_manager_sddm | bool
+
+- import_tasks: lightdm.yml
+  when: display_manager_lightdm | bool

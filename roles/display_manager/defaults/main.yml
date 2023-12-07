@@ -6,6 +6,8 @@ display_manager_sddm: false
 display_manager_sddm_config_dir: '/etc/sddm.conf.d/'
 display_manager_sddm_theme_dir: '/usr/share/sddm/themes'
 
+display_manager_lightdm: false
+
 display_manager_background:
   url: ''
   sum: ''

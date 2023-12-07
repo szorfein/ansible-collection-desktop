@@ -4,6 +4,7 @@ display_manager
 A role to install a display manager:
 
 - [sddm](https://github.com/sddm/sddm)
+- lightdm
 
 Requirements
 ------------
@@ -16,6 +17,9 @@ Role Variables
 - `display_manager_sddm`
   - Default: `false`
   - Description: Install and configure sddm.
+- `display_manager_lightdm`
+  - Default: `false`
+  - Description: Install and configure lightdm.
 - `display_manager_background.name`
   - Default: `''`
   - Description: The name of the backgound image/video to load, e.g `black-wall.jpg`.
