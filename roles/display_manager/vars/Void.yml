@@ -9,16 +9,18 @@ display_manager_sddm_pkg_items:
   - gst-plugins-good1
 
 display_manager_sddm_conflict_items:
+  - lightdm-webkit2-greeter
   - lightdm-gtk-greeter
   - lightdm
+
+dm_lightdm_conflict_pkgs:
+  - sddm
+  - qt5-multimedia
+  - qt5-quickcontrols
+  - qt5-graphicaleffects
+  - qt5-svg
 
 dm_lightdm_pkgs:
   - lightdm-webkit2-greeter
   - lightdm
-
-dm_lightdm_reaver_dir: /home/user/.cache/reaver/display-manager
-
-dm_lightdm_themes_archives:
-  - name: litarvan
-    archive: lightdm-webkit-theme-litarvan.tar.gz
 

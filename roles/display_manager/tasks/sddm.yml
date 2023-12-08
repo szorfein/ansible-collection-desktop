@@ -25,79 +25,51 @@
     - remove display-manager link
     - enable sddm
 
-- name: sddm > required user dir
-  ansible.builtin.file:
-    path: '{{ item }}'
-    state: directory
-  with_items:
-    - '{{ display_manager_cache_dir }}'
-
-- name: sddm > required dir
+- name: sddm > creating required directory
   become: true
   ansible.builtin.file:
     path: '{{ item }}'
     state: directory
   with_items:
-    - '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}'
-    - '{{ display_manager_sddm_config_dir }}'
-  when: display_manager_theme.name != ''
+    - '{{ dm_sddm_theme_dir }}/{{ dm_sddm_theme.name }}'
+    - '{{ dm_sddm_config_dir }}'
+  when: dm_sddm_theme.name != ''
 
-- name: sddm > download the last {{ display_manager_theme.name }} archive
-  ansible.builtin.get_url:
-    url: '{{ display_manager_theme.url }}'
-    dest: '{{ display_manager_cache_dir }}/{{ display_manager_theme.name }}.tar.gz'
-    checksum: 'sha256:{{ display_manager_theme.sum }}'
-  register: sddm_theme
-  when: display_manager_theme.url != '' and display_manager_theme.sum != '' and
-    display_manager_theme.name != ''
-
-- name: sddm > uncompressing theme {{ display_manager_theme.name }}
+- name: sddm > uncompressing themes
   become: true
   ansible.builtin.unarchive:
-    src: '{{ display_manager_cache_dir }}/{{ display_manager_theme.name }}.tar.gz'
-    dest: '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}'
+    src: '{{ dm_reaver_dir }}/{{ dm_sddm_theme.archive }}'
+    dest: '{{ dm_sddm_theme_dir }}/{{ dm_sddm_theme.name }}'
     extra_opts: [--strip-components=1]
-  when: sddm_theme.changed
+  when: dm_sddm_theme.name != '' and dm_sddm_theme.archive != ''
 
-- name: sddm > download background
-  ansible.builtin.get_url:
-    url: '{{ display_manager_background.url }}'
-    dest: '{{ display_manager_cache_dir }}//sddm-background.tar.gz'
-    checksum: 'sha256:{{ display_manager_background.sum }}'
-  register: sddm_background
-  when: display_manager_background.url != '' and
-    display_manager_background.sum != ''
-
-- name: sddm > uncompressing background
+- name: sddm > uncompressing backgrounds
   become: true
   ansible.builtin.unarchive:
-    src: '{{ display_manager_cache_dir }}/sddm-background.tar.gz'
-    dest: '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}/{{ display_manager_theme.background_dir }}'
-    extra_opts: [--strip-components=1]
-  when: sddm_background.changed
+    src: '{{ dm_reaver_dir }}/{{ item }}'
+    dest: '{{ dm_sddm_theme_dir }}/{{ dm_sddm_theme.name }}/{{ dm_sddm_theme.background_dir }}'
+  with_items: '{{ dm_sddm_backgrounds }}'
+  when:
+    - dm_sddm_theme.name != ''
+    - dm_sddm_backgrounds | length > 0
 
 - name: sddm > applying config
   become: true
   ansible.builtin.template:
     src: sddm-config.j2
-    dest: '{{ display_manager_sddm_config_dir }}/desktop.conf'
+    dest: '{{ dm_sddm_config_dir }}/desktop.conf'
+  when: dm_sddm_theme.name != ''
 
-- name: sddm > edit theme {{ display_manager_theme.name }}
+- name: sddm > customize theme {{ dm_sddm_theme.name }}
   become: true
   ansible.builtin.lineinfile:
-    path: '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}/theme.conf'
-    regexp: '^background='
-    line: 'background={{ display_manager_background.name }}'
-  when: display_manager_theme.name != '' and display_manager_background.name != ''
-
-- name: sddm > customize theme
-  become: true
-  ansible.builtin.lineinfile:
-    path: '{{ display_manager_sddm_theme_dir }}/{{ display_manager_theme.name }}/theme.conf'
+    path: '{{ dm_sddm_theme_dir }}/{{ dm_sddm_theme.name }}/theme.conf'
     regexp: '{{ item.regexp }}'
     line: '{{ item.line }}'
-  with_items: '{{ display_manager_theme_customize }}'
-  when: display_manager_theme_customize | length > 0 and display_manager_theme.name != ''
+  with_items: '{{ dm_sddm_theme_customize }}'
+  when:
+    - dm_sddm_theme_customize | length > 0
+    - dm_sddm_theme.name != ''
 
 # https://wiki.gentoo.org/wiki/SDDM#Service
 - name: sddm > openrc need pkg display-manager-init

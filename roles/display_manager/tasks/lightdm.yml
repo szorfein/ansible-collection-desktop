@@ -14,23 +14,24 @@
 - name: lightdm > creating dir themes
   become: true
   ansible.builtin.file:
-    path: '/usr/share/lightdm-webkit/themes/{{ item.name }}'
+    path: '/usr/share/lightdm-webkit/themes/{{ dm_lightdm_theme.name }}'
     state: directory
-  with_items: '{{ dm_lightdm_themes_archives }}'
+  when: dm_lightdm_theme.name != ''
 
 - name: lightdm > uncompressing themes
   become: true
   ansible.builtin.unarchive:
-    src: '{{ dm_lightdm_reaver_dir }}/{{ item.archive }}'
-    dest: '/usr/share/lightdm-webkit/themes/{{ item.name }}'
-  with_items: '{{ dm_lightdm_themes_archives }}'
+    src: '{{ dm_reaver_dir }}/{{ dm_lightdm_theme.archive }}'
+    dest: '/usr/share/lightdm-webkit/themes/{{ dm_lightdm_theme.name }}'
+  when: dm_lightdm_theme.name != '' and dm_lightdm_theme.archive != ''
 
 - name: lightdm > configuring lightdm-webkit2-greeter.conf...
   become: true
   ansible.builtin.lineinfile:
     path: /etc/lightdm/lightdm-webkit2-greeter.conf
     regexp: '^webkit_theme'
-    line: 'webkit_theme = litarvan'
+    line: 'webkit_theme = {{ dm_lightdm_theme.name }}'
+  when: dm_lightdm_theme.name != ''
 
 - name: lightdm > configuring lightdm.conf...
   become: true

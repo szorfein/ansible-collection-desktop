@@ -1,21 +1,22 @@
 ---
 # defaults file for display_manager
-display_manager_cache_dir: ~/.cache/display_manager
+# '', 'sddm' or 'lightdm'
+dm_use: ''
 
-display_manager_sddm: false
-display_manager_sddm_config_dir: '/etc/sddm.conf.d/'
-display_manager_sddm_theme_dir: '/usr/share/sddm/themes'
+dm_sddm_config_dir: '/etc/sddm.conf.d/'
+dm_sddm_theme_dir: '/usr/share/sddm/themes'
 
-display_manager_lightdm: false
+dm_sddm_backgrounds: []
 
-display_manager_background:
-  url: ''
-  sum: ''
+dm_sddm_theme:
   name: ''
+  archive: ''
+  background_dir: ''
 
-display_manager_theme:
-  url: ''
-  sum: ''
+dm_sddm_theme_customize: []
+
+dm_lightdm_theme:
   name: ''
+  archive: ''
 
-display_manager_theme_customize: []
+dm_lightdm_backgrounds: []

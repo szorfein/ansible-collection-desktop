@@ -1,4 +1,6 @@
 CHECKVT=7
-{% if display_manager_sddm | bool %}
+{% if dm_use == 'sddm' %}
 DISPLAYMANAGER="sddm"
+{% elif dm_use == 'lightdm' %}
+DISPLAYMANAGER="lightdm"
 {% endif %}
