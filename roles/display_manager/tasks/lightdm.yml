@@ -48,3 +48,36 @@
   ansible.builtin.service:
     name: lightdm
     enabled: true
+  when: ansible_mgr_service == 'systemd' or ansible_mgr_service == 'runit'
+
+# https://wiki.gentoo.org/wiki/LightDM
+- name: lightdm > openrc need pkg display-manager-init
+  become: true
+  ansible.builtin.package:
+    name: gui-libs/display-manager-init
+    state: present
+  when:
+    - ansible_service_mgr == 'openrc'
+    - ansible_os_family == 'Gentoo'
+
+- name: lightdm > openrc configuring /etc/conf.d/display-manager
+  become: true
+  ansible.builtin.template:
+    src: display-manager.j2
+    dest: /etc/conf.d/display-manager
+    owner: root
+    group: root
+    mode: '0644'
+  when:
+    - ansible_service_mgr == 'openrc'
+    - ansible_os_family == 'Gentoo'
+
+- name: lightdm > openrc enabling service
+  become: true
+  ansible.builtin.service:
+    name: display-manager
+    state: started
+    enabled: true
+  when:
+    - ansible_service_mgr == 'openrc'
+    - ansible_os_family == 'Gentoo'

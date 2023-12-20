@@ -7,3 +7,12 @@ dev-qt/qtmultimedia gstreamer qml opengl widgets
 sys-libs/zlib minizip
 media-libs/openal qt5
 {% endif %}
+
+{% if dm_use == 'lightdm' %}
+x11-misc/lightdm -gnome non-root
+net-libs/webkit-gtk X
+media-libs/harfbuzz icu
+{% if ansible_service_mgr == 'systemd' %}
+sys-apps/systemd policykit
+{% endif %}
+{% endif %}
