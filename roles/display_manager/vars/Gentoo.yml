@@ -11,3 +11,10 @@ display_manager_sddm_pkg_items:
 display_manager_sddm_conflict_items:
   - lightdm-gtk-greeter
   - lightdm
+
+dm_lightdm_conflict_pkgs:
+  - x11-misc/sddm
+
+dm_lightdm_pkgs:
+  - x11-misc/lightdm
+  - x11-misc/lightdm-webkit2-greeter # from ninjatool

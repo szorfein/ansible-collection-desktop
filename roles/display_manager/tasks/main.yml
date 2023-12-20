@@ -21,4 +21,7 @@
   when: ansible_os_family == 'Gentoo'
 
 - import_tasks: sddm.yml
-  when: display_manager_sddm | bool
+  when: dm_use == 'sddm'
+
+- import_tasks: lightdm.yml
+  when: dm_use == 'lightdm'

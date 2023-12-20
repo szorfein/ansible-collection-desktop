@@ -10,3 +10,10 @@ display_manager_sddm_pkg_items:
 display_manager_sddm_conflict_items:
   - lightdm-gtk-greeter
   - lightdm
+
+dm_lightdm_conflict_pkgs:
+  - sddm
+
+dm_lightdm_pkgs:
+  - lightdm
+  - lightdm-webkit2-greeter
