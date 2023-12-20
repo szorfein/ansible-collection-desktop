@@ -4,6 +4,7 @@ display_manager
 A role to install a display manager:
 
 - [sddm](https://github.com/sddm/sddm)
+- lightdm
 
 Requirements
 ------------
@@ -13,18 +14,19 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 Role Variables
 --------------
 
-- `display_manager_sddm`
-  - Default: `false`
-  - Description: Install and configure sddm.
+- `dm_use`
+  - Default: `''`
+  - Description: The display manager to use, valid values are '', 'sddm' or 'lightdm'.
+  - Type: str
 - `display_manager_background.name`
   - Default: `''`
   - Description: The name of the backgound image/video to load, e.g `black-wall.jpg`.
 - `display_manager_background.sum`
   - Default: `''`
   - Description: The sha256sum for the archive.
-- `display_manager_background.url`
-  - Default: `''`
-  - Description: The url for the background images to download `.tar.gz`.
+- `dm_sddm_backgrounds`
+  - Default: `[]`
+  - Description: A list of archives to uncompress in dm_sddm_theme.background_dir `.tar.gz`.
 - `display_manager_theme.name`
   - Default: `''`
   - Description: The name of the theme, used in the config file.
@@ -32,13 +34,10 @@ Role Variables
   - Default: `''`
   - Description: The background directory on theme, can be `Background`,
     `background`, `assert`, etc... depend on theme.
-- `display_manager_theme.sum`
-  - Default: `''`
-  - Description: The sha256sum for the archive.
 - `display_manager_theme.url`
   - Default: `''`
   - Description: The url for the theme to download `.tar.gz`.
-- `display_manager_theme_customize`
+- `dm_sddm_theme_customize`
   - Default: `[]`
   - Description: Modify the content of the `theme.conf` include in the theme.
 

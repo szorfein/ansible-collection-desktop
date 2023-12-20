@@ -1,0 +1,83 @@
+---
+- name: lightdm > removing conflicting pkgs
+  become: true
+  ansible.builtin.package:
+    name: '{{ dm_lightdm_conflict_pkgs }}'
+    state: absent
+  when: dm_lightdm_conflict_pkgs is defined
+
+- name: lightdm > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: '{{ dm_lightdm_pkgs }}'
+
+- name: lightdm > creating dir themes
+  become: true
+  ansible.builtin.file:
+    path: '/usr/share/lightdm-webkit/themes/{{ dm_lightdm_theme.name }}'
+    state: directory
+  when: dm_lightdm_theme.name != ''
+
+- name: lightdm > uncompressing themes
+  become: true
+  ansible.builtin.unarchive:
+    src: '{{ dm_reaver_dir }}/{{ dm_lightdm_theme.archive }}'
+    dest: '/usr/share/lightdm-webkit/themes/{{ dm_lightdm_theme.name }}'
+  when: dm_lightdm_theme.name != '' and dm_lightdm_theme.archive != ''
+
+- name: lightdm > configuring lightdm-webkit2-greeter.conf...
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/lightdm/lightdm-webkit2-greeter.conf
+    regexp: '^webkit_theme'
+    line: 'webkit_theme = {{ dm_lightdm_theme.name }}'
+  when: dm_lightdm_theme.name != ''
+
+- name: lightdm > configuring lightdm.conf...
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+  with_items:
+    - regexp: ^greeter-session=
+      line: greeter-session=lightdm-webkit2-greeter
+
+- name: lightdm > enabling service
+  become: true
+  ansible.builtin.service:
+    name: lightdm
+    enabled: true
+  when: ansible_mgr_service == 'systemd' or ansible_mgr_service == 'runit'
+
+# https://wiki.gentoo.org/wiki/LightDM
+- name: lightdm > openrc need pkg display-manager-init
+  become: true
+  ansible.builtin.package:
+    name: gui-libs/display-manager-init
+    state: present
+  when:
+    - ansible_service_mgr == 'openrc'
+    - ansible_os_family == 'Gentoo'
+
+- name: lightdm > openrc configuring /etc/conf.d/display-manager
+  become: true
+  ansible.builtin.template:
+    src: display-manager.j2
+    dest: /etc/conf.d/display-manager
+    owner: root
+    group: root
+    mode: '0644'
+  when:
+    - ansible_service_mgr == 'openrc'
+    - ansible_os_family == 'Gentoo'
+
+- name: lightdm > openrc enabling service
+  become: true
+  ansible.builtin.service:
+    name: display-manager
+    state: started
+    enabled: true
+  when:
+    - ansible_service_mgr == 'openrc'
+    - ansible_os_family == 'Gentoo'
