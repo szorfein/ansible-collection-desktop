@@ -37,18 +37,21 @@
   become: true
   ansible.builtin.lineinfile:
     path: /etc/lightdm/lightdm.conf
+    insertafter: '\[Seat:\*\]$'
     regexp: '{{ item.regexp }}'
     line: '{{ item.line }}'
   with_items:
     - regexp: ^greeter-session=
       line: greeter-session=lightdm-webkit2-greeter
+    - regexp: ^session-wrapper=
+      line: '#session-wrapper='
 
 - name: lightdm > enabling service
   become: true
   ansible.builtin.service:
     name: lightdm
     enabled: true
-  when: ansible_mgr_service == 'systemd' or ansible_mgr_service == 'runit'
+  when: ansible_service_mgr == 'systemd' or ansible_service_mgr == 'runit'
 
 # https://wiki.gentoo.org/wiki/LightDM
 - name: lightdm > openrc need pkg display-manager-init
