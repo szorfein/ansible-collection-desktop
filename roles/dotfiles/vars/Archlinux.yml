@@ -100,3 +100,6 @@ dotfiles_xorg_pkg_items:
 
 dotfiles_zsh_path: /usr/bin/zsh
 dotfiles_zsh_pkgname: zsh
+dotfiles_zsh_pkg_items:
+  - zsh
+  - starship

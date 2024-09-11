@@ -9,6 +9,7 @@
   ansible.builtin.get_url:
     url: '{{ deb_item.url }}'
     dest: '{{ dotfiles_cache_dir }}/{{ deb_item.name }}-{{ deb_item.version }}.tar.gz'
+    use_netrc: false
   register: deb_src
 
 - name: debian-src > building directory

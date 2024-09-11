@@ -32,6 +32,9 @@
     state: present
   when: dotfiles_stow_dir is defined
 
+- include_tasks: zsh.yml
+  when: dotfiles_zsh | bool
+
 # vim should run before awesome if used
 - include_tasks: vim.yml
   when: dotfiles_vim | bool
@@ -59,6 +62,3 @@
 
 - include_tasks: xst.yml
   when: dotfiles_xst | bool
-
-- include_tasks: zsh.yml
-  when: dotfiles_zsh | bool

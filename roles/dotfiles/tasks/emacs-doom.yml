@@ -30,15 +30,20 @@
 
 # doom-emacs use nerd-icons instead of all-the-icons
 # https://github.com/rainstormstudio/nerd-icons.el/tree/master/fonts
-- name: doom-emacs > get fonts for nerd-icons.el
+# https://github.com/domtronn/all-the-icons.el/tree/master/fonts
+- name: doom-emacs > get all required fonts
   ansible.builtin.get_url:
     url: '{{ item }}'
     dest: '{{ dotfiles_external_font_dir }}/{{ item | basename }}'
+    use_netrc: false
   with_items:
+    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/all-the-icons.ttf
+    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/file-icons.ttf
+    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/fontawesome.ttf
+    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/material-design-icons.ttf
+    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/octicons.ttf
+    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/weathericons.ttf
     - https://github.com/rainstormstudio/nerd-icons.el/raw/main/fonts/NFM.ttf
-
-- name: doom-emacs > x doom sync x
-  ansible.builtin.command: '{{ dotfiles_emacs_dir }}/bin/doom sync'
 
 - name: doom-emacs > clean older install
   ansible.builtin.file:
@@ -47,9 +52,13 @@
   loop:
     - ~/.emacs.d
     - '{{ dotfiles_external_font_dir }}/all-the-icons-project.json'
-    - '{{ dotfiles_external_font_dir }}/all-the-icons.ttf'
-    - '{{ dotfiles_external_font_dir }}/file-icons.ttf'
-    - '{{ dotfiles_external_font_dir }}/fontawesome.ttf'
-    - '{{ dotfiles_external_font_dir }}/material-design-icons.ttf'
-    - '{{ dotfiles_external_font_dir }}/octicons.ttf'
-    - '{{ dotfiles_external_font_dir }}/weathericons.ttf'
+    #- '{{ dotfiles_external_font_dir }}/all-the-icons.ttf'
+    #- '{{ dotfiles_external_font_dir }}/file-icons.ttf'
+    #- '{{ dotfiles_external_font_dir }}/fontawesome.ttf'
+    #- '{{ dotfiles_external_font_dir }}/material-design-icons.ttf'
+    #- '{{ dotfiles_external_font_dir }}/octicons.ttf'
+    #- '{{ dotfiles_external_font_dir }}/weathericons.ttf'
+
+# You have to run the following command manually - too slow...
+#- name: doom-emacs > x doom sync x
+#  ansible.builtin.command: '{{ dotfiles_emacs_dir }}/bin/doom sync'
