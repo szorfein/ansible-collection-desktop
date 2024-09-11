@@ -87,4 +87,6 @@ dotfiles_vim_pkgname: vim
 dotfiles_xst_pkg: xst
 
 dotfiles_zsh_path: /bin/zsh
-dotfiles_zsh_pkgname: zsh
+dotfiles_zsh_pkg_items:
+  - zsh
+  - app-shells/starship

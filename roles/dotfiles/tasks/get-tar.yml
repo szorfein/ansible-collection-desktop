@@ -8,6 +8,7 @@
   ansible.builtin.get_url:
     url: '{{ tar_item.url }}'
     dest: '{{ dotfiles_cache_dir }}/{{ tar_item.name }}.tar.gz'
+    use_netrc: false
   register: tar_archive
 
 - name: tar > uncompressing archive {{ tar_item.name }}

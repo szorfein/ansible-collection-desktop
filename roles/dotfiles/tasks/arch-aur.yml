@@ -10,6 +10,7 @@
   ansible.builtin.get_url:
     url: 'https://aur.archlinux.org/cgit/aur.git/snapshot/{{ aur_item.name }}.tar.gz'
     dest: '{{ dotfiles_cache_dir }}/{{ aur_item.name }}.tar.gz'
+    use_netrc: false
   register: aur_src
 
 - name: aur > creating building directory

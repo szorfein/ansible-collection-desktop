@@ -15,6 +15,7 @@
   ansible.builtin.get_url:
     url: '{{ zip_item.url }}'
     dest: '{{ dotfiles_cache_dir }}/{{ zip_item.name }}.zip'
+    use_netrc: false
   register: zip_archive
   when: zip_item.hash is not defined
 
@@ -23,6 +24,7 @@
     url: '{{ zip_item.url }}'
     dest: '{{ dotfiles_cache_dir }}/{{ zip_item.name }}.zip'
     checksum: 'sha256:{{ zip_item.hash }}'
+    use_netrc: false
   register: zip_archive
   when: zip_item.hash is defined
 

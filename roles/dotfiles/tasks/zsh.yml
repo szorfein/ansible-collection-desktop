@@ -1,9 +1,13 @@
 ---
-- name: zsh > installing
+- name: zsh > installing dependencies
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_zsh_pkgname }}'
+    name: '{{ dotfiles_zsh_pkg_items }}'
     state: present
+
+- name: zsh > installing starship using cargo
+  ansible.builtin.command: 'cargo install starship --locked'
+  when: ansible_os_family == 'Debian'
 
 - name: zsh > setting default shell for {{ username }}
   become: true
@@ -11,6 +15,11 @@
     name: '{{ username }}'
     shell: '{{ dotfiles_zsh_path }}'
 
+- name: zsh > install dotfiles with stow
+  ansible.builtin.command: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_zsh_stow_dir }}'
+  when: dotfiles_stow_dir is defined and dotfiles_zsh_stow_dir is defined
+
+# installing extensions if any
 - include_tasks: get-tar.yml
   loop: '{{ dotfiles_zsh_theme_items }}'
   loop_control:
