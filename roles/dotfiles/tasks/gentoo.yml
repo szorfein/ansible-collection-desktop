@@ -15,6 +15,7 @@
     url: https://raw.githubusercontent.com/szorfein/ninjatools/master/ninjatools.conf
     dest: '{{ dotfiles_cache_dir }}/ninjatools.conf'
     checksum: sha256:504a5b2ff59564ac0f318b903603dfd541e46135eda7b9fa5856f74604ee5beb
+    use_netrc: false
 
 - name: gentoo > copy ninjatools
   become: true

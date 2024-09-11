@@ -19,6 +19,7 @@
     url: 'https://github.com/ryanoasis/nerd-fonts/releases/download/v{{ dotfiles_external_nerd_font_version }}/{{ item.name }}.zip'
     dest: '{{ dotfiles_cache_dir }}/{{ item.name }}.zip'
     checksum: 'sha256:{{ item.hash }}'
+    use_netrc: false
   with_items: '{{ dotfiles_external_nerd_font_items }}'
   register: nerd_font
   when: dotfiles_external_nerd_font_items | length > 0
@@ -44,6 +45,7 @@
   ansible.builtin.get_url:
     url: '{{ item }}'
     dest: "{{ dotfiles_external_font_dir }}/{{ item | basename | replace('%20',' ')}}"
+    use_netrc: false
   with_items: '{{ dotfiles_external_font_ad_hoc_items }}'
   when: dotfiles_external_font_ad_hoc_items | length > 0
 

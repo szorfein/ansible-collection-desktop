@@ -1,3 +1,5 @@
++ Correct ansible `get_url` by adding `use_netrc: false`
++ New dependencie for ZSH - starship (https://starship.rs)
 + Add vulkan with gpu_driver="intel" (gen 8 and more).
 + Mask package >qtmultimedia-5.20 for Gentoo and SDDM.
 + Doom emacs with more code linter.

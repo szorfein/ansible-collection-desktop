@@ -115,6 +115,9 @@ Role Variables
 - `dotfiles_zsh`
   - Default: `false`
   - Description: Use zsh as default shell.
+- `dotfiles_zsh_stow_dir`
+  - Default: `undefined`
+  - Description: If need to install dotfiles with stow, path is relative to `dotfiles_stow_dir`.
 - `dotfiles_zsh_theme_dir:`
   - Default: `undefined`
   - Description: Theme dir, for ohmyzsh, it look like `~/.oh-my-zsh/custom/themes`.
