@@ -35,3 +35,34 @@
     state: link
   with_items: '{{ dotfiles_zsh_link_items }}'
   when: dotfiles_zsh_link_items | length > 0
+
+- name: zsh > check if collection has changed for reaver
+  ansible.builtin.lineinfile:
+    path: '{{ dotfiles_zsh_reaver_cache_dir }}/metadata.yml'
+    line: 'changed: true'
+    state: present
+  check_mode: yes
+  register: presence
+  when: dotfiles_zsh_reaver_cache_dir is defined
+
+- name: zsh > create reaver path's
+  ansible.builtin.file:
+    path: '{{ item.dest }}'
+    state: directory
+  with_items: '{{ dotfiles_zsh_reaver_install }}'
+  when: dotfiles_zsh_reaver_install | length > 0
+
+- name: zsh > installing archives
+  ansible.builtin.unarchive:
+    src: '{{ dotfiles_zsh_reaver_cache_dir }}/{{ item.src }}'
+    dest: '{{ item.dest }}'
+    extra_opts: [--strip-components=1] # remove first directory (only for tar)
+  with_items: '{{ dotfiles_zsh_reaver_install }}'
+  when: dotfiles_zsh_reaver_cache_dir is defined and dotfiles_zsh_reaver_install | length > 0 and presence is not changed
+
+- name: zsh > reaver finish
+  ansible.builtin.lineinfile:
+    path: '{{ dotfiles_zsh_reaver_cache_dir }}/metadata.yml'
+    regexp: '^changed'
+    line: 'changed: false'
+  when: dotfiles_zsh_reaver_cache_dir is defined
