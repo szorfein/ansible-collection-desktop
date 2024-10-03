@@ -46,7 +46,16 @@
     - regexp: ^session-wrapper=
       line: '#session-wrapper='
 
-- name: lightdm > enabling service
+# dbus look required with openrc
+# https://wiki.gentoo.org/wiki/LightDM#Boot_service
+- name: lightdm > enabling dbus service
+  become: true
+  ansible.builtin.service:
+    name: dbus
+    enabled: true
+  when: ansible_service_mgr == 'openrc' or ansible_service_mgr == 'runit'
+
+- name: lightdm > enabling services
   become: true
   ansible.builtin.service:
     name: lightdm

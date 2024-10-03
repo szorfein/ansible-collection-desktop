@@ -25,7 +25,7 @@
 
 - name: awm-m3 > creating required directory
   ansible.builtin.file:
-    path: ~/.config/awesome/config/theme
+    path: ~/.config/awesome/theme
     state: directory
 
     #- name: awm > add config file
