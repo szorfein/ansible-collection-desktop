@@ -16,6 +16,18 @@ dotfiles_awm_pkg_items:
   - inotify-tools
   - scrot
 
+dotfiles_awm3_pkg_items:
+  - awesome
+  - picom
+  - feh
+  - light
+  - papirus-icon-theme
+  - xss-lock
+  - inotify-tools
+  - maim
+  - jq
+  - bc
+
 dotfiles_emacs_pkg_items:
   - ripgrep
   - jq

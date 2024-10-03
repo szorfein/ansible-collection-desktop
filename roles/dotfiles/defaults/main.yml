@@ -1,6 +1,7 @@
 ---
 # defaults file for dotfiles
 dotfiles_awm: false
+dotfiles_awm_m3: false
 
 dotfiles_cache_dir: ~/.cache/dotfiles
 

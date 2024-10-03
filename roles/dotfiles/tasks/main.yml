@@ -42,6 +42,12 @@
 - include_tasks: awesome.yml
   when: dotfiles_awm | bool
 
+- include_tasks: drop_awesome.yml
+  when: not dotfiles_awm | bool
+
+- include_tasks: awesome-m3.yml
+  when: dotfiles_awm_m3 | bool
+
 - include_tasks: emacs-doom.yml
   when: dotfiles_emacs_doom | bool
 

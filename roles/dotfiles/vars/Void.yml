@@ -18,6 +18,18 @@ dotfiles_awm_pkg_items:
   - scrot
   - i3lock-color
 
+dotfiles_awm3_pkg_items:
+  - awesome
+  - picom
+  - feh
+  - light
+  - papirus-icon-theme
+  - xss-lock
+  - inotify-tools
+  - maim
+  - i3lock-color
+  - jq
+
 dotfiles_betterlockscreen_pkg_items:
   - betterlockscreen
 

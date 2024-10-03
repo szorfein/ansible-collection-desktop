@@ -17,6 +17,17 @@ dotfiles_awm_pkg_items:
   - inotify-tools
   - scrot
 
+dotfiles_awm3_pkg_items:
+  - awesome
+  - picom
+  - feh
+  - light
+  - papirus-icon-theme
+  - xss-lock
+  - inotify-tools
+  - maim
+  - jq
+
 dotfiles_betterlockscreen_conflict_pkg_items:
   - i3lock
   - i3lock-color-git
