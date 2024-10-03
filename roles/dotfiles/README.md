@@ -29,6 +29,15 @@ Role Variables
 - `dotfiles_awm_default_theme`
   - Default: `undefined`
   - Description: The string name of a theme to install with Stow if any, relative to `dotfiles_stow_dir_theme`.
+- `dotfiles_awm_m3`
+  - Default: `false`
+  - Description: Install awesome m3 on Xorg (minimal).
+- `dotfiles_awm_m3_stow_dir`
+  - Default: `undefined`
+  - Description: Config files for awesome m3 with Stow, relative to `dotfiles_stow_dir`, e.g: `awm-m3`.
+- `dotfiles_awm_m3_stow_dir_theme`
+  - Default: `undefined`
+  - Description: Config files where themes are stored for awesome m3 with Stow, relative to `dotfiles_stow_dir`, e.g: `themes-m3`.
 - `dotfiles_emacs_doom`
   - Default: `false`
   - Description: Install [doom-emacs](https://github.com/doomemacs/doomemacs).
