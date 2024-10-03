@@ -16,6 +16,17 @@ dotfiles_awm_pkg_items:
   - inotify-tools
   - scrot
 
+dotfiles_awm3_pkg_items:
+  - awesome
+  - picom
+  - feh
+  - light
+  - papirus-icon-theme
+  - xss-lock
+  - inotify-tools
+  - maim
+  - app-misc/jq
+
 dotfiles_betterlockscreen_pkg_items:
   - x11-misc/betterlockscreen
 
