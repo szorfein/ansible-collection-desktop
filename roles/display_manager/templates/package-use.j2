@@ -9,10 +9,12 @@ media-libs/openal qt5
 {% endif %}
 
 {% if dm_use == 'lightdm' %}
-x11-misc/lightdm -gnome non-root
 net-libs/webkit-gtk X
 media-libs/harfbuzz icu
 {% if ansible_service_mgr == 'systemd' %}
+x11-misc/lightdm -gnome non-root
 sys-apps/systemd policykit
+{% else %}
+x11-misc/lightdm -gnome non-root elogind
 {% endif %}
 {% endif %}
