@@ -33,6 +33,8 @@
     line: 'webkit_theme = {{ dm_lightdm_theme.name }}'
   when: dm_lightdm_theme.name != ''
 
+# Voidlinux, Archlinux use session-wrapper, don't erase it.
+# https://github.com/void-linux/void-packages/blob/master/srcpkgs/lightdm/template
 - name: lightdm > configuring lightdm.conf...
   become: true
   ansible.builtin.lineinfile:
@@ -43,16 +45,19 @@
   with_items:
     - regexp: ^greeter-session=
       line: greeter-session=lightdm-webkit2-greeter
-    - regexp: ^session-wrapper=
-      line: '#session-wrapper='
+#    - regexp: ^session-wrapper=
+#      line: '#session-wrapper='
 
-# dbus look required with openrc
+# dbus required with openrc, runit
 # https://wiki.gentoo.org/wiki/LightDM#Boot_service
 - name: lightdm > enabling dbus service
   become: true
   ansible.builtin.service:
-    name: dbus
+    name: "{{ item }}"
     enabled: true
+    state: started
+  loop:
+    - dbus
   when: ansible_service_mgr == 'openrc' or ansible_service_mgr == 'runit'
 
 - name: lightdm > enabling services

@@ -21,6 +21,8 @@ dm_lightdm_conflict_pkgs:
   - qt5-svg
 
 dm_lightdm_pkgs:
+  - dbus
+  - dbus-x11
   - lightdm-webkit2-greeter
   - lightdm
 
