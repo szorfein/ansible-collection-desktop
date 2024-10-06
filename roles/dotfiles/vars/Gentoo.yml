@@ -26,6 +26,7 @@ dotfiles_awm3_pkg_items:
   - inotify-tools
   - maim
   - app-misc/jq
+  - net-misc/curl
 
 dotfiles_betterlockscreen_pkg_items:
   - x11-misc/betterlockscreen
