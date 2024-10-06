@@ -29,6 +29,7 @@ dotfiles_awm3_pkg_items:
   - maim
   - i3lock-color
   - jq
+  - curl
 
 dotfiles_betterlockscreen_pkg_items:
   - betterlockscreen

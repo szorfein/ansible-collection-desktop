@@ -27,6 +27,7 @@ dotfiles_awm3_pkg_items:
   - maim
   - jq
   - bc
+  - curl
 
 dotfiles_emacs_pkg_items:
   - ripgrep
