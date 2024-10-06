@@ -108,15 +108,6 @@ Role Variables
 - `dotfiles_zsh_stow_dir`
   - Default: `undefined`
   - Description: If need to install dotfiles with stow, path is relative to `dotfiles_stow_dir`.
-- `dotfiles_zsh_theme_dir:`
-  - Default: `undefined`
-  - Description: Theme dir, for ohmyzsh, it look like `~/.oh-my-zsh/custom/themes`.
-- `dotfiles_zsh_theme_items:`
-  - Default: `[]`
-  - Description: A list of remote themes to install `- { url: https://xxx, name: xxx }`, the `name:` will be installed in `dotfiles_zsh_theme_dir`.
-- `dotfiles_zsh_link_items:`
-  - Default: `[]`
-  - Description: A list of links to create if need `- { src: xxx, dest: xxx }`
 
 Dependencies
 ------------
