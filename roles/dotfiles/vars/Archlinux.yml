@@ -27,6 +27,7 @@ dotfiles_awm3_pkg_items:
   - inotify-tools
   - maim
   - jq
+  - curl
 
 dotfiles_betterlockscreen_conflict_pkg_items:
   - i3lock

@@ -33,6 +33,33 @@
     line: 'webkit_theme = {{ dm_lightdm_theme.name }}'
   when: dm_lightdm_theme.name != ''
 
+- name: lightdm > configuring background lightdm-webkit2-greeter.conf...
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/lightdm/lightdm-webkit2-greeter.conf
+    regexp: '^background_images'
+    line: 'background_images = /usr/share/backgrounds'
+  when: dm_lightdm_backgrounds | length > 0
+
+- name: lightdm > creating dir /usr/share/backgrounds
+  become: true
+  ansible.builtin.file:
+    path: /usr/share/backgrounds
+    state: directory
+    owner: lightdm
+    group: lightdm
+  when: dm_lightdm_backgrounds | length > 0
+
+- name: lightdm > adding wallpapers > /usr/share/backgrounds
+  become: true
+  ansible.builtin.unarchive:
+    src: "{{ item }}"
+    dest: /usr/share/backgrounds
+    extra_opts:
+      - -j
+  with_items: "{{ dm_lightdm_backgrounds }}"
+  when: dm_lightdm_backgrounds | length > 0
+
 # Voidlinux, Archlinux use session-wrapper, don't erase it.
 # https://github.com/void-linux/void-packages/blob/master/srcpkgs/lightdm/template
 - name: lightdm > configuring lightdm.conf...

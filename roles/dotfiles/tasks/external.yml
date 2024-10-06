@@ -5,85 +5,29 @@
     name: unzip
     state: present
 
-- include_tasks: get-zip.yml
-  loop: '{{ dotfiles_external_wallpaper_items }}'
-  loop_control:
-    loop_var: zip_item
-  vars:
-    to_dest: '{{ dotfiles_external_wallpaper_dir }}'
-    zip_in_sub: false
-  when: dotfiles_external_wallpaper_items | length > 0
-
-- name: external > downloading nerd fonts
-  ansible.builtin.get_url:
-    url: 'https://github.com/ryanoasis/nerd-fonts/releases/download/v{{ dotfiles_external_nerd_font_version }}/{{ item.name }}.zip'
-    dest: '{{ dotfiles_cache_dir }}/{{ item.name }}.zip'
-    checksum: 'sha256:{{ item.hash }}'
-    use_netrc: false
-  with_items: '{{ dotfiles_external_nerd_font_items }}'
-  register: nerd_font
-  when: dotfiles_external_nerd_font_items | length > 0
-
 - name: external > create font dir
   ansible.builtin.file:
-    path: '{{ dotfiles_external_font_dir }}/{{ item.name }}'
+    path: "{{ dotfiles_external_font_dir }}"
     state: directory
-  with_items: '{{ dotfiles_external_nerd_font_items }}'
-  when: dotfiles_external_nerd_font_items | length > 0 and nerd_font.changed
-
-- name: external > extracting nerd font archive
-  ansible.builtin.unarchive:
-    src: '{{ dotfiles_cache_dir }}/{{ item.name }}.zip'
-    dest: '{{ dotfiles_external_font_dir }}/{{ item.name }}'
-    extra_opts: [-j]
-    exclude:
-      - '*.md'
-  with_items: '{{ dotfiles_external_nerd_font_items }}'
-  when: dotfiles_external_nerd_font_items | length > 0 and nerd_font.changed
-
-- name: external > getting ad-hoc fonts
-  ansible.builtin.get_url:
-    url: '{{ item }}'
-    dest: "{{ dotfiles_external_font_dir }}/{{ item | basename | replace('%20',' ')}}"
-    use_netrc: false
-  with_items: '{{ dotfiles_external_font_ad_hoc_items }}'
-  when: dotfiles_external_font_ad_hoc_items | length > 0
 
 - name: external > removing windows font
-  ansible.builtin.command: "find {{ dotfiles_external_font_dir}}/{{ item.name }} -name '*Windows*' -delete"
-  with_items: '{{ dotfiles_external_nerd_font_items }}'
-  when: dotfiles_external_nerd_font_items | length > 0 and nerd_font.changed
+  ansible.builtin.command: "find {{ dotfiles_external_font_dir}} -name '*Windows*' -delete"
 
-- include_tasks: get-zip.yml
-  loop: '{{ dotfiles_external_font_zip_items }}'
-  loop_control:
-    loop_var: zip_item
-  vars:
-    to_dest: '{{ dotfiles_external_font_dir }}'
-    zip_in_sub: true
-  when: dotfiles_external_font_zip_items | length > 0
+- name: external > removing older fonts
+  ansible.builtin.file:
+    path: "{{ dotfiles_external_font_dir }}/{{ item }}"
+    state: absent
+  loop:
+    - CyberPunk
+    - MaterialDesign
+    - material-design
+    - MaterialDesign-Font-master
+    - Iosevka
+    - Iosevka-2.1.0
+    - Iosevka-2.1.0.zip
+    - SpaceMono
+    - SpaceMono-2.1.0
+    - SpaceMono-2.1.0.zip
 
-- name: external > check if collection has changed for reaver
-  ansible.builtin.lineinfile:
-    path: '{{ dotfiles_external_font_reaver_cache_dir }}/metadata.yml'
-    line: 'changed: true'
-    state: present
-  check_mode: yes
-  register: presence
-  when: dotfiles_external_font_reaver_items | length > 0
-
-- include_tasks: get-reaver.yml
-  loop: '{{ dotfiles_external_font_reaver_items }}'
-  loop_control:
-    loop_var: reaver_item
-  vars:
-    cache_dir: '{{ dotfiles_external_font_reaver_cache_dir }}'
-    to_dest: '{{ dotfiles_external_font_dir }}'
-  when: dotfiles_external_font_reaver_items | length > 0 and presence is not changed
-
-- name: external > reaver finish
-  ansible.builtin.lineinfile:
-    path: '{{ dotfiles_external_font_reaver_cache_dir }}/metadata.yml'
-    regexp: '^changed'
-    line: 'changed: false'
-  when: dotfiles_external_font_reaver_items | length > 0 and presence is not changed
+- name: external > updating fonts cache
+  ansible.builtin.command: "fc-cache -f {{ dotfiles_external_font_dir}}"

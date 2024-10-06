@@ -47,19 +47,6 @@ Role Variables
 - `dotfiles_external_font_dir`
   - Default: `~/.local/share/fonts`
   - Description: Fonts dir.
-- `dotfiles_external_font_ad_hoc_items`
-  - Default: `[]`
-  - Description: A list of remote fonts to download directly, end by `.ttf`,
-    `.otf`, etc.
-- `dotfiles_external_font_zip_items`
-  - Default: `[]`
-  - Description: A list of remote `zip` font archive to download.
-- `dotfiles_external_nerd_font_version`
-  - Default: `2.2.2`
-  - Description: Release version of the [Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases).
-- `dotfiles_external_nerd_font_items`
-  - Default: `[]`
-  - Description: If need nerd font, add them. e.g: `- { name: Iosevka: hash: xxxxxx }`
 - `dotfiles_gpu_driver`
   - Default: `''`
   - Description: For now, only support `intel_gen7` (ivybridge), `intel` (broadwell - Gen8 and more), `nouveau`, see the [doc](https://github.com/szorfein/ansible-collection-desktop/blob/main/roles/dotfiles/docs/GPU.md).
@@ -103,12 +90,6 @@ Role Variables
 - `dotfiles_vim`
   - Default: `false`
   - Description: Install and configure vim (not neovim).
-- `dotfiles_vim_plugin_git_items:`
-  - Default: `[]`
-  - Description: A list of remote plugins from github to install with the native pack system, e.g: `- airblade/vim-gitgutter`
-- `dotfiles_vim_plugin_tar_items:`
-  - Default: `[]`
-  - Description: A list of remote plugins from a `.tar.gz` archive to install with the native pack system.
 - `dotfiles_vim_stow_dir:`
   - Default: `undefined`
   - Description: Config files for vim with Stow, relative to `dotfiles_stow_dir`, e.g: `vim`.
@@ -127,15 +108,6 @@ Role Variables
 - `dotfiles_zsh_stow_dir`
   - Default: `undefined`
   - Description: If need to install dotfiles with stow, path is relative to `dotfiles_stow_dir`.
-- `dotfiles_zsh_theme_dir:`
-  - Default: `undefined`
-  - Description: Theme dir, for ohmyzsh, it look like `~/.oh-my-zsh/custom/themes`.
-- `dotfiles_zsh_theme_items:`
-  - Default: `[]`
-  - Description: A list of remote themes to install `- { url: https://xxx, name: xxx }`, the `name:` will be installed in `dotfiles_zsh_theme_dir`.
-- `dotfiles_zsh_link_items:`
-  - Default: `[]`
-  - Description: A list of links to create if need `- { src: xxx, dest: xxx }`
 
 Dependencies
 ------------

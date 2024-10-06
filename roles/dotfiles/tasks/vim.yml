@@ -12,51 +12,6 @@
     name: '{{ dotfiles_vim_pkgname }}'
     state: present
 
-- name: vim > directory for the native vim pack
-  ansible.builtin.file:
-    path: ~/.vim/pack/dotfiles/start
-    state: directory
-
-- name: vim > get git plugins
-  ansible.builtin.git:
-    repo: 'https://github.com/{{ item }}'
-    dest: '~/.vim/pack/dotfiles/start/{{ item | basename }}'
-  with_items: '{{ dotfiles_vim_plugin_git_items }}'
-  when: dotfiles_vim_plugin_git_items | length > 0
-
-- include_tasks: get-tar.yml
-  loop: '{{ dotfiles_vim_plugin_tar_items }}'
-  loop_control:
-    loop_var: tar_item
-  vars:
-    to_dest: ~/.vim/pack/dotfiles/start
-  when: dotfiles_vim_plugin_tar_items | length > 0
-
-- name: vim > check if collection has changed for reaver
-  ansible.builtin.lineinfile:
-    path: '{{ dotfiles_vim_reaver_cache_dir }}/metadata.yml'
-    line: 'changed: true'
-    state: present
-  check_mode: yes
-  register: presence
-  when: dotfiles_vim_reaver_items | length > 0
-
-- include_tasks: get-reaver.yml
-  loop: '{{ dotfiles_vim_reaver_items }}'
-  loop_control:
-    loop_var: reaver_item
-  vars:
-    cache_dir: '{{ dotfiles_vim_reaver_cache_dir }}'
-    to_dest: ~/.vim/pack/dotfiles/start
-  when: dotfiles_vim_reaver_items | length > 0 and presence is not changed
-
-- name: vim > reaver finish
-  ansible.builtin.lineinfile:
-    path: '{{ dotfiles_vim_reaver_cache_dir }}/metadata.yml'
-    regexp: '^changed'
-    line: 'changed: false'
-  when: dotfiles_vim_reaver_items | length > 0 and presence is not changed
-
 - name: vim > copy vim configs using stow
   ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_vim_stow_dir }}'
   when: dotfiles_stow_dir is defined and dotfiles_vim_stow_dir is defined
