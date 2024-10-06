@@ -1,3 +1,21 @@
+1.43.0
+======
+
+### Dotfiles
+- Update Awesome for last themes [focus](https://github.com/szorfein/dotfiles).
+- Remove (a lot) code for download and extract files (ansible.builtin.get_url and
+  ansible.builtin.unarchive). All this stuff is now made by
+[reaver](https://github.com/szorfein/reaver) before launching Ansible.
+- Playbooks now execute faster.
+
+### DM
+- Correct lightdm - was locked because session-wrapper.
+- Ensure dbus is started and enable for lightdm.
+- Can configure lightdm to use extra backgrounds.
+
+1.36.0
+======
+
 + Correct ansible `get_url` by adding `use_netrc: false`
 + New dependencie for ZSH - starship (https://starship.rs)
 + Add vulkan with gpu_driver="intel" (gen 8 and more).
