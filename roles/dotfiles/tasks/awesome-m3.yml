@@ -23,6 +23,14 @@
     name: '{{ dotfiles_awm3_pkg_items }}'
     state: present
 
+- include_tasks: arch-aur.yml
+  loop:
+    - name: light
+      deps: [base-devel]
+  loop_control:
+    loop_var: aur_item
+  when: ansible_os_family == 'Archlinux'
+
 - name: awm-m3 > creating required directory
   ansible.builtin.file:
     path: ~/.config/awesome/theme
