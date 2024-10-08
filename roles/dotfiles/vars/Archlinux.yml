@@ -11,7 +11,6 @@ dotfiles_awm_pkg_items:
   - awesome
   - picom
   - feh
-  - light
   - papirus-icon-theme
   - xss-lock
   - inotify-tools
@@ -21,7 +20,6 @@ dotfiles_awm3_pkg_items:
   - awesome
   - picom
   - feh
-  - light
   - papirus-icon-theme
   - xss-lock
   - inotify-tools

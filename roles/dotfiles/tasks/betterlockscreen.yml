@@ -11,7 +11,7 @@
     - include_tasks: arch-aur.yml
       loop:
         - name: i3lock-color
-          deps: [xcb-util-image, pam, libev, cairo, libxkbcommon-x11,
+          deps: [base-devel, xcb-util-image, pam, libev, cairo, libxkbcommon-x11,
             libjpeg-turbo, xcb-util-xrm, pkgconf]
 
         - name: betterlockscreen
