@@ -3,7 +3,7 @@
   become: true
   ansible.builtin.copy:
     dest: /etc/portage/package.accept_keywords/xst
-    content: =x11-terms/xst-9999 **
+    content: '=x11-terms/xst-9999 **'
   when: ansible_os_family == 'Gentoo'
 
 - name: xst > installing via your package manager
