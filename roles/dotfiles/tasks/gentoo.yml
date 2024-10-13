@@ -10,25 +10,21 @@
     - repos.conf
     - package.license
 
-- name: gentoo > importing ninjatools
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/szorfein/ninjatools/master/ninjatools.conf
-    dest: '{{ dotfiles_cache_dir }}/ninjatools.conf'
-    checksum: sha256:504a5b2ff59564ac0f318b903603dfd541e46135eda7b9fa5856f74604ee5beb
-    use_netrc: false
-
-- name: gentoo > copy ninjatools
+- name: gentoo > add repository
   become: true
-  ansible.builtin.copy:
-    src: '{{ dotfiles_cache_dir }}/ninjatools.conf'
-    dest: /etc/portage/repos.conf/ninjatools.conf
+  ansible.builtin.template:
+    src: gentoo-repository.j2
+    dest: /etc/portage/repos.conf/dotfiles.conf
     owner: root
     group: root
     mode: 0644
 
-- name: gentoo > sync ninjatools
+- name: gentoo > sync repository
   become: true
-  ansible.builtin.command: emaint sync -r ninjatools
+  ansible.builtin.command: "{{ item }}"
+  with_items:
+    - emaint sync -r ninjatools
+    - emaint sync -r guru
 
 - name: gentoo > install global stuff
   become: true

@@ -39,18 +39,6 @@
     loop_var: deb_item
   when: ansible_os_family == 'Debian'
 
-- name: betterlockscreen > Gentoo
-  become: true
-  block:
-    - name: GURU Repo
-      ansible.builtin.copy:
-        src: guru.conf
-        dest: /etc/portage/repos.conf/guru.conf
-
-    - name: GURU Sync
-      ansible.builtin.command: emaint -r guru sync
-  when: ansible_os_family == 'Gentoo'
-
 - name: betterlockscreen > installing dependencies
   become: true
   ansible.builtin.package:
