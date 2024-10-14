@@ -1,3 +1,8 @@
+1.44.0
+======
+
+- Add lxdm as display manager.
+
 1.43.0
 ======
 

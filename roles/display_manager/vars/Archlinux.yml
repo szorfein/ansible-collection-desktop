@@ -1,4 +1,9 @@
 ---
+display_manager_sddm_conflict_items:
+  - lightdm-gtk-greeter
+  - lightdm
+  - lxdm
+
 display_manager_sddm_pkg_items:
   - sddm
   - qt5-multimedia
@@ -7,13 +12,18 @@ display_manager_sddm_pkg_items:
   - qt5-svg
   - gst-libav
 
-display_manager_sddm_conflict_items:
-  - lightdm-gtk-greeter
-  - lightdm
-
 dm_lightdm_conflict_pkgs:
   - sddm
+  - lxdm
 
 dm_lightdm_pkgs:
   - lightdm
   - lightdm-webkit2-greeter
+
+dm_lxdm_conflict_pkgs:
+  - lightdm
+  - lightdm-webkit2-greeter
+  - sddm
+
+dm_lxdm_pkgs:
+  - lxdm

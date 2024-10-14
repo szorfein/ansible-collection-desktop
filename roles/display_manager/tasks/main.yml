@@ -25,3 +25,6 @@
 
 - import_tasks: lightdm.yml
   when: dm_use == 'lightdm'
+
+- import_tasks: lxdm.yml
+  when: dm_use == 'lxdm'
