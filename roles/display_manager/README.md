@@ -5,6 +5,7 @@ A role to install a display manager:
 
 - [sddm](https://github.com/sddm/sddm)
 - lightdm
+- lxdm
 
 Requirements
 ------------
@@ -16,7 +17,7 @@ Role Variables
 
 - `dm_use`
   - Default: `''`
-  - Description: The display manager to use, valid values are '', 'sddm' or 'lightdm'.
+  - Description: The display manager to use, valid values are '', 'sddm', 'lxdm' or 'lightdm'.
   - Type: str
 - `display_manager_background.name`
   - Default: `''`
