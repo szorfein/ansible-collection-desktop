@@ -18,13 +18,6 @@
     dest: /etc/lxdm/LoginReady
     mode: '0755'
 
-- name: lxdm > uncompressing themes
-  become: true
-  ansible.builtin.unarchive:
-    src: '{{ dm_reaver_dir }}/{{ dm_lightdm_theme.archive }}'
-    dest: '/usr/share/lightdm-webkit/themes/{{ dm_lightdm_theme.name }}'
-  when: dm_lightdm_theme.name != '' and dm_lightdm_theme.archive != ''
-
 - name: lxdm > configuring lxdm.conf...
   become: true
   ansible.builtin.lineinfile:
@@ -53,7 +46,7 @@
     dest: /usr/share/backgrounds
     extra_opts:
       - -j
-  with_items: "{{ dm_lightdm_backgrounds }}"
+  with_items: "{{ dm_lxdm_backgrounds }}"
   when: dm_lxdm_backgrounds | length > 0
 
 - name: lxdm > configuring lxdm.conf [display]...

@@ -12,3 +12,10 @@ display_manager_sddm_pkg_items:
 display_manager_sddm_conflict_items:
   - lightdm-gtk-greeter
   - lightdm
+
+dm_lxdm_conflict_pkgs:
+  - lightdm
+  - sddm
+
+dm_lxdm_pkgs:
+  - lxdm

@@ -1,4 +1,10 @@
 ---
+display_manager_sddm_conflict_items:
+  - lightdm-webkit2-greeter
+  - lightdm-gtk-greeter
+  - lightdm
+  - lxdm
+
 display_manager_sddm_pkg_items:
   - sddm
   - qt5-multimedia
@@ -8,12 +14,8 @@ display_manager_sddm_pkg_items:
   - gst-libav
   - gst-plugins-good1
 
-display_manager_sddm_conflict_items:
-  - lightdm-webkit2-greeter
-  - lightdm-gtk-greeter
-  - lightdm
-
 dm_lightdm_conflict_pkgs:
+  - lxdm
   - sddm
   - qt5-multimedia
   - qt5-quickcontrols
@@ -26,3 +28,10 @@ dm_lightdm_pkgs:
   - lightdm-webkit2-greeter
   - lightdm
 
+dm_lxdm_conflict_pkgs:
+  - sddm
+  - lightdm-webkit2-greeter
+  - lightdm
+
+dm_lxdm_pkgs:
+  - lxdm

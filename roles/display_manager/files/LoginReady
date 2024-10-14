@@ -5,6 +5,10 @@ TARGET="$WALLS/default.png"
 
 [ -f "$TARGET" ] && rm "$TARGET"
 
-CHOOSE=$(ls $WALLS/*.png | shuf -n 1)
+CHOOSE=$(find $WALLS -regex ".*\.\(jpg\|png\)" | shuf -n 1)
 
-cp "$CHOOSE" "$TARGET"
+if [ "$(file -b --mime-type "$CHOOSE")" = "image/jpeg" ]; then
+  magick "$CHOOSE" "$TARGET"
+else
+  cp "$CHOOSE" "$TARGET"
+fi
