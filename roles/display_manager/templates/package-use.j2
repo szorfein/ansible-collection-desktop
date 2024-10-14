@@ -18,3 +18,7 @@ sys-apps/systemd policykit
 x11-misc/lightdm -gnome non-root elogind
 {% endif %}
 {% endif %}
+
+{% if dm_use == 'lxdm' %}
+x11-libs/pango X
+{% endif %}

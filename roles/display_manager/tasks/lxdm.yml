@@ -1,0 +1,117 @@
+---
+- name: lxdm > removing conflicting pkgs
+  become: true
+  ansible.builtin.package:
+    name: '{{ dm_lxdm_conflict_pkgs }}'
+    state: absent
+  when: dm_lxdm_conflict_pkgs is defined
+
+- name: lxdm > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: '{{ dm_lxdm_pkgs }}'
+
+- name: lxdm > adding LoginReady
+  become: true
+  ansible.builtin.copy:
+    src: LoginReady
+    dest: /etc/lxdm/LoginReady
+    mode: '0755'
+
+- name: lxdm > uncompressing themes
+  become: true
+  ansible.builtin.unarchive:
+    src: '{{ dm_reaver_dir }}/{{ dm_lightdm_theme.archive }}'
+    dest: '/usr/share/lightdm-webkit/themes/{{ dm_lightdm_theme.name }}'
+  when: dm_lightdm_theme.name != '' and dm_lightdm_theme.archive != ''
+
+- name: lxdm > configuring lxdm.conf...
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/lxdm/lxdm.conf
+    regexp: '{{ item.regex }}'
+    line: '{{ item.line }}'
+  with_items:
+    - regex: '^gtk_theme'
+      line: 'gtk_theme=Adwaita-dark'
+    - regex: '^bg='
+      line: 'bg=/usr/share/backgrounds/default.png'
+    - regex: '^lang'
+      line: 'lang=0'
+
+- name: lxdm > creating dir /usr/share/backgrounds
+  become: true
+  ansible.builtin.file:
+    path: /usr/share/backgrounds
+    state: directory
+  when: dm_lightdm_backgrounds | length > 0
+
+- name: lxdm > adding wallpapers > /usr/share/backgrounds
+  become: true
+  ansible.builtin.unarchive:
+    src: "{{ item }}"
+    dest: /usr/share/backgrounds
+    extra_opts:
+      - -j
+  with_items: "{{ dm_lightdm_backgrounds }}"
+  when: dm_lxdm_backgrounds | length > 0
+
+- name: lxdm > configuring lxdm.conf [display]...
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/lxdm/lxdm.conf
+    insertafter: '\[display\]$'
+    regexp: '^transparent_pane='
+    line: transparent_pane=1
+
+# https://wiki.gentoo.org/wiki/LightDM
+- name: lxdm > openrc need pkg display-manager-init
+  become: true
+  ansible.builtin.package:
+    name: gui-libs/display-manager-init
+    state: present
+  when:
+    - ansible_service_mgr == 'openrc'
+    - ansible_os_family == 'Gentoo'
+
+- name: lxdm > openrc configuring /etc/conf.d/display-manager
+  become: true
+  ansible.builtin.template:
+    src: display-manager.j2
+    dest: /etc/conf.d/display-manager
+    owner: root
+    group: root
+    mode: '0644'
+  when:
+    - ansible_service_mgr == 'openrc'
+    - ansible_os_family == 'Gentoo'
+
+# dbus required with openrc, runit
+# https://wiki.gentoo.org/wiki/LightDM#Boot_service
+- name: lxdm > enabling dbus service
+  become: true
+  ansible.builtin.service:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  loop:
+    - dbus
+  when: ansible_service_mgr == 'openrc' or ansible_service_mgr == 'runit'
+
+- name: lxdm > openrc enabling service
+  become: true
+  ansible.builtin.service:
+    name: display-manager
+    state: started
+    enabled: true
+  when:
+    - ansible_service_mgr == 'openrc'
+    - ansible_os_family == 'Gentoo'
+
+- name: lxdm > enabling services
+  become: true
+  ansible.builtin.service:
+    name: lxdm
+    enabled: true
+  when: ansible_service_mgr == 'systemd' or ansible_service_mgr == 'runit'
+

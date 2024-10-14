@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+WALLS="/usr/share/backgrounds"
+TARGET="$WALLS/default.png"
+
+[ -f "$TARGET" ] && rm "$TARGET"
+
+CHOOSE=$(ls $WALLS/*.png | shuf -n 1)
+
+cp "$CHOOSE" "$TARGET"
