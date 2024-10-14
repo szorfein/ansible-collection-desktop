@@ -4,3 +4,7 @@
 www-client/librewolf ~amd64
 dev-libs/nss ~amd64
 {% endif %}
+
+{% if web_browser_brave and ansible_architecture == 'x86_64' %}
+dev-libs/libpthread-stubs **
+{% endif %}
