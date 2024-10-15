@@ -21,10 +21,10 @@
 
 - name: gentoo > sync repository
   become: true
-  ansible.builtin.command: "{{ item }}"
+  ansible.builtin.command: "emaint sync -r {{ item }}"
   with_items:
-    - emaint sync -r ninjatools
-    - emaint sync -r guru
+    - "ninjatools"
+    - "guru"
 
 - name: gentoo > install global stuff
   become: true
