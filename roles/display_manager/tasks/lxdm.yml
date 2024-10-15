@@ -27,8 +27,6 @@
   with_items:
     - regex: '^gtk_theme'
       line: 'gtk_theme=Adwaita-dark'
-    - regex: '^bg='
-      line: 'bg=/usr/share/backgrounds/default.png'
     - regex: '^lang'
       line: 'lang=0'
 
@@ -54,8 +52,13 @@
   ansible.builtin.lineinfile:
     path: /etc/lxdm/lxdm.conf
     insertafter: '\[display\]$'
-    regexp: '^transparent_pane='
-    line: transparent_pane=1
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+  with_items:
+    - regexp: '^transparent_pane='
+      line: transparent_pane=1
+    - regex: '^bg='
+      line: 'bg=/usr/share/backgrounds/default.png'
 
 # https://wiki.gentoo.org/wiki/LightDM
 - name: lxdm > openrc need pkg display-manager-init
