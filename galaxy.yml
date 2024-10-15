@@ -1,6 +1,6 @@
 namespace: szorfein
 name: desktop
-version: 1.44.0
+version: 1.44.1
 readme: README.md
 authors:
   - szorfein <szorfein@protonmail.com>
