@@ -14,28 +14,11 @@
     - ~/.config/vifm/scripts
     - ~/bin
 
-- name: vifm > downloading scripts from cirala/vifmimg
-  ansible.builtin.get_url:
-    url: '{{ item }}'
-    dest: '~/.config/vifm/scripts/{{ item | basename }}'
-    mode: 0700
-    use_netrc: false
-  with_items:
-    - https://raw.githubusercontent.com/cirala/vifmimg/master/vifmimg
-    - https://raw.githubusercontent.com/cirala/vifmimg/master/vifmrun
-
 - name: vifm > downloading and install epub-thumbnailer.py
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/marianosimone/epub-thumbnailer/master/src/epub-thumbnailer.py
     dest: ~/bin/epub-thumbnailer
     mode: 0700
-    use_netrc: false
-
-- name: vifm > downloading and install fontpreview
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/sdushantha/fontpreview/master/fontpreview
-    dest: ~/bin/fontpreview
-    mode: 0755
     use_netrc: false
 
 - name: vifm > install dots with stow
