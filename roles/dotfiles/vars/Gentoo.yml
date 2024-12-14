@@ -102,3 +102,4 @@ dotfiles_zsh_path: /bin/zsh
 dotfiles_zsh_pkg_items:
   - zsh
   - app-shells/starship
+  - net-misc/yt-dlp

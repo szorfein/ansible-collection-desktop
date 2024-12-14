@@ -114,3 +114,4 @@ dotfiles_zsh_path: /usr/bin/zsh
 dotfiles_zsh_pkg_items:
   - zsh
   - starship
+  - yt-dlp

@@ -14,13 +14,6 @@
     - ~/.config/vifm/scripts
     - ~/bin
 
-- name: vifm > downloading and install epub-thumbnailer.py
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/marianosimone/epub-thumbnailer/master/src/epub-thumbnailer.py
-    dest: ~/bin/epub-thumbnailer
-    mode: 0700
-    use_netrc: false
-
 - name: vifm > install dots with stow
   ansible.builtin.command: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_vifm_stow_dir }}'
   when: dotfiles_stow_dir is defined and dotfiles_vifm_stow_dir is defined
