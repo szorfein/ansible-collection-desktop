@@ -1,0 +1,26 @@
+---
+- name: awm > search previous theme
+  ansible.builtin.command: cat /tmp/awesome-theme
+  ignore_errors: true
+  register: previous_theme
+
+- name: awm > setting awm_theme to previous_theme
+  ansible.builtin.set_fact:
+    awm_theme: '{{ previous_theme.stdout | trim }}'
+  when: previous_theme is succeeded
+
+- name: awm > removing awm-m2 config file
+  ansible.builtin.file:
+    path: ~/.config/awesome/config/env.lua
+    state: absent
+
+- name: awm > removing awm-m2 theme {{ awm_theme }}
+  ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }}/{{ dotfiles_awm_m2_stow_dir_theme  }} -Dt ~/ {{ awm_theme }}'
+  when:
+    - dotfiles_stow_dir_theme is defined
+    - dotfiles_awm_m2_stow_dir_theme is defined
+    - awm_theme is defined
+
+- name: awm > remove awm-m2 files using stow
+  ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Dt ~/ {{ dotfiles_awm_m2_stow_dir }}'
+  when: dotfiles_stow_dir is defined and dotfiles_awm_m2_stow_dir is defined

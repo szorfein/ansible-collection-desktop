@@ -12,10 +12,10 @@
     awm_theme: '{{ previous_theme.stdout | trim }}'
   when: previous_theme is succeeded
 
-- name: awm-m3 > setting awm_theme with default {{ dotfiles_awm_default_theme }}
+- name: awm-m3 > setting awm_theme with default {{ dotfiles_awm_m3_default_theme }}
   ansible.builtin.set_fact:
-    awm_theme: '{{ dotfiles_awm_default_theme }}'
-  when: previous_theme is failed and dotfiles_awm_default_theme is defined
+    awm_theme: '{{ dotfiles_awm_m3_default_theme }}'
+  when: previous_theme is failed and dotfiles_awm_m3_default_theme is defined
 
 - name: awm-m3 > installing dependencies
   become: true

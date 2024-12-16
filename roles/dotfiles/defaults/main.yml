@@ -1,8 +1,4 @@
 ---
-# defaults file for dotfiles
-dotfiles_awm: false
-dotfiles_awm_m3: false
-
 dotfiles_cache_dir: ~/.cache/dotfiles
 
 dotfiles_emacs_doom: false
@@ -25,6 +21,9 @@ dotfiles_tmux: false
 dotfiles_vifm: false
 
 dotfiles_vim: false
+
+# Possible values: awm-m2, awm-m3, swayfx
+dotfiles_wm: ''
 
 dotfiles_xorg_keymap: 'en'
 

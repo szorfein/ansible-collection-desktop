@@ -86,6 +86,33 @@ dotfiles_neomutt_pkg_items:
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
 
+dotfiles_swayfx_conflict_pkg_items:
+  - sway
+  - sway-git
+  - scenefx-git
+  - eww-git
+
+dotfiles_swayfx_pkg_items:
+  - git
+  - meson
+  - scdoc
+  - wayland-protocols
+  - cairo
+  - gdk-pixbuf2
+  - libinput
+  - libevdev
+  - libxcb
+  - pango
+  - pcre2
+  - json-c
+  - wlroots0.17
+  - glslang
+  - ninja
+  - gtk-layer-shell
+  - gtk3
+  - libdbusmenu-gtk3
+  - swaybg
+
 dotfiles_vifm_pkg_items:
   - bat
   - ffmpegthumbnailer

@@ -1,0 +1,49 @@
+---
+- name: swayfx > removing conflicting packages...
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_swayfx_conflict_pkg_items }}'
+    state: absent
+  when: dotfiles_swayfx_conflict_pkg_items is defined
+
+- name: swayfx > installing dependencies...
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_swayfx_pkg_items }}'
+    state: latest
+  when: dotfiles_swayfx_pkg_items is defined and not ansible_os_family == 'Archlinux'
+
+- name: swayfx > importing gpg keys for eww..
+  ansible.builtin.shell: "{{ item }}"
+  with_items:
+    - 'curl -sS https://github.com/elkowar.gpg | gpg --import'
+    - 'curl -sS https://github.com/web-flow.gpg | gpg --import'
+  when: ansible_os_family == 'Archlinux'
+
+- name: swayfx > installing dependencies...
+  become: true
+  community.general.pacman:
+    name: '{{ dotfiles_swayfx_pkg_items }}'
+    state: present
+    update_cache: true
+  when: dotfiles_swayfx_pkg_items is defined and ansible_os_family == 'Archlinux'
+
+- name: swayfx > installing dependencies for Arch...
+  block:
+    - include_tasks: arch-aur.yml
+      loop:
+        - name: eww
+          deps: [base-devel, rust]
+
+        - name: scenefx
+          deps: [pixman, libglvnd, wayland]
+
+        - name: swayfx
+          deps: [libxkbcommon, systemd-libs]
+      loop_control:
+        loop_var: aur_item
+  when: ansible_os_family == 'Archlinux'
+
+- name: swayfx > installing dots using stow...
+  ansible.builtin.command: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_swayfx_stow_dir }}'
+  when: dotfiles_stow_dir is defined and dotfiles_swayfx_stow_dir is defined
