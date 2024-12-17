@@ -1,10 +1,17 @@
 ---
-- name: doom-emacs > removing conflict pkgs
+- name: doom-emacs > removing conflict pkgs for x11
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_emacs_conflict_pkg_items }}'
+    name: '{{ dotfiles_emacs_pkg_conflict_x11_items }}'
     state: absent
-  when: dotfiles_emacs_conflict_pkg_items is defined
+  when: dotfiles_emacs_pkg_conflict_x11_items is defined and dotfiles_wm == 'awm-m2' or dotfiles_wm == 'awm-m3'
+
+- name: doom-emacs > removing conflict pkgs for wayland
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_emacs_pkg_conflict_wayland_items }}'
+    state: absent
+  when: dotfiles_emacs_pkg_conflict_wayland_items is defined and dotfiles_wm == 'swayfx'
 
 - name: doom-emacs > installing dependencies
   become: true
@@ -12,6 +19,20 @@
     name: '{{ dotfiles_emacs_pkg_items }}'
     state: present
   when: dotfiles_emacs_pkg_items is defined
+
+- name: doom-emacs > installing dependencies for x11
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_emacs_pkg_x11 }}'
+    state: present
+  when: dotfiles_emacs_pkg_x11 is defined and dotfiles_wm == 'awm-m2' or dotfiles_wm == 'awm-m3'
+
+- name: doom-emacs > installing dependencies for wayland
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_emacs_pkg_wayland }}'
+    state: present
+  when: dotfiles_emacs_pkg_wayland is defined and dotfiles_wm == 'swayfx'
 
 - name: doom-emacs > clean older install
   ansible.builtin.file:

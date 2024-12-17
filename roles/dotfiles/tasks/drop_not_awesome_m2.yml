@@ -19,3 +19,4 @@
 - name: awm > removing awm3 config
   ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Dt ~/ {{ dotfiles_awm_m3_stow_dir }}'
   when: dotfiles_stow_dir is defined and dotfiles_awm_m3_stow_dir is defined
+

@@ -36,15 +36,25 @@ dotfiles_emacs_pkg_items:
   - ripgrep
   - jq
   - fd
-  - emacs-nativecomp
   - rubocop # ruby lint
   - shellcheck # shell lint
   - tidy # html lint
   - stylelint-config-recommended # css lint
   - luacheck # lua lint
 
-dotfiles_emacs_conflict_pkg_items:
+dotfiles_emacs_pkg_conflict_x11_items:
   - emacs
+  - emacs-wayland
+
+dotfiles_emacs_pkg_conflict_wayland_items:
+  - emacs-nativecomp
+  - emacs
+
+dotfiles_emacs_pkg_x11:
+  - emacs-nativecomp
+
+dotfiles_emacs_pkg_wayland:
+  - emacs-wayland
 
 # intel https://wiki.archlinux.org/title/Intel_graphics
 # https://wiki.archlinux.org/title/Hardware_video_acceleration
@@ -112,6 +122,7 @@ dotfiles_swayfx_pkg_items:
   - gtk3
   - libdbusmenu-gtk3
   - swaybg
+  - imv
 
 dotfiles_vifm_pkg_items:
   - bat
