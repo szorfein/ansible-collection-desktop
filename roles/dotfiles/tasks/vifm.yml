@@ -13,7 +13,3 @@
   with_items:
     - ~/.config/vifm/scripts
     - ~/bin
-
-- name: vifm > install dots with stow
-  ansible.builtin.command: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_vifm_stow_dir }}'
-  when: dotfiles_stow_dir is defined and dotfiles_vifm_stow_dir is defined

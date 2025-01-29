@@ -11,7 +11,3 @@
   ansible.builtin.package:
     name: '{{ dotfiles_vim_pkgname }}'
     state: present
-
-- name: vim > copy vim configs using stow
-  ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_vim_stow_dir }}'
-  when: dotfiles_stow_dir is defined and dotfiles_vim_stow_dir is defined

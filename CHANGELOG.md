@@ -1,3 +1,11 @@
++ Add Neovim
++ Add Wezterm
++ Add SwayFX
+
+## Dropped
+
+- Making or removing stow link with Ansible.
+
 1.44.0
 ======
 

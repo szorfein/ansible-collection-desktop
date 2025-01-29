@@ -14,6 +14,8 @@ dotfiles_mpd_music_dir: ~/musics
 
 dotfiles_neomutt: false
 
+dotfiles_neovim: false
+
 dotfiles_reaver_cache_dir: ~/.cache/reaver
 
 dotfiles_tmux: false
@@ -21,6 +23,8 @@ dotfiles_tmux: false
 dotfiles_vifm: false
 
 dotfiles_vim: false
+
+dotfiles_wezterm: false
 
 # Possible values: awm-m2, awm-m3, swayfx
 dotfiles_wm: ''

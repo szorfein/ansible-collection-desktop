@@ -86,6 +86,7 @@ dotfiles_swayfx_pkg_items:
   - light
   - net-misc/curl
   - papirus-icon-theme
+  - gnome-extra/nemo
   - inotify-tools
   - swaybg
   - imv

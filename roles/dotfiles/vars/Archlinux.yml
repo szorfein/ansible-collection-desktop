@@ -144,6 +144,7 @@ dotfiles_swayfx_pkg_items:
   - gtk3
   - gtk-layer-shell
   - iwd
+  - nemo
 
 dotfiles_vifm_pkg_items:
   - bat

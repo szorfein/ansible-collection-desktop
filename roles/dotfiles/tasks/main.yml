@@ -25,13 +25,6 @@
   ansible.builtin.set_fact:
     username: '{{ ansible_user_id }}'
 
-- name: installing stow
-  become: true
-  ansible.builtin.package:
-    name: stow
-    state: present
-  when: dotfiles_stow_dir is defined
-
 - include_tasks: zsh.yml
   when: dotfiles_zsh | bool
 
@@ -41,9 +34,6 @@
 
 # ##############################
 # Removing previous wm installed
-
-- include_tasks: drop_not_awesome_m2.yml
-  when: dotfiles_wm == "awm-m2"
 
 - include_tasks: drop_not_awesome_m3.yml
   when: dotfiles_wm == "awm-m3"
@@ -75,11 +65,17 @@
 - include_tasks: neomutt.yml
   when: dotfiles_neomutt | bool
 
+- include_tasks: neovim.yml
+  when: dotfiles_neovim | bool
+
 - include_tasks: tmux.yml
   when: dotfiles_tmux | bool
 
 - include_tasks: vifm.yml
   when: dotfiles_vifm | bool
+
+- include_tasks: wezterm.yml
+  when: dotfiles_wezterm | bool
 
 - include_tasks: xst.yml
   when: dotfiles_xst | bool

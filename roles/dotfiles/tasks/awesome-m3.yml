@@ -2,21 +2,6 @@
 - import_tasks: xorg.yml
 - import_tasks: betterlockscreen.yml
 
-- name: awm-m3 > search previous theme
-  ansible.builtin.command: cat /tmp/awm-m3
-  ignore_errors: true
-  register: previous_theme
-
-- name: awm-m3 > setting awm_theme to previous_theme
-  ansible.builtin.set_fact:
-    awm_theme: '{{ previous_theme.stdout | trim }}'
-  when: previous_theme is succeeded
-
-- name: awm-m3 > setting awm_theme with default {{ dotfiles_awm_m3_default_theme }}
-  ansible.builtin.set_fact:
-    awm_theme: '{{ dotfiles_awm_m3_default_theme }}'
-  when: previous_theme is failed and dotfiles_awm_m3_default_theme is defined
-
 - name: awm-m3 > installing dependencies
   become: true
   ansible.builtin.package:
@@ -30,25 +15,3 @@
   loop_control:
     loop_var: aur_item
   when: ansible_os_family == 'Archlinux'
-
-- name: awm-m3 > creating required directory
-  ansible.builtin.file:
-    path: ~/.config/awesome/theme
-    state: directory
-
-    #- name: awm > add config file
-    #ansible.builtin.template:
-    #src: awm-env-lua.j2
-    #dest: ~/.config/awesome/config/env.lua
-
-- name: awm-m3 > removing config for theme
-  ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }}/{{ dotfiles_awm_m3_stow_dir_theme }} -Dt ~/ {{ awm_theme }}'
-  when: dotfiles_stow_dir is defined and dotfiles_awm_m3_stow_dir_theme is defined and awm_theme is defined
-
-- name: awm-m3 > add config files using stow
-  ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_awm_m3_stow_dir }}'
-  when: dotfiles_stow_dir is defined and dotfiles_awm_m3_stow_dir is defined
-
-- name: awm-m3 > installing theme {{ awm_theme }}
-  ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }}/{{ dotfiles_awm_m3_stow_dir_theme }} -Rt ~/ {{ awm_theme }}'
-  when: dotfiles_stow_dir is defined and dotfiles_awm_m3_stow_dir_theme is defined and awm_theme is defined

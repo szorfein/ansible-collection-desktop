@@ -111,6 +111,7 @@ dotfiles_swayfx_pkg_items:
   - grim
   - wmenu
   - iwd
+  - nemo
 
 dotfiles_vifm_pkg_items:
   - bat

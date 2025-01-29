@@ -59,7 +59,3 @@
     name: '{{ username }}'
     groups: network
     append: yes
-
-- name: swayfx > installing dots using stow...
-  ansible.builtin.command: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_swayfx_stow_dir }}'
-  when: dotfiles_stow_dir is defined and dotfiles_swayfx_stow_dir is defined

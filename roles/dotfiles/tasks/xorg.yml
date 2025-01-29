@@ -30,10 +30,6 @@
     name: '{{ dotfiles_xorg_pkg_items }}'
     state: present
 
-- name: xorg > config files with stow
-  ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_xorg_stow_dir }}'
-  when: dotfiles_stow_dir is defined and dotfiles_xorg_stow_dir is defined
-
 - name: xorg > keymap
   become: true
   block:

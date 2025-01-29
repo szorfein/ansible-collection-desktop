@@ -16,12 +16,3 @@
   ansible.builtin.user:
     name: '{{ username }}'
     shell: '{{ dotfiles_zsh_path }}'
-
-- name: zsh > ensure files dont exist
-  ansible.builtin.file:
-    path: ~/.inputrc
-    state: absent
-
-- name: zsh > install dotfiles with stow
-  ansible.builtin.command: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_zsh_stow_dir }}'
-  when: dotfiles_stow_dir is defined and dotfiles_zsh_stow_dir is defined

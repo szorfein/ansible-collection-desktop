@@ -2,21 +2,6 @@
 - import_tasks: xorg.yml
 - import_tasks: betterlockscreen.yml
 
-- name: awm > search previous theme
-  ansible.builtin.command: cat /tmp/awesome-theme
-  ignore_errors: true
-  register: previous_theme
-
-- name: awm > setting awm_theme to previous_theme
-  ansible.builtin.set_fact:
-    awm_theme: '{{ previous_theme.stdout | trim }}'
-  when: previous_theme is succeeded
-
-- name: awm > setting awm_theme with default {{ dotfiles_awm_m2_default_theme }}
-  ansible.builtin.set_fact:
-    awm_theme: '{{ dotfiles_awm_m2_default_theme }}'
-  when: previous_theme is failed and dotfiles_awm_m2_default_theme is defined
-
 - name: awm > installing dependencies
   become: true
   ansible.builtin.package:
@@ -40,14 +25,3 @@
   ansible.builtin.template:
     src: awm-env-lua.j2
     dest: ~/.config/awesome/config/env.lua
-
-- name: awm > add config files using stow
-  ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_awm_m2_stow_dir }}'
-  when: dotfiles_stow_dir is defined and dotfiles_awm_stow_dir is defined
-
-- name: awm > installing theme {{ awm_theme }}
-  ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }}/{{ dotfiles_awm_m2_stow_dir_theme }} -Rt ~/ {{ awm_theme }}'
-  when:
-    - dotfiles_stow_dir is defined
-    - dotfiles_awm_m2_stow_dir_theme is defined
-    - awm_theme is defined
