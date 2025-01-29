@@ -72,8 +72,34 @@ dotfiles_neomutt_pkg_items:
   - neomutt
   - net-mail/isync
 
+dotfiles_neovim_pkg_items:
+  - neovim
+  - sys-apps/fd
+  - ripgrep
+  - fzf
+  - tmux
+
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
+
+dotfiles_swayfx_pkg_items:
+  - light
+  - net-misc/curl
+  - papirus-icon-theme
+  - inotify-tools
+  - swaybg
+  - imv
+  - app-misc/jq
+  - dev-lang/ruby
+  - playerctl
+  - wl-clipboard
+  - gui-apps/grim
+  - gui-apps/wmenu
+  - net-wireless/iwd
+  - gui-apps/eww
+  - gui-wm/swayfx
+  - mpv-mpris
+  - mpd-mpris
 
 dotfiles_xorg_pkg_items:
   - xorg-server

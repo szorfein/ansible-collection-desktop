@@ -81,8 +81,36 @@ dotfiles_neomutt_pkg_items:
   - neomutt
   - isync
 
+dotfiles_neovim_pkg_items:
+  - neovim
+  - fd
+  - fzf
+  - tmux
+  - ripgrep
+  - curl
+  #  - rg (grep in rust)
+
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
+
+dotfiles_swayfx_pkg_items:
+  - swayfx
+  - imv
+  - light
+  - jq
+  - wl-clipboard
+  - papirus-icon-theme
+  - inotify-tools
+  - curl
+  - playerctl
+  - mpv-mpris
+  - mpDris2
+  - eww
+  - ruby
+  - swaybg
+  - grim
+  - wmenu
+  - iwd
 
 dotfiles_vifm_pkg_items:
   - bat
@@ -99,6 +127,9 @@ dotfiles_vifm_pkg_items:
 
 dotfiles_vim_pkgname_conflict: vim
 dotfiles_vim_pkgname: vim-x11
+
+dotfiles_wezterm_pkg_items:
+  - wezterm
 
 dotfiles_xorg_pkg_items:
   - xorg-minimal

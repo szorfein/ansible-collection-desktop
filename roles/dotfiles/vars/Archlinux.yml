@@ -31,6 +31,10 @@ dotfiles_betterlockscreen_conflict_pkg_items:
   - i3lock
   - i3lock-color-git
 
+dotfiles_emacs_pkg_conflict_items:
+  - emacs
+  - emacs-wayland
+
 # https://www.flycheck.org/en/latest/languages.html#flycheck-languages
 dotfiles_emacs_pkg_items:
   - ripgrep
@@ -41,20 +45,7 @@ dotfiles_emacs_pkg_items:
   - tidy # html lint
   - stylelint-config-recommended # css lint
   - luacheck # lua lint
-
-dotfiles_emacs_pkg_conflict_x11_items:
-  - emacs
-  - emacs-wayland
-
-dotfiles_emacs_pkg_conflict_wayland_items:
   - emacs-nativecomp
-  - emacs
-
-dotfiles_emacs_pkg_x11:
-  - emacs-nativecomp
-
-dotfiles_emacs_pkg_wayland:
-  - emacs-wayland
 
 # intel https://wiki.archlinux.org/title/Intel_graphics
 # https://wiki.archlinux.org/title/Hardware_video_acceleration
@@ -93,6 +84,13 @@ dotfiles_neomutt_pkg_items:
   - neomutt
   - isync
 
+dotfiles_neovim_pkg_items:
+  - neovim
+  - fzf
+  - tmux
+  - fd
+  - ripgrep
+
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
 
@@ -103,26 +101,49 @@ dotfiles_swayfx_conflict_pkg_items:
   - eww-git
 
 dotfiles_swayfx_pkg_items:
+  - papirus-icon-theme
+  - inotify-tools
+  - imv
+  - jq
+  - wl-clipboard
+  - curl
+  - bc
+  - imagemagick
+  - rubygems
+  - grim
+  - swaybg
+  - wmenu
+  - playerctl
+  - mpd-mpris
+  - mpv-mpris
+  - rust
   - git
   - meson
   - scdoc
   - wayland-protocols
   - cairo
   - gdk-pixbuf2
-  - libinput
   - libevdev
-  - libxcb
-  - pango
-  - pcre2
+  - libinput
   - json-c
+  - libgudev
+  - wayland
+  - libxcb
+  - libxkbcommon
+  - pango
+  - pcre
   - wlroots0.17
+  - libdrm
+  - libglvnd
+  - pixman
   - glslang
+  - meson
   - ninja
-  - gtk-layer-shell
-  - gtk3
+  - cargo
   - libdbusmenu-gtk3
-  - swaybg
-  - imv
+  - gtk3
+  - gtk-layer-shell
+  - iwd
 
 dotfiles_vifm_pkg_items:
   - bat
@@ -139,6 +160,9 @@ dotfiles_vifm_pkg_items:
 
 dotfiles_vim_pkgname_conflict: vim
 dotfiles_vim_pkgname: gvim
+
+dotfiles_wezterm_pkg_items:
+  - wezterm
 
 dotfiles_xorg_pkg_items:
   - xorg-server

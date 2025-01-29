@@ -32,8 +32,11 @@
   block:
     - include_tasks: arch-aur.yml
       loop:
+        - name: light
+          deps: [base-devel]
+
         - name: eww
-          deps: [base-devel, rust]
+          deps: [rust]
 
         - name: scenefx
           deps: [pixman, libglvnd, wayland]
@@ -43,6 +46,19 @@
       loop_control:
         loop_var: aur_item
   when: ansible_os_family == 'Archlinux'
+
+- name: swayfx > installing few ruby gems
+  community.general.gem:
+    name: i3ipc
+    state: latest
+    user_install: true
+
+- name: swayfx > allowing user to interact with iwd
+  become: true
+  ansible.builtin.user:
+    name: '{{ username }}'
+    groups: network
+    append: yes
 
 - name: swayfx > installing dots using stow...
   ansible.builtin.command: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_swayfx_stow_dir }}'
