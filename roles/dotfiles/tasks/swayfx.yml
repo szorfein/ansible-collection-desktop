@@ -57,5 +57,16 @@
   become: true
   ansible.builtin.user:
     name: '{{ username }}'
-    groups: network
+    groups: '{{ item }}'
     append: yes
+  with_items: dotfiles_swayfx_add_to_group
+  when: dotfiles_swayfx_add_to_group is defined
+
+- name: swayfx > enabling services
+  become: true
+  ansible.builtin.service:
+    name: '{{ item }}'
+    state: started
+    enabled: yes
+  with_items: dotfiles_swayfx_services
+  when: dotfiles_swayfx_services is defined

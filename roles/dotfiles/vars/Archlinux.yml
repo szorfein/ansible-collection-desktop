@@ -145,6 +145,14 @@ dotfiles_swayfx_pkg_items:
   - gtk-layer-shell
   - iwd
   - nemo
+  - seatd
+
+dotfiles_swayfx_add_to_group:
+  - network
+  - seat
+
+dotfiles_swayfx_swayfx_services:
+  - seatd
 
 dotfiles_vifm_pkg_items:
   - bat

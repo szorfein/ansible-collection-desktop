@@ -52,7 +52,7 @@ dotfiles_gpu_intel_gen7_pkg_items:
 dotfiles_gpu_intel_pkg_items:
   - linux-firmware-intel
   - mesa-dri
-  - intel-media-driver
+  - intel-video-accel
   - vulkan-loader
   - mesa-vulkan-intel
 
@@ -88,6 +88,7 @@ dotfiles_neovim_pkg_items:
   - tmux
   - ripgrep
   - curl
+  - gcc
   #  - rg (grep in rust)
 
 dotfiles_pulseaudio_pkg_items:
@@ -112,6 +113,14 @@ dotfiles_swayfx_pkg_items:
   - wmenu
   - iwd
   - nemo
+  - seatd
+
+dotfiles_swayfx_add_to_group:
+  - network
+  - _seatd
+
+dotfiles_swayfx_services:
+  - seatd
 
 dotfiles_vifm_pkg_items:
   - bat
