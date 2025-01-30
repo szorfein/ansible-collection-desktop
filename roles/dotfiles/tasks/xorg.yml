@@ -1,11 +1,5 @@
 ---
-- import_tasks: gpu_intel.yml
-  become: true
-  when: dotfiles_gpu_driver == 'intel_gen7' or dotfiles_gpu_driver == 'intel'
-
-- import_tasks: gpu_nouveau.yml
-  become: true
-  when: dotfiles_gpu_driver == 'nouveau'
+- import_tasks: gpu.yml
 
 - name: xorg > insert global INPUT_DEVICES="libinput"
   become: true

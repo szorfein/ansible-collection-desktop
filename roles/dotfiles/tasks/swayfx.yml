@@ -1,4 +1,6 @@
 ---
+- import_tasks: gpu.yml
+
 - name: swayfx > removing conflicting packages...
   become: true
   ansible.builtin.package:
@@ -59,7 +61,7 @@
     name: '{{ username }}'
     groups: '{{ item }}'
     append: yes
-  with_items: dotfiles_swayfx_add_to_group
+  loop: '{{ dotfiles_swayfx_add_to_group }}'
   when: dotfiles_swayfx_add_to_group is defined
 
 - name: swayfx > enabling services
@@ -68,5 +70,5 @@
     name: '{{ item }}'
     state: started
     enabled: yes
-  with_items: dotfiles_swayfx_services
+  loop: '{{ dotfiles_swayfx_services }}'
   when: dotfiles_swayfx_services is defined

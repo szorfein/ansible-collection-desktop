@@ -114,6 +114,7 @@ dotfiles_swayfx_pkg_items:
   - iwd
   - nemo
   - seatd
+  - turnstile
 
 dotfiles_swayfx_add_to_group:
   - network
@@ -121,6 +122,7 @@ dotfiles_swayfx_add_to_group:
 
 dotfiles_swayfx_services:
   - seatd
+  - turnstiled
 
 dotfiles_vifm_pkg_items:
   - bat
