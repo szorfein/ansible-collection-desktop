@@ -86,12 +86,11 @@ dotfiles_swayfx_pkg_items:
   - light
   - net-misc/curl
   - papirus-icon-theme
-  - gnome-extra/nemo
+# - gnome-extra/nemo - disable temporary
   - inotify-tools
   - swaybg
   - imv
   - app-misc/jq
-  - dev-lang/ruby
   - playerctl
   - wl-clipboard
   - gui-apps/grim
@@ -101,6 +100,11 @@ dotfiles_swayfx_pkg_items:
   - gui-wm/swayfx
   - mpv-mpris
   - mpd-mpris
+  - acct-group/seat
+  - seatd
+
+dotfiles_swayfx_add_to_group:
+  - seat
 
 dotfiles_xorg_pkg_items:
   - xorg-server
@@ -122,6 +126,9 @@ dotfiles_vifm_pkg_items:
   - xdotool
 
 dotfiles_vim_pkgname: vim
+
+dotfiles_wezterm_pkg_items:
+  - wezterm
 
 dotfiles_xst_pkg: xst
 

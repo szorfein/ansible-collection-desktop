@@ -54,6 +54,14 @@
     name: i3ipc
     state: latest
     user_install: true
+  when: ansible_os_family != 'Gentoo'
+
+- name: swayfx > installing few ruby gems
+  community.general.gem:
+    name: i3ipc
+    state: latest
+    user_install: false
+  when: ansible_os_family == 'Gentoo'
 
 - name: swayfx > allowing user to interact with iwd
   become: true
