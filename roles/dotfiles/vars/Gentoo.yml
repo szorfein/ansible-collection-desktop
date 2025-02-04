@@ -42,6 +42,23 @@ dotfiles_emacs_pkg_items:
 # TODO 2023-12 dont compile with musl, try later (because ghc (haskell dep))
 #  - shellcheck
 
+dotfiles_file_browser_alsa_pkg_items:
+  - nnn
+  - xfce-base/thunar
+  - xfce-base/tumbler
+  - mpv
+  - poppler
+  - zathura-pdf-mupdf
+  - zathura
+
+dotfiles_file_browser_pulse_pkg_items:
+  - nnn
+  - gnome-extra/nemo
+  - mpv
+  - poppler
+  - zathura-pdf-mupdf
+  - zathura
+
 # https://wiki.gentoo.org/wiki/Intel_Graphics#VAAPI
 dotfiles_gpu_intel_gen7_pkg_items:
   - libva-intel-driver
@@ -89,6 +106,7 @@ dotfiles_swayfx_pkg_items:
 # - gnome-extra/nemo - disable temporary
   - inotify-tools
   - swaybg
+  - imagemagick
   - imv
   - app-misc/jq
   - playerctl
@@ -106,6 +124,9 @@ dotfiles_swayfx_pkg_items:
 dotfiles_swayfx_add_to_group:
   - seat
 
+dotfiles_swayfx_services:
+  - seatd
+
 dotfiles_xorg_pkg_items:
   - xorg-server
   - xinit
@@ -115,12 +136,7 @@ dotfiles_xorg_pkg_items:
 dotfiles_vifm_pkg_items:
   - bat
   - ffmpegthumbnailer
-  - imagemagick
-  - poppler
   - ueberzug
-  - mpv
-  - zathura-pdf-mupdf
-  - zathura
   - vifm
   - w3m
   - xdotool

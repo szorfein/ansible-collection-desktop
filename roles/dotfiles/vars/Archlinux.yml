@@ -47,6 +47,21 @@ dotfiles_emacs_pkg_items:
   - luacheck # lua lint
   - emacs-nativecomp
 
+dotfiles_file_browser_alsa_pkg_items:
+  - nnn
+  - thunar
+  - tumbler
+  - zathura-pdf-mupdf
+  - zathura
+  - mpv
+
+dotfiles_file_browser_pulse_pkg_items:
+  - nnn
+  - nemo
+  - zathura-pdf-mupdf
+  - zathura
+  - mpv
+
 # intel https://wiki.archlinux.org/title/Intel_graphics
 # https://wiki.archlinux.org/title/Hardware_video_acceleration
 dotfiles_gpu_intel_gen7_pkg_items:
@@ -144,25 +159,19 @@ dotfiles_swayfx_pkg_items:
   - gtk3
   - gtk-layer-shell
   - iwd
-  - nemo
   - seatd
 
 dotfiles_swayfx_add_to_group:
   - network
   - seat
 
-dotfiles_swayfx_swayfx_services:
+dotfiles_swayfx_services:
   - seatd
 
 dotfiles_vifm_pkg_items:
   - bat
   - ffmpegthumbnailer
-  - imagemagick
-  - poppler # pdftoppm
   - ueberzug
-  - zathura-pdf-mupdf
-  - zathura
-  - mpv
   - vifm
   - w3m
   - xdotool

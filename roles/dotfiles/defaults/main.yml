@@ -7,6 +7,8 @@ dotfiles_emacs_dir: ~/.config/emacs
 dotfiles_external: false
 dotfiles_external_font_dir: ~/.local/share/fonts
 
+dotfiles_files_browser: false
+
 dotfiles_gpu_driver: ''
 
 dotfiles_mpd: false
@@ -19,8 +21,6 @@ dotfiles_neovim: false
 dotfiles_reaver_cache_dir: ~/.cache/reaver
 
 dotfiles_tmux: false
-
-dotfiles_vifm: false
 
 dotfiles_vim: false
 

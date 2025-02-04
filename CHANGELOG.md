@@ -1,10 +1,12 @@
-+ Add Neovim
-+ Add Wezterm
-+ Add SwayFX
++ Add in role/dotfilesNeovim
++ Add in role/dotfiles: SwayFX
++ Add in role/dotfiles: Wezterm
++ Add in role/dotfiles: files-browser, install nnn, nemo or thunar.
 
 ## Dropped
 
 - Making or removing stow link with Ansible.
+- role/dotfiles: vifm
 
 1.44.0
 ======

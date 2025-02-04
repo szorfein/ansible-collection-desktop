@@ -1,10 +1,10 @@
-#{% if dotfiles_audio_backend == 'alsa' %}
-#USE="{{ dotfiles_audio_backend }} -pulseaudio ${USE}"
-#{% endif %}
+{% if dotfiles_audio_backend == 'alsa' %}
+#USE="${USE} alsa -pulseaudio"
+{% endif %}
 
-#{% if dotfiles_audio_backend == 'pulseaudio' %}
-#USE="{{ dotfiles_audio_backend }} ${USE}"
-#{% endif %}
+{% if dotfiles_audio_backend == 'pulseaudio' %}
+#USE="${USE} pulseaudio -alsa"
+{% endif %}
 
 #{% if dotfiles_wm == "awm-m2" or dotfiles_wm == "awm-m3" %}
 #USE="-wayland ${USE}"
@@ -23,3 +23,7 @@
 # https://nouveau.freedesktop.org/VideoAcceleration.html
 #USE="vaapi vdpau ${USE}"
 #{% endif %}
+
+{% if dotfiles_wm == 'swayfx' %}
+#USE="${USE} wayland -X"
+{% endif %}

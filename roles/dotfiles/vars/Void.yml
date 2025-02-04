@@ -42,6 +42,15 @@ dotfiles_emacs_pkg_items:
   - shellcheck
   - tidy5
 
+dotfiles_file_browser_alsa_pkg_items:
+  - nnn
+  - thunar
+  - tumbler
+
+dotfiles_file_browser_pulse_pkg_items:
+  - nnn
+  - nemo
+
 # https://docs.voidlinux.org/config/graphical-session/graphics-drivers/intel.html
 dotfiles_gpu_intel_gen7_pkg_items:
   - linux-firmware-intel

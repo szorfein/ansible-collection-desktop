@@ -71,8 +71,8 @@
 - include_tasks: tmux.yml
   when: dotfiles_tmux | bool
 
-- include_tasks: vifm.yml
-  when: dotfiles_vifm | bool
+- include_tasks: files-browser.yml
+  when: dotfiles_files_browser | bool
 
 - include_tasks: wezterm.yml
   when: dotfiles_wezterm | bool

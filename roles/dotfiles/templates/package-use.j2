@@ -25,6 +25,7 @@ media-plugins/alsa-plugins pulseaudio
 
 {% if ansible_service_mgr == 'openrc' %}
 sys-auth/pambase elogind
+#sys-apps/dbus elogind
 {% endif %}
 
 {% if dotfiles_emacs_doom %}
@@ -54,6 +55,8 @@ x11-libs/gtk+ -X wayland
 media-libs/mesa -X wayland
 media-libs/libglvnd X
 media-gfx/imv -X wayland
+# If sys-auth/seatd is used, the server USE flag is required.
+sys-auth/seatd server
 # can't set a wallpaper in jpg without this
 gui-apps/swaybg gdk-pixbuf
 # TODO install nemo (this will install a lot of deps)
