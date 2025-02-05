@@ -21,11 +21,10 @@ media-libs/libglvnd X
 media-libs/libpulse X
 media-plugins/alsa-plugins pulseaudio
 {% endif %}
-{% endif %}
 
 {% if ansible_service_mgr == 'openrc' %}
 sys-auth/pambase elogind
-#sys-apps/dbus elogind
+{% endif %}
 {% endif %}
 
 {% if dotfiles_emacs_doom %}
@@ -38,6 +37,37 @@ sys-auth/pambase elogind
 {% if dotfiles_mpd %}
 # MPD
 dev-libs/boost icu
+{% endif %}
+
+{% if dotfiles_files_browser %}
+x11-libs/gtk+ X
+app-crypt/gcr gtk
+{% if dotfiles_audio_backend == 'pulseaudio' %}
+# Nemo
+# depend of pulseaudio / cinnamon
+dev-libs/glib dbus
+x11-libs/xapp introspection
+media-plugins/alsa-plugins pulseaudio
+{% if ansible_service_mgr == 'openrc' %}
+sys-apps/accountsservice elogind
+media-sound/pulseaudio-daemon elogind alsa -X
+{% elif ansible_service_mgr == 'systemd' %}
+sys-apps/accountsservice systemd
+media-sound/pulseaudio-daemon systemd alsa -X
+{% endif %}
+
+{% elif dotfiles_audio_backend == 'alsa' %}
+# Thunar
+{% if dotfiles_wm == 'awm-m2' or dotfiles_wm == 'awm-m3' %}
+xfce-base/libxfce4ui X
+xfce-base/xfce4-panel X
+xfce-base/libxfce4windowing X
+{% else %}
+# Swayfx
+xfce-base/libxfce4ui wayland
+xfce-base/xfce4-panel wayland
+xfce-base/libxfce4windowing wayland
+{% endif %}
 {% endif %}
 
 #{% if dotfiles_neomutt %}

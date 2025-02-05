@@ -123,6 +123,7 @@ dotfiles_swayfx_pkg_items:
 
 dotfiles_swayfx_add_to_group:
   - seat
+  - video
 
 dotfiles_swayfx_services:
   - seatd
