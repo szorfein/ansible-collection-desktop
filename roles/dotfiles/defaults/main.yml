@@ -1,8 +1,4 @@
 ---
-# defaults file for dotfiles
-dotfiles_awm: false
-dotfiles_awm_m3: false
-
 dotfiles_cache_dir: ~/.cache/dotfiles
 
 dotfiles_emacs_doom: false
@@ -11,6 +7,8 @@ dotfiles_emacs_dir: ~/.config/emacs
 dotfiles_external: false
 dotfiles_external_font_dir: ~/.local/share/fonts
 
+dotfiles_files_browser: false
+
 dotfiles_gpu_driver: ''
 
 dotfiles_mpd: false
@@ -18,13 +16,18 @@ dotfiles_mpd_music_dir: ~/musics
 
 dotfiles_neomutt: false
 
+dotfiles_neovim: false
+
 dotfiles_reaver_cache_dir: ~/.cache/reaver
 
 dotfiles_tmux: false
 
-dotfiles_vifm: false
-
 dotfiles_vim: false
+
+dotfiles_wezterm: false
+
+# Possible values: awm-m2, awm-m3, swayfx
+dotfiles_wm: ''
 
 dotfiles_xorg_keymap: 'en'
 

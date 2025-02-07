@@ -25,13 +25,6 @@
   ansible.builtin.set_fact:
     username: '{{ ansible_user_id }}'
 
-- name: installing stow
-  become: true
-  ansible.builtin.package:
-    name: stow
-    state: present
-  when: dotfiles_stow_dir is defined
-
 - include_tasks: zsh.yml
   when: dotfiles_zsh | bool
 
@@ -39,14 +32,26 @@
 - include_tasks: vim.yml
   when: dotfiles_vim | bool
 
-- include_tasks: awesome.yml
-  when: dotfiles_awm | bool
+# ##############################
+# Removing previous wm installed
 
-- include_tasks: drop_awesome.yml
-  when: not dotfiles_awm | bool
+- include_tasks: drop_not_awesome_m3.yml
+  when: dotfiles_wm == "awm-m3"
+
+- include_tasks: drop_not_swayfx.yml
+  when: dotfiles_wm == "swayfx"
+
+# End Removing previous wm installed
+# ##################################
+
+- include_tasks: awesome-m2.yml
+  when: dotfiles_wm == "awm-m2"
 
 - include_tasks: awesome-m3.yml
-  when: dotfiles_awm_m3 | bool
+  when: dotfiles_wm == "awm-m3"
+
+- include_tasks: swayfx.yml
+  when: dotfiles_wm == "swayfx"
 
 - include_tasks: emacs-doom.yml
   when: dotfiles_emacs_doom | bool
@@ -60,11 +65,17 @@
 - include_tasks: neomutt.yml
   when: dotfiles_neomutt | bool
 
+- include_tasks: neovim.yml
+  when: dotfiles_neovim | bool
+
 - include_tasks: tmux.yml
   when: dotfiles_tmux | bool
 
-- include_tasks: vifm.yml
-  when: dotfiles_vifm | bool
+- include_tasks: files-browser.yml
+  when: dotfiles_files_browser | bool
+
+- include_tasks: wezterm.yml
+  when: dotfiles_wezterm | bool
 
 - include_tasks: xst.yml
   when: dotfiles_xst | bool

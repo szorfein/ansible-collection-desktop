@@ -1,25 +1,29 @@
 {% if dotfiles_audio_backend == 'alsa' %}
-USE="{{ dotfiles_audio_backend }} -pulseaudio ${USE}"
+#USE="${USE} alsa -pulseaudio"
 {% endif %}
 
 {% if dotfiles_audio_backend == 'pulseaudio' %}
-USE="{{ dotfiles_audio_backend }} ${USE}"
+#USE="${USE} pulseaudio -alsa"
 {% endif %}
 
-{% if dotfiles_awm %}
-USE="-wayland ${USE}"
-{% endif %}
+#{% if dotfiles_wm == "awm-m2" or dotfiles_wm == "awm-m3" %}
+#USE="-wayland ${USE}"
+#{% endif %}
 
-{% if dotfiles_gpu_driver == 'intel_gen7' %}
-USE="opengl vaapi ${USE}"
-{% endif %}
+#{% if dotfiles_gpu_driver == 'intel_gen7' %}
+#USE="opengl vaapi ${USE}"
+#{% endif %}
 
-{% if dotfiles_gpu_driver == 'intel' %}
-USE="opengl vaapi vulkan ${USE}"
-{% endif %}
+#{% if dotfiles_gpu_driver == 'intel' %}
+#USE="opengl vaapi vulkan ${USE}"
+#{% endif %}
 
-{% if dotfiles_gpu_driver == 'nouveau' %}
+#{% if dotfiles_gpu_driver == 'nouveau' %}
 # https://wiki.archlinux.org/title/Hardware_video_acceleration#1.2_NVIDIA
 # https://nouveau.freedesktop.org/VideoAcceleration.html
-USE="vaapi vdpau ${USE}"
+#USE="vaapi vdpau ${USE}"
+#{% endif %}
+
+{% if dotfiles_wm == 'swayfx' %}
+#USE="${USE} wayland -X"
 {% endif %}

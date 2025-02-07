@@ -1,0 +1,5 @@
+---
+- name: awm > removing awm-m2 config file
+  ansible.builtin.file:
+    path: ~/.config/awesome/config/env.lua
+    state: absent

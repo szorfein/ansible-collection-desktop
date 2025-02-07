@@ -42,6 +42,23 @@ dotfiles_emacs_pkg_items:
 # TODO 2023-12 dont compile with musl, try later (because ghc (haskell dep))
 #  - shellcheck
 
+dotfiles_file_browser_alsa_pkg_items:
+  - nnn
+  - xfce-base/thunar
+  - xfce-base/tumbler
+  - mpv
+  - poppler
+  - zathura-pdf-mupdf
+  - zathura
+
+dotfiles_file_browser_pulse_pkg_items:
+  - nnn
+  - gnome-extra/nemo
+  - mpv
+  - poppler
+  - zathura-pdf-mupdf
+  - zathura
+
 # https://wiki.gentoo.org/wiki/Intel_Graphics#VAAPI
 dotfiles_gpu_intel_gen7_pkg_items:
   - libva-intel-driver
@@ -72,8 +89,44 @@ dotfiles_neomutt_pkg_items:
   - neomutt
   - net-mail/isync
 
+dotfiles_neovim_pkg_items:
+  - neovim
+  - sys-apps/fd
+  - ripgrep
+  - fzf
+  - tmux
+
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
+
+dotfiles_swayfx_pkg_items:
+  - light
+  - net-misc/curl
+  - papirus-icon-theme
+# - gnome-extra/nemo - disable temporary
+  - inotify-tools
+  - swaybg
+  - imagemagick
+  - imv
+  - app-misc/jq
+  - playerctl
+  - wl-clipboard
+  - gui-apps/grim
+  - gui-apps/wmenu
+  - net-wireless/iwd
+  - gui-apps/eww
+  - gui-wm/swayfx
+  - mpv-mpris
+  - mpd-mpris
+  - acct-group/seat
+  - seatd
+
+dotfiles_swayfx_add_to_group:
+  - seat
+  - video
+
+dotfiles_swayfx_services:
+  - seatd
 
 dotfiles_xorg_pkg_items:
   - xorg-server
@@ -84,17 +137,15 @@ dotfiles_xorg_pkg_items:
 dotfiles_vifm_pkg_items:
   - bat
   - ffmpegthumbnailer
-  - imagemagick
-  - poppler
   - ueberzug
-  - mpv
-  - zathura-pdf-mupdf
-  - zathura
   - vifm
   - w3m
   - xdotool
 
 dotfiles_vim_pkgname: vim
+
+dotfiles_wezterm_pkg_items:
+  - wezterm
 
 dotfiles_xst_pkg: xst
 

@@ -1,0 +1,82 @@
+---
+- import_tasks: gpu.yml
+
+- name: swayfx > removing conflicting packages...
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_swayfx_conflict_pkg_items }}'
+    state: absent
+  when: dotfiles_swayfx_conflict_pkg_items is defined
+
+- name: swayfx > installing dependencies...
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_swayfx_pkg_items }}'
+    state: latest
+  when: dotfiles_swayfx_pkg_items is defined and not ansible_os_family == 'Archlinux'
+
+- name: swayfx > importing gpg keys for eww..
+  ansible.builtin.shell: "{{ item }}"
+  with_items:
+    - 'curl -sS https://github.com/elkowar.gpg | gpg --import'
+    - 'curl -sS https://github.com/web-flow.gpg | gpg --import'
+  when: ansible_os_family == 'Archlinux'
+
+- name: swayfx > installing dependencies...
+  become: true
+  community.general.pacman:
+    name: '{{ dotfiles_swayfx_pkg_items }}'
+    state: present
+    update_cache: true
+  when: dotfiles_swayfx_pkg_items is defined and ansible_os_family == 'Archlinux'
+
+- name: swayfx > installing dependencies for Arch...
+  block:
+    - include_tasks: arch-aur.yml
+      loop:
+        - name: light
+          deps: [base-devel]
+
+        - name: eww
+          deps: [rust]
+
+        - name: scenefx
+          deps: [pixman, libglvnd, wayland]
+
+        - name: swayfx
+          deps: [libxkbcommon, systemd-libs]
+      loop_control:
+        loop_var: aur_item
+  when: ansible_os_family == 'Archlinux'
+
+- name: swayfx > installing few ruby gems
+  community.general.gem:
+    name: i3ipc
+    state: latest
+    user_install: true
+  when: ansible_os_family != 'Gentoo'
+
+- name: swayfx > installing few ruby gems
+  community.general.gem:
+    name: i3ipc
+    state: latest
+    user_install: false
+  when: ansible_os_family == 'Gentoo'
+
+- name: swayfx > allowing user to interact with iwd
+  become: true
+  ansible.builtin.user:
+    name: '{{ username }}'
+    groups: '{{ item }}'
+    append: yes
+  loop: '{{ dotfiles_swayfx_add_to_group }}'
+  when: dotfiles_swayfx_add_to_group is defined
+
+- name: swayfx > enabling services
+  become: true
+  ansible.builtin.service:
+    name: '{{ item }}'
+    state: started
+    enabled: yes
+  loop: '{{ dotfiles_swayfx_services }}'
+  when: dotfiles_swayfx_services is defined

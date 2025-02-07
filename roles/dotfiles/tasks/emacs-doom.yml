@@ -1,10 +1,10 @@
 ---
-- name: doom-emacs > removing conflict pkgs
+- name: doom-emacs > removing conflicting packages
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_emacs_conflict_pkg_items }}'
+    name: '{{ dotfiles_emacs_pkg_conflict_items }}'
     state: absent
-  when: dotfiles_emacs_conflict_pkg_items is defined
+  when: dotfiles_emacs_pkg_conflict_items is defined
 
 - name: doom-emacs > installing dependencies
   become: true

@@ -12,10 +12,6 @@
     name: '{{ dotfiles_alsa_pkg_items }}'
     state: present
 
-- name: alsa > config files with stow
-  ansible.builtin.shell: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_audio_alsa_stow_dir }}'
-  when: dotfiles_stow_dir is defined and dotfiles_audio_alsa_stow_dir is defined
-
 - name: alsa > search card name
   ansible.builtin.shell: cat /proc/asound/card*/id | head -1
   register: audio_card
@@ -26,15 +22,3 @@
   ansible.builtin.set_fact:
     alsa_card: '{{ audio_card.stdout }}'
   when: audio_card.stdout != ''
-
-- name: alsa > default config
-  ansible.builtin.template:
-    src: asoundrc.j2
-    dest: ~/.asoundrc
-  when: dotfiles_audio_stow_dir is not defined
-
-
-    # TODO: Look /var/lib/alsa/asound.state if exist before
-    #- name: alsa > initialize all devices
-  #  become: true
-    #  ansible.builtin.command: alsactl init

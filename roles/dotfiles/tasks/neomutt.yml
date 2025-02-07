@@ -30,10 +30,6 @@
     - div2
   when: dotfiles_neomutt_mail_dir is defined
 
-- name: neomutt > config files with Stow
-  ansible.builtin.command: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_neomutt_stow_dir }}'
-  when: dotfiles_stow_dir is defined and dotfiles_neomutt_stow_dir is defined
-
 - name: neomutt > installing systemd service user
   ansible.builtin.template:
     src: '{{ item.src }}'
