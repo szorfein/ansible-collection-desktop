@@ -39,6 +39,19 @@ dotfiles_emacs_pkg_items:
   - tidy
   - lua-check
 
+dottfiles_file_browser_alsa_pkg_items:
+  - nnn
+  - thunar
+  - tumbler
+  - zathura
+  - mpv
+
+dottfiles_file_browser_pulse_pkg_items:
+  - nnn
+  - nemo
+  - zathura
+  - mpv
+
 # https://wiki.debian.org/GraphicsCard#Intel
 dotfiles_gpu_intel_gen7_pkg_items:
   - i965-va-driver
@@ -74,14 +87,44 @@ dotfiles_neomutt_pkg_items:
 dotfiles_pulseaudio_pkg_item:
   - pulseaudio
 
+# https://github.com/WillPower3309/swayfx/blob/master/INSTALL-deb.md
+dotfiles_swayfx_pkg_items:
+  - papirus-icon-theme
+  - swaybg
+  - jq
+  - curl
+  - bc
+  - imagemagick
+  - grim
+  - wmenu
+  - playerctl
+  - mpdris2
+  - mpv-mpris
+  - wl-clipboard
+  - imv
+  - light
+  - rust-all
+  - inotify-tools
+  - meson
+  - wayland-protocols
+  - wayland
+  - libpcre2-dev
+  - libjson-c-dev
+  - libpango-1.0-0
+  - libcairo2-dev
+  - wget
+
+dotfiles_swayfx_add_to_group:
+  - seatd
+
+dotfiles_swayfx_services:
+  - seatd
+
 dotfiles_vifm_pkg_items:
   - bat
   - ffmpegthumbnailer
-  - imagemagick
   - poppler-utils # pdftoppm
   - ueberzug
-  - mpv
-  - zathura
   - vifm
   - w3m
   - xdotool
@@ -99,3 +142,4 @@ dotfiles_zsh_path: /bin/zsh
 dotfiles_zsh_pkg_items:
   - zsh
   - cargo
+  - yt-dlp

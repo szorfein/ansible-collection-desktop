@@ -53,6 +53,15 @@
     - dm_sddm_theme.name != ''
     - dm_sddm_backgrounds | length > 0
 
+# from: https://github.com/WillPower3309/swayfx/tree/master/assets
+- name: sddm > adding swayfx logo
+  become: true
+  ansible.builtin.copy:
+    src: swayfx_logo.svg
+    dest: '{{ dm_sddm_theme_dir }}/delicious/icons/delicate/SwayFX.svg'
+    mode: '0664'
+  when: dm_sddm_theme.name == "delicious"
+
 - name: sddm > applying config
   become: true
   ansible.builtin.template:

@@ -17,7 +17,6 @@ galaxy_info:
     - name: Void Linux
 
   galaxy_tags:
-    - stow
     - dotfiles
     - desktop
 

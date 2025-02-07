@@ -1,0 +1,27 @@
+---
+- import_tasks: xorg.yml
+- import_tasks: betterlockscreen.yml
+
+- name: awm > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: '{{ dotfiles_awm_pkg_items }}'
+    state: present
+
+- include_tasks: arch-aur.yml
+  loop:
+    - name: light
+      deps: [base-devel]
+  loop_control:
+    loop_var: aur_item
+  when: ansible_os_family == 'Archlinux'
+
+- name: awm > creating required directory
+  ansible.builtin.file:
+    path: ~/.config/awesome/config
+    state: directory
+
+- name: awm > add config file
+  ansible.builtin.template:
+    src: awm-env-lua.j2
+    dest: ~/.config/awesome/config/env.lua

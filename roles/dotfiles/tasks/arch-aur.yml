@@ -36,7 +36,7 @@
     paths:
       - '{{ dotfiles_cache_dir }}/build/{{ aur_item.name }}'
     patterns:
-      - '{{ aur_item.name }}*.pkg.tar.zst'
+      - '{{ aur_item.name }}-[0-9]*.pkg.tar.zst'
     file_type: file
   register: aur_pkg
   when: aur_src.changed

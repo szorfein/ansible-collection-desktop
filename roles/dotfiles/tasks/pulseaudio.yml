@@ -13,7 +13,3 @@
     name: '{{ dotfiles_pulseaudio_pkg_items }}'
     state: present
   when: dotfiles_pulseaudio_pkg_items | length > 0
-
-- name: pulseaudio > installing dots with stow
-  ansible.builtin.command: 'stow -d {{ dotfiles_stow_dir }} -Rt ~/ {{ dotfiles_audio_pulseaudio_stow_dir }}'
-  when: dotfiles_stow_dir is defined and dotfiles_audio_pulseaudio_stow_dir is defined

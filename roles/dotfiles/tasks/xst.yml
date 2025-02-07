@@ -33,6 +33,7 @@
   when: ansible_os_family == 'Archlinux'
 
 - name: nuke build destination
+  become: true
   ansible.builtin.file:
     path: '{{ dotfiles_cache_dir }}/build'
     state: absent

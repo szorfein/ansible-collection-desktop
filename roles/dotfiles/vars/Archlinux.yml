@@ -31,20 +31,36 @@ dotfiles_betterlockscreen_conflict_pkg_items:
   - i3lock
   - i3lock-color-git
 
+dotfiles_emacs_pkg_conflict_items:
+  - emacs
+  - emacs-wayland
+
 # https://www.flycheck.org/en/latest/languages.html#flycheck-languages
 dotfiles_emacs_pkg_items:
   - ripgrep
   - jq
   - fd
-  - emacs-nativecomp
   - rubocop # ruby lint
   - shellcheck # shell lint
   - tidy # html lint
   - stylelint-config-recommended # css lint
   - luacheck # lua lint
+  - emacs-nativecomp
 
-dotfiles_emacs_conflict_pkg_items:
-  - emacs
+dotfiles_file_browser_alsa_pkg_items:
+  - nnn
+  - thunar
+  - tumbler
+  - zathura-pdf-mupdf
+  - zathura
+  - mpv
+
+dotfiles_file_browser_pulse_pkg_items:
+  - nnn
+  - nemo
+  - zathura-pdf-mupdf
+  - zathura
+  - mpv
 
 # intel https://wiki.archlinux.org/title/Intel_graphics
 # https://wiki.archlinux.org/title/Hardware_video_acceleration
@@ -83,24 +99,88 @@ dotfiles_neomutt_pkg_items:
   - neomutt
   - isync
 
+dotfiles_neovim_pkg_items:
+  - neovim
+  - fzf
+  - tmux
+  - fd
+  - ripgrep
+
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
+
+dotfiles_swayfx_conflict_pkg_items:
+  - sway
+  - sway-git
+  - scenefx-git
+  - eww-git
+
+dotfiles_swayfx_pkg_items:
+  - papirus-icon-theme
+  - inotify-tools
+  - imv
+  - jq
+  - wl-clipboard
+  - curl
+  - bc
+  - imagemagick
+  - rubygems
+  - grim
+  - swaybg
+  - wmenu
+  - playerctl
+  - mpd-mpris
+  - mpv-mpris
+  - rust
+  - git
+  - meson
+  - scdoc
+  - wayland-protocols
+  - cairo
+  - gdk-pixbuf2
+  - libevdev
+  - libinput
+  - json-c
+  - libgudev
+  - wayland
+  - libxcb
+  - libxkbcommon
+  - pango
+  - pcre
+  - wlroots0.17
+  - libdrm
+  - libglvnd
+  - pixman
+  - glslang
+  - meson
+  - ninja
+  - cargo
+  - libdbusmenu-gtk3
+  - gtk3
+  - gtk-layer-shell
+  - iwd
+  - seatd
+
+dotfiles_swayfx_add_to_group:
+  - network
+  - seat
+
+dotfiles_swayfx_services:
+  - seatd
 
 dotfiles_vifm_pkg_items:
   - bat
   - ffmpegthumbnailer
-  - imagemagick
-  - poppler # pdftoppm
   - ueberzug
-  - zathura-pdf-mupdf
-  - zathura
-  - mpv
   - vifm
   - w3m
   - xdotool
 
 dotfiles_vim_pkgname_conflict: vim
 dotfiles_vim_pkgname: gvim
+
+dotfiles_wezterm_pkg_items:
+  - wezterm
 
 dotfiles_xorg_pkg_items:
   - xorg-server
@@ -113,3 +193,4 @@ dotfiles_zsh_pkgname: zsh
 dotfiles_zsh_pkg_items:
   - zsh
   - starship
+  - yt-dlp
