@@ -1,10 +1,19 @@
 ---
-
 - include_tasks: arch-aur.yml
   loop:
     - name: librewolf-bin
-      deps: [gtk3, libxt, startup-notification, mime-types, dbus-glib,
-              nss, ttf-font, libpulse, ffmpeg]
+      deps:
+        [
+          gtk3,
+          libxt,
+          startup-notification,
+          mime-types,
+          dbus-glib,
+          nss,
+          ttf-font,
+          libpulse,
+          ffmpeg,
+        ]
       gpg_key: 031F7104E932F7BD7416E7F6D2845E1305D6E801
       gpg_server: hkp://keyserver.ubuntu.com:80
   loop_control:
@@ -40,33 +49,24 @@
       ansible.builtin.command: emaint -r librewolf sync
   when: ansible_os_family == 'Gentoo'
 
-- name: librewolf > installing flatpack
+- name: librewolf > for Void
   become: true
-  ansible.builtin.package:
-    name: flatpak
-    state: present
-  when: ansible_os_family == 'Void'
-
-- name: librewolf > setup flatpak
   block:
-    - name: add the Flathub repository
-      ansible.builtin.command: flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-    - name: installing librewolf
-      ansible.builtin.command: flatpak install --user -y flathub io.gitlab.librewolf-community
-
-    - name: add a script to launch librewolf
+    - name: LibreWolf Repo
       ansible.builtin.copy:
-        dest: ~/bin/librewolf
-        mode: 0700
-        content: |
-          #!/usr/bin/env sh
-          flatpak run io.gitlab.librewolf-community &
+        src: 20-librewolf.conf
+        dest: /etc/xbps.d/20-librewolf.conf
+
+    - name: Add key
+      ansible.builtin.lineinfile:
+        path: /var/db/xbps/keys
+        regexp: "^3d:b9:c0:50:41"
+        line: "3d:b9:c0:50:41:a7:68:4c:2e:2c:a9:a2:5a:04:b7:3f.plist"
   when: ansible_os_family == 'Void'
 
 - name: librewolf > installing dependencies
   become: true
   ansible.builtin.package:
-    name: '{{ web_browser_librewolf_pkg }}'
+    name: "{{ web_browser_librewolf_pkg }}"
     state: present
   when: web_browser_librewolf_pkg is defined

@@ -43,7 +43,7 @@ dotfiles_emacs_pkg_items:
   - tidy5
 
 dotfiles_files_browser_alsa_pkg_items:
-  - thunar
+  - Thunar
   - tumbler
 
 dotfiles_files_browser_pulse_pkg_items:
