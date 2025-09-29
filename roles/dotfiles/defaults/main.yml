@@ -9,7 +9,7 @@ dotfiles_external_font_dir: ~/.local/share/fonts
 
 dotfiles_files_browser: false
 
-dotfiles_gpu_driver: ''
+dotfiles_gpu_driver: ""
 
 dotfiles_mpd: false
 dotfiles_mpd_music_dir: ~/musics
@@ -22,14 +22,12 @@ dotfiles_reaver_cache_dir: ~/.cache/reaver
 
 dotfiles_tmux: false
 
-dotfiles_vim: false
-
 dotfiles_wezterm: false
 
 # Possible values: awm-m2, awm-m3, swayfx
-dotfiles_wm: ''
+dotfiles_wm: ""
 
-dotfiles_xorg_keymap: 'en'
+dotfiles_xorg_keymap: "en"
 
 dotfiles_xst: false
 dotfiles_xst_version: 0.8.5 # https://github.com/gnotclub/xst/blob/master/config.mk
