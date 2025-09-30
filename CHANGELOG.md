@@ -1,8 +1,16 @@
-# 1.55.0 - Sep 29 2025
+# 1.55.0 - Oct. 2025
 
 ## Dotfiles
 
 Remove vim and vifm.
+
+### Archlinux
+
+- Intel gen7 use mesa-amber instead of mesa package.
+
+### Gentoo
+
+- Correct package.use/dotfiles -- lack one `{% endif %}` in jinja template
 
 ### Voidlinux
 

@@ -2,7 +2,7 @@
 - name: gentoo > portage dir
   become: true
   ansible.builtin.file:
-    path: '/etc/portage/{{ item }}'
+    path: "/etc/portage/{{ item }}"
     state: directory
   with_items:
     - package.accept_keywords
@@ -30,15 +30,15 @@
   become: true
   ansible.builtin.blockinfile:
     block: "{{ lookup('ansible.builtin.template', 'global.j2') }}"
-    marker: '# {mark} Configured with Ansible'
+    marker: "# {mark} Configured with Ansible"
     path: /etc/portage/make.conf
   notify: emerge changed use
 
 - name: gentoo > /etc/portage
   become: true
   ansible.builtin.template:
-    src: '{{ item.src }}'
-    dest: '{{ item.dest }}'
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
     owner: root
     group: root
     mode: 0644

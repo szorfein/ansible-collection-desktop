@@ -55,7 +55,6 @@ media-sound/pulseaudio-daemon elogind alsa -X
 sys-apps/accountsservice systemd
 media-sound/pulseaudio-daemon systemd alsa -X
 {% endif %}
-
 {% elif dotfiles_audio_backend == 'alsa' %}
 # Thunar
 {% if dotfiles_wm == 'awm-m2' or dotfiles_wm == 'awm-m3' %}
@@ -67,6 +66,7 @@ xfce-base/libxfce4windowing X
 xfce-base/libxfce4ui wayland
 xfce-base/xfce4-panel wayland
 xfce-base/libxfce4windowing wayland
+{% endif %}
 {% endif %}
 {% endif %}
 
@@ -92,9 +92,9 @@ gui-apps/swaybg gdk-pixbuf
 # TODO install nemo (this will install a lot of deps)
 {% endif %}
 
-{% if dotfiles_vim %}
-# Vim
-app-editors/vim X
+{% if dotfiles_neovim %}
+# Neovim
+#app-editors/vim X
 {% endif %}
 
 {% if dotfiles_wezterm %}

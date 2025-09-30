@@ -49,19 +49,19 @@
       ansible.builtin.command: emaint -r librewolf sync
   when: ansible_os_family == 'Gentoo'
 
+# https://github.com/index-0/librewolf-void/tree/master
 - name: librewolf > for Void
   become: true
   block:
-    - name: LibreWolf Repo
+    - name: Adding LibreWolf Repo...
       ansible.builtin.copy:
         src: 20-librewolf.conf
         dest: /etc/xbps.d/20-librewolf.conf
 
-    - name: Add key
+    - name: Adding public key...
       ansible.builtin.lineinfile:
-        path: /var/db/xbps/keys
-        regexp: "^3d:b9:c0:50:41"
-        line: "3d:b9:c0:50:41:a7:68:4c:2e:2c:a9:a2:5a:04:b7:3f.plist"
+        src: "8f:d6:6b:76:ff:3c:31:95:60:2d:34:6e:83:29:89:13.plist"
+        path: /var/db/xbps/keys/
   when: ansible_os_family == 'Void'
 
 - name: librewolf > installing dependencies
