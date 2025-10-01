@@ -59,13 +59,17 @@ dotfiles_files_browser_conflict_pkg_items:
 
 dotfiles_files_browser_pkg_items:
   - mpv
-  - nnn
+  - app-misc/nnn
   - poppler
   - zathura
   - zathura-pdf-mupdf
 
+dotfiles_gpu_intel_gen7_conflict_pkg_items:
+  - media-libs/mesa
+
 # https://wiki.gentoo.org/wiki/Intel_Graphics#VAAPI
 dotfiles_gpu_intel_gen7_pkg_items:
+  - media-libs/mesa-amber
   - libva-intel-driver
 
 dotfiles_gpu_intel_pkg_items:

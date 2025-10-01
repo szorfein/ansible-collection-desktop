@@ -81,25 +81,32 @@ xfce-base/libxfce4windowing wayland
 gui-apps/eww wayland
 dev-libs/libdbusmenu gtk3
 x11-libs/gdk-pixbuf jpeg
-x11-libs/gtk+ -X wayland
-media-libs/mesa -X wayland
+x11-libs/gtk+ wayland
 media-libs/libglvnd X
 media-gfx/imv -X wayland
 # If sys-auth/seatd is used, the server USE flag is required.
 sys-auth/seatd server
 # can't set a wallpaper in jpg without this
 gui-apps/swaybg gdk-pixbuf
+media-libs/vulkan-loader -X wayland
+media-video/mpv -X wayland
+
+# intel gen7 and lower
+media-libs/mesa -X wayland
+media-libs/mesa-amber -X wayland
 # TODO install nemo (this will install a lot of deps)
 {% endif %}
 
 {% if dotfiles_neovim %}
-# Neovim
-#app-editors/vim X
+# Neovim (nothing look needed...)
 {% endif %}
 
 {% if dotfiles_wezterm %}
 # Wezterm
+{% if dotfiles_wm == 'swayfx' %}
+x11-terms/wezterm wayland
+{% else %}
+{% endif %}
 x11-libs/cairo X
 x11-libs/libxkbcommon X wayland
-x11-terms/wezterm wayland
 {% endif %}

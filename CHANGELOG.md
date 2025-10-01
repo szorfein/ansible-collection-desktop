@@ -2,7 +2,7 @@
 
 ## Dotfiles
 
-Remove vim and vifm.
+Remove vim and vifm globally.
 
 ### Archlinux
 
@@ -11,6 +11,7 @@ Remove vim and vifm.
 ### Gentoo
 
 - Correct package.use/dotfiles -- lack one `{% endif %}` in jinja template
+- Intel gen7 use media-libs/mesa-amber instead of mesa package.
 
 ### Voidlinux
 
