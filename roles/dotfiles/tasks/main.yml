@@ -5,14 +5,14 @@
   vars:
     params:
       files:
-        - '{{ ansible_os_family }}.yml'
+        - "{{ ansible_os_family }}.yml"
         - main.yml
       paths:
-        - 'vars'
+        - "vars"
 
 - name: creating cache dir
   ansible.builtin.file:
-    path: '{{ dotfiles_cache_dir }}'
+    path: "{{ dotfiles_cache_dir }}"
     state: directory
 
 - import_tasks: debian.yml
@@ -23,14 +23,10 @@
 
 - name: setting fact username = {{ ansible_user_id }}
   ansible.builtin.set_fact:
-    username: '{{ ansible_user_id }}'
+    username: "{{ ansible_user_id }}"
 
 - include_tasks: zsh.yml
   when: dotfiles_zsh | bool
-
-# vim should run before awesome if used
-- include_tasks: vim.yml
-  when: dotfiles_vim | bool
 
 # ##############################
 # Removing previous wm installed

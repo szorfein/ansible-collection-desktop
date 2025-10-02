@@ -47,25 +47,33 @@ dotfiles_emacs_pkg_items:
   - luacheck # lua lint
   - emacs-nativecomp
 
-dotfiles_file_browser_alsa_pkg_items:
-  - nnn
+dotfiles_files_browser_alsa_pkg_items:
   - thunar
-  - tumbler
-  - zathura-pdf-mupdf
-  - zathura
-  - mpv
+  - tumbler # display image in thunar
 
-dotfiles_file_browser_pulse_pkg_items:
-  - nnn
+dotfiles_files_browser_pulse_pkg_items:
   - nemo
-  - zathura-pdf-mupdf
-  - zathura
+
+dotfiles_files_browser_conflict_pkg_items:
+  - bat
+  - ffmpegthumbnailer
+  - ueberzug
+  - vifm
+  - w3m
+
+dotfiles_files_browser_pkg_items:
   - mpv
+  - nnn
+  - zathura
+  - zathura-pdf-mupdf
+
+dotfiles_gpu_intel_gen7_conflict_pkg_items:
+  - mesa
 
 # intel https://wiki.archlinux.org/title/Intel_graphics
 # https://wiki.archlinux.org/title/Hardware_video_acceleration
 dotfiles_gpu_intel_gen7_pkg_items:
-  - mesa
+  - mesa-amber
   - libva-intel-driver
 
 # Intel gen8 and more
@@ -99,12 +107,19 @@ dotfiles_neomutt_pkg_items:
   - neomutt
   - isync
 
+dotfiles_neovim_conflict_pkg_items:
+  - vim
+  - gvim
+
 dotfiles_neovim_pkg_items:
   - neovim
   - fzf
   - tmux
   - fd
   - ripgrep
+  - prettier
+  - rubocop
+  - stylua
 
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
@@ -167,17 +182,6 @@ dotfiles_swayfx_add_to_group:
 
 dotfiles_swayfx_services:
   - seatd
-
-dotfiles_vifm_pkg_items:
-  - bat
-  - ffmpegthumbnailer
-  - ueberzug
-  - vifm
-  - w3m
-  - xdotool
-
-dotfiles_vim_pkgname_conflict: vim
-dotfiles_vim_pkgname: gvim
 
 dotfiles_wezterm_pkg_items:
   - wezterm
