@@ -2,7 +2,11 @@
 
 ## Dotfiles
 
-Remove vim and vifm globally.
+Trying globally to:
+
+- Remove vim and vifm.
+- Use mesa-amber when possible
+- Remove dependencie to flatpak because https://flatkill.org/
 
 ### Archlinux
 
@@ -12,6 +16,7 @@ Remove vim and vifm globally.
 
 - Correct package.use/dotfiles -- lack one `{% endif %}` in jinja template
 - Intel gen7 use media-libs/mesa-amber instead of media-libs/mesa package.
+- Correct use flag on librewolf-bin and other packages.
 
 ### Voidlinux
 
