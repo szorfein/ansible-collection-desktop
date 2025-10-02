@@ -42,14 +42,24 @@ dotfiles_emacs_pkg_items:
   - shellcheck
   - tidy5
 
-dotfiles_file_browser_alsa_pkg_items:
-  - nnn
-  - thunar
+dotfiles_files_browser_alsa_pkg_items:
+  - Thunar
   - tumbler
 
-dotfiles_file_browser_pulse_pkg_items:
-  - nnn
+dotfiles_files_browser_pulse_pkg_items:
   - nemo
+
+dotfiles_files_browser_conflict_pkg_items:
+  - ueberzug
+  - vifm
+  - w3m
+
+dotfiles_files_browser_pkg_items:
+  - mpv
+  - nnn
+  - poppler
+  - zathura
+  - zathura-pdf-mupdf
 
 # https://docs.voidlinux.org/config/graphical-session/graphics-drivers/intel.html
 dotfiles_gpu_intel_gen7_pkg_items:
@@ -90,6 +100,11 @@ dotfiles_neomutt_pkg_items:
   - neomutt
   - isync
 
+dotfiles_neovim_conflict_pkg_items:
+  - vim
+  - gvim
+  - vim-x11
+
 dotfiles_neovim_pkg_items:
   - neovim
   - fd
@@ -98,7 +113,8 @@ dotfiles_neovim_pkg_items:
   - ripgrep
   - curl
   - gcc
-  #  - rg (grep in rust)
+  - StyLua
+  #  - rg (grep in rust - not available yet)
 
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
@@ -132,22 +148,6 @@ dotfiles_swayfx_add_to_group:
 dotfiles_swayfx_services:
   - seatd
   - turnstiled
-
-dotfiles_vifm_pkg_items:
-  - bat
-  - ffmpegthumbnailer
-  - ImageMagick
-  - poppler
-  - ueberzug
-  - zathura-pdf-mupdf
-  - zathura
-  - mpv
-  - vifm
-  - w3m
-  - xdotool
-
-dotfiles_vim_pkgname_conflict: vim
-dotfiles_vim_pkgname: vim-x11
 
 dotfiles_wezterm_pkg_items:
   - wezterm

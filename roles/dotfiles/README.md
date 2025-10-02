@@ -1,15 +1,12 @@
-dotfiles
-========
+# dotfiles
 
-A role to install dotfiles on your user home, original create to install [my own dotfiles](https://github.com/szorfein/dotfiles), it should be enought modular (with Stow) to other users.  
+A role to install dotfiles on your user home, original create to install [my own dotfiles](https://github.com/szorfein/dotfiles), it should be enought modular (with Stow) to other users.
 
-Requirements
-------------
+## Requirements
 
 Ansible >=2.10
 
-Role Variables
---------------
+## Role Variables
 
 - `dotfiles_audio_backend`
   - Default: `undefined`
@@ -48,15 +45,11 @@ Role Variables
 - `dotfiles_neomutt_mail_dir`
   - Default: `undefined`
   - Description: Directory for mails.
+- `dotfiles_neovim`
+  - Default: `false`
 - `dotfiles_tmux`
   - Default: `false`
   - Description: Install tmux.
-- `dotfiles_vifm`
-  - Default: `false`
-  - Description: Install [vifm](https://github.com/vifm/vifm) with [vifmimg](https://github.com/cirala/vifmimg) and his dependencies.
-- `dotfiles_vim`
-  - Default: `false`
-  - Description: Install and configure vim (not neovim).
 - `dotfiles_xorg_keymap`
   - Default: `en`
   - Description: Keymap used in Xorg, apply on the `Option "XkbLayout" "{{ dotfiles_xorg_keymap }}"`.
@@ -67,13 +60,11 @@ Role Variables
   - Default: `false`
   - Description: Use zsh as default shell.
 
-Dependencies
-------------
+## Dependencies
 
 A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
-Example Playbook
-----------------
+## Example Playbook
 
     - hosts: desktop
       collections:
@@ -81,10 +72,7 @@ Example Playbook
       roles:
          - dotfiles
       vars:
-        dotfiles_vim: true
-        dotfiles_vim_plugin_git_items:
-          - airblade/vim-gitgutter
-          - Yggdroot/indentLine
+        dotfiles_neovim: true
 
 You can show a complete example at
 https://github.com/szorfein/dots/blob/ansible/ansible/group_vars/desktop.yml.tmpl

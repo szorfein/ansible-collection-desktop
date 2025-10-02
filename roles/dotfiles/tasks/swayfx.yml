@@ -4,28 +4,28 @@
 - name: swayfx > removing conflicting packages...
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_swayfx_conflict_pkg_items }}'
+    name: "{{ dotfiles_swayfx_conflict_pkg_items }}"
     state: absent
   when: dotfiles_swayfx_conflict_pkg_items is defined
 
 - name: swayfx > installing dependencies...
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_swayfx_pkg_items }}'
+    name: "{{ dotfiles_swayfx_pkg_items }}"
     state: latest
   when: dotfiles_swayfx_pkg_items is defined and not ansible_os_family == 'Archlinux'
 
 - name: swayfx > importing gpg keys for eww..
   ansible.builtin.shell: "{{ item }}"
   with_items:
-    - 'curl -sS https://github.com/elkowar.gpg | gpg --import'
-    - 'curl -sS https://github.com/web-flow.gpg | gpg --import'
+    - "curl -sS https://github.com/elkowar.gpg | gpg --import"
+    - "curl -sS https://github.com/web-flow.gpg | gpg --import"
   when: ansible_os_family == 'Archlinux'
 
 - name: swayfx > installing dependencies...
   become: true
   community.general.pacman:
-    name: '{{ dotfiles_swayfx_pkg_items }}'
+    name: "{{ dotfiles_swayfx_pkg_items }}"
     state: present
     update_cache: true
   when: dotfiles_swayfx_pkg_items is defined and ansible_os_family == 'Archlinux'
@@ -66,17 +66,17 @@
 - name: swayfx > allowing user to interact with iwd
   become: true
   ansible.builtin.user:
-    name: '{{ username }}'
-    groups: '{{ item }}'
+    name: "{{ username }}"
+    groups: "{{ item }}"
     append: yes
-  loop: '{{ dotfiles_swayfx_add_to_group }}'
+  loop: "{{ dotfiles_swayfx_add_to_group }}"
   when: dotfiles_swayfx_add_to_group is defined
 
 - name: swayfx > enabling services
   become: true
   ansible.builtin.service:
-    name: '{{ item }}'
+    name: "{{ item }}"
     state: started
     enabled: yes
-  loop: '{{ dotfiles_swayfx_services }}'
+  loop: "{{ dotfiles_swayfx_services }}"
   when: dotfiles_swayfx_services is defined

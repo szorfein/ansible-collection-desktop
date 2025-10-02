@@ -2,14 +2,20 @@
 - name: gpu_intel > apply VIDEO_CARDS="intel"
   ansible.builtin.lineinfile:
     path: /etc/portage/make.conf
-    regexp: '^VIDEO_CARDS='
+    regexp: "^VIDEO_CARDS="
     line: 'VIDEO_CARDS="intel"'
   notify: emerge changed use
   when: ansible_os_family == 'Gentoo'
 
+- name: gpu_intel > removing drivers for intel gen7
+  ansible.builtin.package:
+    name: "{{ dotfiles_gpu_intel_gen7_conflict_pkg_items }}"
+    state: absent
+  when: dotfiles_gpu_driver == 'intel_gen7' and dotfiles_gpu_intel_gen7_conflict_pkg_items is defined
+
 - name: gpu_intel > installing drivers for intel gen7
   ansible.builtin.package:
-    name: '{{ dotfiles_gpu_intel_gen7_pkg_items }}'
+    name: "{{ dotfiles_gpu_intel_gen7_pkg_items }}"
     state: present
   when: dotfiles_gpu_driver == 'intel_gen7'
 
@@ -23,6 +29,6 @@
 
 - name: gpu_intel > installing drivers for intel gen8+
   ansible.builtin.package:
-    name: '{{ dotfiles_gpu_intel_pkg_items }}'
+    name: "{{ dotfiles_gpu_intel_pkg_items }}"
     state: present
   when: dotfiles_gpu_driver == 'intel'

@@ -1,4 +1,7 @@
 ---
+dotfiles_audio_backend: ""
+dotfiles_wm: ""
+
 # defaults file for web_browser
 web_browser_cache_dir: ~/.cache/web-browser
 web_browser_brave: false

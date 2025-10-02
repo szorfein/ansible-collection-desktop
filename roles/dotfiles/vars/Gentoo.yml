@@ -42,25 +42,34 @@ dotfiles_emacs_pkg_items:
 # TODO 2023-12 dont compile with musl, try later (because ghc (haskell dep))
 #  - shellcheck
 
-dotfiles_file_browser_alsa_pkg_items:
-  - nnn
+dotfiles_files_browser_alsa_pkg_items:
   - xfce-base/thunar
   - xfce-base/tumbler
-  - mpv
-  - poppler
-  - zathura-pdf-mupdf
-  - zathura
 
-dotfiles_file_browser_pulse_pkg_items:
-  - nnn
+dotfiles_files_browser_pulse_pkg_items:
   - gnome-extra/nemo
+
+dotfiles_files_browser_conflict_pkg_items:
+  - bat
+  - ffmpegthumbnailer
+  - ueberzug
+  - vifm
+  - w3m
+  - xdotool
+
+dotfiles_files_browser_pkg_items:
   - mpv
+  - app-misc/nnn
   - poppler
-  - zathura-pdf-mupdf
   - zathura
+  - zathura-pdf-mupdf
+
+dotfiles_gpu_intel_gen7_conflict_pkg_items:
+  - media-libs/mesa
 
 # https://wiki.gentoo.org/wiki/Intel_Graphics#VAAPI
 dotfiles_gpu_intel_gen7_pkg_items:
+  - media-libs/mesa-amber
   - libva-intel-driver
 
 dotfiles_gpu_intel_pkg_items:
@@ -89,6 +98,9 @@ dotfiles_neomutt_pkg_items:
   - neomutt
   - net-mail/isync
 
+dotfiles_neovim_conflict_pkg_items:
+  - vim
+
 dotfiles_neovim_pkg_items:
   - neovim
   - sys-apps/fd
@@ -103,7 +115,7 @@ dotfiles_swayfx_pkg_items:
   - light
   - net-misc/curl
   - papirus-icon-theme
-# - gnome-extra/nemo - disable temporary
+  # - gnome-extra/nemo - disable temporary
   - inotify-tools
   - swaybg
   - imagemagick
@@ -133,16 +145,6 @@ dotfiles_xorg_pkg_items:
   - xinit
   - x11-misc/xclip
   - xf86-input-libinput
-
-dotfiles_vifm_pkg_items:
-  - bat
-  - ffmpegthumbnailer
-  - ueberzug
-  - vifm
-  - w3m
-  - xdotool
-
-dotfiles_vim_pkgname: vim
 
 dotfiles_wezterm_pkg_items:
   - wezterm
