@@ -11,13 +11,14 @@ Remove vim and vifm globally.
 ### Gentoo
 
 - Correct package.use/dotfiles -- lack one `{% endif %}` in jinja template
-- Intel gen7 use media-libs/mesa-amber instead of mesa package.
+- Intel gen7 use media-libs/mesa-amber instead of media-libs/mesa package.
 
 ### Voidlinux
 
 - Update package name 'Thunar' instead of 'thunar' (yep...)
 - Update the install of Librewolf (used flatpack before), thanks https://github.com/index-0/librewolf-void
 - Add StyLua to Neovim - Rubocop and Prettier not yet available.
+- mesa-amber is not yet available [#48519](https://github.com/void-linux/void-packages/issues/48519)
 
 # 1.50.0
 

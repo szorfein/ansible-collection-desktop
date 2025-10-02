@@ -57,6 +57,7 @@ media-sound/pulseaudio-daemon systemd alsa -X
 {% endif %}
 {% elif dotfiles_audio_backend == 'alsa' %}
 # Thunar
+dev-python/pycairo X
 {% if dotfiles_wm == 'awm-m2' or dotfiles_wm == 'awm-m3' %}
 xfce-base/libxfce4ui X
 xfce-base/xfce4-panel X
@@ -92,8 +93,8 @@ media-libs/vulkan-loader -X wayland
 media-video/mpv -X wayland
 
 # intel gen7 and lower
-media-libs/mesa -X wayland
-media-libs/mesa-amber -X wayland
+media-libs/mesa wayland
+media-libs/mesa-amber wayland
 # TODO install nemo (this will install a lot of deps)
 {% endif %}
 
