@@ -59,9 +59,9 @@
         dest: /etc/xbps.d/20-librewolf.conf
 
     - name: Adding public key...
-      ansible.builtin.lineinfile:
-        src: "8f:d6:6b:76:ff:3c:31:95:60:2d:34:6e:83:29:89:13.plist"
-        path: /var/db/xbps/keys/
+      ansible.builtin.copy:
+        src: key-void-librewolf.plist
+        dest: "/var/db/xbps/keys/8f:d6:6b:76:ff:3c:31:95:60:2d:34:6e:83:29:89:13.plist"
   when: ansible_os_family == 'Void'
 
 - name: librewolf > installing dependencies
