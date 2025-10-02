@@ -1,11 +1,25 @@
 {% if dm_use == 'sddm' %}
-dev-qt/qtbase opengl
 dev-qt/qtdeclarative opengl
 dev-qt/qttools opengl
 dev-qt/qtquick3d opengl
 dev-qt/qtmultimedia gstreamer qml opengl widgets
 sys-libs/zlib minizip
 media-libs/openal qt5
+{% if dotfiles_wm == 'swayfx' %}
+{% if ansible_service_mgr == 'systemd' %}
+x11-misc/sddm -X
+{% else %}
+x11-misc/sddm -X elogind
+{% endif %}
+dev-qt/qtbase -X opengl wayland
+{% elif dotfiles_wm == 'awm-m2' or dotfiles_wm == 'awm-m3' %}
+dev-qt/qtbase opengl X
+{% if ansible_service_mgr == 'systemd' %}
+x11-misc/sddm X
+{% else %}
+x11-misc/sddm X elogind
+{% endif %}
+{% endif %}
 {% endif %}
 
 {% if dm_use == 'lightdm' %}
