@@ -1,4 +1,9 @@
 ---
+# https://aur.archlinux.org/packages/librewolf-bin
+- name: swayfx > importing gpg keys for librewolf..
+  ansible.builtin.shell: gpg --recv-keys 8A74EAAF89C17944
+  when: ansible_os_family == 'Archlinux'
+
 - include_tasks: arch-aur.yml
   loop:
     - name: librewolf-bin
