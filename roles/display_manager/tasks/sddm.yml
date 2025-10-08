@@ -2,7 +2,7 @@
 - name: sddm > remove conflicting packages
   become: true
   ansible.builtin.package:
-    name: '{{ display_manager_sddm_conflict_items }}'
+    name: "{{ display_manager_sddm_conflict_items }}"
     state: absent
   when: display_manager_sddm_conflict_items is defined
 
@@ -13,13 +13,13 @@
     dest: /etc/portage/package.mask/sddm
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
   when: ansible_os_family == 'Gentoo'
 
 - name: sddm > installing dependencies
   become: true
   ansible.builtin.package:
-    name: '{{ display_manager_sddm_pkg_items }}'
+    name: "{{ display_manager_sddm_pkg_items }}"
     state: present
   notify:
     - remove display-manager link
@@ -28,27 +28,34 @@
 - name: sddm > creating required directory
   become: true
   ansible.builtin.file:
-    path: '{{ item }}'
+    path: "{{ item }}"
     state: directory
   with_items:
-    - '{{ dm_sddm_theme_dir }}/{{ dm_sddm_theme.name }}'
-    - '{{ dm_sddm_config_dir }}'
+    - "{{ dm_sddm_theme_dir }}/{{ dm_sddm_theme.name }}"
+    - "{{ dm_sddm_config_dir }}"
   when: dm_sddm_theme.name != ''
+
+- name: sddm > fixing permission error
+  become: true
+  ansible.builtin.file:
+    path: /usr/share/wayland-sessions
+    state: directory
+    mode: "0755"
 
 - name: sddm > uncompressing themes
   become: true
   ansible.builtin.unarchive:
-    src: '{{ dm_reaver_dir }}/{{ dm_sddm_theme.archive }}'
-    dest: '{{ dm_sddm_theme_dir }}/{{ dm_sddm_theme.name }}'
+    src: "{{ dm_reaver_dir }}/{{ dm_sddm_theme.archive }}"
+    dest: "{{ dm_sddm_theme_dir }}/{{ dm_sddm_theme.name }}"
     extra_opts: [--strip-components=1]
   when: dm_sddm_theme.name != '' and dm_sddm_theme.archive != ''
 
 - name: sddm > uncompressing backgrounds
   become: true
   ansible.builtin.unarchive:
-    src: '{{ dm_reaver_dir }}/{{ item }}'
-    dest: '{{ dm_sddm_theme_dir }}/{{ dm_sddm_theme.name }}/{{ dm_sddm_theme.background_dir }}'
-  with_items: '{{ dm_sddm_backgrounds }}'
+    src: "{{ dm_reaver_dir }}/{{ item }}"
+    dest: "{{ dm_sddm_theme_dir }}/{{ dm_sddm_theme.name }}/{{ dm_sddm_theme.background_dir }}"
+  with_items: "{{ dm_sddm_backgrounds }}"
   when:
     - dm_sddm_theme.name != ''
     - dm_sddm_backgrounds | length > 0
@@ -58,24 +65,24 @@
   become: true
   ansible.builtin.copy:
     src: swayfx_logo.svg
-    dest: '{{ dm_sddm_theme_dir }}/delicious/icons/delicate/SwayFX.svg'
-    mode: '0664'
+    dest: "{{ dm_sddm_theme_dir }}/delicious/icons/delicate/sway.svg"
+    mode: "0664"
   when: dm_sddm_theme.name == "delicious"
 
 - name: sddm > applying config
   become: true
   ansible.builtin.template:
     src: sddm-config.j2
-    dest: '{{ dm_sddm_config_dir }}/desktop.conf'
+    dest: "{{ dm_sddm_config_dir }}/desktop.conf"
   when: dm_sddm_theme.name != ''
 
 - name: sddm > customize theme {{ dm_sddm_theme.name }}
   become: true
   ansible.builtin.lineinfile:
-    path: '{{ dm_sddm_theme_dir }}/{{ dm_sddm_theme.name }}/theme.conf'
-    regexp: '{{ item.regexp }}'
-    line: '{{ item.line }}'
-  with_items: '{{ dm_sddm_theme_customize }}'
+    path: "{{ dm_sddm_theme_dir }}/{{ dm_sddm_theme.name }}/theme.conf"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items: "{{ dm_sddm_theme_customize }}"
   when:
     - dm_sddm_theme_customize | length > 0
     - dm_sddm_theme.name != ''
@@ -97,7 +104,7 @@
     dest: /etc/conf.d/display-manager
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
   when:
     - ansible_service_mgr == 'openrc'
     - ansible_os_family == 'Gentoo'

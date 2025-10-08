@@ -1,4 +1,4 @@
-# 1.55.0 - Oct. 2025
+# 1.55.2 - Oct. 2025
 
 ## Dotfiles
 
@@ -6,11 +6,14 @@ Trying globally to:
 
 - Remove vim and vifm.
 - Use mesa-amber when possible
+- Add dunst for sway
 - Remove dependencie to flatpak because https://flatkill.org/
 
 ### Archlinux
 
 - Intel gen7 use mesa-amber instead of mesa package.
+- Swayfx use scenefx0.4 from AUR
+- Reaver download AUR snapshots now instead of using Ansible modules before executing playbook...
 
 ### Gentoo
 

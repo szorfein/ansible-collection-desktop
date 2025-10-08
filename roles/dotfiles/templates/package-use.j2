@@ -40,7 +40,6 @@ dev-libs/boost icu
 {% endif %}
 
 {% if dotfiles_files_browser %}
-x11-libs/gtk+ X
 app-crypt/gcr gtk
 {% if dotfiles_audio_backend == 'pulseaudio' %}
 # Nemo
@@ -56,9 +55,10 @@ sys-apps/accountsservice systemd
 media-sound/pulseaudio-daemon systemd alsa -X
 {% endif %}
 {% elif dotfiles_audio_backend == 'alsa' %}
+{% if dotfiles_wm == 'awm-m2' or dotfiles_wm == 'awm-m3' %}
 # Thunar
 dev-python/pycairo X
-{% if dotfiles_wm == 'awm-m2' or dotfiles_wm == 'awm-m3' %}
+x11-libs/gtk+ X
 xfce-base/libxfce4ui X
 xfce-base/xfce4-panel X
 xfce-base/libxfce4windowing X
@@ -79,22 +79,26 @@ xfce-base/libxfce4windowing wayland
 
 {% if dotfiles_wm == 'swayfx' %}
 # SwayFX
-gui-apps/eww wayland
+#gui-apps/eww wayland
 dev-libs/libdbusmenu gtk3
 x11-libs/gdk-pixbuf jpeg
-x11-libs/gtk+ wayland
-media-libs/libglvnd X
-media-gfx/imv -X wayland
+#x11-libs/gtk+ wayland
+#media-libs/libglvnd X
+#media-gfx/imv -X wayland
 # If sys-auth/seatd is used, the server USE flag is required.
 sys-auth/seatd server
 # can't set a wallpaper in jpg without this
 gui-apps/swaybg gdk-pixbuf
-media-libs/vulkan-loader -X wayland
-media-video/mpv -X wayland
+#media-libs/vulkan-loader -X wayland
+#media-video/mpv -X wayland
+
+# dunst 
+app-text/xmlto text
+x11-misc/dunst dunstify
 
 # intel gen7 and lower
-media-libs/mesa wayland
-media-libs/mesa-amber wayland
+#media-libs/mesa wayland
+#media-libs/mesa-amber wayland
 # TODO install nemo (this will install a lot of deps)
 {% endif %}
 
