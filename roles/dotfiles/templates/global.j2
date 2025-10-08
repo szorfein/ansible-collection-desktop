@@ -1,14 +1,14 @@
 {% if dotfiles_audio_backend == 'alsa' %}
-#USE="${USE} alsa -pulseaudio"
+USE="${USE} alsa -pulseaudio"
 {% endif %}
 
 {% if dotfiles_audio_backend == 'pulseaudio' %}
-#USE="${USE} pulseaudio -alsa"
+USE="${USE} pulseaudio -alsa"
 {% endif %}
 
-#{% if dotfiles_wm == "awm-m2" or dotfiles_wm == "awm-m3" %}
-#USE="-wayland ${USE}"
-#{% endif %}
+{% if dotfiles_wm == "awm-m2" or dotfiles_wm == "awm-m3" %}
+USE="${USE} -wayland"
+{% endif %}
 
 #{% if dotfiles_gpu_driver == 'intel_gen7' %}
 #USE="opengl vaapi ${USE}"
@@ -25,5 +25,5 @@
 #{% endif %}
 
 {% if dotfiles_wm == 'swayfx' %}
-#USE="${USE} wayland -X"
+USE="${USE} wayland -X"
 {% endif %}

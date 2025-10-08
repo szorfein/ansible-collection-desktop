@@ -1,5 +1,4 @@
 ---
-
 - include_tasks: arch-aur.yml
   loop:
     - name: brave-bin
@@ -38,7 +37,7 @@
       ansible.builtin.command: emaint -r brave-overlay sync
   when: ansible_os_family == 'Gentoo'
 
-- name: brave > installing flatpack
+- name: brave > installing flatpak
   become: true
   block:
     - name: installing flatpak dependencies
@@ -69,10 +68,10 @@
           fi
           flatpak run com.brave.Browser &
   when: ansible_os_family == 'Void'
-          #
+
 - name: brave > installing dependencies
   become: true
   ansible.builtin.package:
-    name: '{{ web_browser_brave_pkg }}'
+    name: "{{ web_browser_brave_pkg }}"
     state: present
   when: web_browser_brave_pkg is defined

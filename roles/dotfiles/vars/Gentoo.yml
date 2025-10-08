@@ -132,6 +132,7 @@ dotfiles_swayfx_pkg_items:
   - mpd-mpris
   - acct-group/seat
   - seatd
+  - x11-misc/dunst
 
 dotfiles_swayfx_add_to_group:
   - seat
