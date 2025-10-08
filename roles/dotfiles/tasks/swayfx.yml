@@ -1,6 +1,13 @@
 ---
 - import_tasks: gpu.yml
 
+- name: swayfx > importing gpg keys for eww..
+  ansible.builtin.shell: "{{ item }}"
+  with_items:
+    - "curl -sS https://github.com/elkowar.gpg | gpg --import"
+    - "curl -sS https://github.com/web-flow.gpg | gpg --import"
+  when: ansible_os_family == 'Archlinux'
+
 - name: swayfx > removing conflicting packages...
   become: true
   ansible.builtin.package:
@@ -14,13 +21,6 @@
     name: "{{ dotfiles_swayfx_pkg_items }}"
     state: latest
   when: dotfiles_swayfx_pkg_items is defined and not ansible_os_family == 'Archlinux'
-
-- name: swayfx > importing gpg keys for eww..
-  ansible.builtin.shell: "{{ item }}"
-  with_items:
-    - "curl -sS https://github.com/elkowar.gpg | gpg --import"
-    - "curl -sS https://github.com/web-flow.gpg | gpg --import"
-  when: ansible_os_family == 'Archlinux'
 
 - name: swayfx > installing dependencies...
   become: true
@@ -40,7 +40,7 @@
         - name: eww
           deps: [rust]
 
-        - name: scenefx
+        - name: scenefx0.4
           deps: [pixman, libglvnd, wayland]
 
         - name: swayfx

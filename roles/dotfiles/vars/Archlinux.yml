@@ -129,6 +129,10 @@ dotfiles_swayfx_conflict_pkg_items:
   - sway-git
   - scenefx-git
   - eww-git
+  - scenefx
+  - wlroots0.17
+  - wlroots0.18
+  - swayfx # need to remove swayfx to remove scenefx...
 
 dotfiles_swayfx_pkg_items:
   - papirus-icon-theme
@@ -162,7 +166,7 @@ dotfiles_swayfx_pkg_items:
   - libxkbcommon
   - pango
   - pcre
-  - wlroots0.17
+  - wlroots0.19
   - libdrm
   - libglvnd
   - pixman
@@ -175,6 +179,7 @@ dotfiles_swayfx_pkg_items:
   - gtk-layer-shell
   - iwd
   - seatd
+  - dunst
 
 dotfiles_swayfx_add_to_group:
   - network

@@ -3,27 +3,28 @@
 - name: aur > installing dependencies for {{ aur_item.name }}
   become: true
   community.general.pacman:
-    name: '{{ aur_item.deps }}'
+    name: "{{ aur_item.deps }}"
     extra_args: --needed
 
-- name: aur > downloading the last snapshot
-  ansible.builtin.get_url:
-    url: 'https://aur.archlinux.org/cgit/aur.git/snapshot/{{ aur_item.name }}.tar.gz'
-    dest: '{{ web_browser_cache_dir }}/{{ aur_item.name }}.tar.gz'
-    use_netrc: false
-  register: aur_src
+- name: aur > checking snapshot {{ aur_item.name }}
+  ansible.builtin.file:
+    path: "~/.cache/reaver/archlinux/{{ aur_item.name }}.tar.gz"
+    state: file
 
 - name: aur > creating building directory
   ansible.builtin.file:
-    path: '{{ web_browser_cache_dir}}/build'
+    path: "{{ web_browser_cache_dir}}/build"
     state: directory
-  when: aur_src.changed
+
+- name: aur > removing older build...
+  ansible.builtin.file:
+    path: "{{ web_browser_cache_dir }}/build/{{ aur_item.name }}"
+    state: absent
 
 - name: aur > uncompressing source
   ansible.builtin.command: >
-    tar xvf ../{{ aur_item.name }}.tar.gz
+    tar xvf ~/.cache/reaver/archlinux/{{ aur_item.name }}.tar.gz
     chdir={{ web_browser_cache_dir}}/build
-  when: aur_src.changed
 
 - name: aur > importing gpg key
   ansible.builtin.command: gpg --keyserver {{ aur_item.gpg_server }} --recv-keys {{ aur_item.gpg_key }}
@@ -33,21 +34,18 @@
   ansible.builtin.command: >
     makepkg --nodeps --noconfirm
     chdir={{ web_browser_cache_dir }}/build/{{ aur_item.name }}
-  when: aur_src.changed
 
 - name: aur > searching for building package '*.pkg.tar.zst'
   ansible.builtin.find:
     paths:
-      - '{{ web_browser_cache_dir }}/build/{{ aur_item.name }}'
+      - "{{ web_browser_cache_dir }}/build/{{ aur_item.name }}"
     patterns:
-      - '{{ aur_item.name }}*.pkg.tar.zst'
+      - "{{ aur_item.name }}*.pkg.tar.zst"
     file_type: file
   register: aur_pkg
-  when: aur_src.changed
 
 - name: aur > installing package {{ aur_item.name }}
   become: true
   community.general.pacman:
-    name: '{{ aur_pkg.files[0].path }}'
+    name: "{{ aur_pkg.files[0].path }}"
     state: present
-  when: aur_src.changed
