@@ -9,6 +9,8 @@ dotfiles_external_font_dir: ~/.local/share/fonts
 
 dotfiles_files_browser: false
 
+dotfiles_foot: false
+
 dotfiles_gpu_driver: ""
 
 dotfiles_mpd: false
