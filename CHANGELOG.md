@@ -1,11 +1,11 @@
-# 1.55.2 - Oct. 2025
+# 1.56.0 - Oct. 2025
 
 ## Dotfiles
 
 Trying globally to:
 
+- Add install of foot (terminal)
 - Remove vim and vifm.
-- Use mesa-amber when possible
 - Add dunst for sway
 - Remove dependencie to flatpak because https://flatkill.org/
 

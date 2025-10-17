@@ -67,13 +67,16 @@ dotfiles_files_browser_pkg_items:
   - zathura
   - zathura-pdf-mupdf
 
+dotfiles_foot_pkg_items:
+  - foot
+
 dotfiles_gpu_intel_gen7_conflict_pkg_items:
-  - mesa
+  - intel-media-driver
 
 # intel https://wiki.archlinux.org/title/Intel_graphics
 # https://wiki.archlinux.org/title/Hardware_video_acceleration
 dotfiles_gpu_intel_gen7_pkg_items:
-  - mesa-amber
+  - mesa
   - libva-intel-driver
 
 # Intel gen8 and more

@@ -61,6 +61,12 @@ dotfiles_files_browser_pkg_items:
   - zathura
   - zathura-pdf-mupdf
 
+dotfiles_foot_pkg_items:
+  - foot 
+
+dotfiles_gpu_intel_gen7_conflict_pkg_items:
+  - intel-video-accel
+
 # https://docs.voidlinux.org/config/graphical-session/graphics-drivers/intel.html
 dotfiles_gpu_intel_gen7_pkg_items:
   - linux-firmware-intel

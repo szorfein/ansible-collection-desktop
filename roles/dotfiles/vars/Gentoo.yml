@@ -64,12 +64,15 @@ dotfiles_files_browser_pkg_items:
   - zathura
   - zathura-pdf-mupdf
 
+dotfiles_foot_pkg_items:
+  - gui-apps/foot
+
 dotfiles_gpu_intel_gen7_conflict_pkg_items:
-  - media-libs/mesa
+  - libva-intel-media-driver
 
 # https://wiki.gentoo.org/wiki/Intel_Graphics#VAAPI
 dotfiles_gpu_intel_gen7_pkg_items:
-  - media-libs/mesa-amber
+  - media-libs/mesa
   - libva-intel-driver
 
 dotfiles_gpu_intel_pkg_items:
