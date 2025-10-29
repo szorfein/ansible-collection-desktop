@@ -110,6 +110,8 @@ dotfiles_neovim_pkg_items:
   - ripgrep
   - fzf
   - tmux
+  - net-libs/nodejs
+  - app-admin/ansible-lint
 
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio

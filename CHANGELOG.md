@@ -1,3 +1,5 @@
+- Update dependencies, add ImageMagick, lua-la, bash-ls
+
 # 1.56.0 - Oct. 2025
 
 ## Dotfiles
