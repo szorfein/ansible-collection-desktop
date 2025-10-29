@@ -5,7 +5,7 @@
   become: true
   ansible.builtin.lineinfile:
     path: /etc/portage/make.conf
-    regexp: '^INPUT_DEVICES='
+    regexp: "^INPUT_DEVICES="
     line: 'INPUT_DEVICES="libinput"'
   when: ansible_os_family == 'Gentoo'
 
@@ -13,7 +13,7 @@
 - name: xorg > updating gentoo
   become: true
   community.general.portage:
-    package: '@world'
+    package: "@world"
     changed_use: true
     deep: true
   when: ansible_os_family == 'Gentoo'
@@ -21,7 +21,7 @@
 - name: xorg > installing dependencies
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_xorg_pkg_items }}'
+    name: "{{ dotfiles_xorg_pkg_items }}"
     state: present
 
 - name: xorg > keymap

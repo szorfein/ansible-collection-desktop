@@ -6,6 +6,7 @@ dotfiles_alsa_pkg_items:
   - alsa-utils
   - alsa-plugins
   - alsa-plugins-samplerate
+  - alsa-plugins-speex
 
 dotfiles_awm_pkg_items:
   - awesome
@@ -62,7 +63,7 @@ dotfiles_files_browser_pkg_items:
   - zathura-pdf-mupdf
 
 dotfiles_foot_pkg_items:
-  - foot 
+  - foot
 
 dotfiles_gpu_intel_gen7_conflict_pkg_items:
   - intel-video-accel
@@ -120,7 +121,11 @@ dotfiles_neovim_pkg_items:
   - curl
   - gcc
   - StyLua
-  #  - rg (grep in rust - not available yet)
+  - nodejs-lts
+  - shfmt
+  - bash-language-server
+  - lua-language-server
+  - python3-ansible-lint
 
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
@@ -131,7 +136,6 @@ dotfiles_swayfx_pkg_items:
   - light
   - jq
   - wl-clipboard
-  - papirus-icon-theme
   - inotify-tools
   - curl
   - playerctl
@@ -143,10 +147,10 @@ dotfiles_swayfx_pkg_items:
   - grim
   - wmenu
   - iwd
-  - nemo
   - seatd
   - turnstile
   - dunst
+  - ImageMagick
 
 dotfiles_swayfx_add_to_group:
   - network
