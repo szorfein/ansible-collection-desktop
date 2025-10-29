@@ -123,6 +123,10 @@ dotfiles_neovim_pkg_items:
   - prettier
   - rubocop
   - stylua
+  - shfmt
+  - bash-language-server
+  - lua-language-server
+  - ansible-lint
 
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
@@ -138,7 +142,6 @@ dotfiles_swayfx_conflict_pkg_items:
   - swayfx # need to remove swayfx to remove scenefx...
 
 dotfiles_swayfx_pkg_items:
-  - papirus-icon-theme
   - inotify-tools
   - imv
   - jq
