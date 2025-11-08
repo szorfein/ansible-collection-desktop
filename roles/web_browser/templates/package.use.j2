@@ -11,10 +11,13 @@ media-libs/libvpx postproc
 # Librewolf-bin, even we don't need wayland :(
 x11-libs/gtk+ wayland
 media-libs/mesa wayland
+media-libs/freetype harfbuzz
 {% if dotfiles_wm == 'swayfx' %}
 media-libs/libpulse -X 
 {% if dotfiles_audio_backend == 'alsa' %}
-www-client/librewolf-bin -pulseaudio wayland
+# No choice with librewolf-bin, pulse is enable
+www-client/librewolf-bin wayland
+media-plugins/alsa-plugins pulseaudio
 {% elif dotfiles_audio_backend == 'pulseaudio' %}
 www-client/librewolf-bin -alsa pulseaudio wayland
 {% endif %}

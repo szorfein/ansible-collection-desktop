@@ -57,7 +57,7 @@ dotfiles_files_browser_conflict_pkg_items:
 
 dotfiles_files_browser_pkg_items:
   - mpv
-  - nnn
+  - yazi
   - poppler
   - zathura
   - zathura-pdf-mupdf
@@ -120,9 +120,10 @@ dotfiles_neovim_pkg_items:
   - ripgrep
   - curl
   - gcc
-  - StyLua
   - nodejs-lts
   - shfmt
+  - StyLua
+  - the_silver_searcher
   - bash-language-server
   - lua-language-server
   - python3-ansible-lint
@@ -137,7 +138,9 @@ dotfiles_swayfx_pkg_items:
   - jq
   - wl-clipboard
   - inotify-tools
+  - cargo
   - curl
+  - chafa
   - playerctl
   - mpv-mpris
   - mpDris2
@@ -145,7 +148,6 @@ dotfiles_swayfx_pkg_items:
   - ruby
   - swaybg
   - grim
-  - wmenu
   - iwd
   - seatd
   - turnstile

@@ -19,6 +19,10 @@ media-sound/mpd-mpris ~amd64
 mpv-plugin/mpv-mpris ~amd64
 {% endif %}
 
+{% if dotfiles_files_browser %}
+app-misc/yazi ~amd64
+{% endif %}
+
 {% if dotfiles_emacs_doom %}
 dev-util/shellcheck ~amd64
 {% endif %}
