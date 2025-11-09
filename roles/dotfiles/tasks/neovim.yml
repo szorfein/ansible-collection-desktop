@@ -1,12 +1,12 @@
 ---
-- name: neovim > uninstall conflicting packages
+- name: Neovim > uninstall conflicting packages
   become: true
   ansible.builtin.package:
     name: "{{ dotfiles_neovim_conflict_pkg_items }}"
     state: absent
   when: dotfiles_neovim_conflict_pkg_items is defined
 
-- name: neovim > installing dependencies
+- name: Neovim > installing dependencies
   become: true
   ansible.builtin.package:
     name: "{{ dotfiles_neovim_pkg_items }}"

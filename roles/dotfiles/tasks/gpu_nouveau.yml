@@ -2,45 +2,45 @@
 # TODO: Arch should need https://aur.archlinux.org/packages/nouveau-fw
 # TODO: https://nouveau.freedesktop.org/CodeNames.html
 # TODO: https://nouveau.freedesktop.org/VideoAcceleration.html
-- name: nouveau > uninstall conflicting packages
+- name: Nouveau > uninstall conflicting packages
   ansible.builtin.package:
-    name: '{{ dotfiles_gpu_nouveau_conflict_pkg_items }}'
+    name: "{{ dotfiles_gpu_nouveau_conflict_pkg_items }}"
     state: absent
 
-- name: nouveau > Gentoo add VIDEO_CARDS="nouveau"
+- name: Nouveau > Gentoo add VIDEO_CARDS="nouveau"
   ansible.builtin.lineinfile:
     path: /etc/portage/make.conf
-    regexp: '^VIDEO_CARDS='
+    regexp: "^VIDEO_CARDS="
     line: 'VIDEO_CARDS="nouveau"'
   notify: emerge changed use
   when: ansible_facts["os_family"] == 'Gentoo'
 
-- name: nouveau > Gentoo accept license NVIDIA-r2
+- name: Nouveau > Gentoo accept license NVIDIA-r2
   ansible.builtin.copy:
     dest: /etc/portage/package.license/nouveau
-    content: 'sys-firmware/nvidia-firmware NVIDIA-r2'
+    content: "sys-firmware/nvidia-firmware NVIDIA-r2"
   when: ansible_facts["os_family"] == 'Gentoo'
 
-- name: nouveau > installing dependencies
+- name: Nouveau > installing dependencies
   ansible.builtin.package:
-    name: '{{ dotfiles_gpu_nouveau_pkg_items }}'
+    name: "{{ dotfiles_gpu_nouveau_pkg_items }}"
     state: present
 
-- name: nouveau > Arch add MODULES=( nouveau )
+- name: Nouveau > Arch add MODULES=( nouveau )
   ansible.builtin.lineinfile:
     path: /etc/mkinitcpio.conf
-    line: 'MODULES+=( nouveau)'
-    insertafter: '^MODULES='
-    create: yes
+    line: "MODULES+=( nouveau)"
+    insertafter: "^MODULES="
+    create: true
   when: ansible_facts["os_family"] == 'Archlinux'
 
-- name: nouveau > ensure udev rules for NVIDIA are removed
+- name: Nouveau > ensure udev rules for NVIDIA are removed
   ansible.builtin.file:
     path: /lib/udev/rules.d/99-nvidia.rules
     state: absent
 
-- name: nouveau > add {{ username }} to video group
+- name: Nouveau > add {{ username }} to video group
   ansible.builtin.user:
-    name: '{{ username }}'
+    name: "{{ username }}"
     groups: video
-    append: yes
+    append: true

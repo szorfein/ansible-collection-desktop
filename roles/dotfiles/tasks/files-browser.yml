@@ -1,26 +1,26 @@
 ---
-- name: files-browser > removing conflicting pkgs...
+- name: Files-browser > removing conflicting pkgs...
   become: true
   ansible.builtin.package:
     name: "{{ dotfiles_files_browser_conflict_pkg_items }}"
     state: absent
   when: dotfiles_files_browser_conflict_pkg_items is defined
 
-- name: files-browser > installing pkgs...
+- name: Files-browser > installing pkgs...
   become: true
   ansible.builtin.package:
     name: "{{ dotfiles_files_browser_pkg_items }}"
     state: present
   when: dotfiles_files_browser_pkg_items is defined
 
-- name: files-browser > installing dependencies for alsa
+- name: Files-browser > installing dependencies for alsa
   become: true
   ansible.builtin.package:
     name: "{{ dotfiles_files_browser_alsa_pkg_items }}"
     state: present
   when: dotfiles_audio_backend == 'alsa'
 
-- name: files-browser > installing dependencies for pulseaudio
+- name: Files-browser > installing dependencies for pulseaudio
   become: true
   ansible.builtin.package:
     name: "{{ dotfiles_files_browser_pulse_pkg_items }}"

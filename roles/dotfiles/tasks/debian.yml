@@ -1,39 +1,39 @@
 ---
 # https://wiki.debian.org/SourcesList
-- name: debian > add sid repo for Debian
+- name: Debian > add sid repo for Debian
   become: true
   ansible.builtin.apt_repository:
-    repo: '{{ item }}'
+    repo: "{{ item }}"
     state: present
     filename: sid
-    update_cache: yes
+    update_cache: true
   with_items:
     - deb https://deb.debian.org/debian/ unstable main
     - deb-src https://deb.debian.org/debian/ unstable main
 
 # http://jaqque.sbih.org/kplug/apt-pinning.html
-- name: debian > high priority for Debian stable
+- name: Debian > high priority for Debian stable
   become: true
   ansible.builtin.blockinfile:
     path: /etc/apt/preferences
-    marker: '# STABLE'
+    marker: "# STABLE"
     create: true
     block: |
       Package: *
       Pin: release a=stable
       Pin-Priority: 700
 
-- name: debian > low priority for Debian unstable
+- name: Debian > low priority for Debian unstable
   become: true
   ansible.builtin.blockinfile:
     path: /etc/apt/preferences
-    marker: '# SID'
+    marker: "# SID"
     block: |
       Package: *
       Pin: release a=unstable
       Pin-Priority: 600
 
-- name: debian > make sure Ansible use the last version
+- name: Debian > make sure Ansible use the last version
   become: true
   ansible.builtin.apt:
     name: ansible-core
