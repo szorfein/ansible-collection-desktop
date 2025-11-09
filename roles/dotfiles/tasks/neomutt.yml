@@ -1,27 +1,27 @@
 ---
-- name: neomutt > removing conflicting packages
+- name: Neomutt > removing conflicting packages
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_neomutt_pkg_conflict_items }}'
+    name: "{{ dotfiles_neomutt_pkg_conflict_items }}"
     state: absent
   when: dotfiles_neomutt_pkg_conflict_items is defined
 
-- name: neomutt > installing dependencies
+- name: Neomutt > installing dependencies
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_neomutt_pkg_items }}'
+    name: "{{ dotfiles_neomutt_pkg_items }}"
     state: present
 
-- name: neomutt > creating {{ dotfiles_neomutt_mail_dir }} directory
+- name: Neomutt > creating {{ dotfiles_neomutt_mail_dir }} directory
   ansible.builtin.file:
-    path: '{{ dotfiles_neomutt_mail_dir }}/{{ item }}'
+    path: "{{ dotfiles_neomutt_mail_dir }}/{{ item }}"
     state: directory
-  with_items: '{{ dotfiles_neomutt_accounts_dir }}'
+  with_items: "{{ dotfiles_neomutt_accounts_dir }}"
   when: dotfiles_neomutt_mail_dir is defined and dotfiles_neomutt_accounts_dir is defined
 
-- name: neomutt > adding divs
+- name: Neomutt > adding divs
   ansible.builtin.file:
-    path: '{{ dotfiles_neomutt_mail_dir }}/{{ item }}'
+    path: "{{ dotfiles_neomutt_mail_dir }}/{{ item }}"
     state: touch
     modification_time: preserve
     access_time: preserve
@@ -30,15 +30,15 @@
     - div2
   when: dotfiles_neomutt_mail_dir is defined
 
-- name: neomutt > installing systemd service user
+- name: Neomutt > installing systemd service user
   ansible.builtin.template:
-    src: '{{ item.src }}'
-    dest: '{{ item.dest }}'
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
   with_items:
     - src: mbsync.service.j2
       dest: ~/.config/systemd/user/mbsync.service
     - src: mbsync.timer.j2
       dest: ~/.config/systemd/user/mbsync.timer
-  notify: 
+  notify:
     - enable systemd mbsync
-  when: ansible_service_mgr == 'systemd'
+  when: ansible_facts["service_mgr"] == 'systemd'

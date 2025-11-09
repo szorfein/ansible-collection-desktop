@@ -1,40 +1,40 @@
 ---
-- import_tasks: alsa.yml
+- ansible.builtin.import_tasks: alsa.yml
   when: dotfiles_audio_backend is defined and dotfiles_audio_backend == 'alsa'
 
-- import_tasks: pulseaudio.yml
+- ansible.builtin.import_tasks: pulseaudio.yml
   when: dotfiles_audio_backend is defined and dotfiles_audio_backend == 'pulseaudio'
 
-- name: mpd > installing dependencies
+- name: Mpd > installing dependencies
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_mpd_pkg_items }}'
+    name: "{{ dotfiles_mpd_pkg_items }}"
     state: present
 
-- include_tasks: arch-aur.yml
+- ansible.builtin.include_tasks: arch-aur.yml
   loop:
     - name: cava
       deps: [base-devel, fftw, alsa-lib, ncurses, iniparser, sndio, portaudio]
   loop_control:
     loop_var: aur_item
-  when: ansible_os_family == 'Archlinux'
+  when: ansible_facts["os_family"] == 'Archlinux'
 
-- name: mpd > mpd_dir fact
+- name: Mpd > mpd_dir fact
   ansible.builtin.set_fact:
     mpd_dir: ~/.config/mpd
 
-- name: mpd > creating required directory
+- name: Mpd > creating required directory
   ansible.builtin.file:
-    path: '{{ item }}'
+    path: "{{ item }}"
     state: directory
   with_items:
-    - '{{ mpd_dir }}'
-    - '{{ mpd_dir }}/playlists'
-    - '{{ dotfiles_mpd_music_dir }}'
+    - "{{ mpd_dir }}"
+    - "{{ mpd_dir }}/playlists"
+    - "{{ dotfiles_mpd_music_dir }}"
 
-- name: mpd > creating required files
+- name: Mpd > creating required files
   ansible.builtin.file:
-    path: '{{ mpd_dir }}/{{ item }}'
+    path: "{{ mpd_dir }}/{{ item }}"
     state: touch
     modification_time: preserve
     access_time: preserve
@@ -43,7 +43,7 @@
     - pid
     - state
 
-- name: mpd > add the config file
+- name: Mpd > add the config file
   ansible.builtin.template:
     src: mpd.conf.j2
-    dest: '{{ mpd_dir }}/mpd.conf'
+    dest: "{{ mpd_dir }}/mpd.conf"

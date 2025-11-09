@@ -1,80 +1,80 @@
 ---
 # tasks file for dotfiles
 - name: Load OS-vars
-  include_vars: "{{ lookup('first_found', params) }}"
+  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
   vars:
     params:
       files:
-        - "{{ ansible_os_family }}.yml"
+        - "{{ ansible_facts['os_family'] }}.yml"
         - main.yml
       paths:
         - "vars"
 
-- name: creating cache dir
+- name: Creating cache dir
   ansible.builtin.file:
     path: "{{ dotfiles_cache_dir }}"
     state: directory
 
-- import_tasks: debian.yml
-  when: ansible_os_family == 'Debian'
+- ansible.builtin.import_tasks: debian.yml
+  when: ansible_facts["os_family"] == 'Debian'
 
-- import_tasks: gentoo.yml
-  when: ansible_os_family == 'Gentoo'
+- ansible.builtin.import_tasks: gentoo.yml
+  when: ansible_facts["os_family"] == 'Gentoo'
 
-- name: setting fact username = {{ ansible_user_id }}
+- name: Setting fact username = {{ ansible_facts["user_id"] }}
   ansible.builtin.set_fact:
-    username: "{{ ansible_user_id }}"
+    username: "{{ ansible_facts['user_id'] }}"
 
-- include_tasks: zsh.yml
+- ansible.builtin.include_tasks: zsh.yml
   when: dotfiles_zsh | bool
 
 # ##############################
 # Removing previous wm installed
 
-- include_tasks: drop_not_awesome_m3.yml
+- ansible.builtin.include_tasks: drop_not_awesome_m3.yml
   when: dotfiles_wm == "awm-m3"
 
-- include_tasks: drop_not_swayfx.yml
+- ansible.builtin.include_tasks: drop_not_swayfx.yml
   when: dotfiles_wm == "swayfx"
 
 # End Removing previous wm installed
 # ##################################
 
-- include_tasks: awesome-m2.yml
+- ansible.builtin.include_tasks: awesome-m2.yml
   when: dotfiles_wm == "awm-m2"
 
-- include_tasks: awesome-m3.yml
+- ansible.builtin.include_tasks: awesome-m3.yml
   when: dotfiles_wm == "awm-m3"
 
-- include_tasks: swayfx.yml
+- ansible.builtin.include_tasks: swayfx.yml
   when: dotfiles_wm == "swayfx"
 
-- include_tasks: emacs-doom.yml
+- ansible.builtin.include_tasks: emacs-doom.yml
   when: dotfiles_emacs_doom | bool
 
-- include_tasks: external.yml
+- ansible.builtin.include_tasks: external.yml
   when: dotfiles_external | bool
 
-- include_tasks: mpd.yml
+- ansible.builtin.include_tasks: mpd.yml
   when: dotfiles_mpd | bool
 
-- include_tasks: neomutt.yml
+- ansible.builtin.include_tasks: neomutt.yml
   when: dotfiles_neomutt | bool
 
-- include_tasks: neovim.yml
+- ansible.builtin.include_tasks: neovim.yml
   when: dotfiles_neovim | bool
 
-- include_tasks: tmux.yml
+- ansible.builtin.include_tasks: tmux.yml
   when: dotfiles_tmux | bool
 
-- include_tasks: files-browser.yml
+- ansible.builtin.include_tasks: files-browser.yml
   when: dotfiles_files_browser | bool
 
-- include_tasks: wezterm.yml
+- ansible.builtin.include_tasks: wezterm.yml
   when: dotfiles_wezterm | bool
 
-- include_tasks: foot.yml
+- ansible.builtin.include_tasks: foot.yml
   when: dotfiles_foot | bool
 
-- include_tasks: xst.yml
+- ansible.builtin.include_tasks: xst.yml
   when: dotfiles_xst | bool

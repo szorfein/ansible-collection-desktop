@@ -1,17 +1,16 @@
 ---
-- import_tasks: xorg.yml
-- import_tasks: betterlockscreen.yml
-
-- name: awm-m3 > installing dependencies
+- ansible.builtin.import_tasks: xorg.yml
+- ansible.builtin.import_tasks: betterlockscreen.yml
+- name: Awm-m3 > installing dependencies
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_awm3_pkg_items }}'
+    name: "{{ dotfiles_awm3_pkg_items }}"
     state: present
 
-- include_tasks: arch-aur.yml
+- ansible.builtin.include_tasks: arch-aur.yml
   loop:
     - name: light
       deps: [base-devel]
   loop_control:
     loop_var: aur_item
-  when: ansible_os_family == 'Archlinux'
+  when: ansible_facts["os_family"] == 'Archlinux'

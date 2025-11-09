@@ -1,18 +1,18 @@
 ---
-- name: zsh > installing dependencies
+- name: Zsh > installing dependencies
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_zsh_pkg_items }}'
+    name: "{{ dotfiles_zsh_pkg_items }}"
     state: present
 
 # https://github.com/starship/starship#step-1-install-starship
-- name: zsh > installing starship for debian
+- name: Zsh > installing starship for debian
   become: true
-  ansible.builtin.command: 'curl -sS https://starship.rs/install.sh | sh'
-  when: ansible_os_family == 'Debian'
+  ansible.builtin.command: "curl -sS https://starship.rs/install.sh | sh"
+  when: ansible_facts["os_family"] == 'Debian'
 
-- name: zsh > setting default shell for {{ username }}
+- name: Zsh > setting default shell for {{ username }}
   become: true
   ansible.builtin.user:
-    name: '{{ username }}'
-    shell: '{{ dotfiles_zsh_path }}'
+    name: "{{ username }}"
+    shell: "{{ dotfiles_zsh_path }}"

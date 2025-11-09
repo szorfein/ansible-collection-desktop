@@ -1,24 +1,24 @@
 ---
-- name: alsa > uninstalling conflicting packages
+- name: Alsa > uninstalling conflicting packages
   become: true
   ansible.builtin.package:
     name: "{{ dotfiles_alsa_pkg_conflict_items }}"
     state: absent
   when: dotfiles_alsa_pkg_conflict_items is defined and dotfiles_alsa_pkg_conflict_items | length > 0
 
-- name: alsa > installing dependencies
+- name: Alsa > installing dependencies
   become: true
   ansible.builtin.package:
     name: "{{ dotfiles_alsa_pkg_items }}"
     state: present
 
-- name: alsa > search card name
+- name: Alsa > search card name
   ansible.builtin.shell: cat /proc/asound/card*/id | head -1
   register: audio_card
   check_mode: false
   changed_when: false
 
-- name: alsa > setting the default card {{ audio_card.stdout }}
+- name: Alsa > setting the default card {{ audio_card.stdout }}
   ansible.builtin.set_fact:
     alsa_card: "{{ audio_card.stdout }}"
   when: audio_card.stdout != ''

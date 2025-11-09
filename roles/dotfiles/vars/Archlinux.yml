@@ -63,7 +63,7 @@ dotfiles_files_browser_conflict_pkg_items:
 
 dotfiles_files_browser_pkg_items:
   - mpv
-  - nnn
+  - yazi
   - zathura
   - zathura-pdf-mupdf
 
@@ -127,6 +127,9 @@ dotfiles_neovim_pkg_items:
   - bash-language-server
   - lua-language-server
   - ansible-lint
+  - gcc
+  - the_silver_searcher
+  - codebook-lsp
 
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
@@ -148,11 +151,11 @@ dotfiles_swayfx_pkg_items:
   - wl-clipboard
   - curl
   - bc
+  - chafa
   - imagemagick
   - rubygems
   - grim
   - swaybg
-  - wmenu
   - playerctl
   - mpd-mpris
   - mpv-mpris

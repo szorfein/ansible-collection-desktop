@@ -1,5 +1,5 @@
 ---
-- name: gentoo > portage dir
+- name: Gentoo > portage dir
   become: true
   ansible.builtin.file:
     path: "/etc/portage/{{ item }}"
@@ -10,23 +10,23 @@
     - repos.conf
     - package.license
 
-- name: gentoo > add repository
+- name: Gentoo > add repository
   become: true
   ansible.builtin.template:
     src: gentoo-repository.j2
     dest: /etc/portage/repos.conf/dotfiles.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
-- name: gentoo > sync repository
+- name: Gentoo > sync repository
   become: true
   ansible.builtin.command: "emaint sync -r {{ item }}"
   with_items:
     - "ninjatools"
     - "guru"
 
-- name: gentoo > install global stuff
+- name: Gentoo > install global stuff
   become: true
   ansible.builtin.blockinfile:
     block: "{{ lookup('ansible.builtin.template', 'global.j2') }}"
@@ -34,14 +34,14 @@
     path: /etc/portage/make.conf
   notify: emerge changed use
 
-- name: gentoo > /etc/portage
+- name: Gentoo > /etc/portage
   become: true
   ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify: emerge changed use
   with_items:
     - src: package-use.j2

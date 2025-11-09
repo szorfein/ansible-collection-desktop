@@ -1,4 +1,7 @@
-- Update dependencies, add ImageMagick, lua-la, bash-ls
+# 1.58.0
+
+- Change all references `ansible_` with recommended `ansible_facts[]`
+- Update dependencies, add ImageMagick, yazi, lua-la, bash-ls...
 
 # 1.56.0 - Oct. 2025
 

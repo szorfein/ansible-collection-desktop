@@ -1,59 +1,59 @@
 ---
 # https://github.com/Raymo111/i3lock-color#debian
-- name: betterlockscreen > installing dependencies for Debian
+- name: Betterlockscreen > installing dependencies for Debian
   become: true
   ansible.builtin.apt:
-    pkg: '{{ deb_item.deps }}'
+    pkg: "{{ deb_item.deps }}"
 
-- name: debian-src > dowloading source of {{ deb_item.name }}
+- name: Debian-src > dowloading source of {{ deb_item.name }}
   ansible.builtin.get_url:
-    url: '{{ deb_item.url }}'
-    dest: '{{ dotfiles_cache_dir }}/{{ deb_item.name }}-{{ deb_item.version }}.tar.gz'
+    url: "{{ deb_item.url }}"
+    dest: "{{ dotfiles_cache_dir }}/{{ deb_item.name }}-{{ deb_item.version }}.tar.gz"
     use_netrc: false
   register: deb_src
 
-- name: debian-src > building directory
+- name: Debian-src > building directory
   ansible.builtin.file:
-    path: '{{ dotfiles_cache_dir }}/build'
+    path: "{{ dotfiles_cache_dir }}/build"
     state: directory
   when: deb_src.changed
 
-- name: debian-src > uncompressing source
+- name: Debian-src > uncompressing source
   ansible.builtin.command: >
     debmake -y -a ../{{ deb_item.name }}-{{ deb_item.version }}.tar.gz
     chdir={{ dotfiles_cache_dir }}/build
   when: deb_src.changed
 
-- name: debian-src > copying {{ deb_item.name }}/debian
+- name: Debian-src > copying {{ deb_item.name }}/debian
   ansible.builtin.copy:
-    src: '{{ deb_item.name }}/debian'
-    dest: '{{ dotfiles_cache_dir }}/build/{{ deb_item.name }}-{{ deb_item.version }}/'
+    src: "{{ deb_item.name }}/debian"
+    dest: "{{ dotfiles_cache_dir }}/build/{{ deb_item.name }}-{{ deb_item.version }}/"
   when: deb_src.changed
 
-- name: debian-src > building source
+- name: Debian-src > building source
   ansible.builtin.command: >
     debmake -i debuild
     chdir={{ dotfiles_cache_dir }}/build/{{ deb_item.name }}-{{ deb_item.version }}
   when: deb_src.changed
 
-- name: debian-src > searching for .deb
+- name: Debian-src > searching for .deb
   ansible.builtin.find:
     paths:
-      - '{{ dotfiles_cache_dir }}/build'
+      - "{{ dotfiles_cache_dir }}/build"
     patterns:
-      - '{{ deb_item.name }}?{{ deb_item.version }}*.deb'
+      - "{{ deb_item.name }}?{{ deb_item.version }}*.deb"
     file_type: file
   register: deb_pkg
   when: deb_src.changed
 
-- name: debian-src > found result
+- name: Debian-src > found result
   ansible.builtin.debug:
     msg:
-      - 'found {{ deb_pkg }}'
+      - "found {{ deb_pkg }}"
   when: deb_src.changed
 
-- name: debian-src > installing package
+- name: Debian-src > installing package
   become: true
   ansible.builtin.apt:
-    deb: '{{ deb_pkg.files[0].path }}'
+    deb: "{{ deb_pkg.files[0].path }}"
   when: deb_src.changed

@@ -1,14 +1,14 @@
 ---
-- name: wezterm > removing conflicting packages
+- name: Wezterm > removing conflicting packages
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_wezterm_pkg_conflict_items }}'
+    name: "{{ dotfiles_wezterm_pkg_conflict_items }}"
     state: absent
   when: dotfiles_wezterm_pkg_conflict_items is defined
 
-- name: wezterm > installing
+- name: Wezterm > installing
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_wezterm_pkg_items }}'
+    name: "{{ dotfiles_wezterm_pkg_items }}"
     state: present
   when: dotfiles_wezterm_pkg_items is defined

@@ -59,7 +59,7 @@ dotfiles_files_browser_conflict_pkg_items:
 
 dotfiles_files_browser_pkg_items:
   - mpv
-  - app-misc/nnn
+  - app-misc/yazi
   - poppler
   - zathura
   - zathura-pdf-mupdf
@@ -112,6 +112,7 @@ dotfiles_neovim_pkg_items:
   - tmux
   - net-libs/nodejs
   - app-admin/ansible-lint
+  - sys-apps/the_silver_searcher
 
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
@@ -119,7 +120,6 @@ dotfiles_pulseaudio_pkg_items:
 dotfiles_swayfx_pkg_items:
   - light
   - net-misc/curl
-  - papirus-icon-theme
   # - gnome-extra/nemo - disable temporary
   - inotify-tools
   - swaybg
@@ -129,10 +129,10 @@ dotfiles_swayfx_pkg_items:
   - playerctl
   - wl-clipboard
   - gui-apps/grim
-  - gui-apps/wmenu
   - net-wireless/iwd
   - gui-apps/eww
   - gui-wm/swayfx
+  - media-gfx/chafa
   - mpv-mpris
   - mpd-mpris
   - acct-group/seat

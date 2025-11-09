@@ -1,12 +1,12 @@
 ---
-- name: foot > removing conflicting packages
+- name: Foot > removing conflicting packages
   become: true
   ansible.builtin.package:
     name: "{{ dotfiles_foot_pkg_conflict_items }}"
     state: absent
   when: dotfiles_foot_pkg_conflict_items is defined
 
-- name: foot > installing
+- name: Foot > installing
   become: true
   ansible.builtin.package:
     name: "{{ dotfiles_foot_pkg_items }}"

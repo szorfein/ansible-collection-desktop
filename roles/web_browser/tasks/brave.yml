@@ -5,7 +5,7 @@
       deps: [alsa-lib, gtk3, libxss, nss, ttf-font]
   loop_control:
     loop_var: aur_item
-  when: ansible_os_family == 'Archlinux'
+  when: ansible_facts["os_family"] == 'Archlinux'
 
 # https://brave.com/linux/#debian-ubuntu-mint
 - name: brave > importing apt-repo
@@ -18,10 +18,10 @@
 
     - name: brave | apt source
       ansible.builtin.apt_repository:
-        repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ {{ ansible_distribution_release }} main
+        repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ {{ ansible_facts["distribution_release"] }} main
         filename: brave
         update_cache: yes
-  when: ansible_os_family == 'Debian'
+  when: ansible_facts["os_family"] == 'Debian'
 
 # Using: https://github.com/gentoo-mirror/brave-overlay
 # https://wiki.gentoo.org/wiki/Brave
@@ -35,7 +35,7 @@
 
     - name: brave-overlay Sync
       ansible.builtin.command: emaint -r brave-overlay sync
-  when: ansible_os_family == 'Gentoo'
+  when: ansible_facts["os_family"] == 'Gentoo'
 
 - name: brave > installing flatpak
   become: true
@@ -44,7 +44,7 @@
       ansible.builtin.package:
         name: flatpak
         state: present
-  when: ansible_os_family == 'Void'
+  when: ansible_facts["os_family"] == 'Void'
 
 - name: brave > setup flatpak
   block:
@@ -67,7 +67,7 @@
             eval `dbus-launch --sh-syntax`
           fi
           flatpak run com.brave.Browser &
-  when: ansible_os_family == 'Void'
+  when: ansible_facts["os_family"] == 'Void'
 
 - name: brave > installing dependencies
   become: true
