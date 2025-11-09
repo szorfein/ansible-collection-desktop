@@ -1,25 +1,25 @@
 ---
-- name: doom-emacs > removing conflicting packages
+- name: Doom-emacs > removing conflicting packages
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_emacs_pkg_conflict_items }}'
+    name: "{{ dotfiles_emacs_pkg_conflict_items }}"
     state: absent
   when: dotfiles_emacs_pkg_conflict_items is defined
 
-- name: doom-emacs > installing dependencies
+- name: Doom-emacs > installing dependencies
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_emacs_pkg_items }}'
+    name: "{{ dotfiles_emacs_pkg_items }}"
     state: present
   when: dotfiles_emacs_pkg_items is defined
 
-- name: doom-emacs > clean older install
+- name: Doom-emacs > clean older install
   ansible.builtin.file:
-    path: '{{ item }}'
+    path: "{{ item }}"
     state: absent
   loop:
     - ~/.emacs.d
-    - '{{ dotfiles_external_font_dir }}/all-the-icons-project.json'
+    - "{{ dotfiles_external_font_dir }}/all-the-icons-project.json"
     #- '{{ dotfiles_external_font_dir }}/all-the-icons.ttf'
     #- '{{ dotfiles_external_font_dir }}/file-icons.ttf'
     #- '{{ dotfiles_external_font_dir }}/fontawesome.ttf'

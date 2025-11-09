@@ -1,7 +1,6 @@
 ---
-- import_tasks: gpu.yml
-
-- name: xorg > insert global INPUT_DEVICES="libinput"
+- ansible.builtin.import_tasks: gpu.yml
+- name: Xorg > insert global INPUT_DEVICES="libinput"
   become: true
   ansible.builtin.lineinfile:
     path: /etc/portage/make.conf
@@ -10,7 +9,7 @@
   when: ansible_facts["os_family"] == 'Gentoo'
 
 # update gentoo here
-- name: xorg > updating gentoo
+- name: Xorg > updating gentoo
   become: true
   community.general.portage:
     package: "@world"
@@ -18,21 +17,21 @@
     deep: true
   when: ansible_facts["os_family"] == 'Gentoo'
 
-- name: xorg > installing dependencies
+- name: Xorg > installing dependencies
   become: true
   ansible.builtin.package:
     name: "{{ dotfiles_xorg_pkg_items }}"
     state: present
 
-- name: xorg > keymap
+- name: Xorg > keymap
   become: true
   block:
-    - name: ensure directory exist
+    - name: Ensure directory exist
       ansible.builtin.file:
         path: /etc/X11/xorg.conf.d
         state: directory
 
-    - name: configuring keymap with {{ dotfiles_xorg_keymap }}
+    - name: Configuring keymap with {{ dotfiles_xorg_keymap }}
       ansible.builtin.template:
         src: xorg/keyboard.j2
         dest: /etc/X11/xorg.conf.d/00-keyboard.conf

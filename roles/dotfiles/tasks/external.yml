@@ -1,19 +1,19 @@
 ---
-- name: external > installing dependencies
+- name: External > installing dependencies
   become: true
   ansible.builtin.package:
     name: unzip
     state: present
 
-- name: external > create font dir
+- name: External > create font dir
   ansible.builtin.file:
     path: "{{ dotfiles_external_font_dir }}"
     state: directory
 
-- name: external > removing windows font
+- name: External > removing windows font
   ansible.builtin.command: "find {{ dotfiles_external_font_dir}} -name '*Windows*' -delete"
 
-- name: external > removing older fonts
+- name: External > removing older fonts
   ansible.builtin.file:
     path: "{{ dotfiles_external_font_dir }}/{{ item }}"
     state: absent
@@ -29,5 +29,5 @@
     - SpaceMono-2.1.0
     - SpaceMono-2.1.0.zip
 
-- name: external > updating fonts cache
+- name: External > updating fonts cache
   ansible.builtin.command: "fc-cache -f {{ dotfiles_external_font_dir}}"

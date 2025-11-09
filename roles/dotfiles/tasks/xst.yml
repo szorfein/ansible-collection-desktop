@@ -1,30 +1,29 @@
 ---
-- name: xst > allowing masking keyword
+- name: Xst > allowing masking keyword
   become: true
   ansible.builtin.copy:
     dest: /etc/portage/package.accept_keywords/xst
-    content: '=x11-terms/xst-9999 **'
+    content: "=x11-terms/xst-9999 **"
   when: ansible_facts["os_family"] == 'Gentoo'
 
-- name: xst > installing via your package manager
+- name: Xst > installing via your package manager
   become: true
   ansible.builtin.package:
-    name: '{{ dotfiles_xst_pkg }}'
+    name: "{{ dotfiles_xst_pkg }}"
     state: present
   when: dotfiles_xst_pkg is defined
 
-- include_tasks: debian-src.yml
+- ansible.builtin.include_tasks: debian-src.yml
   loop:
     - name: xst
       version: 0.8.5
       url: https://github.com/gnotclub/xst/archive/refs/heads/master.tar.gz
-      deps: [build-essential, pkg-config, x11proto-core-dev, libx11-dev,
-        libxft-dev, fontconfig, x11proto-dev, libxext-dev, debmake]
+      deps: [build-essential, pkg-config, x11proto-core-dev, libx11-dev, libxft-dev, fontconfig, x11proto-dev, libxext-dev, debmake]
   loop_control:
     loop_var: deb_item
   when: ansible_facts["os_family"] == 'Debian'
 
-- include_tasks: arch-aur.yml
+- ansible.builtin.include_tasks: arch-aur.yml
   loop:
     - name: xst-git
       deps: [base-devel, libxft, ncurses, libxext, git]
@@ -32,8 +31,8 @@
     loop_var: aur_item
   when: ansible_facts["os_family"] == 'Archlinux'
 
-- name: nuke build destination
+- name: Nuke build destination
   become: true
   ansible.builtin.file:
-    path: '{{ dotfiles_cache_dir }}/build'
+    path: "{{ dotfiles_cache_dir }}/build"
     state: absent

@@ -1,6 +1,6 @@
 ---
 # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=xst
-- name: aur > installing dependencies for {{ aur_item.name }}
+- name: Aur > installing dependencies for {{ aur_item.name }}
   become: true
   community.general.pacman:
     name: "{{ aur_item.deps }}"
@@ -13,32 +13,32 @@
 #   use_netrc: false
 # register: aur_src
 
-- name: aur > checking snapshot {{ aur_item.name }}
+- name: Aur > checking snapshot {{ aur_item.name }}
   ansible.builtin.file:
     path: "~/.cache/reaver/archlinux/{{ aur_item.name }}.tar.gz"
     state: file
 
-- name: aur > creating building directory
+- name: Aur > creating building directory
   ansible.builtin.file:
-    path: "{{ dotfiles_cache_dir}}/build"
+    path: "{{ dotfiles_cache_dir }}/build"
     state: directory
 
-- name: aur > removing older building directory
+- name: Aur > removing older building directory
   ansible.builtin.file:
     path: "{{ dotfiles_cache_dir }}/build/{{ aur_item.name }}"
     state: absent
 
-- name: aur > uncompressing source
+- name: Aur > uncompressing source
   ansible.builtin.command: >
     tar xvf ~/.cache/reaver/archlinux/{{ aur_item.name }}.tar.gz
-    chdir={{ dotfiles_cache_dir}}/build
+    chdir={{ dotfiles_cache_dir }}/build
 
-- name: aur > building source
+- name: Aur > building source
   ansible.builtin.command: >
     makepkg --cleanbuild --force --nodeps --noconfirm
     chdir={{ dotfiles_cache_dir }}/build/{{ aur_item.name }}
 
-- name: aur > searching for building package '*.pkg.tar.zst'
+- name: Aur > searching for building package '*.pkg.tar.zst'
   ansible.builtin.find:
     paths:
       - "{{ dotfiles_cache_dir }}/build/{{ aur_item.name }}"
@@ -47,7 +47,7 @@
     file_type: file
   register: aur_pkg
 
-- name: aur > installing package {{ aur_item.name }}
+- name: Aur > installing package {{ aur_item.name }}
   become: true
   community.general.pacman:
     name: "{{ aur_pkg.files[0].path }}"

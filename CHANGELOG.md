@@ -1,3 +1,5 @@
+# 1.58.0
+
 - Change all references `ansible_` with recommended `ansible_facts[]`
 - Update dependencies, add ImageMagick, yazi, lua-la, bash-ls...
 

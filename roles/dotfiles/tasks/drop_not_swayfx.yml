@@ -1,2 +1,2 @@
 ---
-- import_tasks: drop_not_awesome_m3.yml
+- ansible.builtin.import_tasks: drop_not_awesome_m3.yml
