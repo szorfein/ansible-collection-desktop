@@ -9,7 +9,7 @@
 - name: zsh > installing starship for debian
   become: true
   ansible.builtin.command: 'curl -sS https://starship.rs/install.sh | sh'
-  when: ansible_os_family == 'Debian'
+  when: ansible_facts["os_family"] == 'Debian'
 
 - name: zsh > setting default shell for {{ username }}
   become: true

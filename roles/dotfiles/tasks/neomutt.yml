@@ -41,4 +41,4 @@
       dest: ~/.config/systemd/user/mbsync.timer
   notify: 
     - enable systemd mbsync
-  when: ansible_service_mgr == 'systemd'
+  when: ansible_facts["service_mgr"] == 'systemd'

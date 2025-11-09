@@ -2,7 +2,7 @@
 # https://aur.archlinux.org/packages/librewolf-bin
 - name: librewolf > importing AUR gpg keys...
   ansible.builtin.shell: gpg --recv-keys 8A74EAAF89C17944
-  when: ansible_os_family == 'Archlinux'
+  when: ansible_facts["os_family"] == 'Archlinux'
 
 - include_tasks: arch-aur.yml
   loop:
@@ -23,7 +23,7 @@
       gpg_server: hkp://keyserver.ubuntu.com:80
   loop_control:
     loop_var: aur_item
-  when: ansible_os_family == 'Archlinux'
+  when: ansible_facts["os_family"] == 'Archlinux'
 
 - name: librewolf > importing apt-repo
   become: true
@@ -37,10 +37,10 @@
 
     - name: librewolf | apt source
       ansible.builtin.apt_repository:
-        repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/librewolf.gpg] https://deb.librewolf.net {{ ansible_distribution_release }} main
+        repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/librewolf.gpg] https://deb.librewolf.net {{ ansible_facts["distribution_release"] }} main
         filename: librewolf
         update_cache: yes
-  when: ansible_os_family == 'Debian'
+  when: ansible_facts["os_family"] == 'Debian'
 
 - name: librewolf > for Gentoo
   become: true
@@ -52,7 +52,7 @@
 
     - name: LibreWolf Sync
       ansible.builtin.command: emaint -r librewolf sync
-  when: ansible_os_family == 'Gentoo'
+  when: ansible_facts["os_family"] == 'Gentoo'
 
 # https://github.com/index-0/librewolf-void/tree/master
 - name: librewolf > for Void
@@ -67,7 +67,7 @@
       ansible.builtin.copy:
         src: key-void-librewolf.plist
         dest: "/var/db/xbps/keys/8f:d6:6b:76:ff:3c:31:95:60:2d:34:6e:83:29:89:13.plist"
-  when: ansible_os_family == 'Void'
+  when: ansible_facts["os_family"] == 'Void'
 
 - name: librewolf > installing dependencies
   become: true

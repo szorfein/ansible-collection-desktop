@@ -13,13 +13,13 @@
     regexp: '^VIDEO_CARDS='
     line: 'VIDEO_CARDS="nouveau"'
   notify: emerge changed use
-  when: ansible_os_family == 'Gentoo'
+  when: ansible_facts["os_family"] == 'Gentoo'
 
 - name: nouveau > Gentoo accept license NVIDIA-r2
   ansible.builtin.copy:
     dest: /etc/portage/package.license/nouveau
     content: 'sys-firmware/nvidia-firmware NVIDIA-r2'
-  when: ansible_os_family == 'Gentoo'
+  when: ansible_facts["os_family"] == 'Gentoo'
 
 - name: nouveau > installing dependencies
   ansible.builtin.package:
@@ -32,7 +32,7 @@
     line: 'MODULES+=( nouveau)'
     insertafter: '^MODULES='
     create: yes
-  when: ansible_os_family == 'Archlinux'
+  when: ansible_facts["os_family"] == 'Archlinux'
 
 - name: nouveau > ensure udev rules for NVIDIA are removed
   ansible.builtin.file:

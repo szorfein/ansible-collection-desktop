@@ -67,8 +67,8 @@
     name: gui-libs/display-manager-init
     state: present
   when:
-    - ansible_service_mgr == 'openrc'
-    - ansible_os_family == 'Gentoo'
+    - ansible_facts["service_mgr"] == 'openrc'
+    - ansible_facts["os_family"] == 'Gentoo'
 
 - name: lxdm > openrc configuring /etc/conf.d/display-manager
   become: true
@@ -79,8 +79,8 @@
     group: root
     mode: '0644'
   when:
-    - ansible_service_mgr == 'openrc'
-    - ansible_os_family == 'Gentoo'
+    - ansible_facts["service_mgr"] == 'openrc'
+    - ansible_facts["os_family"] == 'Gentoo'
 
 # dbus required with openrc, runit
 # https://wiki.gentoo.org/wiki/LightDM#Boot_service
@@ -92,7 +92,7 @@
     state: started
   loop:
     - dbus
-  when: ansible_service_mgr == 'openrc' or ansible_service_mgr == 'runit'
+  when: ansible_facts["service_mgr"] == 'openrc' or ansible_facts["service_mgr"] == 'runit'
 
 - name: lxdm > openrc enabling service
   become: true
@@ -101,13 +101,13 @@
     state: started
     enabled: true
   when:
-    - ansible_service_mgr == 'openrc'
-    - ansible_os_family == 'Gentoo'
+    - ansible_facts["service_mgr"] == 'openrc'
+    - ansible_facts["os_family"] == 'Gentoo'
 
 - name: lxdm > enabling services
   become: true
   ansible.builtin.service:
     name: lxdm
     enabled: true
-  when: ansible_service_mgr == 'systemd' or ansible_service_mgr == 'runit'
+  when: ansible_facts["service_mgr"] == 'systemd' or ansible_facts["service_mgr"] == 'runit'
 

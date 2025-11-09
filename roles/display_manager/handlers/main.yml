@@ -5,11 +5,11 @@
   ansible.builtin.file:
     path: /etc/systemd/system/display-manager.service
     state: absent
-  when: ansible_service_mgr == 'systemd'
+  when: ansible_facts["service_mgr"] == 'systemd'
 
 - name: enable sddm
   become: true
   ansible.builtin.service:
     name: sddm
     enabled: true
-  when: ansible_service_mgr == 'systemd' or ansible_os_family == 'Void'
+  when: ansible_facts["service_mgr"] == 'systemd' or ansible_facts["os_family"] == 'Void'

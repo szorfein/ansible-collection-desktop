@@ -2,12 +2,14 @@
 
 Ansible collection for Desktop, tested on:
 
-+ ArchLinux
-+ Debian bullseye
-+ Gentoo
-+ Void Linux
+- ArchLinux
+- Debian bullseye (Frozen, don't work, i need 'a lot' of motivation to build all the .deb file for missing packages...)
+- Gentoo
+- Void Linux
 
-Unless you want to help support other distributions, I won't add another distro/system here.  
+Unless you want to help support other distributions, I won't add another distro/system here.
+
+Theses collections works together with [Reaver](https://github.com/szorfein/reaver), all sources/files required are downloads before execute playbooks to 'limit' crash during the execution.
 
 ## Roles include
 

@@ -17,7 +17,7 @@
       deps: [base-devel, fftw, alsa-lib, ncurses, iniparser, sndio, portaudio]
   loop_control:
     loop_var: aur_item
-  when: ansible_os_family == 'Archlinux'
+  when: ansible_facts["os_family"] == 'Archlinux'
 
 - name: mpd > mpd_dir fact
   ansible.builtin.set_fact:

@@ -5,7 +5,7 @@
     regexp: "^VIDEO_CARDS="
     line: 'VIDEO_CARDS="intel"'
   notify: emerge changed use
-  when: ansible_os_family == 'Gentoo'
+  when: ansible_facts["os_family"] == 'Gentoo'
 
 - name: gpu_intel > removing drivers for intel gen7
   ansible.builtin.package:
@@ -25,7 +25,7 @@
     content: "media-libs/libva-intel-media-driver no-source-code\n"
   when:
     - dotfiles_gpu_driver == 'intel'
-    - ansible_os_family == 'Gentoo'
+    - ansible_facts["os_family"] == 'Gentoo'
 
 - name: gpu_intel > installing drivers for intel gen8+
   ansible.builtin.package:

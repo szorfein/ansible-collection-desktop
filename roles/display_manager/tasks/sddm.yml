@@ -14,7 +14,7 @@
     owner: root
     group: root
     mode: "0644"
-  when: ansible_os_family == 'Gentoo'
+  when: ansible_facts["os_family"] == 'Gentoo'
 
 - name: sddm > installing dependencies
   become: true
@@ -94,8 +94,8 @@
     name: gui-libs/display-manager-init
     state: present
   when:
-    - ansible_service_mgr == 'openrc'
-    - ansible_os_family == 'Gentoo'
+    - ansible_facts["service_mgr"] == 'openrc'
+    - ansible_facts["os_family"] == 'Gentoo'
 
 - name: sddm > openrc configuring /etc/conf.d/display-manager
   become: true
@@ -106,8 +106,8 @@
     group: root
     mode: "0644"
   when:
-    - ansible_service_mgr == 'openrc'
-    - ansible_os_family == 'Gentoo'
+    - ansible_facts["service_mgr"] == 'openrc'
+    - ansible_facts["os_family"] == 'Gentoo'
 
 - name: sddm > openrc enabling service
   become: true
@@ -116,5 +116,5 @@
     state: started
     enabled: true
   when:
-    - ansible_service_mgr == 'openrc'
-    - ansible_os_family == 'Gentoo'
+    - ansible_facts["service_mgr"] == 'openrc'
+    - ansible_facts["os_family"] == 'Gentoo'

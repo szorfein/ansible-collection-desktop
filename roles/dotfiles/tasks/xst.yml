@@ -4,7 +4,7 @@
   ansible.builtin.copy:
     dest: /etc/portage/package.accept_keywords/xst
     content: '=x11-terms/xst-9999 **'
-  when: ansible_os_family == 'Gentoo'
+  when: ansible_facts["os_family"] == 'Gentoo'
 
 - name: xst > installing via your package manager
   become: true
@@ -22,7 +22,7 @@
         libxft-dev, fontconfig, x11proto-dev, libxext-dev, debmake]
   loop_control:
     loop_var: deb_item
-  when: ansible_os_family == 'Debian'
+  when: ansible_facts["os_family"] == 'Debian'
 
 - include_tasks: arch-aur.yml
   loop:
@@ -30,7 +30,7 @@
       deps: [base-devel, libxft, ncurses, libxext, git]
   loop_control:
     loop_var: aur_item
-  when: ansible_os_family == 'Archlinux'
+  when: ansible_facts["os_family"] == 'Archlinux'
 
 - name: nuke build destination
   become: true

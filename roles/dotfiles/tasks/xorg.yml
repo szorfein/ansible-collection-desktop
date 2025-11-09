@@ -7,7 +7,7 @@
     path: /etc/portage/make.conf
     regexp: "^INPUT_DEVICES="
     line: 'INPUT_DEVICES="libinput"'
-  when: ansible_os_family == 'Gentoo'
+  when: ansible_facts["os_family"] == 'Gentoo'
 
 # update gentoo here
 - name: xorg > updating gentoo
@@ -16,7 +16,7 @@
     package: "@world"
     changed_use: true
     deep: true
-  when: ansible_os_family == 'Gentoo'
+  when: ansible_facts["os_family"] == 'Gentoo'
 
 - name: xorg > installing dependencies
   become: true
