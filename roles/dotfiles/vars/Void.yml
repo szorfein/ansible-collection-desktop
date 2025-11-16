@@ -153,6 +153,9 @@ dotfiles_swayfx_pkg_items:
   - turnstile
   - dunst
   - ImageMagick
+  - swayidle
+  - swaylock
+  - wlr-randr
 
 dotfiles_swayfx_add_to_group:
   - network

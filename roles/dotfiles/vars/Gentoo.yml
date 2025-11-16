@@ -120,7 +120,6 @@ dotfiles_pulseaudio_pkg_items:
 dotfiles_swayfx_pkg_items:
   - light
   - net-misc/curl
-  # - gnome-extra/nemo - disable temporary
   - inotify-tools
   - swaybg
   - imagemagick
@@ -138,6 +137,9 @@ dotfiles_swayfx_pkg_items:
   - acct-group/seat
   - seatd
   - x11-misc/dunst
+  - gui-apps/swaylock
+  - gui-apps/swayidle
+  - gui-apps/wlr-randr
 
 dotfiles_swayfx_add_to_group:
   - seat
