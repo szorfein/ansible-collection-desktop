@@ -1,5 +1,6 @@
-# 1.58.0
+# 1.59.0
 
+- Add Swaylock dependencies on Swayfx
 - Change all references `ansible_` with recommended `ansible_facts[]`
 - Update dependencies, add ImageMagick, yazi, lua-la, bash-ls...
 
