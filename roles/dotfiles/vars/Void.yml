@@ -165,6 +165,13 @@ dotfiles_swayfx_services:
   - seatd
   - turnstiled
 
+dotfiles_vim_conflict_pkg_items:
+  - vim
+  - gvim
+
+dotfiles_vim_pkg_items:
+  - vim-x11
+
 dotfiles_wezterm_pkg_items:
   - wezterm
 
