@@ -154,6 +154,13 @@ dotfiles_xorg_pkg_items:
   - x11-misc/xclip
   - xf86-input-libinput
 
+dotfiles_vim_conflict_pkg_items:
+  - app-editors/neovim
+  - app-editors/gvim
+
+dotfiles_vim_pkg_items:
+  - app-editors/vim
+
 dotfiles_wezterm_pkg_items:
   - wezterm
 

@@ -36,3 +36,5 @@ dotfiles_xst_version: 0.8.5 # https://github.com/gnotclub/xst/blob/master/config
 
 # defaults file for dotfiles
 dotfiles_zsh: false
+
+dotfiles_vim: false
