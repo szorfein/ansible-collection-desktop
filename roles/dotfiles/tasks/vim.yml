@@ -1,0 +1,13 @@
+---
+- name: Vim > uninstall conflicting packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ dotfiles_vim_conflict_pkg_items }}"
+    state: absent
+  when: dotfiles_vim_conflict_pkg_items is defined
+
+- name: Vim > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: "{{ dotfiles_vim_pkg_items }}"
+    state: present

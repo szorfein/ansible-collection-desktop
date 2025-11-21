@@ -200,6 +200,12 @@ dotfiles_swayfx_add_to_group:
 dotfiles_swayfx_services:
   - seatd
 
+dotfiles_vim_conflict_pkg_items:
+  - gvim
+
+dotfiles_vim_pkg_items:
+  - vim
+
 dotfiles_wezterm_pkg_items:
   - wezterm
 

@@ -1,3 +1,5 @@
+- Return Vim for Awesome
+
 # 1.59.0
 
 - Add Swaylock dependencies on Swayfx
