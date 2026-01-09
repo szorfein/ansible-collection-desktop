@@ -15,7 +15,10 @@ dotfiles_awm_pkg_items:
   - xss-lock
   - inotify-tools
   - scrot
+  - chafa
+  - ueberzugpp
 
+# Yazi need chafa, ueberzugpp for Xst
 dotfiles_awm3_pkg_items:
   - awesome
   - picom
@@ -26,6 +29,8 @@ dotfiles_awm3_pkg_items:
   - maim
   - jq
   - curl
+  - chafa
+  - ueberzugpp
 
 dotfiles_betterlockscreen_conflict_pkg_items:
   - i3lock
@@ -99,6 +104,7 @@ dotfiles_mpd_pkg_items:
   - mpd
   - mpc
   - ncmpcpp
+  - cava
 
 dotfiles_neomutt_pkg_conflict_items:
   - mutt

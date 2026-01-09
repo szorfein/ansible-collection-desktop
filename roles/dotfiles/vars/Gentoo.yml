@@ -15,7 +15,10 @@ dotfiles_awm_pkg_items:
   - xss-lock
   - inotify-tools
   - scrot
+  - media-gfx/chafa
+  - media-gfx/ueberzugpp
 
+# Yazi need chafa, ueberzugpp for Xst
 dotfiles_awm3_pkg_items:
   - awesome
   - picom
@@ -27,6 +30,8 @@ dotfiles_awm3_pkg_items:
   - maim
   - app-misc/jq
   - net-misc/curl
+  - media-gfx/chafa
+  - media-gfx/ueberzugpp
 
 dotfiles_betterlockscreen_pkg_items:
   - x11-misc/betterlockscreen

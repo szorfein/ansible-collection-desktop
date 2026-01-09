@@ -1,3 +1,7 @@
+# 1.62.0
+
+- Yazi need chafa and ueberzugpp for Xst
+- Cava for Archlinux is now in the official repo
 - Return Vim for Awesome
 
 # 1.59.0

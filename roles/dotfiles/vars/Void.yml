@@ -18,7 +18,9 @@ dotfiles_awm_pkg_items:
   - inotify-tools
   - scrot
   - i3lock-color
+  - chafa
 
+# yazi have requirement to display image (chafa, ueberzugpp) for xst
 dotfiles_awm3_pkg_items:
   - awesome
   - picom
@@ -31,6 +33,7 @@ dotfiles_awm3_pkg_items:
   - i3lock-color
   - jq
   - curl
+  - chafa
 
 dotfiles_betterlockscreen_pkg_items:
   - betterlockscreen
