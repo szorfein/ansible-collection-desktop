@@ -1,7 +1,7 @@
 ---
 - ansible.builtin.import_tasks: gpu.yml
 - name: Swayfx > importing gpg keys for eww..
-  ansible.builtin.shell: "{{ item }}"
+  ansible.builtin.command: "{{ item }}"
   with_items:
     - "curl -sS https://github.com/elkowar.gpg | gpg --import"
     - "curl -sS https://github.com/web-flow.gpg | gpg --import"
