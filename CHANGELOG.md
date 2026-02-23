@@ -1,11 +1,14 @@
 # 1.62.0
 
+- Add terminal Kitty
 - Yazi need chafa and ueberzugpp for Xst
 - Cava for Archlinux is now in the official repo
+- Return Vim for Awesome
 - Return Vim for Awesome
 
 # 1.59.0
 
+- Return Vim8 for Awesome
 - Add Swaylock dependencies on Swayfx
 - Change all references `ansible_` with recommended `ansible_facts[]`
 - Update dependencies, add ImageMagick, yazi, lua-la, bash-ls...

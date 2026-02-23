@@ -68,6 +68,9 @@ dotfiles_files_browser_pkg_items:
 dotfiles_foot_pkg_items:
   - foot
 
+dotfiles_kitty_pkg_items:
+  - kitty
+
 dotfiles_gpu_intel_gen7_conflict_pkg_items:
   - intel-video-accel
 

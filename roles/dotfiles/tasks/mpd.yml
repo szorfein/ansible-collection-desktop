@@ -11,6 +11,8 @@
     name: "{{ dotfiles_mpd_pkg_items }}"
     state: present
 
+# Remove cava from AUR
+
 - name: Mpd > mpd_dir fact
   ansible.builtin.set_fact:
     mpd_dir: ~/.config/mpd
