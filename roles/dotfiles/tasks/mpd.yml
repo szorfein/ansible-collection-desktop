@@ -11,14 +11,7 @@
     name: "{{ dotfiles_mpd_pkg_items }}"
     state: present
 
-- ansible.builtin.include_tasks: arch-aur.yml
-  loop:
-    - name: cava
-      deps: [base-devel, fftw, alsa-lib, ncurses, iniparser, sndio, portaudio]
-  loop_control:
-    loop_var: aur_item
-  when: ansible_facts["os_family"] == 'Archlinux'
-
+# Remove cava from AUR
 - name: Mpd > mpd_dir fact
   ansible.builtin.set_fact:
     mpd_dir: ~/.config/mpd
