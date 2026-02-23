@@ -6,7 +6,7 @@
     name: "{{ aur_item.deps }}"
     extra_args: --needed
 
-#- name: aur > downloading the last snapshot
+# - name: aur > downloading the last snapshot
 # ansible.builtin.uri:
 #   url: "https://aur.archlinux.org/cgit/aur.git/snapshot/{{ aur_item.name }}.tar.gz"
 #   dest: "{{ dotfiles_cache_dir }}/{{ aur_item.name }}.tar.gz"
@@ -17,11 +17,13 @@
   ansible.builtin.file:
     path: "~/.cache/reaver/archlinux/{{ aur_item.name }}.tar.gz"
     state: file
+    mode: "0700"
 
 - name: Aur > creating building directory
   ansible.builtin.file:
     path: "{{ dotfiles_cache_dir }}/build"
     state: directory
+    mode: "0700"
 
 - name: Aur > removing older building directory
   ansible.builtin.file:
@@ -29,14 +31,14 @@
     state: absent
 
 - name: Aur > uncompressing source
-  ansible.builtin.command: >
-    tar xvf ~/.cache/reaver/archlinux/{{ aur_item.name }}.tar.gz
-    chdir={{ dotfiles_cache_dir }}/build
+  ansible.builtin.command:
+    chdir: "{{ dotfiles_cache_dir }}/build"
+    cmd: tar xvf ~/.cache/reaver/archlinux/{{ aur_item.name }}.tar.gz
 
 - name: Aur > building source
-  ansible.builtin.command: >
-    makepkg --cleanbuild --force --nodeps --noconfirm
-    chdir={{ dotfiles_cache_dir }}/build/{{ aur_item.name }}
+  ansible.builtin.command:
+    chdir: "{{ dotfiles_cache_dir }}/build/{{ aur_item.name }}"
+    cmd: makepkg --cleanbuild --force --nodeps --noconfirm
 
 - name: Aur > searching for building package '*.pkg.tar.zst'
   ansible.builtin.find:

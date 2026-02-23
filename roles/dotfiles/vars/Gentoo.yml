@@ -67,6 +67,9 @@ dotfiles_files_browser_pkg_items:
 dotfiles_foot_pkg_items:
   - gui-apps/foot
 
+dotfiles_kitty_pkg_items:
+  - x11-terms/kitty
+
 dotfiles_gpu_intel_gen7_conflict_pkg_items:
   - libva-intel-media-driver
 

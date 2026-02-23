@@ -76,6 +76,9 @@
 - ansible.builtin.include_tasks: foot.yml
   when: dotfiles_foot | bool
 
+- ansible.builtin.include_tasks: kitty.yml
+  when: dotfiles_kitty | bool
+
 - ansible.builtin.include_tasks: vim.yml
   when: dotfiles_vim | bool
 

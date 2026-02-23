@@ -1,0 +1,14 @@
+---
+- name: Kitty > removing conflicting packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ dotfiles_kitty_pkg_conflict_items }}"
+    state: absent
+  when: dotfiles_kitty_pkg_conflict_items is defined
+
+- name: Kitty > installing
+  become: true
+  ansible.builtin.package:
+    name: "{{ dotfiles_kitty_pkg_items }}"
+    state: present
+  when: dotfiles_kitty_pkg_items is defined

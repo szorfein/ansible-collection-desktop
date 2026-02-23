@@ -1,4 +1,5 @@
 ---
+# ansible.builtin.command don't work, use shell instead
 - ansible.builtin.import_tasks: gpu.yml
 - name: Swayfx > importing gpg keys for eww..
   ansible.builtin.shell: "{{ item }}"
@@ -18,7 +19,7 @@
   become: true
   ansible.builtin.package:
     name: "{{ dotfiles_swayfx_pkg_items }}"
-    state: latest
+    state: present
   when: dotfiles_swayfx_pkg_items is defined and not ansible_facts["os_family"] == 'Archlinux'
 
 - name: Swayfx > installing dependencies...

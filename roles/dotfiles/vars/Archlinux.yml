@@ -70,6 +70,9 @@ dotfiles_files_browser_pkg_items:
 dotfiles_foot_pkg_items:
   - foot
 
+dotfiles_kitty_pkg_items:
+  - kitty
+
 dotfiles_gpu_intel_gen7_conflict_pkg_items:
   - intel-media-driver
 
@@ -137,12 +140,14 @@ dotfiles_pulseaudio_pkg_items:
 dotfiles_swayfx_conflict_pkg_items:
   - sway
   - sway-git
+  - swayfx-git
   - scenefx-git
   - eww-git
-  - scenefx
+  - scenefx0.2
+  - scenefx0.3
   - wlroots0.17
   - wlroots0.18
-  - swayfx # need to remove swayfx to remove scenefx...
+#  - swayfx # need to remove swayfx to remove scenefx...
 
 dotfiles_swayfx_pkg_items:
   - inotify-tools

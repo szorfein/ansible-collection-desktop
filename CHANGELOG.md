@@ -1,7 +1,7 @@
-- Return Vim for Awesome
 
 # 1.59.0
 
+- Return Vim8 for Awesome
 - Add Swaylock dependencies on Swayfx
 - Change all references `ansible_` with recommended `ansible_facts[]`
 - Update dependencies, add ImageMagick, yazi, lua-la, bash-ls...
