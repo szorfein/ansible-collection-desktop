@@ -36,6 +36,12 @@ dotfiles_betterlockscreen_conflict_pkg_items:
   - i3lock
   - i3lock-color-git
 
+dotfiles_brightnessctl_pkg_conflict_items:
+  - light
+
+dotfiles_brightnessctl_pkg_items:
+  - brightnessctl
+
 dotfiles_emacs_pkg_conflict_items:
   - emacs
   - emacs-wayland
@@ -168,7 +174,6 @@ dotfiles_swayfx_pkg_items:
   - grim
   - swaybg
   - playerctl
-  - mpd-mpris
   - mpv-mpris
   - rust
   - git

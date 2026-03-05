@@ -1,6 +1,10 @@
 ---
 # ansible.builtin.command don't work, use shell instead
 - ansible.builtin.import_tasks: gpu.yml
+
+# Over light
+- ansible.builtin.import_tasks: brightnessctl.yml
+
 - name: Swayfx > importing gpg keys for eww..
   ansible.builtin.shell: "{{ item }}"
   with_items:
@@ -36,11 +40,8 @@
   block:
     - ansible.builtin.include_tasks: arch-aur.yml
       loop:
-        - name: light
-          deps: [base-devel]
-
         - name: eww
-          deps: [rust]
+          deps: [base-devel, rust]
 
         - name: scenefx0.4
           deps: [pixman, libglvnd, wayland]
@@ -49,6 +50,7 @@
           deps: [libxkbcommon, systemd-libs]
       loop_control:
         loop_var: aur_item
+
 - name: Swayfx > installing few ruby gems
   community.general.gem:
     name: i3ipc

@@ -1,0 +1,14 @@
+---
+- name: Brightnessctl > removing conflicting packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ dotfiles_brightnessctl_pkg_conflict_items }}"
+    state: absent
+  when: dotfiles_brightnessctl_pkg_conflict_items is defined
+
+- name: Brightnessctl > installing
+  become: true
+  ansible.builtin.package:
+    name: "{{ dotfiles_brightnessctl_pkg_items }}"
+    state: present
+  when: dotfiles_brightnessctl_pkg_items is defined

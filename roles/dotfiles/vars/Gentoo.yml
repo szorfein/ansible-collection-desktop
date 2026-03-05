@@ -36,6 +36,12 @@ dotfiles_awm3_pkg_items:
 dotfiles_betterlockscreen_pkg_items:
   - x11-misc/betterlockscreen
 
+dotfiles_brightnessctl_pkg_conflict_items:
+  - dev-libs/light
+
+dotfiles_brightnessctl_pkg_items:
+  - app-misc/brightnessctl
+
 dotfiles_emacs_pkg_items:
   - ripgrep
   - sys-apps/findutils
@@ -126,7 +132,6 @@ dotfiles_pulseaudio_pkg_items:
   - pulseaudio
 
 dotfiles_swayfx_pkg_items:
-  - light
   - net-misc/curl
   - inotify-tools
   - swaybg
@@ -141,7 +146,6 @@ dotfiles_swayfx_pkg_items:
   - gui-wm/swayfx
   - media-gfx/chafa
   - mpv-mpris
-  - mpd-mpris
   - acct-group/seat
   - seatd
   - x11-misc/dunst
