@@ -28,6 +28,12 @@
 - ansible.builtin.include_tasks: zsh.yml
   when: dotfiles_zsh | bool
 
+- ansible.builtin.import_tasks: alsa.yml
+  when: dotfiles_audio_backend is defined and dotfiles_audio_backend == 'alsa'
+
+- ansible.builtin.import_tasks: pulseaudio.yml
+  when: dotfiles_audio_backend is defined and dotfiles_audio_backend == 'pulseaudio'
+
 # ##############################
 # Removing previous wm installed
 

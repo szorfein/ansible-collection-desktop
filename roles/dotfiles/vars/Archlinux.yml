@@ -2,10 +2,21 @@
 dotfiles_alsa_pkg_conflict_items:
   - pipewire-pulse
   - pulseaudio
+  - pulseaudio-alsa
+  - pipewire-media-session
 
 dotfiles_alsa_pkg_items:
+  - pipewire
+  - pipewire-alsa
+  - wireplumber
+  - realtime-privileges
   - alsa-utils
   - alsa-plugins # speexrate resampling
+
+# Add user to group listed
+dotfiles_alsa_group_items:
+  - realtime
+  - audio
 
 dotfiles_awm_pkg_items:
   - awesome
