@@ -23,7 +23,37 @@
     alsa_card: "{{ audio_card.stdout }}"
   when: audio_card.stdout != ''
 
-- name: Alsa > enabling Wireplumber service for user
+- name: Alsa > creating config dir for pipewire
+  become: true
+  ansible.builtin.file:
+    path: /etc/alsa/conf.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Alsa > creating link files for pipewire
+  become: true
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+  loop: "{{ dotfiles_alsa_link_items }}"
+  when: dotfiles_alsa_link_items is defined
+
+- name: Alsa > disabling conflicting user services
+  become: false
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+    scope: user
+  with_items:
+    - pulseaudio.socket
+    - pulseaudio.service
+  when: ansible_facts["service_mgr"] == "systemd"
+
+- name: Alsa > enabling Wireplumber systemd service for user
   become: false
   ansible.builtin.systemd_service:
     name: "{{ item }}"
@@ -34,6 +64,8 @@
     - pipewire
     - wireplumber
   when: ansible_facts["service_mgr"] == "systemd"
+
+# TODO: add steps on openrc, runnit...
 
 - name: Alsa > adding user to group
   become: true
