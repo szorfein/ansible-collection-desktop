@@ -2,10 +2,30 @@
 dotfiles_alsa_pkg_conflict_items:
   - pipewire-pulse
   - pulseaudio
+  - pulseaudio-alsa
+  - libpulse
+  - pipewire-media-session
 
 dotfiles_alsa_pkg_items:
+  - pipewire
+  - pipewire-alsa
+  - wireplumber
+  - realtime-privileges
+  - wiremix
   - alsa-utils
   - alsa-plugins # speexrate resampling
+
+# Add user to group listed
+dotfiles_alsa_group_items:
+  - realtime
+  - audio
+
+# Alsa integration
+dotfiles_alsa_link_items:
+  - src: /usr/share/alsa/alsa.conf.d/50-pipewire.conf
+    dest: /etc/alsa/conf.d/50-pipewire.conf
+  - src: /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf
+    dest: /etc/alsa/conf.d/99-pipewire-default.conf
 
 dotfiles_awm_pkg_items:
   - awesome
