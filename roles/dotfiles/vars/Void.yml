@@ -58,6 +58,21 @@ dotfiles_brightnessctl_pkg_conflict_items:
 dotfiles_brightnessctl_pkg_items:
   - brightnessctl
 
+#- ELOGIND
+##########
+dotfiles_elogind_pkg_conflict_items:
+  - turnstile
+  - seatd
+
+dotfiles_elogind_pkg_items:
+  - dbus
+  - polkit
+  - elogind
+
+# elogind would be automatically enabled after install
+dotfiles_elogind_service_items:
+  - dbus
+
 dotfiles_emacs_pkg_items:
   - ripgrep
   - jq
@@ -173,8 +188,6 @@ dotfiles_swayfx_pkg_items:
   - swaybg
   - grim
   - iwd
-  - seatd
-  - turnstile
   - dunst
   - ImageMagick
   - swayidle
@@ -183,11 +196,6 @@ dotfiles_swayfx_pkg_items:
 
 dotfiles_swayfx_add_to_group:
   - network
-  - _seatd
-
-dotfiles_swayfx_services:
-  - seatd
-  - turnstiled
 
 dotfiles_vim_conflict_pkg_items:
   - vim

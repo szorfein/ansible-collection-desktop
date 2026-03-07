@@ -5,6 +5,9 @@
 # Over light
 - ansible.builtin.import_tasks: brightnessctl.yml
 
+# session
+- ansible.builtin.import_tasks: elogind.yml
+
 - name: Swayfx > importing gpg keys for eww..
   ansible.builtin.shell: "{{ item }}"
   with_items:

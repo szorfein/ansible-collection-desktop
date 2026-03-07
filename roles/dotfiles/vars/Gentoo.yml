@@ -50,6 +50,22 @@ dotfiles_brightnessctl_pkg_conflict_items:
 dotfiles_brightnessctl_pkg_items:
   - app-misc/brightnessctl
 
+#- ELOGIND
+##########
+dotfiles_elogind_pkg_conflict_items:
+  - sys-auth/seatd
+  - acct-group/seat
+  - acpid
+
+dotfiles_elogind_pkg_items:
+  - sys-apps/dbus
+  - polkit
+  - sys-auth/elogind
+
+dotfiles_elogind_service_items:
+  - dbus
+  - elogind
+
 dotfiles_emacs_pkg_items:
   - ripgrep
   - sys-apps/findutils
@@ -154,19 +170,10 @@ dotfiles_swayfx_pkg_items:
   - gui-wm/swayfx
   - media-gfx/chafa
   - mpv-mpris
-  - acct-group/seat
-  - seatd
   - x11-misc/dunst
   - gui-apps/swaylock
   - gui-apps/swayidle
   - gui-apps/wlr-randr
-
-dotfiles_swayfx_add_to_group:
-  - seat
-  - video
-
-dotfiles_swayfx_services:
-  - seatd
 
 dotfiles_xorg_pkg_items:
   - xorg-server

@@ -24,6 +24,11 @@ USE="${USE} -wayland"
 #USE="vaapi vdpau ${USE}"
 #{% endif %}
 
-{% if dotfiles_wm == 'swayfx' %}
-USE="${USE} wayland -X"
+{% if dotfiles_wm == 'swayfx' and not ansible_facts["service_mgr"] == "systemd" %}
+USE="${USE} wayland dbus elogind -X -systemd"
+{% endif %}
+
+{% if dotfiles_wm == 'swayfx' and ansible_facts["service_mgr"] == "systemd" %}
+# Should be alrealy enable with systemd
+USE="${USE} wayland dbus -X"
 {% endif %}
