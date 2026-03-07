@@ -25,5 +25,7 @@ USE="${USE} -wayland"
 #{% endif %}
 
 {% if dotfiles_wm == 'swayfx' %}
-USE="${USE} wayland -X"
+# the official wiki suggest that... really?
+USE="${USE} wayland dbus elogind -X -systemd"
+#USE="${USE} wayland dbus elogind -X"
 {% endif %}

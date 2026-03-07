@@ -62,6 +62,16 @@ dotfiles_brightnessctl_pkg_conflict_items:
 dotfiles_brightnessctl_pkg_items:
   - brightnessctl
 
+#- ELOGIND
+##########
+dotfiles_elogind_pkg_conflict_items:
+  - seatd
+  - acpid
+
+dotfiles_elogind_pkg_items:
+  - dbus-broker
+  - polkit
+
 dotfiles_emacs_pkg_conflict_items:
   - emacs
   - emacs-wayland
@@ -223,7 +233,6 @@ dotfiles_swayfx_pkg_items:
   - gtk3
   - gtk-layer-shell
   - iwd
-  - seatd
   - dunst
   - swayidle
   - swaylock
@@ -231,10 +240,6 @@ dotfiles_swayfx_pkg_items:
 
 dotfiles_swayfx_add_to_group:
   - network
-  - seat
-
-dotfiles_swayfx_services:
-  - seatd
 
 dotfiles_vim_conflict_pkg_items:
   - gvim
