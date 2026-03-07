@@ -1,0 +1,75 @@
+---
+- name: Pipewire-Alsa > uninstalling conflicting packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ dotfiles_pipewire_alsa_pkg_conflict_items }}"
+    state: absent
+  when: dotfiles_pipewire_alsa_pkg_conflict_items is defined and dotfiles_pipewire_alsa_pkg_conflict_items | length > 0
+
+- name: Pipewire-Alsa > installing dependencies
+  become: true
+  ansible.builtin.package:
+    name: "{{ dotfiles_pipewire_alsa_pkg_items }}"
+    state: present
+
+- name: Pipiwire-Alsa > creating config dir for pipewire
+  become: true
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  loop:
+    - /etc/alsa/conf.d
+    - /etc/pipewire/pipewire.conf.d
+
+- name: Pipewire-Alsa > creating link files for pipewire
+  become: true
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+  loop: "{{ dotfiles_pipewire_alsa_link_items }}"
+  when: dotfiles_pipewire_alsa_link_items is defined
+
+- name: Pipewire-Alsa > disabling conflicting user services
+  become: false
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+    scope: user
+  with_items:
+    - pulseaudio.socket
+    - pulseaudio.service
+  when: ansible_facts["service_mgr"] == "systemd"
+
+- name: Pipewire-Alsa > enabling Wireplumber systemd service for user
+  become: false
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+    scope: user
+  with_items:
+    - pipewire
+    - wireplumber
+  when: ansible_facts["service_mgr"] == "systemd"
+
+# TODO: add steps on openrc, runnit...
+- name: Pipewire-Alsa > configuration on Voidlinux
+  become: true
+  ansible.builtin.file:
+    src: /usr/share/examples/wireplumber/10-wireplumber.conf
+    dest: /etc/pipewire/pipewire.conf.d/10-wireplumber.conf
+    state: link
+  when: ansible_facts["os_family"] == 'Void'
+
+- name: Pipewire-Alsa > adding user to group
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_facts['user_id'] }}"
+    groups: "{{ dotfiles_pipewire_alsa_group_items }}"
+    append: true
+  when: dotfiles_pipewire_alsa_group_items is defined
