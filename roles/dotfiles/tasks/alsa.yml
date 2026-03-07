@@ -26,11 +26,14 @@
 - name: Alsa > creating config dir for pipewire
   become: true
   ansible.builtin.file:
-    path: /etc/alsa/conf.d
+    path: "{{ item }}"
     state: directory
     owner: root
     group: root
     mode: "0755"
+  loop:
+    - /etc/alsa/conf.d
+    - /etc/pipewire/pipewire.conf.d
 
 - name: Alsa > creating link files for pipewire
   become: true
@@ -66,6 +69,13 @@
   when: ansible_facts["service_mgr"] == "systemd"
 
 # TODO: add steps on openrc, runnit...
+- name: Alsa > configuration on Voidlinux
+  become: true
+  ansible.builtin.file:
+    src: /usr/share/examples/wireplumber/10-wireplumber.conf
+    dest: /etc/pipewire/pipewire.conf.d/10-wireplumber.conf
+    state: link
+  when: ansible_facts["os_family"] == 'Void'
 
 - name: Alsa > adding user to group
   become: true

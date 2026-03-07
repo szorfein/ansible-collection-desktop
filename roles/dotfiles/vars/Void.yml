@@ -63,16 +63,15 @@ dotfiles_brightnessctl_pkg_items:
 dotfiles_elogind_pkg_conflict_items:
   - turnstile
   - seatd
-  - acpid
 
 dotfiles_elogind_pkg_items:
   - dbus
   - polkit
   - elogind
 
+# elogind would be automatically enabled after install
 dotfiles_elogind_service_items:
   - dbus
-  - elogind
 
 dotfiles_emacs_pkg_items:
   - ripgrep
