@@ -8,6 +8,9 @@
 # session
 - ansible.builtin.import_tasks: elogind.yml
 
+- ansible.builtin.import_tasks: pipewire-alsa.yml
+  when: dotfiles_audio_backend is defined and dotfiles_audio_backend == 'alsa'
+
 - name: Swayfx > importing gpg keys for eww..
   ansible.builtin.shell: "{{ item }}"
   with_items:
