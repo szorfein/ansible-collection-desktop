@@ -1,7 +1,35 @@
 ---
+# libpulse is a dependency of so many packages... like librewolf
+dotfiles_pipewire_alsa_pkg_conflict_items:
+  - pipewire-pulse
+  - pulseaudio
+  - pulseaudio-alsa
+  - pipewire-media-session
+
+dotfiles_pipewire_alsa_pkg_items:
+  - pipewire
+  - pipewire-alsa
+  - wireplumber
+  - realtime-privileges
+  - wiremix
+
+# Add user to group listed
+dotfiles_pipewire_alsa_group_items:
+  - realtime
+
+# Alsa integration
+dotfiles_pipewire_alsa_link_items:
+  - src: /usr/share/alsa/alsa.conf.d/50-pipewire.conf
+    dest: /etc/alsa/conf.d/50-pipewire.conf
+  - src: /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf
+    dest: /etc/alsa/conf.d/99-pipewire-default.conf
+
 dotfiles_alsa_pkg_conflict_items:
   - pipewire-pulse
   - pulseaudio
+  - pulseaudio-alsa
+  - libpulse
+  - pipewire-media-session
 
 dotfiles_alsa_pkg_items:
   - alsa-utils
@@ -15,7 +43,10 @@ dotfiles_awm_pkg_items:
   - xss-lock
   - inotify-tools
   - scrot
+  - chafa
+  - ueberzugpp
 
+# Yazi need chafa, ueberzugpp for Xst
 dotfiles_awm3_pkg_items:
   - awesome
   - picom
@@ -26,10 +57,28 @@ dotfiles_awm3_pkg_items:
   - maim
   - jq
   - curl
+  - chafa
+  - ueberzugpp
 
 dotfiles_betterlockscreen_conflict_pkg_items:
   - i3lock
   - i3lock-color-git
+
+dotfiles_brightnessctl_pkg_conflict_items:
+  - light
+
+dotfiles_brightnessctl_pkg_items:
+  - brightnessctl
+
+#- ELOGIND
+##########
+# seatd is a dependency of wlroots even if systemd (and elogind) are installed by default...
+dotfiles_elogind_pkg_conflict_items:
+  - acpid
+
+dotfiles_elogind_pkg_items:
+  - dbus-broker
+  - polkit
 
 dotfiles_emacs_pkg_conflict_items:
   - emacs
@@ -102,6 +151,7 @@ dotfiles_mpd_pkg_items:
   - mpd
   - mpc
   - ncmpcpp
+  - cava
 
 dotfiles_neomutt_pkg_conflict_items:
   - mutt
@@ -162,7 +212,6 @@ dotfiles_swayfx_pkg_items:
   - grim
   - swaybg
   - playerctl
-  - mpd-mpris
   - mpv-mpris
   - rust
   - git
@@ -192,7 +241,6 @@ dotfiles_swayfx_pkg_items:
   - gtk3
   - gtk-layer-shell
   - iwd
-  - seatd
   - dunst
   - swayidle
   - swaylock
@@ -200,10 +248,6 @@ dotfiles_swayfx_pkg_items:
 
 dotfiles_swayfx_add_to_group:
   - network
-  - seat
-
-dotfiles_swayfx_services:
-  - seatd
 
 dotfiles_vim_conflict_pkg_items:
   - gvim

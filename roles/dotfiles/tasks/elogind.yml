@@ -1,0 +1,23 @@
+---
+- name: Elogind > removing conflicting packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ dotfiles_elogind_pkg_conflict_items }}"
+    state: absent
+  when: dotfiles_elogind_pkg_conflict_items is defined
+
+- name: Elogind > installing
+  become: true
+  ansible.builtin.package:
+    name: "{{ dotfiles_elogind_pkg_items }}"
+    state: present
+  when: dotfiles_elogind_pkg_items is defined
+
+- name: Elogind > enabling services
+  become: true
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  loop: "{{ dotfiles_elogind_service_items }}"
+  when: dotfiles_elogind_service_items is defined

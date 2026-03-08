@@ -4,12 +4,12 @@ Ansible collection for Desktop, tested on:
 
 - ArchLinux
 - Debian bullseye (Frozen, don't work, i need 'a lot' of motivation to build all the .deb file for missing packages...)
-- Gentoo
+- Gentoo (Soon Frozen, unless help, I need people to test it, report bugs or required USE flag, make PR if possible)
 - Void Linux
 
 Unless you want to help support other distributions, I won't add another distro/system here.
 
-Theses collections works together with [Reaver](https://github.com/szorfein/reaver), all sources/files required are downloads before execute playbooks to 'limit' crash during the execution.
+Theses collections made for [dots](https://github.com/szorfein/dots/tree/ansible) and works together with [Reaver](https://github.com/szorfein/reaver), all sources/files required are downloads before execute playbooks to 'limit' crash during the execution.
 
 ## Roles include
 
@@ -23,7 +23,7 @@ Theses collections works together with [Reaver](https://github.com/szorfein/reav
 
 ## Using this collection
 
-Please refer to the examples in the readmes of the role.  
+Please refer to the examples in the readmes of the role.
 See [Ansible Using collections](https://docs.ansible.com/ansible/latest/user_guide/collections_using.html) for more details.
 
 ## Contributing to this collection

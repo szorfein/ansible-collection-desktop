@@ -1,6 +1,27 @@
 ---
+dotfile_pipewire_alsa_pkg_conflict_items:
+  - pulseaudio
+  - alsa-plugins-pulseaudio
+  - apulse
+
+dotfile_pipewire_alsa_pkg_items:
+  - pipewire
+  - alsa-pipewire
+  - wireplumber
+  - wireplumber-elogind
+  - wiremix
+
+# Alsa integration
+dotfiles_pipewire_alsa_link_items:
+  - src: /usr/share/alsa/alsa.conf.d/50-pipewire.conf
+    dest: /etc/alsa/conf.d/50-pipewire.conf
+  - src: /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf
+    dest: /etc/alsa/conf.d/99-pipewire-default.conf
+
 dotfiles_alsa_pkg_conflict_items:
   - pulseaudio
+  - alsa-plugins-pulseaudio
+  - apulse
 
 dotfiles_alsa_pkg_items:
   - alsa-utils
@@ -18,7 +39,9 @@ dotfiles_awm_pkg_items:
   - inotify-tools
   - scrot
   - i3lock-color
+  - chafa
 
+# yazi have requirement to display image (chafa, ueberzugpp) for xst
 dotfiles_awm3_pkg_items:
   - awesome
   - picom
@@ -31,9 +54,31 @@ dotfiles_awm3_pkg_items:
   - i3lock-color
   - jq
   - curl
+  - chafa
 
 dotfiles_betterlockscreen_pkg_items:
   - betterlockscreen
+
+dotfiles_brightnessctl_pkg_conflict_items:
+  - light
+
+dotfiles_brightnessctl_pkg_items:
+  - brightnessctl
+
+#- ELOGIND
+##########
+dotfiles_elogind_pkg_conflict_items:
+  - turnstile
+  - seatd
+
+dotfiles_elogind_pkg_items:
+  - dbus
+  - polkit
+  - elogind
+
+# elogind would be automatically enabled after install
+dotfiles_elogind_service_items:
+  - dbus
 
 dotfiles_emacs_pkg_items:
   - ripgrep
@@ -137,7 +182,6 @@ dotfiles_pulseaudio_pkg_items:
 dotfiles_swayfx_pkg_items:
   - swayfx
   - imv
-  - light
   - jq
   - wl-clipboard
   - inotify-tools
@@ -146,14 +190,11 @@ dotfiles_swayfx_pkg_items:
   - chafa
   - playerctl
   - mpv-mpris
-  - mpDris2
   - eww
   - ruby
   - swaybg
   - grim
   - iwd
-  - seatd
-  - turnstile
   - dunst
   - ImageMagick
   - swayidle
@@ -162,11 +203,6 @@ dotfiles_swayfx_pkg_items:
 
 dotfiles_swayfx_add_to_group:
   - network
-  - _seatd
-
-dotfiles_swayfx_services:
-  - seatd
-  - turnstiled
 
 dotfiles_vim_conflict_pkg_items:
   - vim

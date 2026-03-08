@@ -1,3 +1,24 @@
+# 1.70.0 - Mar. 2026
+
+- Add Pipewire with Alsa (used only with SwayFX for now)
+- Install of SwayFX use elogind as session management, other solutions are not yet enough mature...
+
+### Gentoo
+
+I add "more or less" what is require by Gentoo by reading the doc but
+I can't no longer fully test Gentoo, my hardware sucks a lot. I lose 1 day only to compile 2 packages (LLVM+CLANG), so image how munch time I lose by compiling all the dependencies :)
+
+- Need people to make test on Gentoo and report bugs or making Pull Request directly.
+- Test, report what are the required USE flag, preference by packages instead of globally when possible.
+- Thanks to precise if test concern Glibc and Musl.
+
+# 1.62.0
+
+- Add terminal Kitty
+- Yazi need chafa and ueberzugpp for Xst
+- Cava for Archlinux is now in the official repo
+- Return Vim for Awesome
+- Return Vim for Awesome
 
 # 1.59.0
 

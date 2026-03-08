@@ -1,6 +1,12 @@
 ---
 - ansible.builtin.import_tasks: xorg.yml
 - ansible.builtin.import_tasks: betterlockscreen.yml
+- ansible.builtin.import_tasks: alsa.yml
+  when: dotfiles_audio_backend is defined and dotfiles_audio_backend == 'alsa'
+
+- ansible.builtin.import_tasks: pulseaudio.yml
+  when: dotfiles_audio_backend is defined and dotfiles_audio_backend == 'pulseaudio'
+
 - name: Awm-m3 > installing dependencies
   become: true
   ansible.builtin.package:

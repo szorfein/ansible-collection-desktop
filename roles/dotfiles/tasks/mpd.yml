@@ -1,10 +1,4 @@
 ---
-- ansible.builtin.import_tasks: alsa.yml
-  when: dotfiles_audio_backend is defined and dotfiles_audio_backend == 'alsa'
-
-- ansible.builtin.import_tasks: pulseaudio.yml
-  when: dotfiles_audio_backend is defined and dotfiles_audio_backend == 'pulseaudio'
-
 - name: Mpd > installing dependencies
   become: true
   ansible.builtin.package:
@@ -12,6 +6,7 @@
     state: present
 
 # Remove cava from AUR
+
 - name: Mpd > mpd_dir fact
   ansible.builtin.set_fact:
     mpd_dir: ~/.config/mpd

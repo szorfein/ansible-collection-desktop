@@ -1,6 +1,20 @@
 ---
+dotfiles_pipewire_alsa_pkg_conflict_items:
+  - pulseaudio
+  - media-sound/pulseaudio-daemon
+
+dotfiles_pipewire_alsa_pkg_items:
+  - pipewire
+  - media-video/wireplumber
+  - sys-auth/rtkit
+  - media-sound/wiremix
+
+dotfiles_pipewire_alsa_group_items:
+  - pipewire
+
 dotfiles_alsa_pkg_conflict_items:
   - pulseaudio
+  - media-sound/pulseaudio-daemon
 
 dotfiles_alsa_pkg_items:
   - alsa-utils
@@ -15,7 +29,10 @@ dotfiles_awm_pkg_items:
   - xss-lock
   - inotify-tools
   - scrot
+  - media-gfx/chafa
+  - media-gfx/ueberzugpp
 
+# Yazi need chafa, ueberzugpp for Xst
 dotfiles_awm3_pkg_items:
   - awesome
   - picom
@@ -27,9 +44,33 @@ dotfiles_awm3_pkg_items:
   - maim
   - app-misc/jq
   - net-misc/curl
+  - media-gfx/chafa
+  - media-gfx/ueberzugpp
 
 dotfiles_betterlockscreen_pkg_items:
   - x11-misc/betterlockscreen
+
+dotfiles_brightnessctl_pkg_conflict_items:
+  - dev-libs/light
+
+dotfiles_brightnessctl_pkg_items:
+  - app-misc/brightnessctl
+
+#- ELOGIND
+##########
+dotfiles_elogind_pkg_conflict_items:
+  - sys-auth/seatd
+  - acct-group/seat
+  - acpid
+
+dotfiles_elogind_pkg_items:
+  - sys-apps/dbus
+  - polkit
+  - sys-auth/elogind
+
+dotfiles_elogind_service_items:
+  - dbus
+  - elogind
 
 dotfiles_emacs_pkg_items:
   - ripgrep
@@ -121,7 +162,6 @@ dotfiles_pulseaudio_pkg_items:
   - pulseaudio
 
 dotfiles_swayfx_pkg_items:
-  - light
   - net-misc/curl
   - inotify-tools
   - swaybg
@@ -136,20 +176,10 @@ dotfiles_swayfx_pkg_items:
   - gui-wm/swayfx
   - media-gfx/chafa
   - mpv-mpris
-  - mpd-mpris
-  - acct-group/seat
-  - seatd
   - x11-misc/dunst
   - gui-apps/swaylock
   - gui-apps/swayidle
   - gui-apps/wlr-randr
-
-dotfiles_swayfx_add_to_group:
-  - seat
-  - video
-
-dotfiles_swayfx_services:
-  - seatd
 
 dotfiles_xorg_pkg_items:
   - xorg-server
