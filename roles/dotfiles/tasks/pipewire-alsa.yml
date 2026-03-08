@@ -43,6 +43,7 @@
   with_items:
     - pulseaudio.socket
     - pulseaudio.service
+  ignore_errors: yes
   when: ansible_facts["service_mgr"] == "systemd"
 
 - name: Pipewire-Alsa > enabling Wireplumber systemd service for user

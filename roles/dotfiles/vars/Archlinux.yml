@@ -1,9 +1,9 @@
 ---
+# libpulse is a dependency of so many packages... like librewolf
 dotfiles_pipewire_alsa_pkg_conflict_items:
   - pipewire-pulse
   - pulseaudio
   - pulseaudio-alsa
-  - libpulse
   - pipewire-media-session
 
 dotfiles_pipewire_alsa_pkg_items:
@@ -72,8 +72,8 @@ dotfiles_brightnessctl_pkg_items:
 
 #- ELOGIND
 ##########
+# seatd is a dependency of wlroots even if systemd (and elogind) are installed by default...
 dotfiles_elogind_pkg_conflict_items:
-  - seatd
   - acpid
 
 dotfiles_elogind_pkg_items:
