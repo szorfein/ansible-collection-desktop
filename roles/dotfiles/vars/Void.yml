@@ -110,6 +110,17 @@ dotfiles_files_browser_pkg_items:
 dotfiles_foot_pkg_items:
   - foot
 
+dotfiles_kew_pkg_conflict_items:
+  - cava
+  - mpd
+  - mpc
+  - mpDris2
+  - mpdris2-rs
+  - ncmpcpp
+
+dotfiles_kew_pkg_items:
+  - kew
+
 dotfiles_kitty_pkg_items:
   - kitty
 

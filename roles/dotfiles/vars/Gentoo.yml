@@ -108,6 +108,17 @@ dotfiles_files_browser_pkg_items:
 dotfiles_foot_pkg_items:
   - gui-apps/foot
 
+dotfiles_kew_pkg_conflict_items:
+  - cava
+  - media-sound/mpd
+  - media-sound/mpc
+  - media-sound/mpd-mpris
+  - ncmpcpp
+
+# On GURU
+dotfiles_kew_pkg_items:
+  - media-sound/kew
+
 dotfiles_kitty_pkg_items:
   - x11-terms/kitty
 

@@ -50,7 +50,7 @@ media-plugins/alsa-plugins pulseaudio
 {% if ansible_service_mgr == 'openrc' %}
 sys-apps/accountsservice elogind
 media-sound/pulseaudio-daemon elogind alsa -X
-{% elif ansible_service_mgr == 'systemd' %}
+{% elif ansible_facts_service_mgr == 'systemd' %}
 sys-apps/accountsservice systemd
 media-sound/pulseaudio-daemon systemd alsa -X
 {% endif %}
@@ -85,14 +85,14 @@ dev-libs/libdbusmenu gtk3
 #media-libs/libglvnd X
 #media-gfx/imv -X wayland
 # If sys-auth/seatd is used, the server USE flag is required.
-sys-auth/seatd server
+#sys-auth/seatd server
 # can't set a wallpaper in jpg without this
 x11-libs/gdk-pixbuf jpeg
 gui-apps/swaybg gdk-pixbuf
 #media-libs/vulkan-loader -X wayland
 #media-video/mpv -X wayland
 
-# dunst 
+# dunst
 app-text/xmlto text
 x11-misc/dunst dunstify
 
