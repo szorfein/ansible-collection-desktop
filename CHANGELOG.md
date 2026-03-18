@@ -1,7 +1,12 @@
 # 1.70.0 - Mar. 2026
 
+- Simplify global USE flags on Gentoo.
 - Add Pipewire with Alsa (used only with SwayFX for now)
 - Install of SwayFX use elogind as session management, other solutions are not yet enough mature...
+
+Fixes
+
+- Error on Voidlinux on pipewire in variables name.
 
 ### Gentoo
 
