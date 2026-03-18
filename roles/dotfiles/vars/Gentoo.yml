@@ -3,11 +3,11 @@ dotfiles_pipewire_alsa_pkg_conflict_items:
   - pulseaudio
   - media-sound/pulseaudio-daemon
 
+# fail on media-sound/wiremix
 dotfiles_pipewire_alsa_pkg_items:
   - pipewire
   - media-video/wireplumber
   - sys-auth/rtkit
-  - media-sound/wiremix
 
 dotfiles_pipewire_alsa_group_items:
   - pipewire

@@ -51,7 +51,7 @@
   with_items:
     - pulseaudio.socket
     - pulseaudio.service
-  ignore_errors: yes
+  ignore_errors: true
   when: ansible_facts["service_mgr"] == "systemd"
 
 - name: Pipewire-Alsa > enabling Wireplumber systemd service for user
@@ -59,7 +59,7 @@
   ansible.builtin.systemd_service:
     name: "{{ item }}"
     state: started
-    enabled: yes
+    enabled: true
     scope: user
   with_items:
     - pipewire
@@ -67,10 +67,11 @@
   when: ansible_facts["service_mgr"] == "systemd"
 
 # TODO: add steps on openrc...
-- name: Pipewire-Alsa > configuration {{ ansible_user_dir }} on Voidlinux
+- name: Pipewire-Alsa > Voidlinux configuration on {{ ansible_user_dir }}
   become: false
+  when: ansible_facts["os_family"] == 'Void'
   block:
-    - name: creating user config directory
+    - name: Creating user config directory
       ansible.builtin.file:
         path: "{{ ansible_user_dir }}/.config/pipewire/pipewire.conf.d"
         state: directory
@@ -78,9 +79,8 @@
         group: "{{ ansible_user_id }}"
         mode: "0700"
 
-    - name: install link wireplumber
+    - name: Install link wireplumber
       ansible.builtin.file:
         src: /usr/share/examples/wireplumber/10-wireplumber.conf
         dest: "{{ ansible_user_dir }}/.config/pipewire/pipewire.conf.d/10-wireplumber.conf"
         state: link
-  when: ansible_facts["os_family"] == 'Void'

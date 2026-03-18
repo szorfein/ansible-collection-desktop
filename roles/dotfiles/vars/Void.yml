@@ -1,10 +1,10 @@
 ---
-dotfile_pipewire_alsa_pkg_conflict_items:
+dotfiles_pipewire_alsa_pkg_conflict_items:
   - pulseaudio
   - alsa-plugins-pulseaudio
   - apulse
 
-dotfile_pipewire_alsa_pkg_items:
+dotfiles_pipewire_alsa_pkg_items:
   - pipewire
   - alsa-pipewire
   - wireplumber
