@@ -191,6 +191,8 @@ dotfiles_swayfx_pkg_items:
   - gui-apps/swaylock
   - gui-apps/swayidle
   - gui-apps/wlr-randr
+  - sys-process/glances
+  - sys-apps/fd
 
 dotfiles_xorg_pkg_items:
   - xorg-server

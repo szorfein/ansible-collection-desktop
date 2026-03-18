@@ -83,14 +83,15 @@ xfce-base/libxfce4windowing wayland
 dev-libs/libdbusmenu gtk3
 #x11-libs/gtk+ wayland
 #media-libs/libglvnd X
-#media-gfx/imv -X wayland
+
+media-gfx/imv -X wayland
+
 # If sys-auth/seatd is used, the server USE flag is required.
 #sys-auth/seatd server
 # can't set a wallpaper in jpg without this
 x11-libs/gdk-pixbuf jpeg
 gui-apps/swaybg gdk-pixbuf
 #media-libs/vulkan-loader -X wayland
-#media-video/mpv -X wayland
 
 # dunst
 app-text/xmlto text
@@ -100,6 +101,21 @@ x11-misc/dunst dunstify
 #media-libs/mesa wayland
 #media-libs/mesa-amber wayland
 # TODO install nemo (this will install a lot of deps)
+
+# Mpv
+media-video/mpv -X wayland
+
+{% if dotfiles_audio_backend == 'alsa' %}
+# Pipewire
+media-video/pipewire sound-server pipewire-alsa
+{% endif %}
+
+{% if dotfiles_kitty %}
+# Kitty
+x11-terms/kitty -X wayland
+{% endif %}
+
+# End of SwayFX
 {% endif %}
 
 {% if dotfiles_neovim %}
