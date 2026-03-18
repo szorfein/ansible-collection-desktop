@@ -21,11 +21,15 @@ gui-apps/wlr-randr ~amd64
 media-sound/wiremix ~amd64
 {% endif %}
 
+{% if dotfiles_kew %}
+media-sound/kew ~amd64
+{% endif %}
+
 {% if dotfiles_files_browser %}
 app-misc/yazi ~amd64
 {% endif %}
 
-{% if dotfiles_emacs_doom || dotfiles_neovim %}
+{% if dotfiles_emacs_doom or dotfiles_neovim %}
 dev-util/shellcheck ~amd64
 {% endif %}
 

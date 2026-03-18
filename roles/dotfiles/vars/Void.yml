@@ -211,6 +211,8 @@ dotfiles_swayfx_pkg_items:
   - swayidle
   - swaylock
   - wlr-randr
+  - glances
+  - fd
 
 dotfiles_swayfx_add_to_group:
   - network
