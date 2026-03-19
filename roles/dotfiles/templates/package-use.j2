@@ -14,23 +14,13 @@ x11-libs/libxkbcommon X
 media-libs/libglvnd X
 #media-gfx/imagemagick xml png jpeg
 
-{% if dotfiles_gpu_driver == 'intel_gen7' or dotfiles_gpu_driver == 'intel' %}
-#media-libs/libva X
-{% endif %}
-
-{% if dotfiles_gpu_driver == 'intel' %}
-#media-libs/vulkan-loader X
-{% endif %}
-
 {% if dotfiles_audio_backend == 'pulseaudio' %}
 # Pulseaudio
 media-libs/libpulse X
 media-plugins/alsa-plugins pulseaudio
 {% endif %}
 
-{% if ansible_service_mgr == 'openrc' %}
-sys-auth/pambase elogind
-{% endif %}
+# End of Awesome
 {% endif %}
 
 {% if dotfiles_emacs_doom %}
@@ -53,26 +43,12 @@ app-crypt/gcr gtk
 dev-libs/glib dbus
 x11-libs/xapp introspection
 media-plugins/alsa-plugins pulseaudio
-{% if ansible_service_mgr == 'openrc' %}
+{% if ansible_facts["service_mgr"] == 'openrc' %}
 sys-apps/accountsservice elogind
 media-sound/pulseaudio-daemon elogind alsa -X
-{% elif ansible_facts_service_mgr == 'systemd' %}
+{% elif ansible_facts["service_mgr"] == 'systemd' %}
 sys-apps/accountsservice systemd
 media-sound/pulseaudio-daemon systemd alsa -X
-{% endif %}
-{% elif dotfiles_audio_backend == 'alsa' %}
-{% if dotfiles_wm == 'awm-m2' or dotfiles_wm == 'awm-m3' %}
-# Thunar
-dev-python/pycairo X
-x11-libs/gtk+ X
-xfce-base/libxfce4ui X
-xfce-base/xfce4-panel X
-xfce-base/libxfce4windowing X
-{% else %}
-# Swayfx
-xfce-base/libxfce4ui wayland
-xfce-base/xfce4-panel wayland
-xfce-base/libxfce4windowing wayland
 {% endif %}
 {% endif %}
 {% endif %}
@@ -85,15 +61,18 @@ xfce-base/libxfce4windowing wayland
 
 {% if dotfiles_wm == 'swayfx' %}
 # SwayFX
-#gui-apps/eww wayland
 dev-libs/libdbusmenu gtk3
-#x11-libs/gtk+ wayland
-#media-libs/libglvnd X
+x11-libs/gtk+ -X
+media-libs/libglvnd X
+
+# require by imv
+media-libs/freetype harfbuzz
 
 media-gfx/imv -X wayland
 
-# If sys-auth/seatd is used, the server USE flag is required.
-#sys-auth/seatd server
+# require by Sway
+media-libs/mesa -X
+
 # can't set a wallpaper in jpg without this
 x11-libs/gdk-pixbuf jpeg
 gui-apps/swaybg gdk-pixbuf
@@ -102,16 +81,16 @@ gui-apps/swaybg gdk-pixbuf
 # dunst
 app-text/xmlto text
 x11-misc/dunst dunstify
-
-# intel gen7 and lower
-#media-libs/mesa wayland
-#media-libs/mesa-amber wayland
-# TODO install nemo (this will install a lot of deps)
+x11-libs/cairo X
+x11-libs/pango X
 
 # Mpv
 media-video/mpv -X wayland
 
 {% if dotfiles_audio_backend == 'alsa' %}
+# Thunar
+x11-libx/gtk+ X
+media-libs/mesa X
 # Pipewire
 media-video/pipewire sound-server pipewire-alsa
 {% endif %}
