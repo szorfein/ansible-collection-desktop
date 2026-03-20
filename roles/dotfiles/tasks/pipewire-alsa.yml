@@ -33,6 +33,14 @@
   loop: "{{ dotfiles_pipewire_alsa_link_items }}"
   when: dotfiles_pipewire_alsa_link_items is defined
 
+- name: Pipewire-Alsa > adding user to group
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_facts['user_id'] }}"
+    groups: "{{ dotfiles_pipewire_alsa_group_items }}"
+    append: true
+  when: dotfiles_pipewire_alsa_group_items is defined
+
 - name: Pipewire-Alsa > disabling conflicting user services
   become: false
   ansible.builtin.systemd_service:
@@ -43,7 +51,7 @@
   with_items:
     - pulseaudio.socket
     - pulseaudio.service
-  ignore_errors: yes
+  ignore_errors: true
   when: ansible_facts["service_mgr"] == "systemd"
 
 - name: Pipewire-Alsa > enabling Wireplumber systemd service for user
@@ -51,26 +59,28 @@
   ansible.builtin.systemd_service:
     name: "{{ item }}"
     state: started
-    enabled: yes
+    enabled: true
     scope: user
   with_items:
     - pipewire
     - wireplumber
   when: ansible_facts["service_mgr"] == "systemd"
 
-# TODO: add steps on openrc, runnit...
-- name: Pipewire-Alsa > configuration on Voidlinux
-  become: true
-  ansible.builtin.file:
-    src: /usr/share/examples/wireplumber/10-wireplumber.conf
-    dest: /etc/pipewire/pipewire.conf.d/10-wireplumber.conf
-    state: link
+# TODO: add steps on openrc...
+- name: Pipewire-Alsa > Voidlinux configuration on {{ ansible_user_dir }}
+  become: false
   when: ansible_facts["os_family"] == 'Void'
+  block:
+    - name: Creating user config directory
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/.config/pipewire/pipewire.conf.d"
+        state: directory
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: "0700"
 
-- name: Pipewire-Alsa > adding user to group
-  become: true
-  ansible.builtin.user:
-    name: "{{ ansible_facts['user_id'] }}"
-    groups: "{{ dotfiles_pipewire_alsa_group_items }}"
-    append: true
-  when: dotfiles_pipewire_alsa_group_items is defined
+    - name: Install link wireplumber
+      ansible.builtin.file:
+        src: /usr/share/examples/wireplumber/10-wireplumber.conf
+        dest: "{{ ansible_user_dir }}/.config/pipewire/pipewire.conf.d/10-wireplumber.conf"
+        state: link

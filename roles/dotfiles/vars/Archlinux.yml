@@ -119,6 +119,19 @@ dotfiles_files_browser_pkg_items:
 dotfiles_foot_pkg_items:
   - foot
 
+dotfiles_kew_pkg_conflict_items:
+  - mpd-mpris
+  - mpdris
+  - mpdris2
+  - python-mpd2
+  - mpd
+  - mpc
+  - ncmpcpp
+  - cava
+
+dotfiles_kew_pkg_items:
+  - kew
+
 dotfiles_kitty_pkg_items:
   - kitty
 
@@ -245,7 +258,10 @@ dotfiles_swayfx_pkg_items:
   - swayidle
   - swaylock
   - wlr-randr
+  - glances
+  - fd
 
+# for iwd
 dotfiles_swayfx_add_to_group:
   - network
 

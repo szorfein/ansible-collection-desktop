@@ -15,15 +15,24 @@ x11-misc/betterlockscreen ~amd64
 gui-apps/eww ~amd64
 gui-wm/swayfx ~amd64
 gui-libs/scenefx ~amd64
-media-sound/mpd-mpris ~amd64
 mpv-plugin/mpv-mpris ~amd64
+app-misc/brightnessctl ~amd64
+gui-apps/wlr-randr ~amd64
+media-sound/wiremix ~amd64
+# element-desktop (matrix)
+net-im/element-desktop-bin ~amd64
+dev-libs/nspr ~amd64
+{% endif %}
+
+{% if dotfiles_kew %}
+media-sound/kew ~amd64
 {% endif %}
 
 {% if dotfiles_files_browser %}
 app-misc/yazi ~amd64
 {% endif %}
 
-{% if dotfiles_emacs_doom %}
+{% if dotfiles_emacs_doom or dotfiles_neovim %}
 dev-util/shellcheck ~amd64
 {% endif %}
 

@@ -3,11 +3,11 @@ dotfiles_pipewire_alsa_pkg_conflict_items:
   - pulseaudio
   - media-sound/pulseaudio-daemon
 
+# fail on media-sound/wiremix
 dotfiles_pipewire_alsa_pkg_items:
   - pipewire
   - media-video/wireplumber
   - sys-auth/rtkit
-  - media-sound/wiremix
 
 dotfiles_pipewire_alsa_group_items:
   - pipewire
@@ -108,6 +108,17 @@ dotfiles_files_browser_pkg_items:
 dotfiles_foot_pkg_items:
   - gui-apps/foot
 
+dotfiles_kew_pkg_conflict_items:
+  - cava
+  - media-sound/mpd
+  - media-sound/mpc
+  - media-sound/mpd-mpris
+  - ncmpcpp
+
+# On GURU
+dotfiles_kew_pkg_items:
+  - media-sound/kew
+
 dotfiles_kitty_pkg_items:
   - x11-terms/kitty
 
@@ -180,6 +191,8 @@ dotfiles_swayfx_pkg_items:
   - gui-apps/swaylock
   - gui-apps/swayidle
   - gui-apps/wlr-randr
+  - sys-process/glances
+  - sys-apps/fd
 
 dotfiles_xorg_pkg_items:
   - xorg-server

@@ -7,6 +7,7 @@
 
 # session
 - ansible.builtin.import_tasks: elogind.yml
+  when: not ansible_facts["service_mgr"] == "systemd"
 
 - ansible.builtin.import_tasks: pipewire-alsa.yml
   when: dotfiles_audio_backend is defined and dotfiles_audio_backend == 'alsa'

@@ -14,6 +14,7 @@ dotfiles_kitty: false
 
 dotfiles_gpu_driver: ""
 
+dotfiles_kew: false
 dotfiles_mpd: false
 dotfiles_mpd_music_dir: ~/musics
 

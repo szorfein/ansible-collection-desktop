@@ -1,13 +1,13 @@
-{% if dotfiles_audio_backend == 'alsa' %}
-USE="${USE} alsa -pulseaudio"
+{% if dotfiles_audio_backend == 'alsa' and not dotfiles_wm == "swayfx" %}
+USE="${USE} alsa"
 {% endif %}
 
-{% if dotfiles_audio_backend == 'pulseaudio' %}
-USE="${USE} pulseaudio -alsa"
+{% if dotfiles_audio_backend == 'pulseaudio' and not dotfiles_wm == "swayfx" %}
+USE="${USE} pulseaudio"
 {% endif %}
 
 {% if dotfiles_wm == "awm-m2" or dotfiles_wm == "awm-m3" %}
-USE="${USE} -wayland"
+USE="${USE} X"
 {% endif %}
 
 #{% if dotfiles_gpu_driver == 'intel_gen7' %}
@@ -25,10 +25,10 @@ USE="${USE} -wayland"
 #{% endif %}
 
 {% if dotfiles_wm == 'swayfx' and not ansible_facts["service_mgr"] == "systemd" %}
-USE="${USE} wayland dbus elogind -X -systemd"
+USE="${USE} wayland elogind -systemd"
 {% endif %}
 
 {% if dotfiles_wm == 'swayfx' and ansible_facts["service_mgr"] == "systemd" %}
 # Should be alrealy enable with systemd
-USE="${USE} wayland dbus -X"
+USE="${USE} wayland"
 {% endif %}
