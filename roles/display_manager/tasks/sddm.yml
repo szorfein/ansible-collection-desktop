@@ -1,12 +1,12 @@
 ---
-- name: sddm > remove conflicting packages
+- name: Sddm > remove conflicting packages
   become: true
   ansible.builtin.package:
     name: "{{ display_manager_sddm_conflict_items }}"
     state: absent
   when: display_manager_sddm_conflict_items is defined
 
-- name: sddm > block recent version for gentoo
+- name: Sddm > block recent version for gentoo
   become: true
   ansible.builtin.template:
     src: package-mask.j2
@@ -16,7 +16,7 @@
     mode: "0644"
   when: ansible_facts["os_family"] == 'Gentoo'
 
-- name: sddm > installing dependencies
+- name: Sddm > installing dependencies
   become: true
   ansible.builtin.package:
     name: "{{ display_manager_sddm_pkg_items }}"
@@ -25,79 +25,52 @@
     - remove display-manager link
     - enable sddm
 
-- name: sddm > creating required directory
+- name: Sddm > creating required directory
   become: true
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-  with_items:
-    - "{{ dm_sddm_theme_dir }}/{{ dm_sddm_theme.name }}"
-    - "{{ dm_sddm_config_dir }}"
-  when: dm_sddm_theme.name != ''
-
-- name: sddm > fixing permission error
-  become: true
-  ansible.builtin.file:
-    path: /usr/share/wayland-sessions
-    state: directory
+    owner: root
+    group: root
     mode: "0755"
+  with_items:
+    - "{{ display_manager_sddm_theme_dir }}"
+    - "{{ display_manager_sddm_config_dir }}"
+    - /usr/share/wayland-sessions
+  when: display_manager_sddm_theme.name != ''
 
-- name: sddm > uncompressing themes
-  become: true
-  ansible.builtin.unarchive:
-    src: "{{ dm_reaver_dir }}/{{ dm_sddm_theme.archive }}"
-    dest: "{{ dm_sddm_theme_dir }}/{{ dm_sddm_theme.name }}"
-    extra_opts: [--strip-components=1]
-  when: dm_sddm_theme.name != '' and dm_sddm_theme.archive != ''
-
-- name: sddm > uncompressing backgrounds
-  become: true
-  ansible.builtin.unarchive:
-    src: "{{ dm_reaver_dir }}/{{ item }}"
-    dest: "{{ dm_sddm_theme_dir }}/{{ dm_sddm_theme.name }}/{{ dm_sddm_theme.background_dir }}"
-  with_items: "{{ dm_sddm_backgrounds }}"
-  when:
-    - dm_sddm_theme.name != ''
-    - dm_sddm_backgrounds | length > 0
-
-# from: https://github.com/WillPower3309/swayfx/tree/master/assets
-- name: sddm > adding swayfx logo
+- name: Sddm > copying theme {{ display_manager_sddm_theme.name }}
   become: true
   ansible.builtin.copy:
-    src: swayfx_logo.svg
-    dest: "{{ dm_sddm_theme_dir }}/delicious/icons/delicate/sway.svg"
-    mode: "0664"
-  when: dm_sddm_theme.name == "delicious"
+    src: "{{ display_manager_sddm_theme.path }}"
+    dest: "{{ display_manager_sddm_theme_dir }}/{{ display_manager_sddm_theme.name }}"
+    owner: root
+    group: root
+    remote_src: true
+    mode: "0755"
+  when: display_manager_sddm_theme.name != '' and display_manager_sddm_theme.path != ''
 
-- name: sddm > applying config
+- name: Sddm > configuration for {{ display_manager_sddm_theme.name }}
   become: true
   ansible.builtin.template:
     src: sddm-config.j2
-    dest: "{{ dm_sddm_config_dir }}/desktop.conf"
-  when: dm_sddm_theme.name != ''
-
-- name: sddm > customize theme {{ dm_sddm_theme.name }}
-  become: true
-  ansible.builtin.lineinfile:
-    path: "{{ dm_sddm_theme_dir }}/{{ dm_sddm_theme.name }}/theme.conf"
-    regexp: "{{ item.regexp }}"
-    line: "{{ item.line }}"
-  with_items: "{{ dm_sddm_theme_customize }}"
-  when:
-    - dm_sddm_theme_customize | length > 0
-    - dm_sddm_theme.name != ''
+    dest: "{{ display_manager_sddm_config_dir }}/desktop.conf"
+    owner: root
+    group: root
+    mode: "0644"
+  when: display_manager_sddm_theme.name != ''
 
 # https://wiki.gentoo.org/wiki/SDDM#Service
-- name: sddm > openrc need pkg display-manager-init
+- name: Sddm > openrc need pkg display-manager-init
   become: true
   ansible.builtin.package:
     name: gui-libs/display-manager-init
     state: present
   when:
-    - ansible_facts["service_mgr"] == 'openrc'
+    - not ansible_facts["service_mgr"] == "systemd"
     - ansible_facts["os_family"] == 'Gentoo'
 
-- name: sddm > openrc configuring /etc/conf.d/display-manager
+- name: Sddm > openrc configuring /etc/conf.d/display-manager
   become: true
   ansible.builtin.template:
     src: display-manager.j2
@@ -106,15 +79,15 @@
     group: root
     mode: "0644"
   when:
-    - ansible_facts["service_mgr"] == 'openrc'
+    - not ansible_facts["service_mgr"] == "systemd"
     - ansible_facts["os_family"] == 'Gentoo'
 
-- name: sddm > openrc enabling service
+- name: Sddm > openrc enabling service
   become: true
   ansible.builtin.service:
     name: display-manager
     state: started
     enabled: true
   when:
-    - ansible_facts["service_mgr"] == 'openrc'
+    - not ansible_facts["service_mgr"] == "systemd"
     - ansible_facts["os_family"] == 'Gentoo'
