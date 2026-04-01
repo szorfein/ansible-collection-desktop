@@ -1,20 +1,15 @@
 ---
 # defaults file for display_manager
 dotfiles_wm: ""
-# '', 'sddm' or 'lightdm'
+# '', 'sddm','lightdm', 'lxde'
 dm_use: ""
 
-dm_sddm_config_dir: "/etc/sddm.conf.d/"
-dm_sddm_theme_dir: "/usr/share/sddm/themes"
+display_manager_sddm_config_dir: "/etc/sddm.conf.d/"
+display_manager_sddm_theme_dir: "/usr/share/sddm/themes"
 
-dm_sddm_backgrounds: []
-
-dm_sddm_theme:
+display_manager_sddm_theme:
   name: ""
-  archive: ""
-  background_dir: ""
-
-dm_sddm_theme_customize: []
+  path: ""
 
 dm_lightdm_theme:
   name: ""
