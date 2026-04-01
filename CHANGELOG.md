@@ -1,4 +1,10 @@
-# 1.70.0 - Mar. 2026
+# Changelogs
+
+## 1.71 - Apr. 2026
+
+- Add sddm themes from [Qylock](https://github.com/Darkkal44/qylock)
+
+## 1.70.0 - Mar. 2026
 
 - Simplify global USE flags on Gentoo.
 - Add Pipewire with Alsa (used only with SwayFX for now)
