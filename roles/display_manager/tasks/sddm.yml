@@ -43,7 +43,7 @@
   become: true
   ansible.builtin.copy:
     src: "{{ display_manager_sddm_theme.path }}"
-    dest: "{{ display_manager_sddm_theme_dir }}/{{ display_manager_sddm_theme.name }}"
+    dest: "{{ display_manager_sddm_theme_dir }}/"
     owner: root
     group: root
     remote_src: true
