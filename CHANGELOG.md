@@ -1,8 +1,12 @@
 # Changelogs
 
-## 1.71 - Apr. 2026
+## 1.71.1 - Apr. 2026
 
 - Add sddm themes from [Qylock](https://github.com/Darkkal44/qylock)
+
+Fixes
+
+- path of the sddm theme
 
 ## 1.70.0 - Mar. 2026
 
