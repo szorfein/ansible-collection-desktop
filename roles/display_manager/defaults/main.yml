@@ -6,6 +6,12 @@ dm_use: ""
 
 display_manager_sddm_config_dir: "/etc/sddm.conf.d/"
 display_manager_sddm_theme_dir: "/usr/share/sddm/themes"
+# swayfx, awesome
+display_manager_session: ""
+# default keymap to use,
+# value are passed to setxkbmap, can have multiple value separate by ',' e.g:
+# display_manager_keymap: us,fr
+display_manager_keymap: ""
 
 display_manager_sddm_theme:
   name: ""

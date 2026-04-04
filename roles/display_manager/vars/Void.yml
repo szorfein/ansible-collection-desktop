@@ -15,6 +15,8 @@ display_manager_sddm_pkg_items:
   - gst-plugins-good1
   - gst-plugins-bad1
   - gst-plugins-ugly1
+  - xorg-minimal # required in all case, even if wayland...
+  - setxkbmap
 
 dm_lightdm_conflict_pkgs:
   - lxdm

@@ -37,7 +37,18 @@
     - "{{ display_manager_sddm_theme_dir }}"
     - "{{ display_manager_sddm_config_dir }}"
     - /usr/share/wayland-sessions
+    - /usr/share/sddm/scripts
   when: display_manager_sddm_theme.name != ''
+
+- name: Sddm > keyboard configuration
+  become: true
+  ansible.builtin.template:
+    src: sddm-xsetup.j2
+    dest: /usr/share/sddm/scripts/Xsession
+    owner: root
+    group: root
+    mode: "0755"
+  when: display_manager_keymap != ''
 
 - name: Sddm > copying theme {{ display_manager_sddm_theme.name }}
   become: true
@@ -60,34 +71,37 @@
     mode: "0644"
   when: display_manager_sddm_theme.name != ''
 
-# https://wiki.gentoo.org/wiki/SDDM#Service
-- name: Sddm > openrc need pkg display-manager-init
-  become: true
-  ansible.builtin.package:
-    name: gui-libs/display-manager-init
-    state: present
-  when:
-    - not ansible_facts["service_mgr"] == "systemd"
-    - ansible_facts["os_family"] == 'Gentoo'
-
-- name: Sddm > openrc configuring /etc/conf.d/display-manager
-  become: true
-  ansible.builtin.template:
-    src: display-manager.j2
-    dest: /etc/conf.d/display-manager
-    owner: root
-    group: root
-    mode: "0644"
-  when:
-    - not ansible_facts["service_mgr"] == "systemd"
-    - ansible_facts["os_family"] == 'Gentoo'
-
-- name: Sddm > openrc enabling service
+- name: Sddm > enable service on systemd
   become: true
   ansible.builtin.service:
-    name: display-manager
+    name: sddm
     state: started
     enabled: true
   when:
+    - ansible_facts["service_mgr"] == 'systemd'
+
+# https://wiki.gentoo.org/wiki/SDDM#Service
+- name: Sddm > openrc
+  become: true
+  when:
     - not ansible_facts["service_mgr"] == "systemd"
     - ansible_facts["os_family"] == 'Gentoo'
+  block:
+    - name: Sddm > installing display-manager-init
+      ansible.builtin.package:
+        name: gui-libs/display-manager-init
+        state: present
+
+    - name: Sddm > configuring /etc/conf.d/display-manager
+      ansible.builtin.template:
+        src: display-manager.j2
+        dest: /etc/conf.d/display-manager
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Sddm > enabling openrc service
+      ansible.builtin.service:
+        name: display-manager
+        state: started
+        enabled: true
