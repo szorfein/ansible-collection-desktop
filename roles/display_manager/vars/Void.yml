@@ -7,14 +7,16 @@ display_manager_sddm_conflict_items:
 
 display_manager_sddm_pkg_items:
   - sddm
-  - qt5-graphicaleffects
-  - qt5-quickcontrols2
-  - qt5-svg
-  - qt5-multimedia
+  - qt6-declarative
+  - qt6-qt5compat
+  - qt6-svg
+  - qt6-multimedia
   - gst-plugins-base1
   - gst-plugins-good1
   - gst-plugins-bad1
   - gst-plugins-ugly1
+  - xorg-minimal # required in all case, even if wayland...
+  - setxkbmap
 
 dm_lightdm_conflict_pkgs:
   - lxdm

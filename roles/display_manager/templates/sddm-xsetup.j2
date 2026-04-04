@@ -1,0 +1,6 @@
+#!/bin/sh
+# Xsetup - run as root before the login dialog appears
+
+{% if display_manager_keymap != '' %}
+setxkbmap {{ display_manager_keymap }}
+{% endif %}
