@@ -1,12 +1,13 @@
 # Changelogs
 
-## 1.71.2 - Apr. 2026
+## 1.72.2 - Apr. 2026
 
-- Correct sddm on Voidlinux (tested musl and glibc)
+- New variables used on sddm: `display_manager_keymap` and `display_manager_session`
 - Add sddm themes from [Qylock](https://github.com/Darkkal44/qylock)
 
 Fixes
 
+- Correct sddm on Voidlinux (tested musl and glibc)
 - path of the sddm theme
 
 ## 1.70.0 - Mar. 2026
