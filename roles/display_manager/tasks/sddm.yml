@@ -44,7 +44,7 @@
   become: true
   ansible.builtin.template:
     src: sddm-xsetup.j2
-    dest: /usr/share/sddm/scripts/Xsession
+    dest: /usr/share/sddm/scripts/Xsetup
     owner: root
     group: root
     mode: "0755"

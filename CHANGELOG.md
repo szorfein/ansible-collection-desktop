@@ -1,7 +1,8 @@
 # Changelogs
 
-## 1.71.1 - Apr. 2026
+## 1.71.2 - Apr. 2026
 
+- Correct sddm on Voidlinux (tested musl and glibc)
 - Add sddm themes from [Qylock](https://github.com/Darkkal44/qylock)
 
 Fixes

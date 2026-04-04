@@ -7,9 +7,9 @@ display_manager_sddm_conflict_items:
 
 display_manager_sddm_pkg_items:
   - sddm
-  - qt5-graphicaleffects
-  - qt5-quickcontrols2
-  - qt5-svg
+  - qt6-declarative
+  - gt6-qt5compat
+  - qt6-svg
   - qt5-multimedia
   - gst-plugins-base1
   - gst-plugins-good1
