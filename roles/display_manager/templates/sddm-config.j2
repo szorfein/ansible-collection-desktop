@@ -1,4 +1,71 @@
 [General]
+# Which display server should be used.
+# Valid values are: x11, x11-user, wayland.
+# ! Setting wayland here don't works (tested on Voidlinux), need more configuration? !
+DisplayServer=x11
+
+{% if ansible_facts["os_family"] == 'Void' %}
+# Halt command
+HaltCommand=/usr/bin/shutdown now
+# Reboot command
+RebootCommand=/usr/bin/shutdown -r now
+{% endif %}
 
 [Theme]
+# Current theme name
 Current={{ display_manager_sddm_theme.name }}
+
+[Users]
+# Minimum user id for displayed users
+MinimumUid=1000
+MaximumUid=60000
+
+# When logging in as the same user twice, restore the original session, rather than create a new one
+ReuseSession=true
+
+# Remember the session of the last successfully logged in user
+RememberLastSession=true
+
+# Remember the last successfully logged in user
+RememberLastUser=true
+
+# When logging in as the same user twice, restore the original session, rather than create a new one
+ReuseSession=true
+
+[Wayland]
+# Path to a script to execute when starting the desktop session
+SessionCommand=/usr/share/sddm/scripts/wayland-session
+
+# Enable Qt's automatic high-DPI scaling
+EnableHiDPI=true
+
+# Path to the user session log file
+SessionLogFile=.local/share/sddm/wayland-session.log
+
+[X11]
+# Path to a script to execute when starting the display server
+DisplayCommand=/usr/share/sddm/scripts/Xsetup
+
+# Path to a script to execute when stopping the display server
+DisplayStopCommand=/usr/share/sddm/scripts/Xstop
+
+# Path to a script to execute when starting the desktop session
+SessionCommand=/usr/share/sddm/scripts/Xsession
+
+# Enable Qt's automatic high-DPI scaling
+EnableHiDPI=true
+
+# Arguments passed to the X server invocation
+ServerArguments=-nolisten tcp
+
+# Path to X server binary
+ServerPath=/usr/bin/X
+
+# Path to the user session log file
+SessionLogFile=.local/share/sddm/xorg-session.log
+
+{% if display_manager_session == "swayfx" %}
+[Sessions]
+DefaultSession=sway.desktop
+
+{% endif %}
