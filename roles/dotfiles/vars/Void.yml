@@ -76,9 +76,9 @@ dotfiles_elogind_pkg_items:
   - polkit
   - elogind
 
-# elogind would be automatically enabled after install
 dotfiles_elogind_service_items:
   - dbus
+  - elogind
 
 dotfiles_emacs_pkg_items:
   - ripgrep
