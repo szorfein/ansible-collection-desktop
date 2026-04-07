@@ -286,3 +286,4 @@ dotfiles_zsh_pkg_items:
   - zsh
   - starship
   - yt-dlp
+  - keychain
