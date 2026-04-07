@@ -6,10 +6,10 @@ display_manager_sddm_conflict_items:
 
 display_manager_sddm_pkg_items:
   - sddm
-  - qt5-graphicaleffects
-  - qt5-quickcontrols2
-  - qt5-svg
-  - qt5-multimedia
+  - qt6-declarative
+  - qt6-5compat
+  - qt6-svg
+  - qt6-multimedia
   - qt6-multimedia-ffmpeg
   - gst-plugins-base
   - gst-plugins-good

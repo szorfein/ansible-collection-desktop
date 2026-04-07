@@ -1,7 +1,9 @@
 # Changelogs
 
-## 1.72.2 - Apr. 2026
+## 1.72.3 - Apr. 2026
 
+- Improve dependencies on Voidlinux (swayfx, neovim)
+- Update dependencies on Qylock (qt6)
 - New variables used on sddm: `display_manager_keymap` and `display_manager_session`
 - Add sddm themes from [Qylock](https://github.com/Darkkal44/qylock)
 

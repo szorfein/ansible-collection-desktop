@@ -1,8 +1,8 @@
 ---
 display_manager_sddm_pkg_items:
   - x11-misc/sddm
-  - dev-qt/qtgraphicaleffects
-  - dev-qt/qtquickcontrols2
+  - dev-qt/qtdeclarative
+  - dev-qt/qt5compat
   - dev-qt/qtsvg
   - dev-qt/qtmultimedia
   - media-libs/gst-plugins-base
