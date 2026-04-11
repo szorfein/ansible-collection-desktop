@@ -70,7 +70,7 @@ dotfiles_brightnessctl_pkg_items:
 dotfiles_elogind_pkg_conflict_items:
   - turnstile
   - seatd
-  - acpid
+# - acpid  # can't be removed easily
 
 dotfiles_elogind_pkg_items:
   - dbus
