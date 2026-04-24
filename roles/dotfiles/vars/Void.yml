@@ -9,6 +9,7 @@ dotfiles_pipewire_alsa_pkg_items:
   - alsa-pipewire
   - wireplumber
   - wireplumber-elogind
+  - rtkit
   - wiremix
 
 # Alsa integration
@@ -183,6 +184,7 @@ dotfiles_neovim_pkg_items:
   - curl
   - wget
   - gcc
+  - make
   - nodejs-lts
   - shfmt
   - StyLua
