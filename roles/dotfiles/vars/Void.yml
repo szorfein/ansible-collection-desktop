@@ -80,7 +80,7 @@ dotfiles_elogind_pkg_items:
 
 dotfiles_elogind_service_items:
   - dbus
-  - elogind
+# elogind is started automatically - elogind,
 
 dotfiles_emacs_pkg_items:
   - ripgrep
@@ -223,8 +223,11 @@ dotfiles_swayfx_pkg_items:
   - fd
   - element-desktop
 
+# brightnessctl require member of video
+# iwd require wheel
 dotfiles_swayfx_add_to_group:
-  - network
+  - video
+  - wheel
 
 dotfiles_vim_conflict_pkg_items:
   - vim
