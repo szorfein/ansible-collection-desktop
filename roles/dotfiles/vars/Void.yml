@@ -194,6 +194,7 @@ dotfiles_neovim_pkg_items:
   - python3-ansible-lint
   - ruby-devel # to install rubocop
   - shellcheck
+  - tree-sitter-cli
 
 dotfiles_pulseaudio_pkg_items:
   - pulseaudio
