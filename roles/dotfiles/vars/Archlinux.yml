@@ -287,3 +287,4 @@ dotfiles_zsh_pkg_items:
   - starship
   - yt-dlp
   - keychain
+  - zoxide

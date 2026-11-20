@@ -218,3 +218,4 @@ dotfiles_zsh_pkg_items:
   - app-shells/starship
   - net-misc/yt-dlp
   - net-misc/keychain
+  - app-shells/zoxide
