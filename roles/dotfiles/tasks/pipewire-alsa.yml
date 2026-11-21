@@ -67,20 +67,20 @@
   when: ansible_facts["service_mgr"] == "systemd"
 
 # TODO: add steps on openrc...
-- name: Pipewire-Alsa > Voidlinux configuration on {{ ansible_user_dir }}
+- name: Pipewire-Alsa > Voidlinux configuration on {{ ansible_facts["user_dir"] }}
   become: false
   when: ansible_facts["os_family"] == 'Void'
   block:
     - name: Creating user config directory
       ansible.builtin.file:
-        path: "{{ ansible_user_dir }}/.config/pipewire/pipewire.conf.d"
+        path: '{{ ansible_facts["user_dir"] }}/.config/pipewire/pipewire.conf.d'
         state: directory
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
+        owner: '{{ ansible_facts["user_id"] }}'
+        group: '{{ ansible_facts["user_id"] }}'
         mode: "0700"
 
     - name: Install link wireplumber
       ansible.builtin.file:
         src: /usr/share/examples/wireplumber/10-wireplumber.conf
-        dest: "{{ ansible_user_dir }}/.config/pipewire/pipewire.conf.d/10-wireplumber.conf"
+        dest: '{{ ansible_facts["user_dir"] }}/.config/pipewire/pipewire.conf.d/10-wireplumber.conf'
         state: link
